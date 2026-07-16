@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MedVita — Prototype Index</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+    :root {
+        --primary: #0057c4;
+        --secondary: #36ad2d;
+        --navy: #0f2740;
+        --bg: #eef2f9;
+        --ink: #1c2b42;
+        --muted: #7c8aa5;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
+    body {
+        min-height: 100vh; background: linear-gradient(180deg, #f6f9fe 0%, #eef2f9 100%);
+        color: var(--ink); display: flex; flex-direction: column; align-items: center;
+        padding: 60px 24px;
+    }
+    .brand { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+    .brand .mark {
+        width: 42px; height: 42px; border-radius: 12px; background: var(--navy);
+        display: flex; align-items: center; justify-content: center;
+    }
+    .brand .mark svg { width: 22px; height: 22px; fill: #fff; }
+    .brand h1 { font-size: 22px; font-weight: 800; letter-spacing: -0.3px; color: var(--navy); }
+    .subtitle { font-size: 13.5px; color: var(--muted); margin-bottom: 48px; text-align: center; }
+
+    .card-grid { display: flex; gap: 28px; flex-wrap: wrap; justify-content: center; max-width: 900px; }
+    .proto-card {
+        width: 340px; background: #ffffff; border-radius: 20px; padding: 32px;
+        box-shadow: 0 10px 30px rgba(15, 39, 64, 0.08); border: 1.5px solid #e3e8f0;
+        text-decoration: none; color: inherit; transition: 0.2s;
+        display: flex; flex-direction: column;
+    }
+    .proto-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(15, 39, 64, 0.14); border-color: var(--primary); }
+
+    .proto-icon {
+        width: 56px; height: 56px; border-radius: 14px; display: flex; align-items: center;
+        justify-content: center; margin-bottom: 20px;
+    }
+    .proto-icon.blue { background: #e2ecff; }
+    .proto-icon.navy { background: #0f2740; }
+    .proto-icon svg { width: 28px; height: 28px; }
+    .proto-icon.blue svg { fill: var(--primary); }
+    .proto-icon.navy svg { fill: #fff; }
+
+    .proto-card h2 { font-size: 18px; font-weight: 700; margin-bottom: 6px; color: var(--ink); }
+    .proto-tag {
+        display: inline-block; font-size: 10.5px; font-weight: 700; padding: 3px 9px;
+        border-radius: 6px; margin-bottom: 14px; letter-spacing: 0.3px; width: fit-content;
+    }
+    .proto-tag.blue { background: #e2ecff; color: var(--primary); }
+    .proto-tag.navy { background: #0f2740; color: #fff; }
+
+    .proto-card p { font-size: 13px; color: var(--muted); line-height: 1.6; margin-bottom: 20px; flex: 1; }
+
+    .proto-scope { font-size: 11.5px; color: var(--muted); border-top: 1px solid #eef1f6; padding-top: 14px; line-height: 1.6; }
+    .proto-scope b { color: var(--ink); }
+
+    .open-row { display: flex; align-items: center; gap: 6px; margin-top: 18px; font-size: 13px; font-weight: 700; color: var(--primary); }
+    .proto-card:has(.proto-icon.navy) .open-row { color: var(--navy); }
+    .open-row svg { width: 16px; height: 16px; fill: currentColor; transition: 0.2s; }
+    .proto-card:hover .open-row svg { transform: translateX(3px); }
+
+    .footer-note { margin-top: 50px; font-size: 11.5px; color: var(--muted); text-align: center; max-width: 500px; line-height: 1.6; }
+</style>
+</head>
+<body>
+
+    <div class="brand">
+        <div class="mark"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg></div>
+        <h1>MedVita</h1>
+    </div>
+    <p class="subtitle">Prototype Index — chọn ứng dụng để xem</p>
+
+    <div class="card-grid">
+
+        <a class="proto-card" href="medvita-prototype-v2.html">
+            <div class="proto-icon blue"><svg viewBox="0 0 24 24"><path d="M17 1.01L7 1c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-1.99-2-1.99zM17 19H7V5h10v14z"/></svg></div>
+            <span class="proto-tag blue">MOBILE APP · INTAKE</span>
+            <h2>MedVita Prototype V2</h2>
+            <p>App bệnh nhân: định danh Flow A/B, Đồng ý Consent AI, xác nhận hồ sơ, khai báo triệu chứng, cảnh báo khẩn cấp, lịch sử khai báo, tài khoản &amp; Hồ Sơ Sức Khỏe.</p>
+            <div class="proto-scope"><b>Ticket:</b> MV-8, MV-9, MV-10, MV-11, MV-12, MV-20, MV-21, MV-22, MV-27</div>
+            <div class="open-row">Mở prototype <svg viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg></div>
+        </a>
+
+        <a class="proto-card" href="nurse-dashboard-prototype.html">
+            <div class="proto-icon navy"><svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></div>
+            <span class="proto-tag navy">WEB APP · CARE</span>
+            <h2>Nurse Dashboard</h2>
+            <p>Ứng dụng riêng cho điều dưỡng bệnh viện: đăng nhập, duyệt tóm tắt khai báo &amp; chỉnh phân khoa, xử lý cảnh báo khẩn cấp.</p>
+            <div class="proto-scope"><b>Ticket:</b> MV-24, MV-25, MV-26, MV-28</div>
+            <div class="open-row">Mở prototype <svg viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg></div>
+        </a>
+
+    </div>
+
+    <p class="footer-note">2 prototype này thuộc 2 module khác nhau trong kiến trúc MedVita — Intake (app bệnh nhân, mobile) và Care (Dashboard điều dưỡng, web) — không dùng chung một app.</p>
+
+</body>
+</html>
