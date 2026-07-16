@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MedVita — Dashboard Điều dưỡng (MV-26)</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+    --navy:#0f2740; --navy-2:#16324f; --navy-3:#1d3f63;
+    --primary:#0057c4; --accent-red:#e63535; --accent-amber:#f59e0b; --accent-green:#22a35d;
+    --bg:#eef2f8; --card:#ffffff; --line:#e3e8f0; --ink:#1c2b42; --muted:#7c8aa5;
+    --mono:'JetBrains Mono', monospace;
+    --radius:14px;
+}
+*{box-sizing:border-box;margin:0;padding:0;font-family:'Inter',sans-serif;}
+body{background:var(--bg);color:var(--ink);}
+
+/* ================= LOGIN (MV-28) ================= */
+#view-login{
+    min-height:100vh;display:flex;align-items:center;justify-content:center;
+    background:radial-gradient(circle at 20% 20%, #16324f 0%, #0f2740 55%, #0a1b2e 100%);
+    padding:24px;
+}
+.login-card{
+    width:380px;background:var(--card);border-radius:20px;padding:36px 32px;
+    box-shadow:0 30px 70px rgba(0,0,0,0.35);
+}
+.login-brand{display:flex;align-items:center;gap:10px;margin-bottom:28px;}
+.login-brand .mark{width:38px;height:38px;border-radius:10px;background:var(--navy);display:flex;align-items:center;justify-content:center;}
+.login-brand .mark svg{width:20px;height:20px;fill:#fff;}
+.login-brand .name{font-size:16px;font-weight:800;color:var(--navy);letter-spacing:-0.3px;}
+.login-brand .tag{font-size:10.5px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;}
+.login-title{font-size:19px;font-weight:700;margin-bottom:4px;}
+.login-sub{font-size:12.5px;color:var(--muted);margin-bottom:24px;line-height:1.5;}
+.field{margin-bottom:16px;}
+.field label{display:block;font-size:12px;font-weight:700;color:var(--ink);margin-bottom:6px;letter-spacing:0.2px;}
+.field input{
+    width:100%;height:44px;border:1.5px solid var(--line);border-radius:10px;padding:0 14px;
+    font-size:14px;outline:none;transition:0.2s;
+}
+.field input:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(0,87,196,0.1);}
+.field .err{display:none;color:var(--accent-red);font-size:11.5px;margin-top:5px;font-weight:600;}
+.login-btn{
+    width:100%;height:46px;background:var(--navy);color:#fff;border:none;border-radius:10px;
+    font-weight:700;font-size:14.5px;cursor:pointer;margin-top:6px;transition:0.2s;
+}
+.login-btn:hover{background:var(--navy-3);}
+.login-hint{font-size:11px;color:var(--muted);margin-top:18px;line-height:1.6;background:var(--bg);padding:10px 12px;border-radius:8px;}
+.login-footer-note{font-size:10.5px;color:var(--muted);text-align:center;margin-top:22px;line-height:1.5;}
+
+/* ================= DASHBOARD SHELL ================= */
+#view-dashboard{display:none;min-height:100vh;}
+#view-dashboard.active{display:flex;}
+
+.sidebar{
+    width:236px;background:var(--navy);color:#fff;flex-shrink:0;
+    display:flex;flex-direction:column;padding:22px 16px;position:sticky;top:0;height:100vh;
+}
+.sidebar-brand{display:flex;align-items:center;gap:9px;margin-bottom:6px;padding:0 6px;}
+.sidebar-brand .mark{width:30px;height:30px;border-radius:8px;background:rgba(255,255,255,0.12);display:flex;align-items:center;justify-content:center;}
+.sidebar-brand .mark svg{width:16px;height:16px;fill:#fff;}
+.sidebar-brand span{font-weight:800;font-size:14.5px;letter-spacing:-0.2px;}
+.sidebar-sub{font-size:10px;color:rgba(255,255,255,0.45);letter-spacing:1.2px;text-transform:uppercase;padding:0 6px;margin-bottom:26px;}
+
+.hospital-chip{
+    background:rgba(255,255,255,0.08);border-radius:10px;padding:10px 12px;margin-bottom:22px;
+}
+.hospital-chip .hlabel{font-size:9.5px;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:3px;}
+.hospital-chip .hname{font-size:13px;font-weight:700;}
+
+.nav-item{
+    display:flex;align-items:center;gap:11px;padding:11px 12px;border-radius:10px;
+    font-size:13.5px;font-weight:600;color:rgba(255,255,255,0.68);cursor:pointer;margin-bottom:4px;
+    transition:0.15s;position:relative;
+}
+.nav-item:hover{background:rgba(255,255,255,0.06);color:#fff;}
+.nav-item.active{background:rgba(255,255,255,0.14);color:#fff;}
+.nav-item svg{width:17px;height:17px;fill:currentColor;flex-shrink:0;}
+.nav-badge{
+    margin-left:auto;background:var(--accent-red);color:#fff;font-size:10px;font-weight:800;
+    border-radius:9px;padding:1px 7px;
+}
+.nav-badge.amber{background:var(--accent-amber);}
+
+.sidebar-footer{margin-top:auto;border-top:1px solid rgba(255,255,255,0.1);padding-top:14px;}
+.nurse-chip{display:flex;align-items:center;gap:9px;padding:0 6px;margin-bottom:10px;}
+.nurse-avatar{width:32px;height:32px;border-radius:50%;background:var(--primary);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;flex-shrink:0;}
+.nurse-name{font-size:12.5px;font-weight:700;}
+.nurse-role{font-size:10.5px;color:rgba(255,255,255,0.45);}
+.logout-btn{
+    display:flex;align-items:center;gap:8px;font-size:12.5px;font-weight:600;color:rgba(255,255,255,0.6);
+    cursor:pointer;padding:8px 6px;border-radius:8px;
+}
+.logout-btn:hover{background:rgba(255,255,255,0.06);color:#fff;}
+.logout-btn svg{width:15px;height:15px;fill:currentColor;}
+
+.main{flex:1;padding:30px 36px;max-width:1180px;}
+.main-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:22px;}
+.main-header h1{font-size:22px;font-weight:800;letter-spacing:-0.3px;}
+.main-header p{font-size:12.5px;color:var(--muted);margin-top:3px;}
+.epic-tag{font-size:10.5px;font-weight:700;color:var(--primary);background:#e8f0ff;padding:3px 9px;border-radius:6px;letter-spacing:0.3px;}
+
+.pane{display:none;}
+.pane.active{display:block;}
+
+/* filter bar */
+.filter-bar{display:flex;gap:10px;margin-bottom:18px;flex-wrap:wrap;}
+.filter-bar select, .filter-bar input{
+    height:38px;border:1.5px solid var(--line);border-radius:9px;padding:0 12px;font-size:12.5px;
+    background:#fff;color:var(--ink);
+}
+.control-search-btn{
+    height:38px;padding:0 18px;background:var(--navy);color:#fff;border:none;border-radius:9px;
+    font-size:12.5px;font-weight:700;cursor:pointer;transition:0.15s;
+}
+.control-search-btn:hover{background:var(--navy-3);}
+
+.pagination{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:18px;padding-top:6px;}
+.pagination button{
+    height:34px;padding:0 14px;border:1.5px solid var(--line);background:#fff;color:var(--ink);
+    border-radius:8px;font-size:12.5px;font-weight:600;cursor:pointer;transition:0.15s;
+}
+.pagination button:hover:not(:disabled){border-color:var(--primary);color:var(--primary);}
+.pagination button:disabled{opacity:0.4;cursor:not-allowed;}
+.pagination .page-info{font-size:12px;color:var(--muted);font-family:var(--mono);}
+
+/* table-like list */
+.data-card{background:var(--card);border:1.5px solid var(--line);border-radius:var(--radius);overflow:hidden;margin-bottom:14px;transition:0.15s;cursor:pointer;}
+.data-card:hover{border-color:var(--primary);box-shadow:0 6px 18px rgba(0,87,196,0.08);}
+.data-card .dc-top{display:flex;justify-content:space-between;align-items:center;padding:14px 18px;border-bottom:1px solid var(--line);}
+.dc-patient{font-size:14px;font-weight:700;}
+.dc-meta{font-size:11.5px;color:var(--muted);font-family:var(--mono);}
+.dc-body{padding:14px 18px;}
+.dc-chief{font-size:13px;color:var(--ink);margin-bottom:8px;}
+.dc-tags{display:flex;gap:6px;flex-wrap:wrap;}
+
+.pill{font-size:10.5px;font-weight:800;padding:4px 10px;border-radius:20px;letter-spacing:0.2px;}
+.pill.pending{background:#fff3d6;color:#92400e;}
+.pill.approved{background:#e0e9ff;color:var(--primary);}
+.pill.sent{background:#dcf7e3;color:#166534;}
+.pill.failed{background:#ffe1e1;color:#b91c1c;}
+.pill.new{background:#ffe1e1;color:#b91c1c;}
+.pill.progress{background:#fff3d6;color:#92400e;}
+.pill.resolved{background:#dcf7e3;color:#166534;}
+.pill.dismissed{background:#eef1f6;color:var(--muted);}
+
+.alert-card{border-left:4px solid var(--accent-red);}
+.alert-card .dc-top{background:#fff8f8;}
+
+.empty-state{text-align:center;padding:60px 20px;color:var(--muted);}
+.empty-state svg{width:48px;height:48px;fill:#c7d0e0;margin-bottom:14px;}
+.empty-state p{font-size:13.5px;}
+
+/* detail drawer */
+.drawer-overlay{position:fixed;inset:0;background:rgba(15,39,64,0.4);display:none;align-items:stretch;justify-content:flex-end;z-index:2000;}
+.drawer-overlay.active{display:flex;}
+.drawer{width:460px;max-width:92vw;background:#fff;height:100vh;overflow-y:auto;box-shadow:-16px 0 40px rgba(0,0,0,0.2);animation:slideL 0.25s ease-out;}
+@keyframes slideL{from{transform:translateX(24px);opacity:0;}to{transform:translateX(0);opacity:1;}}
+.drawer-head{padding:20px 24px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:flex-start;position:sticky;top:0;background:#fff;z-index:2;}
+.drawer-head h3{font-size:16px;font-weight:800;}
+.drawer-head .close{cursor:pointer;font-size:20px;color:var(--muted);}
+.drawer-body{padding:20px 24px;}
+.d-section{margin-bottom:18px;}
+.d-label{font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:0.6px;color:var(--muted);margin-bottom:6px;}
+.d-content{font-size:13.5px;line-height:1.6;color:var(--ink);}
+.d-content.mono{font-family:var(--mono);font-size:12.5px;}
+.conflict-note{display:flex;gap:9px;background:#fff3d6;border:1.5px solid #fcd34d;border-radius:10px;padding:12px 14px;font-size:12px;color:#92400e;margin-bottom:16px;}
+.conflict-note svg{width:16px;height:16px;fill:#d97706;flex-shrink:0;margin-top:1px;}
+.allergy-flag{color:var(--accent-red);font-weight:700;}
+
+.dept-row{display:flex;gap:8px;margin-bottom:14px;}
+.dept-row select{flex:1;height:42px;border:1.5px solid var(--line);border-radius:9px;padding:0 10px;font-size:13px;}
+.dept-row select:disabled{background:var(--bg);color:var(--muted);cursor:not-allowed;border-style:dashed;}
+.audit-note{font-size:10.5px;color:var(--muted);font-family:var(--mono);margin-top:4px;}
+
+.btn-primary{width:100%;height:46px;background:var(--accent-green);color:#fff;border:none;border-radius:10px;font-weight:700;font-size:14px;cursor:pointer;margin-bottom:8px;}
+.btn-primary:hover{opacity:0.92;}
+.btn-secondary{width:100%;height:40px;background:var(--bg);color:var(--ink);border:none;border-radius:10px;font-weight:600;font-size:13px;cursor:pointer;}
+
+.status-timeline{font-size:12px;color:var(--muted);background:var(--bg);border-radius:10px;padding:10px 12px;margin-top:10px;font-family:var(--mono);}
+
+.action-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px;}
+.action-grid button{height:40px;border-radius:9px;border:none;font-weight:700;font-size:12px;cursor:pointer;}
+.act-progress{background:#fff3d6;color:#92400e;}
+.act-resolved{background:#dcf7e3;color:#166534;}
+.act-dismiss{background:#eef1f6;color:var(--muted);grid-column:span 2;}
+textarea.note-input{width:100%;min-height:70px;border:1.5px solid var(--line);border-radius:9px;padding:10px 12px;font-size:13px;margin-top:10px;resize:vertical;outline:none;}
+textarea.note-input:focus{border-color:var(--primary);}
+</style>
+</head>
+<body>
+
+<!-- ================= LOGIN — MV-28 ================= -->
+<div id="view-login">
+    <div class="login-card">
+        <div class="login-brand">
+            <div class="mark"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg></div>
+            <div><div class="name">MedVita</div><div class="tag">Care · Dashboard</div></div>
+        </div>
+        <div class="login-title">Đăng nhập Điều dưỡng</div>
+        <div class="login-sub">Tài khoản do MedVita cấp sẵn (MV28-BR-01) — không tự đăng ký tại đây.</div>
+
+        <div class="field">
+            <label for="li-user">Tên đăng nhập</label>
+            <input type="text" id="li-user" placeholder="vd: dieuduong.tn01" value="dieuduong.tn01">
+            <div class="err" id="li-user-err">Sai tài khoản hoặc mật khẩu.</div>
+        </div>
+        <div class="field">
+            <label for="li-pass">Mật khẩu</label>
+            <input type="password" id="li-pass" placeholder="Nhập mật khẩu" value="123456">
+        </div>
+
+        <button class="login-btn" id="btn-nurse-login">Đăng nhập</button>
+
+        <div class="login-hint">
+            <b>Test nhanh (MV28-AC1/AC3):</b><br>
+            • <code>dieuduong.tn01</code> → active, có quyền BV Thái Nguyên<br>
+            • <code>dieuduong.inactive</code> → tài khoản bị khóa (AC3)<br>
+            • <code>dieuduong.norole</code> → active nhưng chưa gán bệnh viện (edge case)
+        </div>
+        <div class="login-footer-note">Đây là ứng dụng riêng cho điều dưỡng bệnh viện — khác app bệnh nhân.</div>
+    </div>
+</div>
+
+<!-- ================= DASHBOARD SHELL ================= -->
+<div id="view-dashboard">
+
+    <div class="sidebar">
+        <div class="sidebar-brand">
+            <div class="mark"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg></div>
+            <span>MedVita</span>
+        </div>
+
+        <div class="hospital-chip">
+            <div class="hlabel">Bệnh viện được phân quyền</div>
+            <div class="hname" id="sb-hospital-name">Bệnh viện Thái Nguyên</div>
+        </div>
+
+        <div class="nav-item active" data-view="review" onclick="switchView('review')">
+            <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+            Duyệt tóm tắt khai báo
+            <span class="nav-badge amber" id="badge-review">0</span>
+        </div>
+        <div class="nav-item" data-view="redflag" onclick="switchView('redflag')">
+            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+            Cảnh báo khẩn cấp
+            <span class="nav-badge" id="badge-redflag">0</span>
+        </div>
+
+        <div class="sidebar-footer">
+            <div class="nurse-chip">
+                <div class="nurse-avatar" id="sb-nurse-initial">Đ</div>
+                <div><div class="nurse-name" id="sb-nurse-name">Điều dưỡng TN01</div><div class="nurse-role">Điều dưỡng</div></div>
+            </div>
+            <div class="logout-btn" id="btn-logout">
+                <svg viewBox="0 0 24 24"><path d="M16 17v-3H9v-4h7V7l5 5-5 5M14 2a2 2 0 012 2v2h-2V4H5v16h9v-2h2v2a2 2 0 01-2 2H5a2 2 0 01-2-2V4a2 2 0 012-2h9z"/></svg>
+                Đăng xuất
+            </div>
+        </div>
+    </div>
+
+    <div class="main">
+
+        <!-- ============ REVIEW & APPROVE — MV-24 ============ -->
+        <div class="pane active" id="pane-review">
+            <div class="main-header">
+                <div><h1>Duyệt tóm tắt khai báo</h1><p>Tóm tắt khai báo triệu chứng chờ duyệt trước khi gửi HIS</p></div>
+                <span class="epic-tag">MV-24</span>
+            </div>
+            <div class="filter-bar">
+                <select id="flt-status">
+                    <option value="">Tất cả trạng thái</option>
+                    <option value="Pending Nurse Review">Pending Nurse Review</option>
+                    <option value="Approved">Approved</option>
+                </select>
+                <input type="date" id="flt-date-from">
+                <input type="date" id="flt-date-to">
+                <button class="control-search-btn" id="btn-review-search">Tìm kiếm</button>
+            </div>
+            <div id="review-list"></div>
+            <div class="pagination" id="review-pagination"></div>
+        </div>
+
+        <!-- ============ RED-FLAG — MV-25 ============ -->
+        <div class="pane" id="pane-redflag">
+            <div class="main-header">
+                <div><h1>Cảnh báo khẩn cấp</h1><p>Cảnh báo dấu hiệu nguy hiểm cần xử lý ưu tiên</p></div>
+                <span class="epic-tag">MV-25</span>
+            </div>
+            <div class="filter-bar">
+                <select id="flt-rf-status">
+                    <option value="">Tất cả trạng thái</option>
+                    <option value="New">New</option>
+                    <option value="Đang xử lý">Đang xử lý</option>
+                    <option value="Đã xử lý">Đã xử lý</option>
+                    <option value="Bỏ qua">Bỏ qua</option>
+                </select>
+            </div>
+            <div id="redflag-list"></div>
+            <div class="pagination" id="redflag-pagination"></div>
+        </div>
+
+    </div>
+</div>
+
+<!-- ============ DETAIL DRAWER: REVIEW ============ -->
+<div class="drawer-overlay" id="drawer-review">
+    <div class="drawer">
+        <div class="drawer-head">
+            <div>
+                <h3 id="rv-patient-name">—</h3>
+                <div class="dc-meta" id="rv-patient-meta">—</div>
+            </div>
+            <span class="close" onclick="closeDrawer('review')">&times;</span>
+        </div>
+        <div class="drawer-body">
+            <div class="conflict-note" id="rv-conflict" style="display:none;">
+                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+                <div><b>Mâu thuẫn dữ liệu:</b> HIS ghi nhận bệnh nền nhưng bệnh nhân khai không dùng thuốc tương ứng. Cần xác minh trực tiếp.</div>
+            </div>
+
+            <div class="d-section"><div class="d-label">Lý do đến khám</div><div class="d-content" id="rv-chief">—</div></div>
+            <div class="d-section"><div class="d-label">Tiền sử &amp; dị ứng</div><div class="d-content" id="rv-history">—</div></div>
+            <div class="d-section"><div class="d-label">Summary AI</div><div class="d-content" id="rv-summary">—</div></div>
+            <div class="d-section"><div class="d-label">Thời điểm khai báo</div><div class="d-content mono" id="rv-time">—</div></div>
+
+            <div class="d-section">
+                <div class="d-label">Phân khoa (MV24-AC3)</div>
+                <div class="dept-row">
+                    <select id="rv-dept-select">
+                        <option>Khoa Nội Tổng Quát</option>
+                        <option>Khoa Tiêu Hóa</option>
+                        <option>Khoa Hô Hấp</option>
+                        <option>Khoa Tim Mạch</option>
+                        <option>Khoa Nhi</option>
+                    </select>
+                </div>
+                <div class="audit-note" id="rv-ai-suggest">AI đề xuất ban đầu: —</div>
+            </div>
+
+            <div id="rv-actions">
+                <button class="btn-primary" id="btn-rv-approve">Approve</button>
+            </div>
+            <div class="status-timeline" id="rv-timeline"></div>
+        </div>
+    </div>
+</div>
+
+<!-- ============ DETAIL DRAWER: RED-FLAG ============ -->
+<div class="drawer-overlay" id="drawer-redflag">
+    <div class="drawer">
+        <div class="drawer-head">
+            <div>
+                <h3 id="rf-patient-name">—</h3>
+                <div class="dc-meta" id="rf-patient-meta">—</div>
+            </div>
+            <span class="close" onclick="closeDrawer('redflag')">&times;</span>
+        </div>
+        <div class="drawer-body">
+            <div class="d-section"><div class="d-label">Loại cảnh báo / lý do phát hiện</div><div class="d-content" id="rf-reason">—</div></div>
+            <div class="d-section"><div class="d-label">Nội dung khai báo liên quan</div><div class="d-content" id="rf-content">—</div></div>
+            <div class="d-section"><div class="d-label">Thông tin liên hệ</div><div class="d-content" id="rf-contact">—</div></div>
+            <div class="d-section"><div class="d-label">Hướng dẫn xử lý (protocol)</div><div class="d-content" id="rf-protocol">—</div></div>
+            <div class="d-section"><div class="d-label">Thời điểm phát hiện</div><div class="d-content mono" id="rf-time">—</div></div>
+
+            <textarea class="note-input" id="rf-note" placeholder="Ghi chú xử lý (bắt buộc khi Đã xử lý/Bỏ qua)..."></textarea>
+
+            <div class="action-grid" id="rf-actions"></div>
+            <div class="status-timeline" id="rf-timeline"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+// ================= DATA (demo) =================
+const NURSE_ACCOUNTS = {
+    'dieuduong.tn01': { pass: '123456', active: true, hospital: 'Bệnh viện Thái Nguyên', name: 'Điều dưỡng TN01' },
+    'dieuduong.inactive': { pass: '123456', active: false, hospital: 'Bệnh viện Thái Nguyên', name: 'Điều dưỡng (khóa)' },
+    'dieuduong.norole': { pass: '123456', active: true, hospital: null, name: 'Điều dưỡng chưa gán viện' }
+};
+
+let currentNurse = null;
+
+let reviewItems = [
+    {
+        id: 'r1', name: 'NGUYỄN VĂN TÙNG', age: 32, gender: 'Nam',
+        chief: 'Đau bụng âm ỉ vùng quanh rốn, xuất hiện từ đêm qua.',
+        allergy: 'Dị ứng Penicillin', meds: 'Không dùng thuốc', chronic: 'Tiểu đường',
+        aiDept: 'Khoa Tiêu Hóa', status: 'Pending Nurse Review',
+        time: new Date(Date.now() - 12*60000), conflict: true
+    },
+    {
+        id: 'r2', name: 'TRẦN THỊ MAI', age: 38, gender: 'Nữ',
+        chief: 'Ho khan kéo dài 3 ngày, kèm sốt nhẹ.',
+        allergy: 'Không ghi nhận', meds: 'Paracetamol', chronic: 'Không ghi nhận',
+        aiDept: 'Khoa Hô Hấp', status: 'Approved',
+        time: new Date(Date.now() - 40*60000), conflict: false, approvedDept: 'Khoa Hô Hấp'
+    },
+    { id: 'r3', name: 'PHẠM VĂN ĐỨC', age: 45, gender: 'Nam', chief: 'Đau thắt ngực khi gắng sức.', allergy: 'Không ghi nhận', meds: 'Aspirin', chronic: 'Tăng huyết áp', aiDept: 'Khoa Tim Mạch', status: 'Pending Nurse Review', time: new Date(Date.now() - 55*60000), conflict: false },
+    { id: 'r4', name: 'HOÀNG THỊ LAN', age: 27, gender: 'Nữ', chief: 'Buồn nôn, chóng mặt 2 ngày nay.', allergy: 'Dị ứng hải sản', meds: 'Không dùng thuốc', chronic: 'Không ghi nhận', aiDept: 'Khoa Nội Tổng Quát', status: 'Pending Nurse Review', time: new Date(Date.now() - 70*60000), conflict: false },
+    { id: 'r5', name: 'VŨ MINH TUẤN', age: 60, gender: 'Nam', chief: 'Ho đờm, khó thở khi nằm.', allergy: 'Không ghi nhận', meds: 'Thuốc hen', chronic: 'Hen suyễn', aiDept: 'Khoa Hô Hấp', status: 'Approved', time: new Date(Date.now() - 90*60000), conflict: false, approvedDept: 'Khoa Hô Hấp' },
+    { id: 'r6', name: 'ĐỖ THỊ HƯƠNG', age: 33, gender: 'Nữ', chief: 'Đau vùng thượng vị sau ăn.', allergy: 'Không ghi nhận', meds: 'Omeprazole', chronic: 'Không ghi nhận', aiDept: 'Khoa Tiêu Hóa', status: 'Pending Nurse Review', time: new Date(Date.now() - 110*60000), conflict: false },
+    { id: 'r7', name: 'NGÔ VĂN SƠN', age: 50, gender: 'Nam', chief: 'Đau lưng, tê chân trái.', allergy: 'Không ghi nhận', meds: 'Không dùng thuốc', chronic: 'Không ghi nhận', aiDept: 'Khoa Nội Tổng Quát', status: 'Pending Nurse Review', time: new Date(Date.now() - 130*60000), conflict: false },
+    { id: 'r8', name: 'BÙI THỊ NGA', age: 41, gender: 'Nữ', chief: 'Sốt cao 39 độ kèm ớn lạnh.', allergy: 'Không ghi nhận', meds: 'Paracetamol', chronic: 'Không ghi nhận', aiDept: 'Khoa Nội Tổng Quát', status: 'Approved', time: new Date(Date.now() - 150*60000), conflict: false, approvedDept: 'Khoa Nội Tổng Quát' },
+    { id: 'r9', name: 'LÝ VĂN PHÚC', age: 29, gender: 'Nam', chief: 'Khó thở, thở khò khè.', allergy: 'Dị ứng phấn hoa', meds: 'Không dùng thuốc', chronic: 'Hen suyễn', aiDept: 'Khoa Hô Hấp', status: 'Pending Nurse Review', time: new Date(Date.now() - 170*60000), conflict: false },
+    { id: 'r10', name: 'DƯƠNG THỊ THU', age: 36, gender: 'Nữ', chief: 'Đau đầu kéo dài kèm buồn nôn.', allergy: 'Không ghi nhận', meds: 'Không dùng thuốc', chronic: 'Không ghi nhận', aiDept: 'Khoa Nội Tổng Quát', status: 'Pending Nurse Review', time: new Date(Date.now() - 190*60000), conflict: false },
+    { id: 'r11', name: 'TRỊNH VĂN LONG', age: 58, gender: 'Nam', chief: 'Đau ngực âm ỉ, mệt mỏi.', allergy: 'Không ghi nhận', meds: 'Metformin', chronic: 'Tiểu đường', aiDept: 'Khoa Tim Mạch', status: 'Pending Nurse Review', time: new Date(Date.now() - 210*60000), conflict: false },
+    { id: 'r12', name: 'PHAN THỊ YẾN', age: 24, gender: 'Nữ', chief: 'Đau bụng dưới, kinh nguyệt bất thường.', allergy: 'Không ghi nhận', meds: 'Không dùng thuốc', chronic: 'Không ghi nhận', aiDept: 'Khoa Nội Tổng Quát', status: 'Approved', time: new Date(Date.now() - 230*60000), conflict: false, approvedDept: 'Khoa Nội Tổng Quát' }
+];
+
+let redflagItems = [
+    {
+        id: 'a1', name: 'LÊ VĂN HÙNG', age: 55, gender: 'Nam',
+        reason: 'Câu trả lời chứa từ khóa "đau ngực, khó thở" — nghi ngờ hội chứng vành cấp.',
+        content: '"Tôi thấy đau ngực trái và khó thở khi leo cầu thang."',
+        contact: 'SĐT: 09xx xxx 456 (Health Profile, hiển thị đầy đủ trong hệ thống thật)',
+        protocol: 'Ưu tiên gọi điện xác minh trong 5 phút. Nếu không liên lạc được, thông báo lễ tân kiểm tra tại chỗ.',
+        status: 'New', time: new Date(Date.now() - 3*60000), note: ''
+    },
+    {
+        id: 'a2', name: 'NGUYỄN THỊ HẠNH', age: 68, gender: 'Nữ',
+        reason: 'Câu trả lời chứa từ khóa "liệt, méo miệng" — nghi ngờ đột quỵ.',
+        content: '"Tay trái của mẹ tôi tự nhiên yếu, không cầm được đũa, miệng hơi méo."',
+        contact: 'SĐT: 09xx xxx 112 (con gái khai hộ)',
+        protocol: 'Gọi ngay 115 theo quy trình FAST-stroke. Không chờ xác minh qua điện thoại.',
+        status: 'New', time: new Date(Date.now() - 8*60000), note: ''
+    },
+    {
+        id: 'a3', name: 'TRẦN VĂN BÌNH', age: 42, gender: 'Nam',
+        reason: 'Câu trả lời chứa từ khóa "ngất, mất ý thức".',
+        content: '"Tôi bị ngất khoảng 30 giây lúc đang đứng xếp hàng, sau đó tỉnh lại bình thường."',
+        contact: 'SĐT: 09xx xxx 778',
+        protocol: 'Liên hệ xác minh trong 10 phút, kiểm tra tiền sử tim mạch/huyết áp trước khi quyết định.',
+        status: 'Đang xử lý', time: new Date(Date.now() - 25*60000), note: 'Đã gọi lần 1, chưa liên lạc được, đang gọi lại.'
+    },
+    {
+        id: 'a4', name: 'PHẠM THỊ THẢO', age: 30, gender: 'Nữ',
+        reason: 'Câu trả lời chứa từ khóa "khó thở" khi đang mang thai.',
+        content: '"Tôi đang mang thai tuần 32, hôm nay thấy khó thở hơn bình thường khi đi lại."',
+        contact: 'SĐT: 09xx xxx 334',
+        protocol: 'Ưu tiên chuyển khoa Sản cấp cứu, xác minh thêm dấu hiệu phù/huyết áp.',
+        status: 'Đang xử lý', time: new Date(Date.now() - 48*60000), note: 'Đã liên hệ, đang hướng dẫn đến khoa Sản.'
+    },
+    {
+        id: 'a5', name: 'ĐINH VĂN KHOA', age: 61, gender: 'Nam',
+        reason: 'Câu trả lời chứa từ khóa "đau ngực" — nghi ngờ hội chứng vành cấp.',
+        content: '"Tôi có đau nhẹ vùng ngực sau khi leo cầu thang, đỡ khi nghỉ."',
+        contact: 'SĐT: 09xx xxx 990',
+        protocol: 'Đã gọi xác minh, bệnh nhân xác nhận đau đã hết, không cần can thiệp cấp cứu tức thời — vẫn hẹn tái khám khoa Tim mạch.',
+        status: 'Đã xử lý', time: new Date(Date.now() - 65*60000), note: 'Đã gọi điện xác minh lúc 14:20 — bệnh nhân ổn định, hẹn tái khám khoa Tim mạch trong tuần.'
+    },
+    {
+        id: 'a6', name: 'VÕ THỊ KIM', age: 19, gender: 'Nữ',
+        reason: 'Câu trả lời chứa từ khóa "khó thở" nhưng ngữ cảnh là hen suyễn nhẹ đã biết trước.',
+        content: '"Tôi hơi khó thở do thời tiết, tôi có tiền sử hen suyễn nhẹ, đã dùng thuốc xịt như bình thường."',
+        contact: 'SĐT: 09xx xxx 221',
+        protocol: 'Không cần can thiệp — dấu hiệu khớp với hen suyễn mãn tính đã kiểm soát tốt theo hồ sơ.',
+        status: 'Bỏ qua', time: new Date(Date.now() - 95*60000), note: 'Đã xác minh — thuộc bệnh nền hen suyễn đã kiểm soát, không phải dấu hiệu cấp tính mới.'
+    },
+    {
+        id: 'a7', name: 'LƯƠNG VĂN ĐẠT', age: 47, gender: 'Nam',
+        reason: 'Câu trả lời chứa từ khóa "cấp cứu" do người dùng tự mô tả mức độ nghiêm trọng.',
+        content: '"Cần cấp cứu gấp, tôi bị đau bụng dữ dội không chịu nổi."',
+        contact: 'SĐT: 09xx xxx 556',
+        protocol: 'Xác minh mức độ đau, kiểm tra dấu hiệu ruột thừa/viêm tụy cấp, chuyển cấp cứu nếu cần.',
+        status: 'New', time: new Date(Date.now() - 120*60000), note: ''
+    }
+];
+
+// ================= LOGIN (MV-28) =================
+document.getElementById('btn-nurse-login').addEventListener('click', () => {
+    const user = document.getElementById('li-user').value.trim();
+    const pass = document.getElementById('li-pass').value;
+    const errEl = document.getElementById('li-user-err');
+    const acc = NURSE_ACCOUNTS[user];
+
+    if (!acc || acc.pass !== pass) {
+        errEl.innerText = 'Sai tài khoản hoặc mật khẩu.';
+        errEl.style.display = 'block';
+        return;
+    }
+    if (!acc.active) {
+        errEl.innerText = 'Tài khoản đang bị khóa (inactive) — không thể truy cập Dashboard (MV28-AC3).';
+        errEl.style.display = 'block';
+        return;
+    }
+    errEl.style.display = 'none';
+    currentNurse = { username: user, ...acc };
+
+    if (!acc.hospital) {
+        alert('Đăng nhập thành công nhưng account chưa được gán bệnh viện. Không thể xem dữ liệu (MV28 edge case) — liên hệ MedVita để cấp quyền.');
+        return;
+    }
+
+    document.getElementById('sb-hospital-name').innerText = acc.hospital;
+    document.getElementById('sb-nurse-name').innerText = acc.name;
+    document.getElementById('sb-nurse-initial').innerText = acc.name[0];
+    document.getElementById('view-login').style.display = 'none';
+    document.getElementById('view-dashboard').classList.add('active');
+    renderReviewList();
+    renderRedflagList();
+});
+
+document.getElementById('btn-logout').addEventListener('click', () => {
+    currentNurse = null;
+    document.getElementById('view-dashboard').classList.remove('active');
+    document.getElementById('view-login').style.display = 'flex';
+    document.getElementById('li-user-err').style.display = 'none';
+});
+
+// ================= NAV =================
+function switchView(view) {
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.toggle('active', n.dataset.view === view));
+    document.querySelectorAll('.pane').forEach(p => p.classList.remove('active'));
+    document.getElementById(`pane-${view}`).classList.add('active');
+}
+
+// ================= REVIEW & APPROVE (MV-24) =================
+function statusPillClass(status) {
+    return { 'Pending Nurse Review': 'pending', 'Approved': 'approved' }[status] || 'pending';
+}
+let reviewPage = 1;
+const REVIEW_PAGE_SIZE = 5;
+
+function renderReviewList() {
+    const statusFilter = document.getElementById('flt-status').value;
+    const dateFrom = document.getElementById('flt-date-from').value;
+    const dateTo = document.getElementById('flt-date-to').value;
+    const list = document.getElementById('review-list');
+
+    let filtered = reviewItems.filter(r => !statusFilter || r.status === statusFilter);
+    if (dateFrom) filtered = filtered.filter(r => r.time >= new Date(dateFrom + 'T00:00:00'));
+    if (dateTo) filtered = filtered.filter(r => r.time <= new Date(dateTo + 'T23:59:59'));
+
+    document.getElementById('badge-review').innerText = reviewItems.filter(r => r.status === 'Pending Nurse Review').length;
+
+    const totalPages = Math.max(1, Math.ceil(filtered.length / REVIEW_PAGE_SIZE));
+    if (reviewPage > totalPages) reviewPage = totalPages;
+    const start = (reviewPage - 1) * REVIEW_PAGE_SIZE;
+    const pageItems = filtered.slice(start, start + REVIEW_PAGE_SIZE);
+
+    if (filtered.length === 0) {
+        list.innerHTML = `<div class="empty-state"><svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/></svg><p>Không có bản tóm tắt nào phù hợp bộ lọc.</p></div>`;
+        document.getElementById('review-pagination').innerHTML = '';
+        return;
+    }
+    list.innerHTML = pageItems.map(r => `
+        <div class="data-card" onclick="openReviewDrawer('${r.id}')">
+            <div class="dc-top">
+                <div><div class="dc-patient">${r.name}</div><div class="dc-meta">${r.age} tuổi · ${r.gender}</div></div>
+                <span class="pill ${statusPillClass(r.status)}">${r.status}</span>
+            </div>
+            <div class="dc-body">
+                <div class="dc-chief">${r.chief}</div>
+                <div class="dc-tags">
+                    <span class="pill pending" style="background:#eef1f6;color:var(--muted);">AI đề xuất: ${r.aiDept}</span>
+                    ${r.conflict ? '<span class="pill failed">⚠ Mâu thuẫn dữ liệu</span>' : ''}
+                </div>
+            </div>
+        </div>
+    `).join('');
+
+    document.getElementById('review-pagination').innerHTML = `
+        <button ${reviewPage <= 1 ? 'disabled' : ''} onclick="changeReviewPage(-1)">‹ Trước</button>
+        <span class="page-info">Trang ${reviewPage}/${totalPages} · ${filtered.length} kết quả</span>
+        <button ${reviewPage >= totalPages ? 'disabled' : ''} onclick="changeReviewPage(1)">Sau ›</button>
+    `;
+}
+function changeReviewPage(delta) {
+    reviewPage += delta;
+    renderReviewList();
+}
+document.getElementById('btn-review-search').addEventListener('click', () => {
+    reviewPage = 1;
+    renderReviewList();
+});
+
+let activeReviewId = null;
+function openReviewDrawer(id) {
+    const r = reviewItems.find(x => x.id === id);
+    activeReviewId = id;
+    document.getElementById('rv-patient-name').innerText = r.name;
+    document.getElementById('rv-patient-meta').innerText = `${r.age} tuổi · ${r.gender}`;
+    document.getElementById('rv-conflict').style.display = r.conflict ? 'flex' : 'none';
+    document.getElementById('rv-chief').innerText = r.chief;
+    document.getElementById('rv-history').innerHTML = `Bệnh nền: ${r.chronic}<br>Dị ứng: <span class="allergy-flag">${r.allergy}</span><br>Thuốc đang dùng: ${r.meds}`;
+    document.getElementById('rv-summary').innerText = r.chief + ' AI tổng hợp: cần theo dõi thêm dấu hiệu tiêu hóa.';
+    document.getElementById('rv-time').innerText = r.time.toLocaleString('vi-VN');
+    document.getElementById('rv-dept-select').value = r.approvedDept || r.aiDept;
+    document.getElementById('rv-dept-select').disabled = (r.status === 'Approved');
+    document.getElementById('rv-ai-suggest').innerText = `AI đề xuất ban đầu: ${r.aiDept}`;
+
+    const actionsEl = document.getElementById('rv-actions');
+    const timeline = document.getElementById('rv-timeline');
+    if (r.status === 'Pending Nurse Review') {
+        actionsEl.innerHTML = '<button class="btn-primary" id="btn-rv-approve" onclick="approveReview()">Approve</button>';
+        timeline.innerText = 'Chưa approve — bệnh nhân vẫn tiếp tục khám bình thường theo vận hành bệnh viện (MV24-BR-05).';
+    } else if (r.status === 'Approved') {
+        actionsEl.innerHTML = `<div class="status-timeline" style="margin-top:0;">Đã approve — phân khoa chính thức: <b>${r.approvedDept}</b></div>`;
+        timeline.innerText = `Đã approve lúc ${r.approvedAt ? r.approvedAt.toLocaleString('vi-VN') : ''}. Việc gửi sang HIS do hệ thống MedVita tự xử lý, không hiển thị ở đây.`;
+    }
+    document.getElementById('drawer-review').classList.add('active');
+}
+function approveReview() {
+    const r = reviewItems.find(x => x.id === activeReviewId);
+    r.approvedDept = document.getElementById('rv-dept-select').value;
+    r.status = 'Approved';
+    r.approvedAt = new Date();
+    // Việc gửi sang HIS (thành công/thất bại/retry) là trạng thái nội bộ hệ thống MedVita,
+    // không thuộc phạm vi hiển thị cho điều dưỡng — không track/hiện ở Dashboard này.
+    renderReviewList();
+    openReviewDrawer(activeReviewId);
+    alert(`Đã Approve. Phân khoa chính thức: ${r.approvedDept}. Audit log: nurse_id, old/new dept, approved_at (MV24-AC4).`);
+}
+
+// ================= RED-FLAG (MV-25) =================
+function rfPillClass(status) {
+    return { 'New': 'new', 'Đang xử lý': 'progress', 'Đã xử lý': 'resolved', 'Bỏ qua': 'dismissed' }[status] || 'new';
+}
+let redflagPage = 1;
+const REDFLAG_PAGE_SIZE = 5;
+
+function renderRedflagList() {
+    const statusFilter = document.getElementById('flt-rf-status').value;
+    const list = document.getElementById('redflag-list');
+    const filtered = redflagItems.filter(a => !statusFilter || a.status === statusFilter);
+    document.getElementById('badge-redflag').innerText = redflagItems.filter(a => a.status === 'New' || a.status === 'Đang xử lý').length;
+
+    const totalPages = Math.max(1, Math.ceil(filtered.length / REDFLAG_PAGE_SIZE));
+    if (redflagPage > totalPages) redflagPage = totalPages;
+    const start = (redflagPage - 1) * REDFLAG_PAGE_SIZE;
+    const pageItems = filtered.slice(start, start + REDFLAG_PAGE_SIZE);
+
+    if (filtered.length === 0) {
+        list.innerHTML = `<div class="empty-state"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/></svg><p>Không có cảnh báo nào phù hợp bộ lọc.</p></div>`;
+        document.getElementById('redflag-pagination').innerHTML = '';
+        return;
+    }
+    list.innerHTML = pageItems.map(a => `
+        <div class="data-card alert-card" onclick="openRedflagDrawer('${a.id}')">
+            <div class="dc-top">
+                <div><div class="dc-patient">${a.name}</div><div class="dc-meta">${a.age} tuổi · ${a.gender} · ${a.time.toLocaleTimeString('vi-VN',{hour:'2-digit',minute:'2-digit'})}</div></div>
+                <span class="pill ${rfPillClass(a.status)}">${a.status}</span>
+            </div>
+            <div class="dc-body"><div class="dc-chief">${a.reason}</div></div>
+        </div>
+    `).join('');
+
+    document.getElementById('redflag-pagination').innerHTML = `
+        <button ${redflagPage <= 1 ? 'disabled' : ''} onclick="changeRedflagPage(-1)">‹ Trước</button>
+        <span class="page-info">Trang ${redflagPage}/${totalPages} · ${filtered.length} kết quả</span>
+        <button ${redflagPage >= totalPages ? 'disabled' : ''} onclick="changeRedflagPage(1)">Sau ›</button>
+    `;
+}
+function changeRedflagPage(delta) {
+    redflagPage += delta;
+    renderRedflagList();
+}
+document.getElementById('flt-rf-status').addEventListener('change', () => { redflagPage = 1; renderRedflagList(); });
+
+let activeAlertId = null;
+function openRedflagDrawer(id) {
+    const a = redflagItems.find(x => x.id === id);
+    activeAlertId = id;
+    document.getElementById('rf-patient-name').innerText = a.name;
+    document.getElementById('rf-patient-meta').innerText = `${a.age} tuổi · ${a.gender}`;
+    document.getElementById('rf-reason').innerText = a.reason;
+    document.getElementById('rf-content').innerText = a.content;
+    document.getElementById('rf-contact').innerText = a.contact;
+    document.getElementById('rf-protocol').innerText = a.protocol;
+    document.getElementById('rf-time').innerText = a.time.toLocaleString('vi-VN');
+    document.getElementById('rf-note').value = a.note || '';
+    document.getElementById('rf-timeline').innerText = `Trạng thái hiện tại: ${a.status}${a.note ? ' — ghi chú: ' + a.note : ''}`;
+
+    const isTerminal = (a.status === 'Đã xử lý' || a.status === 'Bỏ qua');
+    document.getElementById('rf-note').disabled = isTerminal;
+    document.getElementById('rf-actions').innerHTML = isTerminal
+        ? `<div class="status-timeline" style="grid-column:span 2;margin-top:0;">Đã xử lý xong (${a.status}) — không thể đổi trạng thái nữa.</div>`
+        : `<button class="act-progress" onclick="setAlertStatus('Đang xử lý')">Đang xử lý</button>
+           <button class="act-resolved" onclick="setAlertStatus('Đã xử lý')">Đã xử lý</button>
+           <button class="act-dismiss" onclick="setAlertStatus('Bỏ qua')">Bỏ qua (cần lý do)</button>`;
+
+    document.getElementById('drawer-redflag').classList.add('active');
+}
+function setAlertStatus(newStatus) {
+    const a = redflagItems.find(x => x.id === activeAlertId);
+    const note = document.getElementById('rf-note').value.trim();
+    const noteRequired = (newStatus === 'Đã xử lý' || newStatus === 'Bỏ qua');
+    if (noteRequired && !note) {
+        alert('Cần nhập ghi chú/lý do trước khi đánh dấu ' + newStatus + ' (MV25-AC4).');
+        return;
+    }
+    a.status = newStatus;
+    a.note = note;
+    renderRedflagList();
+    openRedflagDrawer(activeAlertId);
+    alert(`Đã cập nhật trạng thái: ${newStatus}. Audit log: alert_id, nurse_id, trạng thái trước/sau, ghi chú, thời điểm (MV25-AC5).`);
+}
+
+function closeDrawer(which) {
+    document.getElementById(`drawer-${which}`).classList.remove('active');
+}
+</script>
+
+</body>
+</html>
