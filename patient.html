@@ -506,11 +506,11 @@
                 <div class="profile-pick-item new-profile" id="btn-create-new-hp">+ Tạo hồ sơ mới</div>
             </div>
 
-            <!-- SCREEN: TẠO HỒ SƠ MỚI (self-declared Hồ Sơ Sức Khỏe) -->
+            <!-- SCREEN: TẠO HỒ SƠ MỚI (MV-29 — self-declared Hồ Sơ Sức Khỏe) -->
             <div class="screen" id="screen-new-hp">
                 <div class="screen-header">
                     <h2 id="newhp-title">Tạo hồ sơ mới</h2>
-                    <p id="newhp-subtitle">Hồ sơ tự khai — chưa liên kết bệnh viện (MV-20 AC3)</p>
+                    <p id="newhp-subtitle">Hồ sơ tự khai — chưa liên kết bệnh viện (MV-29)</p>
                 </div>
 
                 <div class="form-group">
@@ -525,25 +525,9 @@
                     <label for="newhp-gender">Giới tính <span style="color:var(--error-color);">*</span></label>
                     <select id="newhp-gender"><option value="">— Chọn —</option><option>Nam</option><option>Nữ</option></select>
                 </div>
-                <div class="form-group">
-                    <label for="newhp-cccd">Số CCCD (không bắt buộc)</label>
-                    <input type="text" id="newhp-cccd" placeholder="Nhập số CCCD">
-                </div>
-                <div class="form-group">
-                    <label for="newhp-ethnicity">Dân tộc (không bắt buộc)</label>
-                    <select id="newhp-ethnicity">
-                        <option value="">— Chọn —</option>
-                        <option>Kinh</option><option>Tày</option><option>Thái</option><option>Mường</option>
-                        <option>Khmer</option><option>Hoa</option><option>Nùng</option><option>Khác</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="newhp-bhyt">Số thẻ BHYT (không bắt buộc)</label>
-                    <input type="text" id="newhp-bhyt" placeholder="Nhập số thẻ BHYT">
-                </div>
-                <span class="error-message" id="newhp-err">Vui lòng nhập đủ Họ tên, Ngày sinh, Giới tính.</span>
+                <span class="error-message" id="newhp-err">Vui lòng kiểm tra lại Họ tên, Ngày sinh, Giới tính.</span>
 
-                <button class="btn-submit" id="btn-newhp-submit" style="margin-top: 6px;">Xong</button>
+                <button class="btn-submit" id="btn-newhp-submit" style="margin-top: 6px;">Lưu</button>
                 <button class="btn-submit ghost" id="btn-newhp-cancel" style="margin-top: 8px;">Hủy</button>
             </div>
 
@@ -631,8 +615,19 @@
             <div class="screen" id="screen-done">
                 <div class="done-icon"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>
                 <h3 style="font-weight: 700; color: var(--text-color); margin-bottom: 8px;">Đã ghi nhận khai báo</h3>
-                <p style="font-size: 13.5px; padding: 0 10px;" id="done-desc">Thông tin của bạn đã được lưu lại. Điều dưỡng sẽ kiểm tra trước khi chuyển sang hệ thống bệnh viện.</p>
-                <div class="status-pill">Pending Nurse Review</div>
+                <p style="font-size: 13.5px; padding: 0 10px;" id="done-desc">Thông tin của bạn đã được ghi nhận.</p>
+
+                <div id="done-summary-card" style="width:100%; margin-top:18px; text-align:left;">
+                    <div class="summary-section-title" style="margin-bottom:8px;">Tóm tắt khai báo</div>
+                    <div class="confirm-card" id="done-summary-body" style="margin-bottom:0;"></div>
+                </div>
+
+                <div id="done-dept-row" style="display:none; margin-top: 16px; width:100%;">
+                    <div class="confirm-card" style="text-align:left; margin-bottom:0;">
+                        <div class="confirm-row"><span class="k">Khoa gợi ý</span><span class="v" id="done-dept-value">—</span></div>
+                    </div>
+                    <p class="hint-text" style="margin-top:8px; display:block;">Đây chỉ là gợi ý tham khảo, không phải chỉ định y khoa chính thức.</p>
+                </div>
                 <button class="btn-submit" id="btn-done-finish" style="width: 100%; margin-top: 30px;">Về màn hình chính</button>
             </div>
 
@@ -649,11 +644,6 @@
 
                 <div class="history-filter-bar">
                     <select id="hist-flt-hp"><option value="">Tất cả Hồ Sơ Sức Khỏe</option></select>
-                    <select id="hist-flt-status">
-                        <option value="">Tất cả trạng thái</option>
-                        <option value="Pending Nurse Review">Pending Nurse Review</option>
-                        <option value="Approved">Approved</option>
-                    </select>
                     <select id="hist-flt-hospital"><option value="">Tất cả bệnh viện</option></select>
                     <div class="history-filter-dates">
                         <input type="date" id="hist-flt-from">
@@ -697,7 +687,7 @@
             <!-- SCREEN: HEALTH PROFILES (MV-27) — chỉ xem, không cho sửa -->
             <div class="screen" id="screen-healthprofiles">
                 <div class="app-topbar">
-                    <span class="title">HEALTH PROFILES</span>
+                    <span class="title">HỒ SƠ SỨC KHỎE</span>
                     <div class="hamburger-btn" id="btn-menu-hp"><svg viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg></div>
                 </div>
                 <div class="screen-header">
@@ -705,6 +695,7 @@
                     <p>MV-27 — các hồ sơ Account có quyền truy cập</p>
                 </div>
                 <div id="hp-view-list"></div>
+                <button class="btn-submit" id="btn-add-hp-from-list" style="margin-top: 14px;">+ Thêm Hồ sơ sức khoẻ</button>
             </div>
 
             <!-- GENERIC DETAIL MODAL — dùng chung cho Hồ Sơ Sức Khỏe (MV-27) và Lịch sử khai báo (MV-21) -->
@@ -713,6 +704,19 @@
                     <span class="hp-detail-close" id="detail-close">&times;</span>
                     <h3 id="detail-title">—</h3>
                     <div class="confirm-card" id="detail-body" style="margin-bottom:0;"></div>
+                </div>
+            </div>
+
+            <!-- DELETE CONFIRM MODAL — MV-30 AC2 -->
+            <div class="hp-detail-overlay" id="delete-confirm-overlay">
+                <div class="hp-detail-card" style="text-align:center;">
+                    <h3 style="margin-bottom:10px;">Xóa hồ sơ?</h3>
+                    <p style="font-size:13.5px; color:var(--text-color); margin-bottom:6px;">Bạn có chắc muốn xóa hồ sơ <b id="delete-hp-name">—</b>?</p>
+                    <p style="font-size:12.5px; color:#8698b8; margin-bottom:20px;">Hồ sơ sẽ không còn được sử dụng cho các lần khai báo mới. Lịch sử khai báo trước đó vẫn được giữ lại.</p>
+                    <div style="display:flex; gap:10px;">
+                        <button class="btn-submit ghost" id="btn-delete-cancel" style="margin-top:0;">Hủy</button>
+                        <button class="btn-submit" id="btn-delete-confirm" style="margin-top:0; background:var(--error-color); box-shadow:none;">Xác nhận xóa</button>
+                    </div>
                 </div>
             </div>
 
@@ -817,15 +821,16 @@
     let flow = null; // 'A' | 'B'
     let account = { phone: '', fullname: '', dob: '', gender: '' };
     let healthProfiles = [
-        { id: 'hp-self', name: 'NGUYỄN VĂN TÙNG', dob: '1994-06-12', gender: 'Nam', hospitalLinked: true, hospitalName: 'Bệnh viện Thái Nguyên' },
-        { id: 'hp-child', name: 'NGUYỄN VĂN AN', dob: '2016-09-01', gender: 'Nam', hospitalLinked: false, hospitalName: null, cccd: '', ethnicity: 'Kinh', bhyt: 'DN4012345678901' },
-        { id: 'hp-other', name: 'TRẦN THỊ HOA', dob: '1988-02-20', gender: 'Nữ', hospitalLinked: false, hospitalName: null, cccd: '019188002345', ethnicity: 'Kinh', bhyt: '' }
-    ]; // {id, name, dob, gender, hospitalLinked, hospitalName}
+        { id: 'hp-self', name: 'NGUYỄN VĂN TÙNG', dob: '1994-06-12', gender: 'Nam', hospitalLinked: true, hospitalName: 'Bệnh viện Thái Nguyên', selfCreated: false, active: true },
+        { id: 'hp-child', name: 'NGUYỄN VĂN AN', dob: '2016-09-01', gender: 'Nam', hospitalLinked: false, hospitalName: null, selfCreated: true, active: true },
+        { id: 'hp-other', name: 'TRẦN THỊ HOA', dob: '1988-02-20', gender: 'Nữ', hospitalLinked: false, hospitalName: null, selfCreated: true, active: true }
+    ]; // {id, name, dob, gender, hospitalLinked, hospitalName, selfCreated, active}
     let activeHpId = 'hp-self';
     let consentStatus = 'PENDING'; // ACCEPTED | PENDING | DECLINED — cấp Account (MV12-BR-04)
     let hasDeclinedBefore = false;
     let sessionHospitalContext = null; // hospital context của phiên hiện tại (MV9-BR-07)
     let pickerAllowCreateNew = true; // MV-20: false khi picker hiển thị danh sách từ HIS (có chọn viện, AC2), true khi từ Account (AC3)
+    let newHpEntryContext = 'login'; // 'login' = từ luồng đăng nhập (MV-20 AC3) → tiếp Consent/Confirm; 'management' = từ màn Hồ Sơ Sức Khỏe (MV-29) → quay lại danh sách
     let chatStep = 1;
     let userMessages = [];
     let hasFinishedEarly = false;
@@ -1007,42 +1012,34 @@
 
     function createNewHealthProfile() {
         const id = 'hp-' + Date.now();
-        healthProfiles.push({ id, name: '(Chưa khai tên)', dob: '', gender: '', hospitalLinked: false, hospitalName: null });
+        healthProfiles.push({ id, name: '(Chưa khai tên)', dob: '', gender: '', hospitalLinked: false, hospitalName: null, selfCreated: true, active: true });
         activeHpId = id;
     }
 
-    let editingHpId = null; // null = đang Tạo hồ sơ mới; có giá trị = đang Sửa hồ sơ tự khai (MV-27)
-
     document.getElementById('btn-create-new-hp').addEventListener('click', () => {
-        editingHpId = null;
+        newHpEntryContext = 'login';
         document.getElementById('newhp-title').innerText = 'Tạo hồ sơ mới';
-        document.getElementById('newhp-subtitle').innerText = 'Hồ sơ tự khai — chưa liên kết bệnh viện (MV-20 AC3)';
+        document.getElementById('newhp-subtitle').innerText = 'Hồ sơ tự khai — chưa liên kết bệnh viện (MV-29)';
         document.getElementById('newhp-name').value = '';
         document.getElementById('newhp-dob').value = '';
         document.getElementById('newhp-gender').value = '';
-        document.getElementById('newhp-cccd').value = '';
-        document.getElementById('newhp-ethnicity').value = '';
-        document.getElementById('newhp-bhyt').value = '';
+        document.getElementById('newhp-err').style.display = 'none';
         gotoScreen('new-hp');
     });
 
-    function openEditHpForm(id) {
-        const hp = healthProfiles.find(h => h.id === id);
-        if (!hp) return;
-        editingHpId = id;
-        document.getElementById('newhp-title').innerText = 'Sửa hồ sơ';
-        document.getElementById('newhp-subtitle').innerText = 'Chỉ áp dụng cho hồ sơ tự khai, chưa gắn HIS (MV27-BR-03)';
-        document.getElementById('newhp-name').value = hp.name === '(Chưa khai tên)' ? '' : hp.name;
-        document.getElementById('newhp-dob').value = hp.dob || '';
-        document.getElementById('newhp-gender').value = hp.gender || '';
-        document.getElementById('newhp-cccd').value = hp.cccd || '';
-        document.getElementById('newhp-ethnicity').value = hp.ethnicity || '';
-        document.getElementById('newhp-bhyt').value = hp.bhyt || '';
+    document.getElementById('btn-add-hp-from-list').addEventListener('click', () => {
+        newHpEntryContext = 'management';
+        document.getElementById('newhp-title').innerText = 'Tạo hồ sơ mới';
+        document.getElementById('newhp-subtitle').innerText = 'Hồ sơ tự khai — chưa liên kết bệnh viện (MV-29)';
+        document.getElementById('newhp-name').value = '';
+        document.getElementById('newhp-dob').value = '';
+        document.getElementById('newhp-gender').value = '';
+        document.getElementById('newhp-err').style.display = 'none';
         gotoScreen('new-hp');
-    }
+    });
 
     document.getElementById('btn-newhp-cancel').addEventListener('click', () => {
-        if (editingHpId) { gotoScreen('healthprofiles'); return; }
+        if (newHpEntryContext === 'management') { gotoScreen('healthprofiles'); return; }
         gotoScreen(healthProfiles.length > 0 ? 'picker' : 'login');
     });
 
@@ -1050,32 +1047,27 @@
         const name = document.getElementById('newhp-name').value.trim();
         const dob = document.getElementById('newhp-dob').value;
         const gender = document.getElementById('newhp-gender').value;
-        if (!name || !dob || !gender) {
+        // MV29-AC3: họ tên không rỗng (sau trim), ngày sinh hợp lệ và không lớn hơn hiện tại, đã chọn giới tính.
+        const dobValid = dob && new Date(dob) <= new Date();
+        if (!name || !dobValid || !gender) {
             document.getElementById('newhp-err').style.display = 'block';
             return;
         }
         document.getElementById('newhp-err').style.display = 'none';
 
-        const cccd = document.getElementById('newhp-cccd').value.trim();
-        const ethnicity = document.getElementById('newhp-ethnicity').value;
-        const bhyt = document.getElementById('newhp-bhyt').value.trim();
+        const hp = {
+            id: 'hp-' + Date.now(), name, dob, gender,
+            hospitalLinked: false, hospitalName: null, selfCreated: true, active: true
+        };
+        healthProfiles.push(hp);
 
-        if (editingHpId) {
-            const hp = healthProfiles.find(h => h.id === editingHpId);
-            hp.name = name; hp.dob = dob; hp.gender = gender;
-            hp.cccd = cccd; hp.ethnicity = ethnicity; hp.bhyt = bhyt;
-            editingHpId = null;
+        if (newHpEntryContext === 'management') {
+            // MV-29 từ màn quản lý Hồ Sơ Sức Khỏe: không đổi activeHpId, quay lại danh sách.
             gotoScreen('healthprofiles');
             return;
         }
 
-        const hp = {
-            id: 'hp-' + Date.now(), name, dob, gender, cccd, ethnicity, bhyt,
-            hospitalLinked: false, hospitalName: null
-        };
-        healthProfiles.push(hp);
         activeHpId = hp.id;
-
         // Hồ Sơ Sức Khỏe mới thừa hưởng Consent hiện tại của Account (MV12-BR-04):
         // Account đã ACCEPTED -> vào thẳng Xác nhận hồ sơ; chưa ACCEPTED -> phải qua Consent trước (MV12-BR-01).
         gotoScreen(consentStatus === 'ACCEPTED' ? 'confirm' : 'consent');
@@ -1085,7 +1077,7 @@
     function renderPickerScreen() {
         const list = document.getElementById('picker-list');
         list.innerHTML = '';
-        healthProfiles.forEach(hp => {
+        healthProfiles.filter(hp => hp.active !== false).forEach(hp => {
             const div = document.createElement('div');
             div.className = 'profile-pick-item';
             const yob = hp.dob ? hp.dob.split('-')[0] : '----';
@@ -1158,9 +1150,6 @@
             <div class="confirm-row"><span class="k">Họ tên</span><span class="v">${hp.name}</span></div>
             <div class="confirm-row"><span class="k">Ngày sinh</span><span class="v">${hp.dob || 'Chưa có'}</span></div>
             <div class="confirm-row"><span class="k">Giới tính</span><span class="v">${hp.gender || 'Chưa có'}</span></div>
-            ${hp.cccd ? `<div class="confirm-row"><span class="k">Số CCCD</span><span class="v">${hp.cccd}</span></div>` : ''}
-            ${hp.ethnicity ? `<div class="confirm-row"><span class="k">Dân tộc</span><span class="v">${hp.ethnicity}</span></div>` : ''}
-            ${hp.bhyt ? `<div class="confirm-row"><span class="k">Số thẻ BHYT</span><span class="v">${hp.bhyt}</span></div>` : ''}
             <div class="confirm-row"><span class="k">Bệnh viện liên kết</span><span class="v">${hp.hospitalLinked ? hp.hospitalName : 'Chưa có (tự khai)'}</span></div>
         `;
 
@@ -1274,18 +1263,54 @@
         }
     });
 
+    function suggestDeptFromChief(text) {
+        const t = (text || '').toLowerCase();
+        if (t.includes('ngực') || t.includes('tim') || t.includes('huyết áp')) return 'Khoa Tim Mạch';
+        if (t.includes('bụng') || t.includes('tiêu hóa') || t.includes('buồn nôn') || t.includes('dạ dày')) return 'Khoa Tiêu Hóa';
+        if (t.includes('ho') || t.includes('khó thở') || t.includes('hô hấp')) return 'Khoa Hô Hấp';
+        if (t.includes('sốt') && t.includes('trẻ')) return 'Khoa Nhi';
+        return 'Khoa Nội Tổng Quát';
+    }
+
     function finishDeclaration(early) {
         const hp = healthProfiles.find(h => h.id === activeHpId);
         const chief = userMessages[0] || 'Chưa có mô tả';
+        // MV11-BR-02/04: trạng thái nội bộ chỉ phụ thuộc hospital context CỦA PHIÊN HIỆN TẠI —
+        // không suy ra từ hp.hospitalLinked (HIS link cũ) theo Technical Design Reference mục 9/15.
+        const hasContext = !!sessionHospitalContext;
+        const suggestedDept = suggestDeptFromChief(chief);
         historyLog.unshift({
             id: 'hist-' + Date.now(),
             hpId: activeHpId, hpName: hp.name, hpDob: hp.dob, time: new Date(),
-            hospital: sessionHospitalContext || (hp.hospitalLinked ? hp.hospitalName : null),
-            chief, answers: [...userMessages], status: 'Pending Nurse Review', redFlag: false
+            hospital: sessionHospitalContext || null,
+            chief, answers: [...userMessages], suggestedDept,
+            status: hasContext ? 'Pending Nurse Review' : 'Done', redFlag: false
         });
+
+        // AC3/AC4/AC5: hệ thống PHẢI hiển thị tóm tắt cho người dùng xem lại — áp dụng cho cả 2 nhánh
+        // có/không hospital context, chỉ khác nhau ở việc có hiện khoa/phân khoa hay không (MV11-BR-03/05).
+        document.getElementById('done-summary-body').innerHTML = `
+            <div class="confirm-row"><span class="k">Lý do đến khám</span><span class="v">${chief}</span></div>
+            ${userMessages.length > 1 ? `<div class="confirm-row"><span class="k">Thông tin bổ sung</span><span class="v">${userMessages.slice(1).join('; ')}</span></div>` : ''}
+            <div class="confirm-row"><span class="k">Thời điểm khai báo</span><span class="v">${new Date().toLocaleString('vi-VN')}</span></div>
+            <div class="confirm-row"><span class="k">Bệnh viện</span><span class="v">${sessionHospitalContext || 'Tự khai — không gắn bệnh viện'}</span></div>
+        `;
+
+        // MV11-BR-06: người dùng KHÔNG được thấy trạng thái vận hành nội bộ (Pending Nurse Review...),
+        // dù có hospital context hay không — message chỉ nói chung chung, không tiết lộ quy trình điều dưỡng.
         document.getElementById('done-desc').innerText = early
-            ? 'Bạn đã kết thúc sớm. Thông tin đã khai được lưu lại và chờ điều dưỡng kiểm tra.'
-            : 'Cảm ơn bạn đã hoàn tất khai báo. Thông tin sẽ được điều dưỡng kiểm tra trước khi chuyển sang hệ thống bệnh viện.';
+            ? 'Bạn đã kết thúc sớm. Thông tin đã khai được ghi nhận.'
+            : 'Cảm ơn bạn đã hoàn tất khai báo. Thông tin của bạn đã được ghi nhận.';
+
+        // MV11-BR-03/05: khoa/phân khoa CHỈ hiện khi KHÔNG có hospital context — ngược lại với trực giác thông thường.
+        const deptRow = document.getElementById('done-dept-row');
+        if (!hasContext) {
+            deptRow.style.display = 'block';
+            document.getElementById('done-dept-value').innerText = suggestedDept;
+        } else {
+            deptRow.style.display = 'none';
+        }
+
         gotoScreen('done');
     }
 
@@ -1294,7 +1319,8 @@
     // ===================== RED-FLAG (MV-10) =====================
     function triggerRedFlag() {
         const hp = healthProfiles.find(h => h.id === activeHpId);
-        const linked = sessionHospitalContext || (hp && hp.hospitalLinked ? hp.hospitalName : null);
+        // Technical Design Reference mục 9/15: không tự suy ra hospital context từ HIS link cũ.
+        const linked = sessionHospitalContext || null;
         const desc = linked
             ? `Hệ thống phát hiện dấu hiệu cần can thiệp gấp. Vì bạn đang khai báo tại <b>${linked}</b>, hãy báo ngay nhân viên y tế gần nhất.`
             : `Hệ thống phát hiện dấu hiệu cần can thiệp gấp. Vui lòng gọi 115 hoặc đến cơ sở y tế gần nhất ngay.`;
@@ -1303,7 +1329,8 @@
         historyLog.unshift({
             id: 'hist-' + Date.now(),
             hpId: activeHpId, hpName: hp.name, hpDob: hp.dob, time: new Date(), hospital: linked,
-            chief: userMessages[userMessages.length-1] || '(red-flag)', answers: [...userMessages], status: 'Pending Nurse Review', redFlag: true
+            chief: userMessages[userMessages.length-1] || '(red-flag)', answers: [...userMessages],
+            status: linked ? 'Pending Nurse Review' : 'Done', redFlag: true
         });
 
         gotoScreen('emergency');
@@ -1340,21 +1367,20 @@
         const list = document.getElementById('history-list');
 
         const fHp = document.getElementById('hist-flt-hp').value;
-        const fStatus = document.getElementById('hist-flt-status').value;
         const fHospital = document.getElementById('hist-flt-hospital').value;
         const fFrom = document.getElementById('hist-flt-from').value;
         const fTo = document.getElementById('hist-flt-to').value;
 
-        let accessible = historyLog; // demo: tất cả Hồ Sơ Sức Khỏe của Account hiện tại (MV21-BR-01)
+        let accessible = historyLog.filter(h => h.status === 'Approved' || h.status === 'Done'); // MV21-BR-01/BR-02
         if (fHp) accessible = accessible.filter(h => h.hpId === fHp);
-        if (fStatus) accessible = accessible.filter(h => h.status === fStatus);
         if (fHospital === '__none__') accessible = accessible.filter(h => !h.hospital);
         else if (fHospital) accessible = accessible.filter(h => h.hospital === fHospital);
         if (fFrom) accessible = accessible.filter(h => h.time >= new Date(fFrom + 'T00:00:00'));
         if (fTo) accessible = accessible.filter(h => h.time <= new Date(fTo + 'T23:59:59'));
 
         if (accessible.length === 0) {
-            const msg = historyLog.length === 0
+            const hasAnyApprovedOrDone = historyLog.some(h => h.status === 'Approved' || h.status === 'Done');
+            const msg = !hasAnyApprovedOrDone
                 ? 'Chưa có lịch sử khai báo nào.'
                 : 'Không có lịch sử khai báo phù hợp bộ lọc.';
             list.innerHTML = `<p style="font-size:13px; color:#8698b8; text-align:center; margin-top:40px;">${msg}</p>`;
@@ -1362,10 +1388,11 @@
         }
         list.innerHTML = accessible.map(h => {
             const yob = h.hpDob ? h.hpDob.split('-')[0] : '----';
-            const statusClass = h.status === 'Approved' ? 'approved' : 'pending';
+            // MV21-AC2: mọi item hiển thị đều đã Approved/Done nên luôn có nhãn trạng thái.
+            const statusChip = `<span class="status-chip approved">${h.status === 'Approved' ? 'Đã duyệt' : 'Đã hoàn tất'}</span>`;
             return `
             <div class="history-item" onclick="openHistoryDetail('${h.id}')">
-                <div class="h-top"><span>${h.hpName} <small style="font-weight:500; color:#8698b8;">(${yob})</small></span><span class="status-chip ${statusClass}">${h.status}</span></div>
+                <div class="h-top"><span>${h.hpName} <small style="font-weight:500; color:#8698b8;">(${yob})</small></span>${statusChip}</div>
                 <div class="h-meta">${h.time.toLocaleString('vi-VN')} · ${h.hospital || 'Tự khai — không gắn bệnh viện'}${h.redFlag ? ' · 🚨 cảnh báo khẩn cấp' : ''}</div>
                 <div class="h-chief">${h.chief}</div>
             </div>
@@ -1412,10 +1439,11 @@
                 <div class="summary-section-title">Tiền sử bệnh</div>
                 <div class="summary-section-content">${history}</div>
             </div>
+            ${!h.hospital ? `
             <div class="summary-section">
-                <div class="summary-section-title">Khoa</div>
-                <div class="summary-section-content">${h.dept || 'Chưa xác định'}</div>
-            </div>
+                <div class="summary-section-title">Khoa gợi ý</div>
+                <div class="summary-section-content">${h.suggestedDept || 'Chưa xác định'} <span style="color:#8698b8; font-size:11.5px;">(tham khảo, không phải chỉ định y khoa)</span></div>
+            </div>` : ''}
             <div class="summary-section">
                 <div class="summary-section-title">Thông tin sàng lọc</div>
                 <div class="summary-section-content">${screening}</div>
@@ -1458,7 +1486,8 @@
     // ===================== HEALTH PROFILES (MV-27) — chỉ xem, không có nút Sửa =====================
     function renderHealthProfilesScreen() {
         const list = document.getElementById('hp-view-list');
-        list.innerHTML = healthProfiles.map(hp => `
+        const activeProfiles = healthProfiles.filter(hp => hp.active !== false); // MV27-BR-01: chỉ hồ sơ active
+        list.innerHTML = activeProfiles.map(hp => `
             <div class="hp-list-item ${hp.id === activeHpId ? 'active-hp' : ''}" onclick="openHpDetail('${hp.id}')">
                 ${hp.id === activeHpId ? '<span class="active-tag">ĐANG DÙNG</span>' : ''}
                 <div class="profile-pick-avatar">${hp.name[0]}</div>
@@ -1469,6 +1498,31 @@
             </div>
         `).join('') || '<p style="font-size:13px; color:#8698b8;">Account chưa có Hồ Sơ Sức Khỏe nào.</p>';
     }
+
+    // ===================== XÓA HỒ SƠ SỨC KHỎE TỰ TẠO (MV-30) =====================
+    let deletingHpId = null;
+    function openDeleteHpConfirm(id) {
+        const hp = healthProfiles.find(h => h.id === id);
+        if (!hp) return;
+        deletingHpId = id;
+        document.getElementById('delete-hp-name').innerText = hp.name;
+        document.getElementById('delete-confirm-overlay').classList.add('active');
+    }
+    document.getElementById('btn-delete-cancel').addEventListener('click', () => {
+        deletingHpId = null;
+        document.getElementById('delete-confirm-overlay').classList.remove('active');
+    });
+    document.getElementById('btn-delete-confirm').addEventListener('click', () => {
+        const hp = healthProfiles.find(h => h.id === deletingHpId);
+        if (hp) {
+            // MV30-AC3: chuyển sang không hoạt động, không xóa dữ liệu/lịch sử.
+            hp.active = false;
+            if (activeHpId === hp.id) activeHpId = null; // last_active_health_profile_id = null, không tự chọn hồ sơ khác
+        }
+        deletingHpId = null;
+        document.getElementById('delete-confirm-overlay').classList.remove('active');
+        renderHealthProfilesScreen();
+    });
 
     function openHpDetail(id) {
         const hp = healthProfiles.find(h => h.id === id);
@@ -1487,21 +1541,22 @@
             body.innerHTML = `
                 <div class="confirm-row"><span class="k">Ngày sinh</span><span class="v">${hp.dob || 'Chưa có'}</span></div>
                 <div class="confirm-row"><span class="k">Giới tính</span><span class="v">${hp.gender || 'Chưa có'}</span></div>
-                ${hp.cccd ? `<div class="confirm-row"><span class="k">Số CCCD</span><span class="v">${hp.cccd}</span></div>` : ''}
-                ${hp.ethnicity ? `<div class="confirm-row"><span class="k">Dân tộc</span><span class="v">${hp.ethnicity}</span></div>` : ''}
-                ${hp.bhyt ? `<div class="confirm-row"><span class="k">Số thẻ BHYT</span><span class="v">${hp.bhyt}</span></div>` : ''}
                 <div class="confirm-row"><span class="k">Bệnh viện liên kết</span><span class="v">Chưa có — hồ sơ tự khai (MV-27 AC3)</span></div>
                 <div class="confirm-row"><span class="k">Đồng bộ HIS</span><span class="v">Không tự động gửi/đồng bộ</span></div>
             `;
-            body.innerHTML += `
-                <div style="display:flex; justify-content:center; margin-top:16px;">
-                    <button class="btn-submit" id="detail-edit-hp-btn" style="width:auto; height:38px; padding:0 32px; margin-top:0; border-radius:10px; font-size:13.5px;">Sửa hồ sơ</button>
-                </div>
-            `;
+            // MV30-AC1/AC4: chỉ hiện "Xóa" khi hồ sơ tự tạo trên MedVita, đang active, KHÔNG liên kết bệnh viện.
+            if (hp.selfCreated && hp.active) {
+                body.innerHTML += `
+                    <div style="display:flex; justify-content:center; margin-top:16px;">
+                        <button class="btn-submit" id="detail-delete-hp-btn" style="width:auto; height:38px; padding:0 32px; margin-top:0; border-radius:10px; font-size:13.5px; background:var(--error-color); box-shadow:none;">Xóa</button>
+                    </div>
+                `;
+            }
             document.getElementById('detail-overlay').classList.add('active');
-            document.getElementById('detail-edit-hp-btn').addEventListener('click', () => {
+            const delBtn = document.getElementById('detail-delete-hp-btn');
+            if (delBtn) delBtn.addEventListener('click', () => {
                 document.getElementById('detail-overlay').classList.remove('active');
-                openEditHpForm(hp.id);
+                openDeleteHpConfirm(hp.id);
             });
             return;
         }
@@ -1552,7 +1607,7 @@
         if (hp.dob) age = new Date().getFullYear() - new Date(hp.dob).getFullYear();
         document.getElementById('doc-page').innerText = age;
         document.getElementById('doc-pgender').innerText = hp.gender || '—';
-        document.getElementById('doc-hospital').innerText = sessionHospitalContext || (hp.hospitalLinked ? hp.hospitalName : 'Chưa gắn bệnh viện');
+        document.getElementById('doc-hospital').innerText = sessionHospitalContext || 'Chưa gắn bệnh viện (phiên hiện tại)';
 
         const completionEl = document.getElementById('doc-completion');
         if (hasFinishedEarly) {
