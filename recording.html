@@ -243,6 +243,13 @@ button{font-family:inherit;cursor:pointer;border:none;}
           <span>Upload thất bại — mất kết nối mạng. Dữ liệu đã ghi vẫn được giữ nguyên.</span>
           <button class="retry-btn" id="btn-retry">Thử lại</button>
         </div>
+
+        <div class="rec-controls hidden" id="new-session-row">
+          <button class="rec-btn btn-new" id="btn-new-session-2">
+            <svg viewBox="0 0 24 24" fill="#fff"><path d="M12 4v16m8-8H4" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/></svg>
+            Tạo phiên mới
+          </button>
+        </div>
       </div>
     </div>
 
@@ -417,7 +424,7 @@ function setStatus(status) {
   document.getElementById('status-label').textContent = status;
 }
 
-document.getElementById('btn-new-session').addEventListener('click', async () => {
+async function createNewSession() {
   sessionCounter += 1;
   session = { id: `MV52-${String(sessionCounter).padStart(3, '0')}`, seconds: 0, status: 'Draft', timerHandle: null };
   document.getElementById('no-session-state').classList.add('hidden');
@@ -427,6 +434,7 @@ document.getElementById('btn-new-session').addEventListener('click', async () =>
   document.getElementById('timer-caption').textContent = 'Sẵn sàng ghi âm';
   setStatus('Draft');
   document.getElementById('upload-fail-note').classList.add('hidden');
+  document.getElementById('new-session-row').classList.add('hidden');
   toggleButtons('Draft');
 
   if (micAvailable === null) {
@@ -439,7 +447,10 @@ document.getElementById('btn-new-session').addEventListener('click', async () =>
       document.getElementById('mic-warning').classList.remove('hidden');
     }
   }
-});
+}
+
+document.getElementById('btn-new-session').addEventListener('click', createNewSession);
+document.getElementById('btn-new-session-2').addEventListener('click', createNewSession);
 
 function toggleButtons(state) {
   const map = {
@@ -537,6 +548,7 @@ function completeUpload() {
   setStatus('Completed');
   document.getElementById('timer-caption').textContent = 'Hoàn tất — audio và metadata đã sẵn sàng cho AI team';
   document.getElementById('upload-fail-note').classList.add('hidden');
+  document.getElementById('new-session-row').classList.remove('hidden');
   sessions[currentUser] = sessions[currentUser] || [];
   sessions[currentUser].unshift({
     id: session.id,
