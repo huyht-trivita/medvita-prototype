@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MV-52 — Thu thập hội thoại thăm khám (Prototype)</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0f2740; --navy-2:#16324f; --navy-3:#1d3f63;
+  --primary:#0057c4; --primary-dark:#00408f;
+  --accent-red:#e63535; --accent-amber:#f59e0b; --accent-green:#22a35d;
+  --bg:#eef2f8; --card:#ffffff; --line:#e3e8f0; --ink:#1c2b42; --muted:#7c8aa5;
+  --mono:'JetBrains Mono', monospace;
+  --radius:14px;
+}
+*{box-sizing:border-box;margin:0;padding:0;font-family:'Inter',sans-serif;}
+body{background:var(--bg);color:var(--ink);min-height:100vh;}
+button{font-family:inherit;cursor:pointer;border:none;}
+.hidden{display:none !important;}
+
+/* ================= LOGIN ================= */
+#view-login{
+  min-height:100vh;display:flex;align-items:center;justify-content:center;
+  background:radial-gradient(circle at 20% 20%, var(--navy-2) 0%, var(--navy) 55%, #0a1b2e 100%);
+  padding:24px;
+}
+.login-card{width:380px;background:var(--card);border-radius:20px;padding:36px 32px;box-shadow:0 30px 70px rgba(0,0,0,0.35);}
+.login-brand{display:flex;align-items:center;gap:10px;margin-bottom:28px;}
+.login-brand .mark{width:38px;height:38px;border-radius:10px;background:var(--navy);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.login-brand .mark svg{width:20px;height:20px;fill:#fff;}
+.login-brand .name{font-size:16px;font-weight:800;color:var(--navy);letter-spacing:-0.3px;}
+.login-brand .tag{font-size:10.5px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;}
+.login-title{font-size:19px;font-weight:700;margin-bottom:4px;}
+.login-sub{font-size:13px;color:var(--muted);margin-bottom:24px;line-height:1.5;}
+.field{margin-bottom:16px;}
+.field label{display:block;font-size:12.5px;font-weight:600;color:var(--navy);margin-bottom:6px;}
+.field input{width:100%;padding:11px 13px;border:1.5px solid var(--line);border-radius:10px;font-size:14px;color:var(--ink);}
+.field input:focus{outline:2px solid var(--primary);outline-offset:1px;border-color:var(--primary);}
+.login-error{background:#fdecec;color:var(--accent-red);font-size:12.5px;font-weight:600;padding:10px 12px;border-radius:8px;margin-bottom:16px;display:none;}
+.login-error.show{display:block;}
+.btn-login{width:100%;height:46px;background:var(--primary);color:#fff;border-radius:10px;font-size:14.5px;font-weight:700;}
+.btn-login:hover{background:var(--primary-dark);}
+.login-hint{margin-top:18px;font-size:11.5px;color:var(--muted);text-align:center;line-height:1.6;}
+.login-hint b{color:var(--ink);font-family:var(--mono);}
+
+/* ================= APP SHELL ================= */
+#view-app{min-height:100vh;display:none;flex-direction:column;}
+#view-app.show{display:flex;}
+.topbar{
+  background:var(--navy);color:#fff;padding:14px 28px;display:flex;align-items:center;justify-content:space-between;
+}
+.topbar-left{display:flex;align-items:center;gap:12px;}
+.topbar .mark{width:32px;height:32px;border-radius:8px;background:var(--primary);display:flex;align-items:center;justify-content:center;}
+.topbar .mark svg{width:17px;height:17px;fill:#fff;}
+.topbar-title{font-size:14.5px;font-weight:700;}
+.topbar-sub{font-size:11px;color:#9db3cc;}
+.topbar-right{display:flex;align-items:center;gap:16px;}
+.doctor-chip{display:flex;align-items:center;gap:8px;font-size:12.5px;}
+.doctor-chip .avatar{width:28px;height:28px;border-radius:50%;background:var(--primary);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;}
+.doctor-name{font-weight:600;}
+.doctor-dept{color:#9db3cc;font-size:11px;}
+.btn-logout{background:transparent;color:#cdd9e8;font-size:12px;font-weight:600;padding:6px 10px;border-radius:6px;border:1px solid #2c4361;}
+.btn-logout:hover{background:#16324f;color:#fff;}
+
+.tabs{display:flex;gap:4px;background:var(--card);border-bottom:1px solid var(--line);padding:0 28px;}
+.tab-btn{padding:14px 18px;font-size:13.5px;font-weight:600;color:var(--muted);border-bottom:3px solid transparent;background:transparent;}
+.tab-btn.active{color:var(--primary);border-bottom-color:var(--primary);}
+
+.content{flex:1;padding:28px;display:grid;grid-template-columns:1fr 320px;gap:24px;max-width:1200px;width:100%;margin:0 auto;align-items:start;}
+.panel{background:var(--card);border-radius:var(--radius);border:1px solid var(--line);padding:24px;}
+.panel-title{font-size:15px;font-weight:700;margin-bottom:4px;}
+.panel-sub{font-size:12.5px;color:var(--muted);margin-bottom:20px;}
+
+/* ---- Recording panel ---- */
+.session-id-badge{font-family:var(--mono);font-size:12px;background:#eef3fb;color:var(--primary);padding:4px 10px;border-radius:6px;display:inline-block;margin-bottom:18px;}
+.status-badge{font-size:11.5px;font-weight:700;padding:4px 11px;border-radius:20px;display:inline-flex;align-items:center;gap:6px;}
+.status-badge .dot{width:7px;height:7px;border-radius:50%;}
+.status-Draft{background:#eef1f6;color:var(--muted);}
+.status-Draft .dot{background:var(--muted);}
+.status-Recording{background:#fdecec;color:var(--accent-red);}
+.status-Recording .dot{background:var(--accent-red);animation:pulse 1.2s infinite;}
+.status-Paused{background:#fff6e6;color:var(--accent-amber);}
+.status-Paused .dot{background:var(--accent-amber);}
+.status-Uploading{background:#eaf2ff;color:var(--primary);}
+.status-Uploading .dot{background:var(--primary);animation:pulse 1s infinite;}
+.status-Uploadfailed{background:#fdecec;color:var(--accent-red);}
+.status-Uploadfailed .dot{background:var(--accent-red);}
+.status-Completed{background:#e9f9ef;color:var(--accent-green);}
+.status-Completed .dot{background:var(--accent-green);}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.3;}}
+
+.timer-display{font-family:var(--mono);font-size:52px;font-weight:700;color:var(--navy);text-align:center;margin:22px 0 6px;letter-spacing:1px;}
+.timer-caption{text-align:center;font-size:12px;color:var(--muted);margin-bottom:26px;}
+
+.rec-controls{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:22px;}
+.rec-btn{height:48px;padding:0 22px;border-radius:12px;font-size:13.5px;font-weight:700;display:flex;align-items:center;gap:8px;}
+.rec-btn svg{width:16px;height:16px;}
+.btn-start{background:var(--primary);color:#fff;}
+.btn-start:hover{background:var(--primary-dark);}
+.btn-pause{background:#fff6e6;color:var(--accent-amber);border:1.5px solid #fbdca0;}
+.btn-resume{background:var(--primary);color:#fff;}
+.btn-end{background:#fdecec;color:var(--accent-red);border:1.5px solid #f7c2c2;}
+.btn-new{background:var(--navy);color:#fff;}
+.rec-btn:disabled{opacity:0.4;cursor:not-allowed;}
+
+.mic-warning{background:#fff6e6;border:1px solid #fbdca0;color:#92620a;font-size:12px;padding:10px 12px;border-radius:8px;margin-bottom:18px;line-height:1.5;}
+.upload-note{background:#fdecec;border:1px solid #f7c2c2;color:var(--accent-red);font-size:12.5px;padding:12px 14px;border-radius:10px;margin-top:6px;display:flex;justify-content:space-between;align-items:center;gap:10px;}
+.retry-btn{background:var(--accent-red);color:#fff;font-size:12px;font-weight:700;padding:8px 14px;border-radius:8px;flex-shrink:0;}
+
+/* ---- Sidebar: scenario controls (demo only) ---- */
+.sidebar-title{font-size:12.5px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:12px;}
+.scenario-btn{width:100%;text-align:left;background:var(--bg);border:1px solid var(--line);padding:11px 13px;border-radius:9px;font-size:12.5px;font-weight:600;color:var(--ink);margin-bottom:8px;display:flex;align-items:center;justify-content:space-between;}
+.scenario-btn:hover{border-color:var(--primary);color:var(--primary);}
+.scenario-note{font-size:11px;color:var(--muted);line-height:1.5;margin-top:14px;padding-top:14px;border-top:1px dashed var(--line);}
+.toggle-pill{font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:20px;}
+.pill-off{background:#eef1f6;color:var(--muted);}
+.pill-on{background:#fdecec;color:var(--accent-red);}
+
+/* ---- History ---- */
+.history-list{display:flex;flex-direction:column;gap:10px;}
+.history-item{display:flex;align-items:center;gap:14px;padding:14px 16px;border:1px solid var(--line);border-radius:12px;}
+.history-item .h-id{font-family:var(--mono);font-size:12px;color:var(--primary);font-weight:700;width:76px;flex-shrink:0;}
+.history-item .h-meta{flex:1;min-width:0;}
+.history-item .h-time{font-size:13px;font-weight:600;}
+.history-item .h-sub{font-size:11.5px;color:var(--muted);margin-top:2px;}
+.history-item .h-dur{font-family:var(--mono);font-size:13px;color:var(--ink);width:64px;text-align:right;flex-shrink:0;}
+.empty-state{text-align:center;padding:60px 20px;color:var(--muted);}
+.empty-state svg{width:44px;height:44px;fill:#c9d3e0;margin-bottom:14px;}
+.empty-state .e-title{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:4px;}
+.empty-state .e-sub{font-size:12.5px;}
+
+@media (max-width:860px){
+  .content{grid-template-columns:1fr;padding:16px;}
+  .topbar{padding:12px 16px;}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ LOGIN VIEW (MV-53) ============ -->
+<div id="view-login">
+  <div class="login-card">
+    <div class="login-brand">
+      <div class="mark"><svg viewBox="0 0 24 24"><path d="M12 2a5 5 0 0 0-5 5v5a5 5 0 0 0 10 0V7a5 5 0 0 0-5-5zm7 10a1 1 0 0 0-2 0 5 5 0 0 1-10 0 1 1 0 0 0-2 0 7 7 0 0 0 6 6.92V21H9a1 1 0 0 0 0 2h6a1 1 0 0 0 0-2h-2v-2.08A7 7 0 0 0 19 12z"/></svg></div>
+      <div>
+        <div class="name">MedVita — Thu thập hội thoại</div>
+        <div class="tag">MV-52 · Pilot Thái Nguyên</div>
+      </div>
+    </div>
+    <div class="login-title">Đăng nhập</div>
+    <div class="login-sub">Dùng tài khoản được cấp để bắt đầu ghi âm hội thoại thăm khám.</div>
+    <div class="login-error" id="login-error">Tài khoản hoặc mật khẩu không đúng. Vui lòng thử lại.</div>
+    <div class="field">
+      <label>Tài khoản</label>
+      <input type="text" id="input-username" placeholder="bs.a" autocomplete="username">
+    </div>
+    <div class="field">
+      <label>Mật khẩu</label>
+      <input type="password" id="input-password" placeholder="••••••••" autocomplete="current-password">
+    </div>
+    <button class="btn-login" id="btn-login">Đăng nhập</button>
+    <div class="login-hint">Demo: <b>bs.a</b> / <b>123456</b> (BS. Nguyễn Văn A — Khoa TMH)<br>Nhập sai để xem thông báo lỗi (AC2 · MV-53)</div>
+  </div>
+</div>
+
+<!-- ============ APP VIEW ============ -->
+<div id="view-app">
+  <div class="topbar">
+    <div class="topbar-left">
+      <div class="mark"><svg viewBox="0 0 24 24"><path d="M12 2a5 5 0 0 0-5 5v5a5 5 0 0 0 10 0V7a5 5 0 0 0-5-5z"/></svg></div>
+      <div>
+        <div class="topbar-title">MedVita — Thu thập hội thoại</div>
+        <div class="topbar-sub">MV-52 · Pilot Bệnh viện Trung ương Thái Nguyên</div>
+      </div>
+    </div>
+    <div class="topbar-right">
+      <div class="doctor-chip">
+        <div class="avatar">A</div>
+        <div>
+          <div class="doctor-name">BS. Nguyễn Văn A</div>
+          <div class="doctor-dept">Khoa Tai Mũi Họng</div>
+        </div>
+      </div>
+      <button class="btn-logout" id="btn-logout">Đăng xuất</button>
+    </div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab-btn active" data-tab="record">Ghi âm</button>
+    <button class="tab-btn" data-tab="history">Lịch sử phiên</button>
+  </div>
+
+  <!-- ===== RECORD TAB ===== -->
+  <div class="content" id="tab-record">
+    <div class="panel">
+      <div class="panel-title">Phiên ghi âm hội thoại</div>
+      <div class="panel-sub">Bắt đầu, tạm dừng và tiếp tục ghi âm trong cùng một phiên — không mất dữ liệu đã ghi khi tạm dừng (AC2–AC3 · MV-56).</div>
+
+      <div id="mic-warning" class="mic-warning hidden">
+        Trình duyệt/preview không cấp được quyền microphone — chuyển sang <b>chế độ mô phỏng</b> để demo luồng trạng thái. Trên môi trường thật, hệ thống sẽ ghi âm thật qua MediaRecorder API.
+      </div>
+
+      <div id="no-session-state">
+        <div class="status-badge status-Draft"><span class="dot"></span>Chưa có phiên</div>
+        <div class="timer-display">00:00:00</div>
+        <div class="timer-caption">Tạo phiên mới để bắt đầu ghi âm</div>
+        <div class="rec-controls">
+          <button class="rec-btn btn-new" id="btn-new-session">
+            <svg viewBox="0 0 24 24" fill="#fff"><path d="M12 4v16m8-8H4" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/></svg>
+            Tạo phiên mới
+          </button>
+        </div>
+      </div>
+
+      <div id="session-state" class="hidden">
+        <span class="session-id-badge" id="session-id-label">MV52-000</span>
+        <span class="status-badge" id="status-badge"><span class="dot"></span><span id="status-label">Draft</span></span>
+
+        <div class="timer-display" id="timer">00:00:00</div>
+        <div class="timer-caption" id="timer-caption">Sẵn sàng ghi âm</div>
+
+        <div class="rec-controls">
+          <button class="rec-btn btn-start" id="btn-start">
+            <svg viewBox="0 0 24 24" fill="#fff"><circle cx="12" cy="12" r="7"/></svg>
+            Bắt đầu
+          </button>
+          <button class="rec-btn btn-pause hidden" id="btn-pause">
+            <svg viewBox="0 0 24 24" fill="none"><rect x="7" y="6" width="3.5" height="12" fill="#f59e0b"/><rect x="13.5" y="6" width="3.5" height="12" fill="#f59e0b"/></svg>
+            Tạm dừng
+          </button>
+          <button class="rec-btn btn-resume hidden" id="btn-resume">
+            <svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg>
+            Tiếp tục
+          </button>
+          <button class="rec-btn btn-end hidden" id="btn-end">
+            <svg viewBox="0 0 24 24" fill="none"><rect x="6" y="6" width="12" height="12" rx="2" fill="#e63535"/></svg>
+            Kết thúc
+          </button>
+        </div>
+
+        <div id="upload-fail-note" class="upload-note hidden">
+          <span>Upload thất bại — mất kết nối mạng. Dữ liệu đã ghi vẫn được giữ nguyên.</span>
+          <button class="retry-btn" id="btn-retry">Thử lại</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="sidebar-title">Kịch bản thử nghiệm</div>
+      <button class="scenario-btn" id="btn-toggle-network">
+        <span>Mô phỏng mất mạng khi upload</span>
+        <span class="toggle-pill pill-off" id="network-pill">TẮT</span>
+      </button>
+      <button class="scenario-btn" id="btn-toggle-account">
+        <span>Đổi sang tài khoản BS. Trần Thị B</span>
+      </button>
+      <div class="scenario-note">
+        Bật "mất mạng" trước khi bấm Kết thúc để xem luồng <b>Upload failed → tự động thử lại</b> (AC4 · MV-56). Đổi tài khoản để thấy Lịch sử phiên chỉ hiển thị đúng phiên của bác sĩ đang đăng nhập (AC1 · MV-53).
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== HISTORY TAB ===== -->
+  <div class="content hidden" id="tab-history">
+    <div class="panel" style="grid-column:1/-1;">
+      <div class="panel-title">Lịch sử phiên ghi âm</div>
+      <div class="panel-sub">Các phiên do tài khoản đang đăng nhập thực hiện, mới nhất lên trước (MV-59).</div>
+      <div class="history-list" id="history-list"></div>
+      <div class="empty-state hidden" id="history-empty">
+        <svg viewBox="0 0 24 24"><path d="M12 2a5 5 0 0 0-5 5v5a5 5 0 0 0 10 0V7a5 5 0 0 0-5-5z"/></svg>
+        <div class="e-title">Chưa có phiên ghi âm nào</div>
+        <div class="e-sub">Các phiên bạn thực hiện sẽ hiển thị ở đây.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ---------------- Mock accounts & data ----------------
+const ACCOUNTS = {
+  'bs.a': { pass: '123456', name: 'BS. Nguyễn Văn A', dept: 'Khoa Tai Mũi Họng', initial: 'A' },
+  'bs.b': { pass: '123456', name: 'BS. Trần Thị B', dept: 'Khoa Tai Mũi Họng', initial: 'B' },
+};
+let currentUser = 'bs.a';
+let sessions = {
+  'bs.a': [
+    { id: 'MV52-014', time: '04/08/2026 09:12', duration: 462, status: 'Completed' },
+    { id: 'MV52-011', time: '03/08/2026 14:05', duration: 318, status: 'Completed' },
+    { id: 'MV52-009', time: '03/08/2026 08:40', duration: 201, status: 'Upload failed' },
+  ],
+  'bs.b': [
+    { id: 'MV52-013', time: '04/08/2026 08:50', duration: 275, status: 'Completed' },
+  ],
+};
+let sessionCounter = 15;
+
+let simulateNetworkLoss = false;
+let micAvailable = null; // becomes true/false after permission check
+
+// ---------------- Login ----------------
+const viewLogin = document.getElementById('view-login');
+const viewApp = document.getElementById('view-app');
+const loginError = document.getElementById('login-error');
+
+document.getElementById('btn-login').addEventListener('click', () => {
+  const u = document.getElementById('input-username').value.trim();
+  const p = document.getElementById('input-password').value;
+  const acc = ACCOUNTS[u];
+  if (acc && acc.pass === p) {
+    loginError.classList.remove('show');
+    currentUser = u;
+    enterApp();
+  } else {
+    loginError.classList.add('show');
+  }
+});
+
+function enterApp() {
+  viewLogin.style.display = 'none';
+  viewApp.classList.add('show');
+  updateDoctorChip();
+  renderHistory();
+  resetRecordingPanel();
+}
+
+document.getElementById('btn-logout').addEventListener('click', () => {
+  viewApp.classList.remove('show');
+  viewLogin.style.display = 'flex';
+  document.getElementById('input-password').value = '';
+  resetRecordingPanel();
+});
+
+function updateDoctorChip() {
+  const acc = ACCOUNTS[currentUser];
+  document.querySelector('.doctor-chip .avatar').textContent = acc.initial;
+  document.querySelector('.doctor-name').textContent = acc.name;
+  document.querySelector('.doctor-dept').textContent = acc.dept;
+}
+
+// ---------------- Tabs ----------------
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const tab = btn.dataset.tab;
+    document.getElementById('tab-record').classList.toggle('hidden', tab !== 'record');
+    document.getElementById('tab-history').classList.toggle('hidden', tab !== 'history');
+    if (tab === 'history') renderHistory();
+  });
+});
+
+// ---------------- Scenario controls ----------------
+document.getElementById('btn-toggle-network').addEventListener('click', () => {
+  simulateNetworkLoss = !simulateNetworkLoss;
+  const pill = document.getElementById('network-pill');
+  pill.textContent = simulateNetworkLoss ? 'BẬT' : 'TẮT';
+  pill.className = 'toggle-pill ' + (simulateNetworkLoss ? 'pill-on' : 'pill-off');
+});
+document.getElementById('btn-toggle-account').addEventListener('click', () => {
+  currentUser = currentUser === 'bs.a' ? 'bs.b' : 'bs.a';
+  updateDoctorChip();
+  renderHistory();
+  resetRecordingPanel();
+});
+
+// ---------------- History ----------------
+function renderHistory() {
+  const list = document.getElementById('history-list');
+  const empty = document.getElementById('history-empty');
+  const data = (sessions[currentUser] || []).slice().sort((a, b) => b.id.localeCompare(a.id));
+  list.innerHTML = '';
+  if (data.length === 0) {
+    empty.classList.remove('hidden');
+    return;
+  }
+  empty.classList.add('hidden');
+  data.forEach(s => {
+    const el = document.createElement('div');
+    el.className = 'history-item';
+    const statusClass = 'status-' + s.status.replace(/\s/g, '');
+    el.innerHTML = `
+      <div class="h-id">${s.id}</div>
+      <div class="h-meta">
+        <div class="h-time">${s.time}</div>
+        <div class="h-sub"><span class="status-badge ${statusClass}" style="padding:2px 8px;"><span class="dot"></span>${s.status}</span></div>
+      </div>
+      <div class="h-dur">${formatTime(s.duration)}</div>
+    `;
+    list.appendChild(el);
+  });
+}
+
+// ---------------- Recording state machine ----------------
+let session = null; // { id, seconds, status, timerHandle }
+let mediaRecorder = null;
+let mediaStream = null;
+
+function resetRecordingPanel() {
+  session = null;
+  document.getElementById('no-session-state').classList.remove('hidden');
+  document.getElementById('session-state').classList.add('hidden');
+  document.getElementById('upload-fail-note').classList.add('hidden');
+}
+
+function formatTime(totalSeconds) {
+  const h = Math.floor(totalSeconds / 3600).toString().padStart(2, '0');
+  const m = Math.floor((totalSeconds % 3600) / 60).toString().padStart(2, '0');
+  const s = Math.floor(totalSeconds % 60).toString().padStart(2, '0');
+  return `${h}:${m}:${s}`;
+}
+
+function setStatus(status) {
+  session.status = status;
+  const badge = document.getElementById('status-badge');
+  badge.className = 'status-badge status-' + status.replace(/\s/g, '');
+  document.getElementById('status-label').textContent = status;
+}
+
+document.getElementById('btn-new-session').addEventListener('click', async () => {
+  sessionCounter += 1;
+  session = { id: `MV52-${String(sessionCounter).padStart(3, '0')}`, seconds: 0, status: 'Draft', timerHandle: null };
+  document.getElementById('no-session-state').classList.add('hidden');
+  document.getElementById('session-state').classList.remove('hidden');
+  document.getElementById('session-id-label').textContent = session.id;
+  document.getElementById('timer').textContent = '00:00:00';
+  document.getElementById('timer-caption').textContent = 'Sẵn sàng ghi âm';
+  setStatus('Draft');
+  document.getElementById('upload-fail-note').classList.add('hidden');
+  toggleButtons('Draft');
+
+  if (micAvailable === null) {
+    try {
+      mediaStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      micAvailable = true;
+      document.getElementById('mic-warning').classList.add('hidden');
+    } catch (e) {
+      micAvailable = false;
+      document.getElementById('mic-warning').classList.remove('hidden');
+    }
+  }
+});
+
+function toggleButtons(state) {
+  const map = {
+    Draft: ['btn-start'],
+    Recording: ['btn-pause', 'btn-end'],
+    Paused: ['btn-resume', 'btn-end'],
+  };
+  ['btn-start', 'btn-pause', 'btn-resume', 'btn-end'].forEach(id => {
+    document.getElementById(id).classList.add('hidden');
+  });
+  (map[state] || []).forEach(id => document.getElementById(id).classList.remove('hidden'));
+}
+
+function startTimer() {
+  session.timerHandle = setInterval(() => {
+    session.seconds += 1;
+    document.getElementById('timer').textContent = formatTime(session.seconds);
+  }, 1000);
+}
+function stopTimer() {
+  clearInterval(session.timerHandle);
+}
+
+document.getElementById('btn-start').addEventListener('click', () => {
+  setStatus('Recording');
+  document.getElementById('timer-caption').textContent = 'Đang ghi âm — dữ liệu được lưu liên tục theo phiên';
+  toggleButtons('Recording');
+  if (micAvailable && mediaStream) {
+    mediaRecorder = new MediaRecorder(mediaStream);
+    mediaRecorder.start();
+  }
+  startTimer();
+});
+
+document.getElementById('btn-pause').addEventListener('click', () => {
+  setStatus('Paused');
+  document.getElementById('timer-caption').textContent = 'Đã tạm dừng — phần đã ghi được giữ nguyên trong cùng phiên';
+  toggleButtons('Paused');
+  stopTimer();
+  if (mediaRecorder && mediaRecorder.state === 'recording') mediaRecorder.pause();
+});
+
+document.getElementById('btn-resume').addEventListener('click', () => {
+  setStatus('Recording');
+  document.getElementById('timer-caption').textContent = 'Đang ghi âm — dữ liệu được lưu liên tục theo phiên';
+  toggleButtons('Recording');
+  startTimer();
+  if (mediaRecorder && mediaRecorder.state === 'paused') mediaRecorder.resume();
+});
+
+document.getElementById('btn-end').addEventListener('click', () => {
+  stopTimer();
+  toggleButtons('none');
+  if (mediaRecorder && mediaRecorder.state !== 'inactive') mediaRecorder.stop();
+  if (mediaStream) { /* keep stream for potential next session in this demo */ }
+
+  setStatus('Uploading');
+  document.getElementById('timer-caption').textContent = 'Đang upload audio và metadata...';
+
+  setTimeout(() => {
+    if (simulateNetworkLoss) {
+      setStatus('Upload failed');
+      document.getElementById('timer-caption').textContent = 'Upload thất bại — dữ liệu vẫn được giữ, sẽ tự thử lại';
+      document.getElementById('upload-fail-note').classList.remove('hidden');
+      attemptAutoRetry();
+    } else {
+      completeUpload();
+    }
+  }, 1400);
+});
+
+function attemptAutoRetry() {
+  const retryInterval = setInterval(() => {
+    if (!simulateNetworkLoss) {
+      clearInterval(retryInterval);
+      document.getElementById('upload-fail-note').classList.add('hidden');
+      setStatus('Uploading');
+      document.getElementById('timer-caption').textContent = 'Kết nối đã khôi phục — đang upload lại...';
+      setTimeout(completeUpload, 1200);
+    }
+  }, 1000);
+}
+
+document.getElementById('btn-retry').addEventListener('click', () => {
+  if (simulateNetworkLoss) {
+    document.getElementById('timer-caption').textContent = 'Vẫn chưa có kết nối — tắt "mô phỏng mất mạng" ở khung bên phải để thử lại';
+    return;
+  }
+  document.getElementById('upload-fail-note').classList.add('hidden');
+  setStatus('Uploading');
+  setTimeout(completeUpload, 1000);
+});
+
+function completeUpload() {
+  setStatus('Completed');
+  document.getElementById('timer-caption').textContent = 'Hoàn tất — audio và metadata đã sẵn sàng cho AI team';
+  document.getElementById('upload-fail-note').classList.add('hidden');
+  sessions[currentUser] = sessions[currentUser] || [];
+  sessions[currentUser].unshift({
+    id: session.id,
+    time: new Date().toLocaleString('vi-VN', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' }),
+    duration: session.seconds,
+    status: 'Completed',
+  });
+}
+</script>
+</body>
+</html>
