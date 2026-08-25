@@ -1,0 +1,4 @@
+node_modules/
+sitemap-urls.json
+output.jsonl
+*.log
