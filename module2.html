@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>MedVita Module 2 — Ambient-first HIS Prototype</title>
+<style>
+  :root{
+    --bg:#f4f7fb;
+    --panel:#ffffff;
+    --text:#162033;
+    --muted:#6e7a90;
+    --line:#dfe6ef;
+    --primary:#246bfe;
+    --primary-soft:#eaf1ff;
+    --success:#16845b;
+    --success-soft:#e7f6ef;
+    --warning:#a86600;
+    --warning-soft:#fff5dc;
+    --danger:#c13b3b;
+    --danger-soft:#fff0f0;
+    --shadow:0 10px 30px rgba(30,50,90,.08);
+    --shadow-lg:0 22px 60px rgba(31,49,84,.13);
+    --radius:16px;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--text)}
+  button,input,textarea{font:inherit}
+  button{cursor:pointer}
+  .hidden{display:none!important}
+  .app{min-height:100vh}
+  .topbar{height:64px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 24px;position:sticky;top:0;z-index:20}
+  .brand{display:flex;align-items:center;gap:12px;font-weight:750}
+  .brand-mark{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#246bfe,#6d9cff);display:grid;place-items:center;color:#fff;font-weight:800}
+  .brand-sub{font-size:12px;color:var(--muted);font-weight:500;margin-top:2px}
+  .top-actions{display:flex;align-items:center;gap:10px}
+  .ghost-btn,.secondary-btn,.primary-btn,.danger-btn{border-radius:10px;padding:10px 14px;border:1px solid var(--line);background:#fff;color:var(--text);font-weight:650}
+  .primary-btn{background:var(--primary);border-color:var(--primary);color:#fff}
+  .primary-btn:disabled,.ghost-btn:disabled,.secondary-btn:disabled{opacity:.45;cursor:not-allowed}
+  .secondary-btn{background:var(--primary-soft);border-color:#cfe0ff;color:#1f5bd7}
+  .danger-btn{background:var(--danger-soft);border-color:#ffd1d1;color:var(--danger)}
+  .ghost-btn:hover,.secondary-btn:hover,.primary-btn:hover,.danger-btn:hover{filter:brightness(.98)}
+  .layout{display:grid;grid-template-columns:224px 1fr;min-height:calc(100vh - 64px)}
+  .sidebar{background:#fff;border-right:1px solid var(--line);padding:18px 14px}
+  .nav-section{font-size:11px;color:#8a95a8;text-transform:uppercase;letter-spacing:.08em;margin:10px 10px 8px}
+  .nav-item{display:flex;align-items:center;gap:10px;padding:11px 12px;border-radius:9px;color:#506078;font-size:14px;margin:3px 0}
+  .nav-item.active{background:var(--primary-soft);color:#1f5bd7;font-weight:700}
+  .nav-dot{width:8px;height:8px;border-radius:50%;background:#bdc7d6}
+  .nav-item.active .nav-dot{background:var(--primary)}
+  .main{padding:24px;max-width:1500px;width:100%;margin:0 auto}
+  .page-title{display:flex;align-items:flex-start;justify-content:space-between;gap:20px;margin-bottom:18px}
+  h1{font-size:24px;margin:0 0 6px}
+  h2{font-size:18px;margin:0}
+  h3{font-size:15px;margin:0}
+  .subtitle{font-size:14px;color:var(--muted)}
+  .grid{display:grid;grid-template-columns:1.15fr .85fr;gap:18px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+  .card-header{padding:16px 18px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:12px}
+  .card-body{padding:18px}
+  .patient-header{display:flex;align-items:center;gap:14px}
+  .avatar{width:48px;height:48px;border-radius:50%;background:#eaf1ff;display:grid;place-items:center;font-weight:800;color:#275ec7}
+  .patient-name{font-size:18px;font-weight:750}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px 16px;color:var(--muted);font-size:13px;margin-top:5px}
+  .kv-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 18px}
+  .kv .label{font-size:12px;color:var(--muted);margin-bottom:4px}
+  .kv .value{font-size:14px;font-weight:650}
+  .status-chip{display:inline-flex;align-items:center;gap:7px;padding:6px 9px;border-radius:999px;font-size:12px;font-weight:700}
+  .status-chip::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+  .status-wait{background:var(--warning-soft);color:var(--warning)}
+  .status-live{background:var(--danger-soft);color:var(--danger)}
+  .status-success{background:var(--success-soft);color:var(--success)}
+  .status-neutral{background:#eef2f7;color:#66748a}
+  .tabs{display:flex;gap:4px;border-bottom:1px solid var(--line);padding:0 16px;background:#fff}
+  .tab{padding:12px 10px;font-size:13px;color:#67758a;border-bottom:2px solid transparent}
+  .tab.active{color:var(--primary);font-weight:750;border-color:var(--primary)}
+  .note-empty{border:1px dashed #cfd8e5;border-radius:12px;padding:28px;text-align:center;color:var(--muted);background:#fafcff}
+  .note-box{background:#fbfcfe;border:1px solid var(--line);border-radius:12px;padding:16px;line-height:1.55;font-size:14px;white-space:pre-wrap}
+  .section-title{font-size:13px;font-weight:800;margin:18px 0 10px}
+  .launch-card{background:linear-gradient(135deg,#f8fbff,#eef4ff);border:1px solid #d8e5ff;border-radius:14px;padding:18px}
+  .launch-logo{display:flex;align-items:center;gap:10px;font-weight:800;color:#1d59c8}
+  .launch-mark{width:34px;height:34px;border-radius:10px;background:#246bfe;color:#fff;display:grid;place-items:center}
+  .launch-copy{color:#56657a;font-size:13px;line-height:1.5;margin:12px 0 14px}
+  .context-mini{display:grid;gap:7px;font-size:12px;color:#68768a;margin-bottom:14px}
+  .context-mini b{color:#35445a}
+  .flowline{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:12px;color:#718097;margin:10px 0 18px}
+  .flow-step{background:#fff;border:1px solid var(--line);padding:6px 9px;border-radius:999px}
+  .flow-step.active{border-color:#bcd1ff;background:var(--primary-soft);color:#1f5bd7;font-weight:700}
+  .flow-arrow{color:#a8b2c1}
+  .muted{color:var(--muted)}
+  .small{font-size:12px}
+  .confirmed-block{border-left:4px solid var(--success);padding-left:14px}
+  .confirmed-meta{font-size:12px;color:var(--muted);margin-top:10px}
+
+  /* MedVita ambient-first */
+  .med-shell{min-height:100vh;background:#f7f9fc}
+  .med-header{height:68px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 24px;position:sticky;top:0;z-index:30}
+  .med-brand{display:flex;align-items:center;gap:10px}
+  .med-logo{width:38px;height:38px;border-radius:11px;background:linear-gradient(135deg,#2067ff,#63a0ff);display:grid;place-items:center;color:#fff;font-weight:900}
+  .med-brand-copy{font-weight:800}
+  .med-brand-copy span{display:block;font-size:11px;color:#8190a5;font-weight:600;margin-top:1px}
+  .encounter-mini{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .patient-pill{display:flex;align-items:center;gap:9px;padding:7px 11px;border:1px solid var(--line);border-radius:999px;background:#fff}
+  .patient-pill .mini-avatar{width:26px;height:26px;border-radius:50%;background:var(--primary-soft);color:#245ec9;display:grid;place-items:center;font-size:10px;font-weight:800}
+  .patient-pill strong{font-size:13px}
+  .patient-pill span{font-size:11px;color:var(--muted)}
+  .med-main{max-width:1240px;margin:0 auto;padding:28px 24px 40px}
+  .med-topline{display:flex;align-items:flex-start;justify-content:space-between;gap:18px;margin-bottom:22px}
+  .med-topline h1{font-size:22px}
+  .ambient-stage{max-width:840px;margin:0 auto}
+  .capture-card{background:#fff;border:1px solid #e1e7f0;border-radius:22px;box-shadow:var(--shadow-lg);padding:34px 34px 28px;text-align:center}
+  .capture-kicker{font-size:12px;color:#77859a;font-weight:700;letter-spacing:.02em;margin-bottom:8px}
+  .capture-title{font-size:26px;font-weight:800;letter-spacing:-.02em;margin-bottom:8px}
+  .capture-copy{max-width:600px;margin:0 auto;color:#6f7d91;font-size:14px;line-height:1.6}
+  .record-orb-wrap{display:flex;justify-content:center;margin:34px 0 18px}
+  .record-orb{width:118px;height:118px;border-radius:50%;border:0;background:linear-gradient(145deg,#2a70ff,#1f5edb);color:#fff;box-shadow:0 16px 34px rgba(36,107,254,.26);display:grid;place-items:center;transition:.2s;position:relative}
+  .record-orb:hover{transform:translateY(-2px)}
+  .record-orb.recording{background:linear-gradient(145deg,#ef6262,#d83c3c);box-shadow:0 16px 34px rgba(216,60,60,.24)}
+  .record-orb.recording::after{content:"";position:absolute;inset:-12px;border-radius:50%;border:1px solid rgba(216,60,60,.25);animation:ring 1.7s infinite}
+  @keyframes ring{0%{transform:scale(.9);opacity:1}100%{transform:scale(1.18);opacity:0}}
+  .mic-symbol{font-size:36px;line-height:1}
+  .record-orb-label{font-size:11px;font-weight:800;letter-spacing:.03em;margin-top:5px}
+  .capture-status{display:flex;justify-content:center;align-items:center;gap:9px;font-size:14px;font-weight:750}
+  .capture-status .dot{width:8px;height:8px;border-radius:50%;background:#9ba7ba}
+  .capture-status.live .dot{background:#e24b4b}
+  .capture-timer{font-size:34px;font-weight:800;font-variant-numeric:tabular-nums;letter-spacing:.02em;margin-top:5px}
+  .wave{height:52px;display:flex;justify-content:center;align-items:center;gap:4px;margin:22px auto 12px;opacity:.35}
+  .wave span{width:4px;height:12px;border-radius:6px;background:#6f89b6}
+  .wave.live{opacity:1}
+  .wave.live span{animation:wave 1s ease-in-out infinite}
+  .wave.live span:nth-child(2n){animation-delay:.12s}.wave.live span:nth-child(3n){animation-delay:.2s}.wave.live span:nth-child(5n){animation-delay:.28s}
+  @keyframes wave{0%,100%{height:10px}50%{height:42px}}
+  .capture-actions{display:flex;justify-content:center;gap:10px;margin-top:20px}
+  .ambient-hint{display:flex;align-items:center;justify-content:center;gap:8px;color:#7a899e;font-size:12px;margin-top:18px}
+  .ambient-hint b{color:#4c5e76}
+  .consent-note{margin:26px auto 0;padding-top:18px;border-top:1px solid #eef1f6;display:flex;justify-content:center;gap:16px;flex-wrap:wrap;font-size:12px;color:#728096}
+  .consent-note span{display:flex;align-items:center;gap:6px}
+  .check{width:17px;height:17px;border-radius:50%;background:var(--success-soft);color:var(--success);display:grid;place-items:center;font-size:11px;font-weight:900}
+  .transcript-peek{margin-top:18px;text-align:left;border-top:1px solid #eef1f6;padding-top:16px}
+  .peek-toggle{border:0;background:transparent;color:#46607f;font-weight:700;padding:6px 0}
+  .peek-body{max-height:170px;overflow:auto;margin-top:8px;border:1px solid var(--line);border-radius:12px;background:#fbfcfe;padding:10px 12px}
+  .peek-line{display:grid;grid-template-columns:82px 1fr;gap:8px;padding:7px 2px;border-bottom:1px solid #edf1f6;font-size:12px;line-height:1.5}
+  .peek-line:last-child{border-bottom:0}
+  .peek-speaker{font-weight:800;color:#62728a}
+  .peek-speaker.doctor{color:#1f62da}.peek-speaker.patient{color:#8d5f09}
+
+  .review-shell{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:18px;align-items:start}
+  .review-main{background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow)}
+  .review-header{padding:18px 20px 14px;border-bottom:1px solid var(--line);display:flex;align-items:flex-start;justify-content:space-between;gap:16px}
+  .review-title{display:flex;align-items:center;gap:10px}
+  .review-title h2{font-size:20px}
+  .review-body{padding:20px}
+  .draft-note{display:flex;align-items:flex-start;gap:9px;padding:11px 12px;background:#fff8e8;border:1px solid #f2dfab;border-radius:10px;color:#745200;font-size:12px;line-height:1.45;margin-bottom:14px}
+  .note-editor{width:100%;min-height:470px;border:1px solid #dbe2ec;border-radius:12px;padding:18px;background:#fff;color:var(--text);line-height:1.65;resize:vertical;outline:none;font-size:14px}
+  .note-editor:focus{border-color:#9cbcff;box-shadow:0 0 0 3px rgba(36,107,254,.08)}
+  .review-footer{position:sticky;bottom:0;background:rgba(255,255,255,.96);backdrop-filter:blur(10px);border-top:1px solid var(--line);padding:13px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;border-radius:0 0 18px 18px}
+  .review-footer-copy{font-size:12px;color:#76859a}
+  .review-actions{display:flex;gap:8px}
+  .side-panel{background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);overflow:hidden;position:sticky;top:88px}
+  .side-tabs{display:flex;border-bottom:1px solid var(--line);padding:0 12px}
+  .side-tab{border:0;background:transparent;padding:13px 10px;font-size:12px;color:#718096;border-bottom:2px solid transparent;font-weight:700}
+  .side-tab.active{color:var(--primary);border-color:var(--primary)}
+  .side-body{padding:14px;max-height:610px;overflow:auto}
+  .evidence-card{border:1px solid #e4e9f1;border-radius:12px;padding:11px 12px;margin-bottom:10px;background:#fbfcfe}
+  .evidence-card:last-child{margin-bottom:0}
+  .evidence-label{font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:#8b97aa;font-weight:800;margin-bottom:5px}
+  .evidence-text{font-size:12px;line-height:1.5;color:#46566e}
+  .full-transcript .peek-line{font-size:12px;padding:9px 3px}
+  .review-meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+  .mini-chip{padding:5px 8px;border-radius:999px;background:#f1f4f8;color:#67758a;font-size:11px;font-weight:700}
+  .success-chip{background:var(--success-soft);color:var(--success)}
+  .sync-overlay{position:fixed;inset:0;background:rgba(18,28,45,.32);display:grid;place-items:center;z-index:80}
+  .sync-card{width:min(420px,90vw);background:#fff;border-radius:16px;padding:24px;box-shadow:0 30px 80px rgba(16,28,50,.25);text-align:center}
+  .spinner{width:38px;height:38px;border:4px solid #dbe6fb;border-top-color:var(--primary);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 14px}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .toast{position:fixed;right:22px;bottom:22px;background:#14233a;color:#fff;padding:12px 15px;border-radius:10px;font-size:13px;box-shadow:var(--shadow);z-index:90;opacity:0;transform:translateY(10px);pointer-events:none;transition:.2s}
+  .toast.show{opacity:1;transform:translateY(0)}
+
+  @media(max-width:980px){
+    .layout{grid-template-columns:1fr}.sidebar{display:none}.grid{grid-template-columns:1fr}.main{padding:16px}
+    .review-shell{grid-template-columns:1fr}.side-panel{position:static}.med-main{padding:20px 16px 32px}.med-header{height:auto;padding:12px 16px;align-items:flex-start;gap:12px;flex-direction:column}.med-topline{flex-direction:column}.capture-card{padding:28px 18px 24px}
+  }
+</style>
+</head>
+<body>
+<div class="app">
+  <!-- HIS VIEW -->
+  <section id="hisView">
+    <div class="topbar">
+      <div class="brand">
+        <div class="brand-mark">H</div>
+        <div>
+          <div>HIS — Bệnh viện Trung ương Thái Nguyên</div>
+          <div class="brand-sub">Khám bệnh ngoại trú</div>
+        </div>
+      </div>
+      <div class="top-actions">
+        <button class="ghost-btn" id="resetBtn">Reset demo</button>
+        <div class="status-chip status-neutral">BS. Nguyễn Minh Anh</div>
+      </div>
+    </div>
+
+    <div class="layout">
+      <aside class="sidebar">
+        <div class="nav-section">Khám bệnh</div>
+        <div class="nav-item active"><span class="nav-dot"></span> Danh sách chờ khám</div>
+        <div class="nav-item"><span class="nav-dot"></span> Hồ sơ bệnh nhân</div>
+        <div class="nav-item"><span class="nav-dot"></span> Chỉ định</div>
+        <div class="nav-item"><span class="nav-dot"></span> Kết quả CLS</div>
+        <div class="nav-section">Tiện ích</div>
+        <div class="nav-item"><span class="nav-dot"></span> Lịch làm việc</div>
+        <div class="nav-item"><span class="nav-dot"></span> Tra cứu thuốc</div>
+      </aside>
+
+      <main class="main">
+        <div class="page-title">
+          <div>
+            <h1>Phiên khám ngoại trú</h1>
+            <div class="subtitle">Mã lượt khám: <strong>ENC-20260902-0158</strong> · 02/09/2026 · Phòng khám Tai Mũi Họng 02</div>
+          </div>
+          <div id="hisSyncStatus" class="status-chip status-wait">Chưa có dữ liệu MedVita</div>
+        </div>
+
+        <div class="flowline">
+          <span class="flow-step active">HIS</span><span class="flow-arrow">→</span>
+          <span class="flow-step" id="flowMed">MedVita</span><span class="flow-arrow">→</span>
+          <span class="flow-step" id="flowConfirm">Bác sĩ xác nhận</span><span class="flow-arrow">→</span>
+          <span class="flow-step" id="flowBack">HIS cập nhật</span>
+        </div>
+
+        <div class="card" style="margin-bottom:18px">
+          <div class="card-body">
+            <div class="patient-header">
+              <div class="avatar">NA</div>
+              <div style="flex:1">
+                <div class="patient-name">Nguyễn Văn An</div>
+                <div class="meta-row">
+                  <span>Nam · 42 tuổi</span><span>Mã BN: BN-0084251</span><span>SĐT: 09•• ••• 678</span><span>BHYT: Có</span>
+                </div>
+              </div>
+              <div class="status-chip status-wait">Đang chờ khám</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid">
+          <div>
+            <div class="card">
+              <div class="tabs">
+                <div class="tab active">Thông tin khám</div><div class="tab">Tiền sử</div><div class="tab">Kết quả CLS</div><div class="tab">Đơn thuốc</div>
+              </div>
+              <div class="card-body">
+                <div class="kv-grid">
+                  <div class="kv"><div class="label">Lý do khám</div><div class="value">Đau họng, nuốt vướng 3 ngày</div></div>
+                  <div class="kv"><div class="label">Khoa khám</div><div class="value">Tai Mũi Họng</div></div>
+                  <div class="kv"><div class="label">Bác sĩ phụ trách</div><div class="value">BS. Nguyễn Minh Anh</div></div>
+                  <div class="kv"><div class="label">Phòng khám</div><div class="value">TMH 02</div></div>
+                </div>
+
+                <div class="section-title">Ghi nhận từ MedVita</div>
+                <div id="hisNoteEmpty" class="note-empty">
+                  Chưa có nội dung từ MedVita cho phiên khám này.<br />
+                  <span class="small">Chỉ nội dung đã được bác sĩ xác nhận mới được cập nhật vào HIS.</span>
+                </div>
+                <div id="hisNoteResult" class="hidden">
+                  <div class="confirmed-block">
+                    <div class="status-chip status-success" style="margin-bottom:10px">Đã xác nhận bởi bác sĩ</div>
+                    <div id="hisConfirmedText" class="note-box"></div>
+                    <div class="confirmed-meta">Nguồn: MedVita · BS. Nguyễn Minh Anh xác nhận · <span id="confirmedAt"></span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="launch-card">
+              <div class="launch-logo"><div class="launch-mark">M</div> MedVita — Đồng hành khám chữa bệnh</div>
+              <div class="launch-copy">Bắt đầu ghi nhận buổi khám với đúng bệnh nhân hiện tại. Sau khi kết thúc, bác sĩ review bản tóm tắt và chỉ bản đã xác nhận mới được cập nhật lại HIS.</div>
+              <div class="context-mini">
+                <div><b>Bệnh nhân:</b> Nguyễn Văn An · BN-0084251</div>
+                <div><b>Lượt khám:</b> ENC-20260902-0158</div>
+                <div><b>Bác sĩ:</b> BS. Nguyễn Minh Anh</div>
+              </div>
+              <button class="primary-btn" id="launchMedvitaBtn" style="width:100%">Bắt đầu với MedVita</button>
+            </div>
+
+            <div class="card" style="margin-top:18px">
+              <div class="card-header"><h3>Thông tin phiên khám</h3></div>
+              <div class="card-body">
+                <div class="kv-grid">
+                  <div class="kv"><div class="label">Hospital</div><div class="value">BVTW Thái Nguyên</div></div>
+                  <div class="kv"><div class="label">Encounter</div><div class="value">ENC-20260902-0158</div></div>
+                  <div class="kv"><div class="label">Thời gian</div><div class="value">21:30 · 02/09/2026</div></div>
+                  <div class="kv"><div class="label">Trạng thái</div><div class="value" id="encounterState">Chờ khám</div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </section>
+
+  <!-- MEDVITA VIEW -->
+  <section id="medvitaView" class="med-shell hidden">
+    <div class="med-header">
+      <div class="med-brand">
+        <div class="med-logo">M</div>
+        <div class="med-brand-copy">MedVita <span>Đồng hành khám chữa bệnh</span></div>
+      </div>
+      <div class="encounter-mini">
+        <div class="patient-pill">
+          <div class="mini-avatar">NA</div>
+          <div><strong>Nguyễn Văn An</strong><br><span>Nam · 42 tuổi · TMH 02</span></div>
+        </div>
+        <button class="ghost-btn" id="backHisBtn">← HIS</button>
+      </div>
+    </div>
+
+    <main class="med-main">
+      <div class="med-topline">
+        <div>
+          <h1 id="medPageTitle">Ghi nhận buổi khám</h1>
+          <div id="medPageSubtitle" class="subtitle">MedVita ghi nhận hội thoại trong nền để bác sĩ tập trung vào bệnh nhân.</div>
+        </div>
+        <div id="stageStatus" class="status-chip status-neutral">Sẵn sàng</div>
+      </div>
+
+      <!-- CAPTURE -->
+      <section id="captureStage" class="ambient-stage">
+        <div class="capture-card">
+          <div class="capture-kicker">AMBIENT RECORDING</div>
+          <div class="capture-title" id="captureTitle">Bắt đầu khi bác sĩ sẵn sàng</div>
+          <div class="capture-copy" id="captureCopy">Không cần đọc hay nhập liệu trong lúc khám. MedVita sẽ ghi nhận hội thoại và tạo bản nháp sau khi kết thúc.</div>
+
+          <div class="record-orb-wrap">
+            <button id="recordOrb" class="record-orb" aria-label="Bắt đầu ghi nhận">
+              <div><div class="mic-symbol" id="micSymbol">●</div><div class="record-orb-label" id="recordOrbLabel">BẮT ĐẦU</div></div>
+            </button>
+          </div>
+
+          <div id="captureStatus" class="capture-status"><span class="dot"></span><span id="captureStatusText">Chưa ghi âm</span></div>
+          <div id="timer" class="capture-timer">00:00</div>
+
+          <div id="wave" class="wave" aria-hidden="true">
+            <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+          </div>
+
+          <div class="capture-actions">
+            <button class="secondary-btn hidden" id="pauseBtn">Tạm dừng</button>
+            <button class="secondary-btn hidden" id="resumeBtn">Tiếp tục</button>
+            <button class="danger-btn hidden" id="finishBtn">Kết thúc buổi khám</button>
+          </div>
+
+          <div class="ambient-hint"><span>✦</span><span><b>AI đang chạy trong nền.</b> Bác sĩ có thể tiếp tục trao đổi tự nhiên với bệnh nhân.</span></div>
+
+          <div class="transcript-peek">
+            <button id="peekToggle" class="peek-toggle">Xem transcript đang ghi ▾</button>
+            <div id="peekBody" class="peek-body hidden">
+              <div id="transcriptPlaceholder" class="small muted" style="padding:8px">Transcript sẽ xuất hiện khi bắt đầu ghi nhận.</div>
+              <div id="transcriptLines"></div>
+            </div>
+          </div>
+
+          <div class="consent-note">
+            <span><span class="check">✓</span> Đúng bệnh nhân và phiên khám</span>
+            <span><span class="check">✓</span> Ghi âm chỉ phục vụ hỗ trợ lập hồ sơ</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- REVIEW -->
+      <section id="reviewStage" class="review-shell hidden">
+        <div class="review-main">
+          <div class="review-header">
+            <div>
+              <div class="review-title"><h2>Tóm tắt buổi khám</h2><span class="status-chip status-wait">AI draft</span></div>
+              <div class="review-meta"><span class="mini-chip">8 đoạn hội thoại</span><span class="mini-chip">Tai Mũi Họng</span><span class="mini-chip success-chip">Có transcript đối chiếu</span></div>
+            </div>
+          </div>
+          <div class="review-body">
+            <div class="draft-note"><span>✦</span><span>Đây là bản nháp do AI tạo từ hội thoại. Bác sĩ kiểm tra, chỉnh sửa nếu cần trước khi xác nhận.</span></div>
+            <textarea id="summaryText" class="note-editor"></textarea>
+          </div>
+          <div class="review-footer">
+            <div class="review-footer-copy">Chỉ bản bác sĩ xác nhận mới được cập nhật vào HIS.</div>
+            <div class="review-actions">
+              <button class="ghost-btn" id="copySummaryBtn" disabled>Copy bản tóm tắt</button>
+              <button class="ghost-btn" id="saveDraftBtn">Lưu nháp</button>
+              <button class="primary-btn" id="confirmBtn">Xác nhận & gửi HIS</button>
+            </div>
+          </div>
+        </div>
+
+        <aside class="side-panel">
+          <div class="side-tabs">
+            <button class="side-tab active" data-side="evidence">Nguồn hội thoại</button>
+            <button class="side-tab" data-side="transcript">Transcript</button>
+          </div>
+          <div id="evidencePanel" class="side-body">
+            <div class="evidence-card"><div class="evidence-label">Lý do khám</div><div class="evidence-text">“Tôi đau họng khoảng ba ngày nay, nuốt hơi vướng và tối qua có sốt nhẹ.”</div></div>
+            <div class="evidence-card"><div class="evidence-label">Triệu chứng</div><div class="evidence-text">“Tôi ho ít, không khó thở. Sáng nay thấy cổ họng đau hơn.”</div></div>
+            <div class="evidence-card"><div class="evidence-label">Tiền sử liên quan</div><div class="evidence-text">“Khoảng một năm nay tôi bị vài lần, nhưng thường tự hết sau vài ngày.”</div></div>
+            <div class="evidence-card"><div class="evidence-label">Thuốc & dị ứng</div><div class="evidence-text">“Tôi không biết dị ứng thuốc gì và hiện không uống thuốc thường xuyên.”</div></div>
+          </div>
+          <div id="fullTranscriptPanel" class="side-body full-transcript hidden"></div>
+        </aside>
+      </section>
+    </main>
+  </section>
+
+  <div id="syncOverlay" class="sync-overlay hidden">
+    <div class="sync-card">
+      <div class="spinner"></div>
+      <h2 style="margin-bottom:6px">Đang cập nhật HIS</h2>
+      <div class="muted">Đang gửi bản đã được bác sĩ xác nhận về đúng phiên khám hiện tại…</div>
+    </div>
+  </div>
+  <div id="toast" class="toast"></div>
+</div>
+
+<script>
+const transcriptScript = [
+  {speaker:'Bác sĩ', cls:'doctor', text:'Chào anh An, hôm nay anh đến khám vì vấn đề gì?'},
+  {speaker:'Bệnh nhân', cls:'patient', text:'Tôi đau họng khoảng ba ngày nay, nuốt hơi vướng và tối qua có sốt nhẹ.'},
+  {speaker:'Bác sĩ', cls:'doctor', text:'Anh có ho, sổ mũi hoặc khó thở không?'},
+  {speaker:'Bệnh nhân', cls:'patient', text:'Tôi ho ít, không khó thở. Sáng nay thấy cổ họng đau hơn.'},
+  {speaker:'Bác sĩ', cls:'doctor', text:'Trước đây anh có hay bị viêm họng hoặc viêm amidan không?'},
+  {speaker:'Bệnh nhân', cls:'patient', text:'Khoảng một năm nay tôi bị vài lần, nhưng thường tự hết sau vài ngày.'},
+  {speaker:'Bác sĩ', cls:'doctor', text:'Anh có dị ứng thuốc hay đang sử dụng thuốc gì không?'},
+  {speaker:'Bệnh nhân', cls:'patient', text:'Tôi không biết dị ứng thuốc gì và hiện không uống thuốc thường xuyên.'}
+];
+
+const draftSummary = `Lý do khám:\n- Đau họng, nuốt vướng khoảng 3 ngày, tối qua sốt nhẹ.\n\nTriệu chứng ghi nhận:\n- Ho ít.\n- Không khó thở.\n- Đau họng tăng vào sáng nay.\n\nTiền sử liên quan:\n- Trong khoảng 1 năm gần đây có vài đợt viêm họng/viêm amidan tái diễn, thường tự hết sau vài ngày.\n\nThuốc và dị ứng:\n- Hiện không dùng thuốc thường xuyên.\n- Chưa ghi nhận dị ứng thuốc theo lời bệnh nhân.`;
+
+const state = {
+  recording:false,
+  paused:false,
+  finished:false,
+  seconds:0,
+  timerId:null,
+  transcriptId:null,
+  lineIndex:0,
+  confirmedSummary:'',
+  synced:false
+};
+
+const $ = id => document.getElementById(id);
+
+function showView(name){
+  $('hisView').classList.toggle('hidden', name !== 'his');
+  $('medvitaView').classList.toggle('hidden', name !== 'medvita');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function showToast(msg){
+  $('toast').textContent = msg;
+  $('toast').classList.add('show');
+  setTimeout(()=> $('toast').classList.remove('show'), 2200);
+}
+
+function formatTime(s){
+  const m = String(Math.floor(s/60)).padStart(2,'0');
+  const sec = String(s%60).padStart(2,'0');
+  return `${m}:${sec}`;
+}
+
+function updateCaptureUI(){
+  const live = state.recording && !state.paused && !state.finished;
+  $('recordOrb').classList.toggle('recording', live);
+  $('wave').classList.toggle('live', live);
+  $('captureStatus').classList.toggle('live', live);
+  $('pauseBtn').classList.toggle('hidden', !state.recording || state.paused || state.finished);
+  $('resumeBtn').classList.toggle('hidden', !state.recording || !state.paused || state.finished);
+  $('finishBtn').classList.toggle('hidden', !state.recording || state.finished);
+
+  if(!state.recording && !state.finished){
+    $('recordOrbLabel').textContent='BẮT ĐẦU';
+    $('micSymbol').textContent='●';
+    $('captureStatusText').textContent='Chưa ghi âm';
+    $('captureTitle').textContent='Bắt đầu khi bác sĩ sẵn sàng';
+    $('captureCopy').textContent='Không cần đọc hay nhập liệu trong lúc khám. MedVita sẽ ghi nhận hội thoại và tạo bản nháp sau khi kết thúc.';
+    $('stageStatus').className='status-chip status-neutral';
+    $('stageStatus').textContent='Sẵn sàng';
+  } else if(state.paused){
+    $('recordOrbLabel').textContent='TẠM DỪNG';
+    $('micSymbol').textContent='Ⅱ';
+    $('captureStatusText').textContent='Đang tạm dừng';
+    $('captureTitle').textContent='Đã tạm dừng ghi nhận';
+    $('stageStatus').className='status-chip status-wait';
+    $('stageStatus').textContent='Tạm dừng';
+  } else if(live){
+    $('recordOrbLabel').textContent='ĐANG GHI';
+    $('micSymbol').textContent='●';
+    $('captureStatusText').textContent='Đang ghi âm hội thoại';
+    $('captureTitle').textContent='Bác sĩ cứ tiếp tục buổi khám';
+    $('captureCopy').textContent='MedVita đang ghi nhận trong nền. Không cần đọc transcript hoặc thao tác thêm trong lúc trao đổi với bệnh nhân.';
+    $('stageStatus').className='status-chip status-live';
+    $('stageStatus').textContent='Đang ghi';
+  }
+}
+
+function appendTranscript(line){
+  $('transcriptPlaceholder').classList.add('hidden');
+  const row = document.createElement('div');
+  row.className='peek-line';
+  row.innerHTML=`<div class="peek-speaker ${line.cls}">${line.speaker}</div><div>${line.text}</div>`;
+  $('transcriptLines').appendChild(row);
+  const fullRow = row.cloneNode(true);
+  $('fullTranscriptPanel').appendChild(fullRow);
+  $('peekBody').scrollTop=$('peekBody').scrollHeight;
+}
+
+function startTranscriptLoop(){
+  clearInterval(state.transcriptId);
+  state.transcriptId=setInterval(()=>{
+    if(!state.recording || state.paused || state.finished) return;
+    if(state.lineIndex < transcriptScript.length){
+      appendTranscript(transcriptScript[state.lineIndex++]);
+    }
+  },2100);
+}
+
+function startRecording(){
+  if(state.recording || state.finished) return;
+  state.recording=true;
+  state.paused=false;
+  $('encounterState').textContent='Đang khám';
+  updateCaptureUI();
+  clearInterval(state.timerId);
+  state.timerId=setInterval(()=>{
+    if(state.recording && !state.paused && !state.finished){
+      state.seconds++;
+      $('timer').textContent=formatTime(state.seconds);
+    }
+  },1000);
+  startTranscriptLoop();
+  showToast('Đã bắt đầu ghi nhận hội thoại');
+}
+
+function pauseRecording(){
+  if(!state.recording || state.finished) return;
+  state.paused=true;
+  updateCaptureUI();
+}
+
+function resumeRecording(){
+  if(!state.recording || state.finished) return;
+  state.paused=false;
+  updateCaptureUI();
+}
+
+function finishConsultation(){
+  if(!state.recording || state.finished) return;
+  state.finished=true;
+  state.paused=false;
+  clearInterval(state.timerId);
+  clearInterval(state.transcriptId);
+  while(state.lineIndex < transcriptScript.length){ appendTranscript(transcriptScript[state.lineIndex++]); }
+  $('summaryText').value=draftSummary;
+  $('copySummaryBtn').disabled=!draftSummary.trim();
+  $('captureStage').classList.add('hidden');
+  $('reviewStage').classList.remove('hidden');
+  $('medPageTitle').textContent='Review bản tóm tắt';
+  $('medPageSubtitle').textContent='Kiểm tra nội dung AI draft, đối chiếu transcript khi cần và xác nhận bản cuối cùng.';
+  $('stageStatus').className='status-chip status-wait';
+  $('stageStatus').textContent='Chờ bác sĩ review';
+  showToast('Đã tạo bản tóm tắt nháp');
+}
+
+async function copySummary(){
+  const text=$('summaryText').value.trim();
+  if(!text) return;
+  const btn=$('copySummaryBtn');
+  const originalLabel='Copy bản tóm tắt';
+  try{
+    if(navigator.clipboard && window.isSecureContext){
+      await navigator.clipboard.writeText(text);
+    }else{
+      const helper=document.createElement('textarea');
+      helper.value=text;
+      helper.setAttribute('readonly','');
+      helper.style.position='fixed';
+      helper.style.opacity='0';
+      document.body.appendChild(helper);
+      helper.select();
+      const copied=document.execCommand('copy');
+      helper.remove();
+      if(!copied) throw new Error('copy failed');
+    }
+    btn.textContent='Đã copy ✓';
+    showToast('Đã copy bản tóm tắt');
+    setTimeout(()=>{ btn.textContent=originalLabel; },1400);
+  }catch(e){
+    showToast('Không thể copy. Vui lòng thử lại');
+  }
+}
+
+function saveDraft(){
+  const text=$('summaryText').value.trim();
+  if(!text){ showToast('Bản tóm tắt đang trống'); return; }
+  showToast('Đã lưu nháp');
+}
+
+function confirmAndSync(){
+  const text=$('summaryText').value.trim();
+  if(!text){ showToast('Bản tóm tắt đang trống'); return; }
+  state.confirmedSummary=text;
+  $('confirmBtn').disabled=true;
+  $('saveDraftBtn').disabled=true;
+  $('copySummaryBtn').disabled=true;
+  $('summaryText').disabled=true;
+  $('stageStatus').className='status-chip status-success';
+  $('stageStatus').textContent='Đã xác nhận';
+  $('syncOverlay').classList.remove('hidden');
+  setTimeout(()=>{
+    state.synced=true;
+    $('syncOverlay').classList.add('hidden');
+    $('hisNoteEmpty').classList.add('hidden');
+    $('hisNoteResult').classList.remove('hidden');
+    $('hisConfirmedText').textContent=state.confirmedSummary;
+    $('confirmedAt').textContent=new Date().toLocaleString('vi-VN',{hour:'2-digit',minute:'2-digit',day:'2-digit',month:'2-digit',year:'numeric'});
+    $('hisSyncStatus').className='status-chip status-success';
+    $('hisSyncStatus').textContent='MedVita đã cập nhật';
+    $('encounterState').textContent='Đang khám · Có tóm tắt đã xác nhận';
+    $('flowMed').classList.add('active');
+    $('flowConfirm').classList.add('active');
+    $('flowBack').classList.add('active');
+    showView('his');
+    showToast('Đã cập nhật bản xác nhận vào HIS');
+  },1300);
+}
+
+function resetDemo(){
+  state.recording=false;state.paused=false;state.finished=false;state.seconds=0;state.lineIndex=0;state.confirmedSummary='';state.synced=false;
+  clearInterval(state.timerId);clearInterval(state.transcriptId);
+  $('timer').textContent='00:00';
+  $('transcriptLines').innerHTML='';
+  $('fullTranscriptPanel').innerHTML='';
+  $('transcriptPlaceholder').classList.remove('hidden');
+  $('peekBody').classList.add('hidden');
+  $('peekToggle').textContent='Xem transcript đang ghi ▾';
+  $('captureStage').classList.remove('hidden');
+  $('reviewStage').classList.add('hidden');
+  $('summaryText').value='';$('summaryText').disabled=false;
+  $('copySummaryBtn').disabled=true;$('copySummaryBtn').textContent='Copy bản tóm tắt';
+  $('confirmBtn').disabled=false;$('saveDraftBtn').disabled=false;
+  $('medPageTitle').textContent='Ghi nhận buổi khám';
+  $('medPageSubtitle').textContent='MedVita ghi nhận hội thoại trong nền để bác sĩ tập trung vào bệnh nhân.';
+  $('hisNoteEmpty').classList.remove('hidden');$('hisNoteResult').classList.add('hidden');
+  $('hisSyncStatus').className='status-chip status-wait';$('hisSyncStatus').textContent='Chưa có dữ liệu MedVita';
+  $('encounterState').textContent='Chờ khám';
+  ['flowMed','flowConfirm','flowBack'].forEach(id=>$(id).classList.remove('active'));
+  document.querySelectorAll('.side-tab').forEach((tab,i)=>tab.classList.toggle('active',i===0));
+  $('evidencePanel').classList.remove('hidden');$('fullTranscriptPanel').classList.add('hidden');
+  updateCaptureUI();showView('his');showToast('Đã reset prototype');
+}
+
+$('launchMedvitaBtn').addEventListener('click',()=>{ $('flowMed').classList.add('active'); showView('medvita'); });
+$('backHisBtn').addEventListener('click',()=>showView('his'));
+$('recordOrb').addEventListener('click',()=>{ if(!state.recording) startRecording(); });
+$('pauseBtn').addEventListener('click',pauseRecording);
+$('resumeBtn').addEventListener('click',resumeRecording);
+$('finishBtn').addEventListener('click',finishConsultation);
+$('copySummaryBtn').addEventListener('click',copySummary);
+$('summaryText').addEventListener('input',()=>{ $('copySummaryBtn').disabled=!$('summaryText').value.trim(); });
+$('saveDraftBtn').addEventListener('click',saveDraft);
+$('confirmBtn').addEventListener('click',confirmAndSync);
+$('resetBtn').addEventListener('click',resetDemo);
+$('peekToggle').addEventListener('click',()=>{
+  const open=$('peekBody').classList.contains('hidden');
+  $('peekBody').classList.toggle('hidden',!open);
+  $('peekToggle').textContent=open?'Ẩn transcript đang ghi ▴':'Xem transcript đang ghi ▾';
+});
+document.querySelectorAll('.side-tab').forEach(tab=>{
+  tab.addEventListener('click',()=>{
+    document.querySelectorAll('.side-tab').forEach(t=>t.classList.remove('active'));
+    tab.classList.add('active');
+    const isEvidence=tab.dataset.side==='evidence';
+    $('evidencePanel').classList.toggle('hidden',!isEvidence);
+    $('fullTranscriptPanel').classList.toggle('hidden',isEvidence);
+  });
+});
+updateCaptureUI();
+</script>
+</body>
+</html>
