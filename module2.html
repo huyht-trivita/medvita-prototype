@@ -25,7 +25,7 @@
   }
   *{box-sizing:border-box}
   body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--text)}
-  button,input,textarea{font:inherit}
+  button,input,textarea,select{font:inherit}
   button{cursor:pointer}
   .hidden{display:none!important}
   .app{min-height:100vh}
@@ -111,9 +111,18 @@
   .capture-kicker{font-size:12px;color:#77859a;font-weight:700;letter-spacing:.02em;margin-bottom:8px}
   .capture-title{font-size:26px;font-weight:800;letter-spacing:-.02em;margin-bottom:8px}
   .capture-copy{max-width:600px;margin:0 auto;color:#6f7d91;font-size:14px;line-height:1.6}
+  .session-setup{max-width:620px;margin:24px auto 0;text-align:left;display:grid;gap:12px}
+  .setup-field{border:1px solid #e2e7ef;border-radius:12px;background:#fbfcfe;padding:12px 14px}
+  .setup-label{display:block;font-size:11px;color:#7c899d;font-weight:800;text-transform:uppercase;letter-spacing:.05em;margin-bottom:7px}
+  .template-select{width:100%;border:0;background:transparent;color:#26364d;font-weight:700;outline:none;padding:0}
+  .consent-check{display:flex;align-items:flex-start;gap:10px;cursor:pointer;font-size:13px;line-height:1.45;color:#43536a}
+  .consent-check input{width:17px;height:17px;margin-top:1px;accent-color:var(--primary);flex:0 0 auto}
+  .consent-check strong{display:block;color:#26364d;margin-bottom:2px}
+  .consent-helper{font-size:11px;color:#7d899b;margin:3px 0 0 27px}
   .record-orb-wrap{display:flex;justify-content:center;margin:34px 0 18px}
   .record-orb{width:118px;height:118px;border-radius:50%;border:0;background:linear-gradient(145deg,#2a70ff,#1f5edb);color:#fff;box-shadow:0 16px 34px rgba(36,107,254,.26);display:grid;place-items:center;transition:.2s;position:relative}
   .record-orb:hover{transform:translateY(-2px)}
+  .record-orb:disabled{opacity:.38;cursor:not-allowed;box-shadow:none;transform:none}
   .record-orb.recording{background:linear-gradient(145deg,#ef6262,#d83c3c);box-shadow:0 16px 34px rgba(216,60,60,.24)}
   .record-orb.recording::after{content:"";position:absolute;inset:-12px;border-radius:50%;border:1px solid rgba(216,60,60,.25);animation:ring 1.7s infinite}
   @keyframes ring{0%{transform:scale(.9);opacity:1}100%{transform:scale(1.18);opacity:0}}
@@ -150,8 +159,13 @@
   .review-title h2{font-size:20px}
   .review-body{padding:20px}
   .draft-note{display:flex;align-items:flex-start;gap:9px;padding:11px 12px;background:#fff8e8;border:1px solid #f2dfab;border-radius:10px;color:#745200;font-size:12px;line-height:1.45;margin-bottom:14px}
-  .note-editor{width:100%;min-height:470px;border:1px solid #dbe2ec;border-radius:12px;padding:18px;background:#fff;color:var(--text);line-height:1.65;resize:vertical;outline:none;font-size:14px}
-  .note-editor:focus{border-color:#9cbcff;box-shadow:0 0 0 3px rgba(36,107,254,.08)}
+  .clinical-note{border:1px solid #dbe2ec;border-radius:14px;background:#fff;overflow:hidden}
+  .note-section{padding:17px 18px;border-bottom:1px solid #edf1f6}
+  .note-section:last-child{border-bottom:0}
+  .note-section-title{font-size:11px;font-weight:850;letter-spacing:.06em;color:#65758b;margin-bottom:8px}
+  .note-section-body{min-height:48px;outline:none;font-size:14px;line-height:1.65;color:#24344b;white-space:pre-wrap;border-radius:7px;padding:4px}
+  .note-section-body:focus{background:#f8fbff;box-shadow:0 0 0 2px rgba(36,107,254,.08)}
+  .note-section-body[contenteditable="false"]{background:#fafbfd;color:#5f6d80}
   .review-footer{position:sticky;bottom:0;background:rgba(255,255,255,.96);backdrop-filter:blur(10px);border-top:1px solid var(--line);padding:13px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;border-radius:0 0 18px 18px}
   .review-footer-copy{font-size:12px;color:#76859a}
   .review-actions{display:flex;gap:8px}
@@ -259,11 +273,11 @@
                 <div class="section-title">Ghi nhận từ MedVita</div>
                 <div id="hisNoteEmpty" class="note-empty">
                   Chưa có nội dung từ MedVita cho phiên khám này.<br />
-                  <span class="small">Chỉ nội dung đã được bác sĩ xác nhận mới được cập nhật vào HIS.</span>
+                  <span class="small">Chỉ bản đã được bác sĩ xác nhận mới được cập nhật vào HIS.</span>
                 </div>
                 <div id="hisNoteResult" class="hidden">
                   <div class="confirmed-block">
-                    <div class="status-chip status-success" style="margin-bottom:10px">Đã xác nhận bởi bác sĩ</div>
+                    <div class="status-chip status-success" style="margin-bottom:10px">Bản đã được bác sĩ xác nhận</div>
                     <div id="hisConfirmedText" class="note-box"></div>
                     <div class="confirmed-meta">Nguồn: MedVita · BS. Nguyễn Minh Anh xác nhận · <span id="confirmedAt"></span></div>
                   </div>
@@ -275,7 +289,7 @@
           <div>
             <div class="launch-card">
               <div class="launch-logo"><div class="launch-mark">M</div> MedVita — Đồng hành khám chữa bệnh</div>
-              <div class="launch-copy">Bắt đầu ghi nhận buổi khám với đúng bệnh nhân hiện tại. Sau khi kết thúc, bác sĩ review bản tóm tắt và chỉ bản đã xác nhận mới được cập nhật lại HIS.</div>
+              <div class="launch-copy">Bắt đầu ghi nhận buổi khám với đúng bệnh nhân hiện tại. Sau khi kết thúc, bác sĩ kiểm tra bản ghi do AI tạo và chỉ nội dung đã xác nhận mới được cập nhật lại HIS.</div>
               <div class="context-mini">
                 <div><b>Bệnh nhân:</b> Nguyễn Văn An · BN-0084251</div>
                 <div><b>Lượt khám:</b> ENC-20260902-0158</div>
@@ -333,6 +347,22 @@
           <div class="capture-title" id="captureTitle">Bắt đầu khi bác sĩ sẵn sàng</div>
           <div class="capture-copy" id="captureCopy">Không cần đọc hay nhập liệu trong lúc khám. MedVita sẽ ghi nhận hội thoại và tạo bản nháp sau khi kết thúc.</div>
 
+          <div class="session-setup" id="sessionSetup">
+            <div class="setup-field">
+              <label class="setup-label" for="documentTemplate">Mẫu tài liệu</label>
+              <select id="documentTemplate" class="template-select" aria-label="Mẫu tài liệu">
+                <option value="consultation-summary">Tóm tắt buổi khám</option>
+              </select>
+            </div>
+            <div class="setup-field">
+              <label class="consent-check" for="consentCheck">
+                <input id="consentCheck" type="checkbox" />
+                <span><strong>Bệnh nhân đã đồng ý ghi âm</strong>Tôi xác nhận đã thông báo cho bệnh nhân và nhận được sự đồng ý trước khi ghi nhận hội thoại.</span>
+              </label>
+              <div class="consent-helper">MedVita chỉ bắt đầu ghi âm sau khi bác sĩ xác nhận mục này.</div>
+            </div>
+          </div>
+
           <div class="record-orb-wrap">
             <button id="recordOrb" class="record-orb" aria-label="Bắt đầu ghi nhận">
               <div><div class="mic-symbol" id="micSymbol">●</div><div class="record-orb-label" id="recordOrbLabel">BẮT ĐẦU</div></div>
@@ -362,10 +392,6 @@
             </div>
           </div>
 
-          <div class="consent-note">
-            <span><span class="check">✓</span> Đúng bệnh nhân và phiên khám</span>
-            <span><span class="check">✓</span> Ghi âm chỉ phục vụ hỗ trợ lập hồ sơ</span>
-          </div>
         </div>
       </section>
 
@@ -374,18 +400,35 @@
         <div class="review-main">
           <div class="review-header">
             <div>
-              <div class="review-title"><h2>Tóm tắt buổi khám</h2><span class="status-chip status-wait">AI draft</span></div>
-              <div class="review-meta"><span class="mini-chip">8 đoạn hội thoại</span><span class="mini-chip">Tai Mũi Họng</span><span class="mini-chip success-chip">Có transcript đối chiếu</span></div>
+              <div class="review-title"><h2>Bản ghi buổi khám</h2><span class="status-chip status-wait">AI tạo · Chưa được bác sĩ xác nhận</span></div>
+              <div class="review-meta"><span class="mini-chip">Tóm tắt buổi khám</span><span class="mini-chip">8 đoạn hội thoại</span><span class="mini-chip">Tai Mũi Họng</span><span class="mini-chip success-chip">Có transcript đối chiếu</span></div>
             </div>
           </div>
           <div class="review-body">
-            <div class="draft-note"><span>✦</span><span>Đây là bản nháp do AI tạo từ hội thoại. Bác sĩ kiểm tra, chỉnh sửa nếu cần trước khi xác nhận.</span></div>
-            <textarea id="summaryText" class="note-editor"></textarea>
+            <div class="draft-note"><span>✦</span><span>AI đã tạo bản ghi từ hội thoại. Bác sĩ kiểm tra, chỉnh sửa và đối chiếu nguồn khi cần trước khi xác nhận.</span></div>
+            <div id="clinicalNote" class="clinical-note">
+              <div class="note-section">
+                <div class="note-section-title">LÝ DO KHÁM</div>
+                <div class="note-section-body" contenteditable="true" data-note-section="reason"></div>
+              </div>
+              <div class="note-section">
+                <div class="note-section-title">BỆNH SỬ</div>
+                <div class="note-section-body" contenteditable="true" data-note-section="history"></div>
+              </div>
+              <div class="note-section">
+                <div class="note-section-title">TRIỆU CHỨNG GHI NHẬN</div>
+                <div class="note-section-body" contenteditable="true" data-note-section="symptoms"></div>
+              </div>
+              <div class="note-section">
+                <div class="note-section-title">THUỐC VÀ DỊ ỨNG</div>
+                <div class="note-section-body" contenteditable="true" data-note-section="meds"></div>
+              </div>
+            </div>
           </div>
           <div class="review-footer">
-            <div class="review-footer-copy">Chỉ bản bác sĩ xác nhận mới được cập nhật vào HIS.</div>
+            <div class="review-footer-copy">Chỉ bản đã được bác sĩ xác nhận mới được cập nhật vào HIS.</div>
             <div class="review-actions">
-              <button class="ghost-btn" id="copySummaryBtn" disabled>Copy bản tóm tắt</button>
+              <button class="ghost-btn" id="copySummaryBtn" disabled>Copy bản ghi</button>
               <button class="ghost-btn" id="saveDraftBtn">Lưu nháp</button>
               <button class="primary-btn" id="confirmBtn">Xác nhận & gửi HIS</button>
             </div>
@@ -431,7 +474,12 @@ const transcriptScript = [
   {speaker:'Bệnh nhân', cls:'patient', text:'Tôi không biết dị ứng thuốc gì và hiện không uống thuốc thường xuyên.'}
 ];
 
-const draftSummary = `Lý do khám:\n- Đau họng, nuốt vướng khoảng 3 ngày, tối qua sốt nhẹ.\n\nTriệu chứng ghi nhận:\n- Ho ít.\n- Không khó thở.\n- Đau họng tăng vào sáng nay.\n\nTiền sử liên quan:\n- Trong khoảng 1 năm gần đây có vài đợt viêm họng/viêm amidan tái diễn, thường tự hết sau vài ngày.\n\nThuốc và dị ứng:\n- Hiện không dùng thuốc thường xuyên.\n- Chưa ghi nhận dị ứng thuốc theo lời bệnh nhân.`;
+const draftClinicalNote = {
+  reason:'Đau họng, nuốt vướng khoảng 3 ngày; tối qua có sốt nhẹ.',
+  history:'Trong khoảng 1 năm gần đây có vài đợt viêm họng/viêm amidan tái diễn, thường tự hết sau vài ngày.',
+  symptoms:'Ho ít. Không khó thở. Đau họng tăng vào sáng nay.',
+  meds:'Hiện không dùng thuốc thường xuyên. Chưa ghi nhận dị ứng thuốc theo lời bệnh nhân.'
+};
 
 const state = {
   recording:false,
@@ -465,6 +513,35 @@ function formatTime(s){
   return `${m}:${sec}`;
 }
 
+function updateRecordAvailability(){
+  $('recordOrb').disabled=!$('consentCheck').checked || state.recording || state.finished;
+}
+
+function populateClinicalNote(){
+  Object.entries(draftClinicalNote).forEach(([key,value])=>{
+    const el=document.querySelector(`[data-note-section="${key}"]`);
+    if(el) el.textContent=value;
+  });
+  updateCopyAvailability();
+}
+
+function collectClinicalNote(){
+  const labels={reason:'LÝ DO KHÁM',history:'BỆNH SỬ',symptoms:'TRIỆU CHỨNG GHI NHẬN',meds:'THUỐC VÀ DỊ ỨNG'};
+  return Object.keys(labels).map(key=>{
+    const el=document.querySelector(`[data-note-section="${key}"]`);
+    const value=(el?.innerText||'').trim();
+    return value ? `${labels[key]}\n${value}` : '';
+  }).filter(Boolean).join('\n\n');
+}
+
+function setClinicalNoteDisabled(disabled){
+  document.querySelectorAll('[data-note-section]').forEach(el=>el.setAttribute('contenteditable', disabled?'false':'true'));
+}
+
+function updateCopyAvailability(){
+  $('copySummaryBtn').disabled=!collectClinicalNote().trim();
+}
+
 function updateCaptureUI(){
   const live = state.recording && !state.paused && !state.finished;
   $('recordOrb').classList.toggle('recording', live);
@@ -473,6 +550,7 @@ function updateCaptureUI(){
   $('pauseBtn').classList.toggle('hidden', !state.recording || state.paused || state.finished);
   $('resumeBtn').classList.toggle('hidden', !state.recording || !state.paused || state.finished);
   $('finishBtn').classList.toggle('hidden', !state.recording || state.finished);
+  updateRecordAvailability();
 
   if(!state.recording && !state.finished){
     $('recordOrbLabel').textContent='BẮT ĐẦU';
@@ -523,9 +601,11 @@ function startTranscriptLoop(){
 
 function startRecording(){
   if(state.recording || state.finished) return;
+  if(!$('consentCheck').checked){ showToast('Vui lòng xác nhận bệnh nhân đã đồng ý ghi âm'); return; }
   state.recording=true;
   state.paused=false;
   $('encounterState').textContent='Đang khám';
+  $('sessionSetup').classList.add('hidden');
   updateCaptureUI();
   clearInterval(state.timerId);
   state.timerId=setInterval(()=>{
@@ -557,22 +637,21 @@ function finishConsultation(){
   clearInterval(state.timerId);
   clearInterval(state.transcriptId);
   while(state.lineIndex < transcriptScript.length){ appendTranscript(transcriptScript[state.lineIndex++]); }
-  $('summaryText').value=draftSummary;
-  $('copySummaryBtn').disabled=!draftSummary.trim();
+  populateClinicalNote();
   $('captureStage').classList.add('hidden');
   $('reviewStage').classList.remove('hidden');
-  $('medPageTitle').textContent='Review bản tóm tắt';
-  $('medPageSubtitle').textContent='Kiểm tra nội dung AI draft, đối chiếu transcript khi cần và xác nhận bản cuối cùng.';
+  $('medPageTitle').textContent='Review bản ghi buổi khám';
+  $('medPageSubtitle').textContent='Kiểm tra bản ghi do AI tạo, đối chiếu transcript khi cần và xác nhận nội dung cuối cùng.';
   $('stageStatus').className='status-chip status-wait';
   $('stageStatus').textContent='Chờ bác sĩ review';
-  showToast('Đã tạo bản tóm tắt nháp');
+  showToast('Đã tạo bản ghi nháp');
 }
 
 async function copySummary(){
-  const text=$('summaryText').value.trim();
+  const text=collectClinicalNote().trim();
   if(!text) return;
   const btn=$('copySummaryBtn');
-  const originalLabel='Copy bản tóm tắt';
+  const originalLabel='Copy bản ghi';
   try{
     if(navigator.clipboard && window.isSecureContext){
       await navigator.clipboard.writeText(text);
@@ -589,7 +668,7 @@ async function copySummary(){
       if(!copied) throw new Error('copy failed');
     }
     btn.textContent='Đã copy ✓';
-    showToast('Đã copy bản tóm tắt');
+    showToast('Đã copy bản ghi');
     setTimeout(()=>{ btn.textContent=originalLabel; },1400);
   }catch(e){
     showToast('Không thể copy. Vui lòng thử lại');
@@ -597,19 +676,19 @@ async function copySummary(){
 }
 
 function saveDraft(){
-  const text=$('summaryText').value.trim();
-  if(!text){ showToast('Bản tóm tắt đang trống'); return; }
+  const text=collectClinicalNote().trim();
+  if(!text){ showToast('Bản ghi đang trống'); return; }
   showToast('Đã lưu nháp');
 }
 
 function confirmAndSync(){
-  const text=$('summaryText').value.trim();
-  if(!text){ showToast('Bản tóm tắt đang trống'); return; }
+  const text=collectClinicalNote().trim();
+  if(!text){ showToast('Bản ghi đang trống'); return; }
   state.confirmedSummary=text;
   $('confirmBtn').disabled=true;
   $('saveDraftBtn').disabled=true;
   $('copySummaryBtn').disabled=true;
-  $('summaryText').disabled=true;
+  setClinicalNoteDisabled(true);
   $('stageStatus').className='status-chip status-success';
   $('stageStatus').textContent='Đã xác nhận';
   $('syncOverlay').classList.remove('hidden');
@@ -642,8 +721,11 @@ function resetDemo(){
   $('peekToggle').textContent='Xem transcript đang ghi ▾';
   $('captureStage').classList.remove('hidden');
   $('reviewStage').classList.add('hidden');
-  $('summaryText').value='';$('summaryText').disabled=false;
-  $('copySummaryBtn').disabled=true;$('copySummaryBtn').textContent='Copy bản tóm tắt';
+  document.querySelectorAll('[data-note-section]').forEach(el=>el.textContent='');
+  setClinicalNoteDisabled(false);
+  $('copySummaryBtn').disabled=true;$('copySummaryBtn').textContent='Copy bản ghi';
+  $('consentCheck').checked=false;
+  $('sessionSetup').classList.remove('hidden');
   $('confirmBtn').disabled=false;$('saveDraftBtn').disabled=false;
   $('medPageTitle').textContent='Ghi nhận buổi khám';
   $('medPageSubtitle').textContent='MedVita ghi nhận hội thoại trong nền để bác sĩ tập trung vào bệnh nhân.';
@@ -663,7 +745,8 @@ $('pauseBtn').addEventListener('click',pauseRecording);
 $('resumeBtn').addEventListener('click',resumeRecording);
 $('finishBtn').addEventListener('click',finishConsultation);
 $('copySummaryBtn').addEventListener('click',copySummary);
-$('summaryText').addEventListener('input',()=>{ $('copySummaryBtn').disabled=!$('summaryText').value.trim(); });
+document.querySelectorAll('[data-note-section]').forEach(el=>el.addEventListener('input',updateCopyAvailability));
+$('consentCheck').addEventListener('change',updateRecordAvailability);
 $('saveDraftBtn').addEventListener('click',saveDraft);
 $('confirmBtn').addEventListener('click',confirmAndSync);
 $('resetBtn').addEventListener('click',resetDemo);
@@ -682,6 +765,7 @@ document.querySelectorAll('.side-tab').forEach(tab=>{
   });
 });
 updateCaptureUI();
+updateRecordAvailability();
 </script>
 </body>
 </html>
