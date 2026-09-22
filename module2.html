@@ -20,7 +20,42 @@
     .mini-pill .mp-actions button{width:34px;height:34px;border-radius:50%;border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.08);color:#fff;font-size:13px}
     .mini-pill .mp-actions .mp-stop{background:#dc3545;border-color:#dc3545}
     .mini-pill .mp-hint{font-size:9px;color:#7c8db0;text-align:center;max-width:96px;line-height:1.4}
-    @media(max-width:260px){.drawer.pip-mode .mini-pill{display:flex}.drawer.pip-mode .drawer-head,.drawer.pip-mode .drawer-body{display:none}}.drawer-head{height:67px;background:#fff;border-bottom:1px solid var(--line);padding:0 17px;display:flex;align-items:center;justify-content:space-between}.drawer-body{padding:16px;overflow:auto;flex:1}.context{padding:14px;background:#eaf2ff;border-radius:12px;margin-bottom:12px}.context b{display:block;font-size:15px}.context small{display:block;color:#5d6f88;margin-top:5px;line-height:1.45}.embed-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:17px}.embed-card h3{margin:0 0 13px}.consent{display:flex;gap:9px;line-height:1.45;color:#46556c}.consent input{width:17px;height:17px;margin-top:2px;accent-color:var(--blue)}.record-button{width:124px;height:124px;border:8px solid #e8efff;border-radius:50%;background:var(--blue);color:#fff;display:grid;place-items:center;margin:22px auto 6px;font-weight:900;box-shadow:0 10px 30px rgba(37,99,235,.25)}.record-button:disabled{background:#aab4c4;box-shadow:none}.timer{text-align:center;font-size:44px;font-weight:850;letter-spacing:-.04em;margin:18px 0 6px}.record-state{text-align:center;color:var(--red);font-weight:850}.embed-actions{display:grid;grid-template-columns:1fr 1.3fr;gap:9px;margin-top:18px}.processing-list{margin:14px 0 0;padding:0;list-style:none}.processing-list li{padding:9px 0;border-bottom:1px solid #edf0f5;color:#778398}.processing-list .done{color:var(--green)}.processing-list .active{color:var(--blue);font-weight:800}.result-icon{width:48px;height:48px;border-radius:50%;background:var(--soft-green);color:var(--green);display:grid;place-items:center;font-size:22px;margin-bottom:12px}.result-copy{background:#f7f9fc;border-radius:10px;padding:11px;font-size:12px;line-height:1.5;color:#526177;margin:12px 0}.offline{background:#fff5e5;border:1px solid #f3d39e;border-radius:10px;padding:10px;font-size:12px;color:#8b5b14;margin-top:12px;line-height:1.45}.compact-field{margin-bottom:12px}.compact-field label{display:block;font-size:10px;font-weight:800;color:var(--muted);margin-bottom:5px;letter-spacing:.03em}.compact-content{background:#f7f9fc;border-radius:9px;padding:10px;font-size:12.5px;line-height:1.55;outline:0}.compact-content:focus{background:#f2f6ff;box-shadow:0 0 0 2px #d7e4ff}
+    @media(max-width:260px){.drawer.pip-mode .mini-pill{display:flex}.drawer.pip-mode .drawer-head,.drawer.pip-mode .drawer-body{display:none}}.drawer-head{height:67px;background:#fff;border-bottom:1px solid var(--line);padding:0 17px;display:flex;align-items:center;justify-content:space-between}.drawer-body{padding:16px;overflow:auto;flex:1}.context{padding:14px;background:#eaf2ff;border-radius:12px;margin-bottom:12px}.context b{display:block;font-size:15px}.context small{display:block;color:#5d6f88;margin-top:5px;line-height:1.45}.embed-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:17px}.embed-card h3{margin:0 0 13px}.consent{display:flex;gap:9px;line-height:1.45;color:#46556c}.consent input{width:17px;height:17px;margin-top:2px;accent-color:var(--blue)}.record-button{width:124px;height:124px;border:8px solid #e8efff;border-radius:50%;background:var(--blue);color:#fff;display:grid;place-items:center;margin:22px auto 6px;font-weight:900;box-shadow:0 10px 30px rgba(37,99,235,.25)}.record-button:disabled{background:#aab4c4;box-shadow:none}.timer{text-align:center;font-size:44px;font-weight:850;letter-spacing:-.04em;margin:18px 0 6px}.record-state{text-align:center;color:var(--red);font-weight:850}.embed-actions{display:grid;grid-template-columns:1fr 1.3fr;gap:9px;margin-top:18px}.processing-list{margin:14px 0 0;padding:0;list-style:none}.processing-list li{padding:9px 0;border-bottom:1px solid #edf0f5;color:#778398}.processing-list .done{color:var(--green)}.processing-list .active{color:var(--blue);font-weight:800}.result-icon{width:48px;height:48px;border-radius:50%;background:var(--soft-green);color:var(--green);display:grid;place-items:center;font-size:22px;margin-bottom:12px}.result-copy{background:#f7f9fc;border-radius:10px;padding:11px;font-size:12px;line-height:1.5;color:#526177;margin:12px 0}.offline{background:#fff5e5;border:1px solid #f3d39e;border-radius:10px;padding:10px;font-size:12px;color:#8b5b14;margin-top:12px;line-height:1.45}.compact-field{margin-bottom:12px}.compact-field label{display:block;font-size:10px;font-weight:800;color:var(--muted);margin-bottom:5px;letter-spacing:.03em}    .compact-content{background:#f7f9fc;border-radius:9px;padding:10px;font-size:12.5px;line-height:1.55;outline:0}
+    .export-choice{display:grid;gap:10px;margin-top:4px}
+    .export-opt{display:flex;gap:11px;align-items:flex-start;border:1.5px solid var(--line);border-radius:12px;padding:13px 14px;cursor:pointer;background:#fff;text-align:left;width:100%;min-height:auto}
+    .export-opt:hover{border-color:var(--blue)}
+    .export-opt.on{border-color:var(--blue);background:var(--soft-blue)}
+    .export-opt[disabled]{opacity:.55;cursor:not-allowed;background:#f7f9fc}
+    .export-opt[disabled]:hover{border-color:var(--line)}
+    .export-opt .mark{flex:0 0 auto;width:17px;height:17px;border-radius:50%;border:2px solid var(--line);margin-top:2px}
+    .export-opt.on .mark{border-color:var(--blue);background:var(--blue);box-shadow:inset 0 0 0 3px #fff}
+    .export-opt .ttl{font-weight:750;font-size:14px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+    .export-opt .dsc{font-size:12.5px;color:var(--muted);line-height:1.5;margin-top:3px}
+    .sum-list{list-style:none;padding:0;margin:0}
+    .sum-item{display:flex;gap:9px;align-items:flex-start;padding:3px 0}
+    .sum-item .dot{color:var(--blue);font-weight:700;line-height:1.65;flex:0 0 auto}
+    .sum-item .val{flex:1;outline:0;line-height:1.65;border-radius:6px;padding:3px 5px;margin:-3px -5px}
+    .sum-item .val:focus{background:var(--soft-blue)}
+    .sum-item .del{flex:0 0 auto;border:0;background:none;color:var(--muted);cursor:pointer;font-size:15px;line-height:1;padding:4px 6px;min-height:auto;min-width:auto}
+    .sum-item .del:hover{color:var(--red)}
+    .sum-add{border:1px dashed var(--line);background:none;color:var(--blue);border-radius:8px;padding:6px 10px;font-size:12.5px;cursor:pointer;margin-top:7px;min-height:auto}
+    .drug-card{border:1px solid var(--line);border-radius:10px;padding:11px 12px;margin-bottom:9px;background:#fff}
+    .drug-card .dname{font-weight:750;font-size:15px;outline:0;border-radius:6px;padding:2px 4px;margin:-2px -4px}
+    .drug-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 14px;margin-top:8px}
+    .drug-grid .f label{display:block;font-size:10.5px;font-weight:700;letter-spacing:.03em;color:var(--muted);margin-bottom:2px}
+    .drug-grid .f .val{font-size:13.5px;line-height:1.5;outline:0;background:#f7f9fc;border-radius:7px;padding:6px 8px;min-height:18px}
+    .drug-grid .f.wide{grid-column:1/-1}
+    .drug-src{margin-top:8px;font-size:11px;color:var(--muted);display:flex;align-items:center;gap:6px}
+    .drug-card .del{float:right;border:0;background:none;color:var(--muted);cursor:pointer;font-size:15px;padding:0 2px;min-height:auto;min-width:auto}
+    .section.urgent{background:#fff5f5;border-radius:10px;padding:14px 16px;border-bottom:0;margin-bottom:18px}
+    .section.urgent .section-title b{color:var(--red)}
+    .section.urgent .sum-item .dot{color:var(--red)}
+    .section.private{background:#f7f9fc;border-radius:10px;padding:14px 16px;border-bottom:0;margin-bottom:18px}
+    .sum-empty{color:var(--muted);font-size:13px;font-style:italic;padding:3px 0}
+    .summary-sections.compact .section{padding:0 0 12px;margin-bottom:12px}
+    .summary-sections.compact .section-title b{font-size:11px}
+    .summary-sections.compact .drug-grid{grid-template-columns:1fr}
+    .summary-sections.compact .section-content,.summary-sections.compact .sum-item .val{font-size:12.5px}.compact-content:focus{background:#f2f6ff;box-shadow:0 0 0 2px #d7e4ff}
     .embedded-prior{display:flex;align-items:center;justify-content:space-between;gap:8px;background:#f8faff;border:1px solid #e2ecff;border-radius:10px;padding:9px 11px;margin:10px 0;font-size:12px}
     .embedded-prior-body{margin-top:8px;padding-top:8px;border-top:1px solid #e2ecff;font-size:12px;line-height:1.6}
     .compact-ref-line{display:flex;align-items:center;justify-content:space-between;background:#f8faff;border:1px solid #e2ecff;border-radius:9px;padding:8px 10px;font-size:11.5px;margin-bottom:12px}
@@ -116,7 +151,33 @@
     .mobile-his-nav{display:none;background:#fff;border-bottom:1px solid var(--line);gap:8px;padding:10px 14px;overflow-x:auto}.mobile-his-nav button{min-height:44px;white-space:nowrap}.mobile-his-nav [aria-current="page"]{background:var(--navy);color:#fff}.x,.icon-action,.mini,.text-link{min-height:44px;min-width:44px}.sub,.nav-label,.fact label,.compact-field label,.trust-note{font-size:max(12px,1em)}button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,[contenteditable="true"]:focus-visible{outline:3px solid #8db2ff;outline-offset:2px}.inline-error{color:var(--red);font-size:12px;margin-top:6px}.sync-status{margin-top:10px;padding:11px;border-radius:10px;background:#fff6e8;color:#805416;line-height:1.5}.recap-source{width:100%;min-height:150px;border:1px solid var(--line);border-radius:10px;padding:12px;line-height:1.55}
     @media(max-width:900px){.mobile-his-nav{display:flex}}
     @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}.btn:hover{transform:none}}
-    @media print{body.printing-summary{background:#fff}body.printing-summary .workspace-head,body.printing-summary .standalone-tools,body.printing-summary .stage-head,body.printing-summary .side,body.printing-summary .note-footer{display:none!important}body.printing-summary .review-grid{display:block}body.printing-summary .note{box-shadow:none;border:0}body.printing-summary .workspace-main{padding:0;max-width:none}}
+    #printDocument{display:none}
+    @media print{
+      /* --- BẢN DÁN SỔ KHÁM BỆNH (A5) --- */
+      body.print-booklet #printDocument{font-family:Arial,Helvetica,sans-serif;color:#000;font-size:11pt;line-height:1.42}
+      .bk-head{display:flex;justify-content:space-between;align-items:flex-end;border-bottom:1.5pt solid #000;padding-bottom:3pt}
+      .bk-head .org{font-size:10.5pt;font-weight:bold;text-transform:uppercase;line-height:1.25}
+      .bk-head .dept{font-size:9.5pt;font-weight:normal;text-transform:none}
+      .bk-head .when{font-size:9.5pt;text-align:right;white-space:nowrap}
+      .bk-title{text-align:center;font-size:13pt;font-weight:bold;margin:9pt 0 8pt;letter-spacing:.02em}
+      .bk-pt{font-size:11pt;border:1pt solid #000;padding:4pt 6pt;margin-bottom:8pt}
+      .bk-pt b{font-size:11.5pt}
+      .bk-block{margin-bottom:7pt;page-break-inside:avoid}
+      .bk-block .lbl{font-size:9pt;font-weight:bold;letter-spacing:.04em;margin-bottom:1pt}
+      .bk-block .txt{font-size:11pt;text-align:justify}
+      .bk-sign{margin-top:10pt;display:flex;justify-content:space-between;align-items:flex-start;font-size:10pt}
+      .bk-sign .lookup{width:62%;font-size:8.5pt;color:#333;line-height:1.35;display:flex;gap:6pt;align-items:flex-start}
+      .bk-sign .lookup svg{width:22mm;height:22mm;flex:0 0 auto}
+      .bk-sign .lookup .qtxt{padding-top:2pt}
+      .bk-sign .box{width:34%;text-align:center}
+      .bk-sign .box .role{font-weight:bold;font-size:9.5pt}
+      .bk-sign .box .gap{height:14mm}
+      .bk-foot{border-top:.75pt solid #000;margin-top:6pt;padding-top:3pt;font-size:8pt;display:flex;justify-content:space-between}
+      /* --- Dùng chung cho mọi bản in --- */
+      body.printing-summary{background:#fff}
+      body.printing-summary>*{display:none!important}
+      body.printing-summary #printDocument{display:block!important;font-family:Arial,Helvetica,sans-serif;color:#111;font-size:11pt;line-height:1.45}
+    }
   </style>
 </head>
 <body>
@@ -131,13 +192,10 @@
     <header class="topbar"><div class="brand"><div class="logo">M</div><div>MedVita<div class="sub">Standalone · Bệnh viện Trung ương Thái Nguyên</div></div></div><div class="row"><span class="chip">BS. Nguyễn Minh Anh</span><button class="btn ghost" id="logoutBtn">Đăng xuất</button></div></header>
     <main class="home-main">
       <div class="page-head"><div><h1>Phiên khám của tôi</h1><div class="muted">Worklist riêng của BS. Nguyễn Minh Anh.</div></div><button class="btn primary" id="createStandaloneSession">+ Tạo phiên khám</button></div>
-      <div class="worklist-tabs"><button id="worklistActionTab" class="btn worklist-tab active" data-worklist="action">Cần xử lý <span class="chip amber">2</span></button><button id="worklistCompletedTab" class="btn worklist-tab" data-worklist="completed">Đã hoàn tất</button><button id="worklistAllTab" class="btn worklist-tab" data-worklist="all">Tất cả</button></div>
-      <div class="history-tools" id="sessionHistoryTools"><input id="sessionSearch" class="search-input" placeholder="Tìm theo bệnh nhân, mã BN hoặc nội dung…"><select id="sessionStatusFilter" class="filter-select"><option value="all">Tất cả trạng thái</option><option value="review">Chờ review</option><option value="confirmed">Đã xác nhận</option><option value="draft">Bản nháp</option></select></div>
+      <div class="worklist-tabs"><button id="worklistActionTab" class="btn worklist-tab active" data-worklist="action">Cần xử lý <span id="actionCount" class="chip amber">0</span></button><button id="worklistCompletedTab" class="btn worklist-tab" data-worklist="completed">Đã hoàn tất</button><button id="worklistAllTab" class="btn worklist-tab" data-worklist="all">Tất cả</button></div>
+      <div class="history-tools" id="sessionHistoryTools"><input id="sessionSearch" class="search-input" placeholder="Tìm theo bệnh nhân, mã BN hoặc nội dung…"><select id="sessionStatusFilter" class="filter-select"><option value="all">Tất cả trạng thái</option><option value="ACTIVE">Đang ghi</option><option value="COMPLETED">Chờ review</option><option value="DRAFT_SUMMARY">Bản nháp</option><option value="CONFIRM_SUMMARY">Đã xác nhận</option><option value="REJECT_CONSENT">Không ghi âm</option></select></div>
       <div id="sessionListCard" class="card"><div class="panel-head"><h2 id="worklistTitle">Cần xử lý</h2><span id="sessionCount" class="chip">2 phiên</span></div><div id="sessionList" class="panel-body">
-        <div class="session-row" data-session data-worklist-group="action" data-status="review" data-patient="Nguyễn Văn An" data-patient-id="BN-0084251" data-readonly="false" data-search="nguyễn văn an bn-0084251 đau họng nuốt vướng"><div><b>Nguyễn Văn An</b><div class="sub">BN-0084251 · Hôm nay, 14:30</div></div><span>Đau họng, nuốt vướng</span><span class="chip amber">Chờ review</span><button class="btn secondary sessionOpenBtn">Mở</button></div>
-        <div class="session-row" data-session data-worklist-group="completed" data-status="confirmed" data-patient="Trần Thị Mai" data-patient-id="BN-0061732" data-readonly="true" data-search="trần thị mai bn-0061732 viêm mũi kéo dài"><div><b>Trần Thị Mai</b><div class="sub">BN-0061732 · Hôm nay, 13:45</div></div><span>Viêm mũi kéo dài</span><span class="chip green">Đã xác nhận</span><button class="btn secondary sessionOpenBtn">Xem</button></div>
-        <div class="session-row" data-session data-worklist-group="action" data-status="draft" data-patient="Lê Minh Đức" data-patient-id="BN-0091254" data-readonly="false" data-search="lê minh đức bn-0091254 khàn tiếng"><div><b>Lê Minh Đức</b><div class="sub">BN-0091254 · Hôm nay, 13:10</div></div><span>Khàn tiếng</span><span class="chip">Bản nháp</span><button class="btn secondary sessionOpenBtn">Tiếp tục</button></div>
-        <div class="session-row" data-session data-worklist-group="completed" data-status="confirmed" data-patient="Nguyễn Văn An" data-patient-id="BN-0084251" data-readonly="true" data-search="nguyễn văn an bn-0084251 tái khám viêm họng"><div><b>Nguyễn Văn An</b><div class="sub">BN-0084251 · 21/08/2026, 09:20</div></div><span>Tái khám viêm họng</span><span class="chip green">Đã xác nhận</span><button class="btn secondary sessionOpenBtn">Xem</button></div>
+        <div id="sessionRows"></div>
         <div id="sessionEmpty" class="empty hidden">Không tìm thấy phiên khám phù hợp.</div>
       </div></div>
     </main>
@@ -173,10 +231,7 @@
         <div class="section-title" style="margin-bottom:12px"><h3 style="margin:0">Tóm tắt buổi khám</h3><span id="compactReviewChip" class="chip amber">● AI tạo</span></div>
         <div id="compactRefLine" class="compact-ref-line"><span>🔗 Đã tham khảo note khoa Tai Mũi Họng</span><button id="compactViewRef" class="text-link" style="font-size:11px;padding:0">Xem</button></div>
         <div id="compactRefDetail" class="embedded-prior-body hidden" style="margin-bottom:12px">Câu được AI tham chiếu cho "LÝ DO KHÁM":<br>"<i>Đau họng, nuốt vướng 3 ngày, sốt nhẹ tối qua.</i>"<br><span class="muted" style="font-size:11px">— Trích từ ghi chú khoa Tai Mũi Họng, 08:15 —</span></div>
-        <div class="compact-field"><label>LÝ DO KHÁM</label><div id="compactReason" class="compact-content" contenteditable="true" role="textbox" aria-label="Lý do khám" aria-multiline="true"></div></div>
-        <div class="compact-field"><label>BỆNH SỬ</label><div id="compactHistory" class="compact-content" contenteditable="true" role="textbox" aria-label="Bệnh sử" aria-multiline="true"></div></div>
-        <div class="compact-field"><label>TRIỆU CHỨNG GHI NHẬN</label><div id="compactSymptoms" class="compact-content" contenteditable="true" role="textbox" aria-label="Triệu chứng ghi nhận" aria-multiline="true"></div></div>
-        <div class="compact-field"><label>THUỐC VÀ DỊ ỨNG</label><div id="compactMeds" class="compact-content" contenteditable="true" role="textbox" aria-label="Thuốc và dị ứng" aria-multiline="true"></div></div>
+        <div id="compactSummary" class="summary-sections compact"></div>
         <div class="trust-note" style="margin:4px 0 14px">Bác sĩ có thể sửa trực tiếp trước khi xác nhận. Nội dung cần được xác nhận trước khi chia sẻ hoặc đồng bộ HIS.</div>
         <button id="compactConfirmBtn" class="btn primary" style="width:100%">Xác nhận bản ghi</button>
         <div id="compactShareRow" class="hidden" style="margin-top:8px"><button id="compactShareBtn" class="btn secondary" style="width:100%">↥ Chia sẻ tóm tắt</button><button id="compactSyncBtn" class="btn secondary" style="width:100%;margin-top:8px" disabled>↻ Đồng bộ HIS</button></div>
@@ -203,15 +258,10 @@
     <div id="standaloneToolbar" class="standalone-tools hidden"><button id="addPatientBtn" class="btn secondary tool-btn">＋ <span id="selectedPatientLabel">Add patient</span></button><button id="contextBtn" class="btn secondary tool-btn">☷ Thông tin tham khảo <span id="contextBtnBadge" class="chip blue hidden" style="font-size:10px"></span></button><button id="quickNoteBtn" class="btn secondary tool-btn" disabled title="Sắp ra mắt">✎ Note <span class="chip">Sắp ra mắt</span></button><button id="createEncounterBtn" class="btn primary" disabled title="Đang có phiên khám hiện tại" aria-disabled="true">＋ Create</button></div>
     <main class="workspace-main"><div class="stage-head"><div><h1 id="stageTitle">Ghi nhận buổi khám</h1><div id="stageMeta" class="muted">ENC-20260908-0158 · BS. Nguyễn Minh Anh</div></div><span id="stageChip" class="chip">Sẵn sàng</span></div>
       <section data-stage="ready" id="readyStage" class="ready-card"><span class="chip blue">AMBIENT-FIRST</span><h2>Sẵn sàng khi bác sĩ bắt đầu</h2><p class="muted">MedVita ghi nhận trong nền và tạo bản nháp sau khi kết thúc. Bác sĩ không cần nhập liệu trong lúc khám.</p><div id="priorEncounterCard" class="prior-encounter-card"><b>🔗 Buổi khám trước của bệnh nhân</b><div id="readyPriorVisitsList" style="margin-top:8px"></div></div><div class="patient-required"><div><small class="muted">BỆNH NHÂN CỦA PHIÊN</small><br><b id="readyPatientName">Nguyễn Văn An</b></div><button id="changePatientBtn" class="btn secondary hidden">Đổi bệnh nhân</button></div><div class="setup"><div class="setup-box"><label>Mẫu tài liệu</label><select><option>Tóm tắt khám Tai Mũi Họng</option></select></div><div class="setup-box"><label>Mặc định</label><b>Theo khoa · BS. Nguyễn Minh Anh</b></div></div><div class="consent-block"><div class="row" style="justify-content:space-between;align-items:flex-start"><div><b>Xác nhận trước khi ghi âm</b><div class="sub">Bệnh nhân có thể từ chối hoặc yêu cầu dừng bất kỳ lúc nào.</div></div><button class="text-link consent-details" data-consent-type="patient" type="button">Xem nội dung thông báo</button></div><div class="consent-method"><div class="setup-box"><label>NGƯỜI ĐỒNG Ý</label><select id="consentingPerson"><option>Bệnh nhân trực tiếp</option><option>Người đại diện hợp pháp</option></select></div><div class="setup-box"><label>PHƯƠNG THỨC XÁC NHẬN</label><select id="consentMethod"><option value="verbal">Đồng ý bằng lời nói</option><option value="electronic">Xác nhận điện tử</option><option value="audio">Ghi âm lời xác nhận · Theo cấu hình bệnh viện</option></select></div></div><div id="audioConsentPanel" class="audio-consent hidden"><div class="audio-consent-status"><div><b id="audioConsentLabel">Chưa có audio xác nhận</b><div class="sub">Đoạn ghi riêng chỉ dùng làm bằng chứng consent, không đưa vào transcript khám.</div></div><span id="audioConsentDuration" class="chip">00:00</span></div><div class="row"><button id="recordConsentAudio" class="btn secondary">● Ghi lời xác nhận</button><button id="playConsentAudio" class="btn ghost" disabled>▶ Nghe lại</button><button id="deleteConsentAudio" class="btn ghost" disabled>Xóa</button></div></div><label class="consent"><input type="checkbox" id="patientConsent"><span><b id="consentStatement">Tôi xác nhận đã giải thích và bệnh nhân đồng ý trước khi ghi âm</b><br><small class="muted">Bác sĩ xác nhận quy trình đã được thực hiện; đây không phải consent thay cho bệnh nhân.</small></span></label><div id="consentAudit" class="confirmed-banner hidden" style="margin-top:12px">✓ Đồng ý bằng lời nói · Bệnh nhân trực tiếp · Ghi nhận bởi BS. Nguyễn Minh Anh · 14:30 · Consent v1.2</div><div class="trust-note" style="margin-top:14px"><b>Bằng chứng mặc định:</b> người đồng ý, phương thức, bác sĩ ghi nhận, thời gian và phiên bản nội dung. Audio xác nhận chỉ được lưu khi bệnh viện bật cấu hình này.</div><div class="consent-actions"><button id="declineConsentBtn" class="btn secondary">Bệnh nhân không đồng ý</button><button id="fullStart" class="btn primary" disabled>Xác nhận và bắt đầu ghi</button></div><div id="consentDeclinedPanel" class="declined-panel hidden"><h3>Không ghi âm phiên khám</h3><p>Quyết định từ chối đã được ghi nhận. Bác sĩ vẫn có thể tiếp tục khám bình thường.</p><div class="row"><button id="continueWithoutRecording" class="btn secondary">Tiếp tục khám không ghi âm</button><button id="recapAfterVisit" class="btn ghost">Đọc recap sau buổi khám</button></div></div></div></section>
-      <section data-stage="recording" id="recordingStage" class="capture hidden"><span class="chip red">● ĐANG GHI</span><div id="fullTimer" class="timer">00:00</div><p class="muted">AI đang chạy trong nền. Bác sĩ tiếp tục trao đổi tự nhiên.</p><div class="wave"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div id="fullOffline" class="offline hidden"><b>Ghi cục bộ</b> · Audio đang được giữ an toàn trên thiết bị và sẽ <b>Tự đồng bộ</b> khi có mạng.</div><div class="capture-actions"><button class="btn secondary" id="fullPause">Tạm dừng</button><button class="btn danger" id="fullFinish">Kết thúc buổi khám</button><button class="btn ghost" id="fullNetwork">Mô phỏng mất mạng</button><button class="btn ghost hidden" id="fullFloatToggle">🪟 Cửa sổ nổi</button></div><div class="transcript-peek"><button id="toggleTranscript">Xem transcript đang ghi ▾</button><div id="liveTranscript" class="peek hidden"></div></div></section>
+      <section data-stage="recording" id="recordingStage" class="capture hidden"><span class="chip red">● ĐANG GHI</span><div id="fullTimer" class="timer">00:00</div><p class="muted">AI đang chạy trong nền. Bác sĩ tiếp tục trao đổi tự nhiên.</p><div class="wave"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div id="fullOffline" class="offline hidden"><b>Ghi cục bộ</b> · Audio đang được giữ an toàn trên thiết bị và sẽ <b>Tự đồng bộ</b> khi có mạng.</div><div class="capture-actions"><button class="btn secondary" id="fullPause">Tạm dừng</button><button class="btn danger" id="fullFinish">Kết thúc buổi khám</button><button class="btn ghost" id="fullNetwork">Mô phỏng mất mạng</button><button class="btn ghost hidden" id="fullFloatToggle">🪟 Cửa sổ nổi</button></div><div class="withdraw-note">Trạng thái hiển thị ở đây là trạng thái máy cục bộ. Server chỉ chuyển sang <b>RECORDING</b> khi nhận được chunk audio đầu tiên.</div><div class="transcript-peek"><button id="toggleTranscript">Xem transcript đang ghi ▾</button><div id="liveTranscript" class="peek hidden"></div></div></section>
       <section data-stage="processing" id="processingStage" class="process-card hidden"><span class="chip blue">PROCESSING</span><h2>Đang tạo bản ghi buổi khám</h2><div class="bar"><div id="progressBar"></div></div><ul class="processing-list"><li id="pAudio" class="done">✓ Đã lưu bản ghi</li><li id="pTranscript" class="active">● Đang tạo transcript</li><li id="pSummary">○ Tạo bản ghi có cấu trúc</li><li id="pChecks">○ Hoàn tất bản nháp</li></ul><button id="backgroundBtn" class="btn secondary" style="margin-top:16px">Để xử lý nền</button></section>
-      <section data-stage="review" id="reviewStage" class="review-grid hidden"><article class="note"><div class="note-head"><div><div class="row" style="align-items:center;flex-wrap:wrap"><h2>Bản tóm tắt buổi khám</h2><span id="reviewChip" class="chip amber">● AI tạo · Chưa được bác sĩ xác nhận</span><span id="crossDeptBadge" class="chip blue cross-dept-badge">🔗 Đã tham chiếu: TMH (08:15)</span></div><div class="sub" id="reviewPatientName">Nguyễn Văn An · BN-0084251</div><div class="row summary-meta"><span class="chip">Tóm tắt buổi khám</span><span class="chip">8 đoạn hội thoại</span><span class="chip">Tai Mũi Họng</span><span class="chip green">Có transcript đối chiếu</span></div></div><div class="save-meta"><span id="autosaveStatus">✓ Đã lưu lúc 14:42</span></div></div><div class="note-body"><div id="readOnlyBanner" class="readonly-banner hidden">Phiên đã được xác nhận · Nội dung chỉ đọc.</div><div class="ai-banner">✦ AI đã tạo bản tóm tắt từ hội thoại. Bác sĩ kiểm tra và chỉnh sửa trước khi xác nhận.</div><div id="summarySections" class="summary-sections">
-        <div class="section" data-section="reason"><div class="section-title"><b>LÝ DO KHÁM</b></div><div class="section-content" contenteditable="true">Đau họng, nuốt vướng 3 ngày, sốt nhẹ tối qua.</div><div class="section-meta"><span class="chip blue origin">AI tạo</span></div></div>
-        <div class="section" data-section="history"><div class="section-title"><b>BỆNH SỬ</b></div><div class="section-content" contenteditable="true">Bệnh nhân đau họng khoảng 3 ngày, tăng khi nuốt. Tối qua sốt nhẹ khoảng 38°C, ho ít và không khó thở.</div><div class="section-meta"><span class="chip blue origin">AI tạo</span></div></div>
-        <div class="section" data-section="symptoms"><div class="section-title"><b>TRIỆU CHỨNG GHI NHẬN</b></div><div class="section-content" contenteditable="true">Đau họng, nuốt vướng, sốt nhẹ, ho ít. Chưa ghi nhận khó thở.</div><div class="section-meta"><span class="chip blue origin">AI tạo</span></div></div>
-        <div class="section" data-section="meds"><div class="section-title"><b>THUỐC VÀ DỊ ỨNG</b></div><div class="section-content" contenteditable="true">Chưa ghi nhận dị ứng thuốc. Bệnh nhân có dùng thuốc hạ sốt nhưng chưa xác định tên thuốc và liều dùng.</div><div class="section-meta"><span class="chip blue origin">AI tạo</span></div></div>
-      </div></div><div class="note-footer"><small>Bác sĩ chịu trách nhiệm chuyên môn cuối cùng.</small><div class="row"><button class="btn secondary" id="saveDraft">Lưu bản nháp</button><button class="btn primary" id="confirmBtn">Xác nhận</button></div></div></article>
-        <aside class="side evidence-panel" id="transcriptEvidencePanel"><div class="side-card"><div class="row" style="justify-content:space-between"><div><h3 id="inlineEvidenceTitle">Transcript đối chiếu</h3><div class="sub">Tìm kiếm hoặc mở toàn bộ nội dung hội thoại</div></div><button class="mini" id="playInlineEvidence">▶ Audio</button></div><input id="inlineTranscriptSearch" class="search-input evidence-search" style="margin-top:12px" placeholder="Tìm trong transcript…"><div id="inlineEvidenceQuotes"></div><button class="btn secondary" id="openFullTranscript" style="width:100%;margin-top:11px">Mở transcript đầy đủ</button></div><div class="side-card"><h3>Hành động</h3><div class="post-actions"><button class="btn secondary" id="shareBtn">Chia sẻ bệnh nhân</button><button class="btn secondary" id="inviteDoctorBtn">Mời bác sĩ</button><button class="btn secondary" id="exportPdfBtn">Xuất PDF</button><button class="btn secondary" id="syncBtn" disabled>Đồng bộ HIS</button></div><div class="trust-note">Chia sẻ cho bệnh nhân, cộng tác nội bộ và đồng bộ HIS là các luồng độc lập.</div><div id="syncStatusPanel" class="sync-status hidden" role="status" aria-live="polite"><span id="syncStatusText"></span><button id="retrySyncBtn" class="btn secondary hidden" style="width:100%;margin-top:8px">Thử đồng bộ lại</button></div></div></aside></section>
+      <section data-stage="review" id="reviewStage" class="review-grid hidden"><article class="note"><div class="note-head"><div><div class="row" style="align-items:center;flex-wrap:wrap"><h2>Bản tóm tắt buổi khám</h2><span id="reviewChip" class="chip amber">● AI tạo · Chưa được bác sĩ xác nhận</span><span id="crossDeptBadge" class="chip blue cross-dept-badge">🔗 Đã tham chiếu: TMH (08:15)</span></div><div class="sub" id="reviewPatientName">Nguyễn Văn An · BN-0084251</div><div class="row summary-meta"><span class="chip">Tóm tắt buổi khám</span><span class="chip">8 đoạn hội thoại</span><span class="chip">Tai Mũi Họng</span><span class="chip green">Có transcript đối chiếu</span></div></div><div class="save-meta"><span id="autosaveStatus">✓ Đã lưu lúc 14:42</span></div></div><div class="note-body"><div id="readOnlyBanner" class="readonly-banner hidden">Phiên đã được xác nhận · Nội dung chỉ đọc.</div><div class="ai-banner">✦ AI đã tạo bản tóm tắt từ hội thoại. Bác sĩ kiểm tra và chỉnh sửa trước khi xác nhận.</div><div id="summarySections" class="summary-sections"></div></div><div class="note-footer"><small>Bác sĩ chịu trách nhiệm chuyên môn cuối cùng.</small><div class="row"><button class="btn secondary" id="saveDraft">Lưu bản nháp</button><button class="btn primary" id="confirmBtn">Xác nhận</button></div></div></article>
+        <aside class="side evidence-panel" id="transcriptEvidencePanel"><div class="side-card" id="transcriptEvidenceCard"><div class="row" style="justify-content:space-between"><div><h3 id="inlineEvidenceTitle">Transcript đối chiếu</h3><div class="sub">Tìm kiếm hoặc mở toàn bộ nội dung hội thoại</div></div><button class="mini" id="playInlineEvidence">▶ Audio</button></div><input id="inlineTranscriptSearch" class="search-input evidence-search" style="margin-top:12px" placeholder="Tìm trong transcript…"><div id="inlineEvidenceQuotes"></div><button class="btn secondary" id="openFullTranscript" style="width:100%;margin-top:11px">Mở transcript đầy đủ</button></div><div class="side-card"><h3>Hành động</h3><div class="post-actions"><button class="btn secondary" id="shareBtn">Chia sẻ bệnh nhân</button><button class="btn secondary" id="inviteDoctorBtn">Mời bác sĩ</button><button class="btn secondary" id="exportPdfBtn">Xuất PDF</button><button class="btn secondary" id="syncBtn" disabled>Đồng bộ HIS</button></div><div class="trust-note">Chia sẻ cho bệnh nhân, cộng tác nội bộ và đồng bộ HIS là các luồng độc lập.</div><div id="syncStatusPanel" class="sync-status hidden" role="status" aria-live="polite"><span id="syncStatusText"></span><button id="retrySyncBtn" class="btn secondary hidden" style="width:100%;margin-top:8px">Thử đồng bộ lại</button></div></div></aside></section>
       <section data-stage="confirmed" id="confirmedStage" class="hidden"></section>
     </main>
   </section>
@@ -230,19 +280,242 @@
 <div id="inviteDoctorModal" class="overlay hidden"><div class="modal" style="width:min(620px,100%)"><div class="modal-head"><div><h2>Mời bác sĩ xem phiên khám</h2><div class="sub">Chỉ hiển thị bác sĩ cùng Bệnh viện Đa khoa Thái Nguyên</div></div><button class="x" data-close="inviteDoctorModal">×</button></div><div class="modal-body"><div class="field"><label>BÁC SĨ CÙNG BỆNH VIỆN</label><select id="doctorInviteSelect"><option value="">Chọn bác sĩ…</option><option>BS. Trần Thu Hà · Nội tổng quát</option><option>BS. Lê Quốc Nam · Tai Mũi Họng</option><option>BS. Phạm Ngọc Lan · Hô hấp</option></select></div><div class="trust-note">Bác sĩ được mời có thể xem audio, transcript và bản tóm tắt của riêng phiên này; không thể chỉnh sửa, xác nhận, chia sẻ hoặc đồng bộ HIS. Hoạt động truy cập được ghi nhật ký.</div></div><div class="modal-foot"><button class="btn secondary" data-close="inviteDoctorModal">Hủy</button><button class="btn primary" id="sendDoctorInvite">Gửi lời mời chỉ xem</button></div></div></div>
 <div id="priorNoteModal" class="overlay hidden"><div class="modal" style="max-width:560px"><div class="modal-head"><div><h2 id="priorNoteModalTitle">Ghi chú khoa Tai Mũi Họng</h2><div class="sub" id="priorNoteModalMeta">08:15 · BS. Nguyễn Minh Anh</div></div><button class="x" data-close="priorNoteModal">×</button></div><div class="modal-body"><div id="priorNoteModalBody" class="preview" style="white-space:pre-wrap;background:#f7f9fc;border-radius:10px;padding:14px;font-size:13px;line-height:1.6"></div><div class="trust-note" style="margin-top:12px">Bác sĩ khoa hiện tại chỉ xem được nội dung đã xác nhận; không truy cập được audio gốc của khoa khác.</div></div><div class="modal-foot"><button class="btn secondary" data-close="priorNoteModal">Đóng</button></div></div></div>
 <div id="qrModal" class="overlay hidden"><div class="modal" style="max-width:430px"><div class="modal-head"><h2>Mở MedVita trên điện thoại</h2><button class="x" data-close="qrModal">×</button></div><div class="modal-body" style="text-align:center"><div style="width:170px;height:170px;margin:0 auto 15px;background:repeating-conic-gradient(#17233a 0 25%,#fff 0 50%) 50%/22px 22px;border:14px solid #fff;box-shadow:0 0 0 1px var(--line)"></div><p class="muted">QR chứa token ngắn hạn, không chứa trực tiếp dữ liệu bệnh nhân.</p><button id="scanQr" class="btn primary">Mô phỏng quét QR</button></div></div></div>
+<div id="exportPdfModal" class="overlay hidden" role="dialog" aria-modal="true" aria-labelledby="exportPdfTitle" aria-hidden="true"><div class="modal" style="max-width:560px"><div class="modal-head"><h2 id="exportPdfTitle">Chọn bản tóm tắt để xuất PDF</h2><button class="x" data-close="exportPdfModal" aria-label="Đóng">×</button></div><div class="modal-body"><div class="export-choice">
+  <button class="export-opt" id="exportPatientSummary"><span class="mark"></span><span><span class="ttl">Tóm tắt dành cho bệnh nhân <span id="patientSummaryChip" class="chip green">Đã xác nhận</span></span><span class="dsc">Khổ A5, một trang, dán vào sổ khám bệnh. Kèm mã QR tra cứu bản đầy đủ.</span></span></button>
+  <button class="export-opt" id="exportClinicalSummary"><span class="mark"></span><span><span class="ttl">Bản tóm tắt buổi khám <span id="clinicalSummaryChip" class="chip green">Đã xác nhận</span></span><span class="dsc">Cùng định dạng A5, dùng để lưu hồ sơ hoặc gửi đồng nghiệp.</span></span></button>
+</div><div class="trust-note" style="margin-top:12px">File chỉ gồm thông tin phiên khám và nội dung bản đã chọn. Không kèm transcript và không kèm audio.</div></div><div class="modal-foot"><button class="btn secondary" data-close="exportPdfModal">Hủy</button><button class="btn primary" id="downloadExportPdf" disabled>Tải file PDF</button></div></div></div>
 <div id="clinicalConfirmModal" class="overlay hidden" role="dialog" aria-modal="true" aria-labelledby="clinicalConfirmTitle" aria-hidden="true"><div class="modal" style="max-width:560px"><div class="modal-head"><h2 id="clinicalConfirmTitle">Xác nhận bản ghi lâm sàng?</h2><button class="x" data-close="clinicalConfirmModal" aria-label="Đóng">×</button></div><div class="modal-body"><p>Sau khi xác nhận, nội dung sẽ chuyển sang chỉ đọc. Thay đổi tiếp theo phải được tạo dưới dạng bản sửa đổi.</p><label class="consent"><input id="clinicalReviewComplete" type="checkbox"><span>Tôi đã kiểm tra bệnh nhân, thuốc, dị ứng và nội dung AI.</span></label></div><div class="modal-foot"><button class="btn secondary" data-close="clinicalConfirmModal">Quay lại review</button><button class="btn primary" id="finalizeClinicalConfirm" disabled>Xác nhận bản ghi</button></div></div></div>
 <div id="leaveRecordingModal" class="overlay hidden" role="dialog" aria-modal="true" aria-labelledby="leaveRecordingTitle" aria-hidden="true"><div class="modal" style="max-width:540px"><div class="modal-head"><h2 id="leaveRecordingTitle">Phiên vẫn đang ghi</h2><button class="x" data-close="leaveRecordingModal" aria-label="Đóng">×</button></div><div class="modal-body"><p>Rời màn hình có thể khiến bác sĩ mất dấu trạng thái ghi. Hãy chọn cách tiếp tục.</p></div><div class="modal-foot"><button class="btn secondary" data-close="leaveRecordingModal">Ở lại phiên</button><button class="btn secondary" id="pauseAndExit">Tạm dừng và quay lại</button><button class="btn primary" id="floatAndExit">Tiếp tục ghi nền</button></div></div></div>
 <div id="recapModal" class="overlay hidden" role="dialog" aria-modal="true" aria-labelledby="recapTitle" aria-hidden="true"><div class="modal" style="max-width:600px"><div class="modal-head"><h2 id="recapTitle">Recap sau buổi khám</h2><button class="x" data-close="recapModal" aria-label="Đóng">×</button></div><div class="modal-body"><p class="muted">Nhập hoặc đọc lại ghi chú của bác sĩ. Bản nháp tạo từ nguồn này sẽ được gắn nhãn “Recap của bác sĩ”, không phải hội thoại.</p><label for="recapSource"><b>Nội dung recap</b></label><textarea id="recapSource" class="recap-source" placeholder="Ví dụ: Bệnh nhân đau họng 3 ngày..."></textarea><div id="recapError" class="inline-error hidden" role="alert">Cần nhập nội dung recap trước khi tạo bản nháp.</div></div><div class="modal-foot"><button class="btn secondary" data-close="recapModal">Hủy</button><button class="btn primary" id="submitRecapBtn">Tạo bản nháp từ recap</button></div></div></div>
+<style>
+    .status-inspector{position:fixed;left:18px;bottom:18px;z-index:120;width:290px;background:#11161f;color:#e8eefb;border:1px solid #2c3546;border-radius:14px;padding:13px 14px;font-size:12px;line-height:1.5;box-shadow:0 18px 44px rgba(0,0,0,.35)}
+    .status-inspector.collapsed .si-body{display:none}
+    .si-head{display:flex;align-items:center;justify-content:space-between;gap:8px;font-weight:800;letter-spacing:.03em}
+    .si-head button{background:none;border:0;color:#9db2d6;font-size:14px;cursor:pointer;min-height:auto;min-width:auto}
+    .si-status{display:inline-block;margin-top:9px;padding:4px 10px;border-radius:99px;font-weight:850;letter-spacing:.03em;background:#1f2a3c;color:#9db2d6}
+    .si-status.is-new,.si-status.is-recording{background:#123055;color:#8fbdf5}
+    .si-status.is-completed{background:#3a2f0c;color:#f0c46a}
+    .si-status.is-draft{background:#2a2f3c;color:#c6d2e6}
+    .si-status.is-confirm{background:#0d3a2c;color:#6fd7ae}
+    .si-status.is-reject{background:#3d1618;color:#f19a9c}
+    .si-meta{margin-top:9px;color:#93a3bd}
+    .si-meta b{color:#e8eefb;font-weight:750}
+    .si-warn{margin-top:9px;padding:7px 9px;border-radius:8px;background:#3d2a08;color:#f3c777}
+    .si-log{margin-top:10px;border-top:1px solid #2c3546;padding-top:8px;max-height:132px;overflow:auto;color:#8d9cb5;font-size:11px}
+    .si-log div{padding:2px 0}
+    .si-log b{color:#c6d2e6;font-weight:750}
+    @media(max-width:700px){.status-inspector{left:10px;right:10px;width:auto;bottom:10px}}
+    .withdraw-note{margin-top:10px;font-size:11.5px;color:#8b5b14;background:#fff5e5;border:1px solid #f3d39e;border-radius:9px;padding:8px 10px;line-height:1.45}
+  </style>
+  <style id="printPageStyle"></style>
+  <div id="printDocument" aria-hidden="true"></div>
+  <div id="statusInspector" class="status-inspector">
+    <div class="si-head"><span>TRẠNG THÁI PHIÊN THU ÂM</span><button id="siToggle" aria-label="Thu gọn bảng trạng thái">–</button></div>
+    <div class="si-body">
+      <span id="siStatus" class="si-status">CHƯA TẠO PHIÊN</span>
+      <div class="si-meta">summaryStatus: <b id="siSummary">NONE</b> · v<b id="siVersion">0</b><br>sessionId: <b id="siSession">—</b></div>
+      <div id="siWarn" class="si-warn hidden"></div>
+      <div id="siLog" class="si-log"></div>
+    </div>
+  </div>
 <div id="toast" class="toast hidden" role="status" aria-live="polite" aria-atomic="true"></div>
 
 <script>
 const $=id=>document.getElementById(id)||(typeof embedPipWindow!=='undefined'&&embedPipWindow&&embedPipWindow.document.getElementById(id))||null;
-const state={confirmed:false,synced:false,paused:false,offline:false,seconds:0,timer:null,recipients:['0902 345 678'],contextFiles:[],linkedVisits:[],source:'full',sourceLabel:'Hội thoại trong buổi khám',recapText:'',recordingMode:null,currentPatient:{name:'Nguyễn Văn An',id:'BN-0084251'},encounterId:'ENC-20260908-0158',worklist:'action',readOnly:false,pendingNewSession:false,consentAudioCaptured:false};
-const draft={reason:'Đau họng, nuốt vướng 3 ngày, sốt nhẹ tối qua.',history:'Bệnh nhân đau họng khoảng 3 ngày, tăng khi nuốt. Tối qua sốt nhẹ khoảng 38°C, ho ít và không khó thở.',symptoms:'Đau họng, nuốt vướng, sốt nhẹ, ho ít. Chưa ghi nhận khó thở.',meds:'Chưa ghi nhận dị ứng thuốc. Bệnh nhân có dùng thuốc hạ sốt nhưng chưa xác định tên thuốc và liều dùng.'};
-const patientNotes={
+const state={confirmed:false,synced:false,paused:false,offline:false,seconds:0,timer:null,recipients:['0902 345 678'],contextFiles:[],linkedVisits:[],source:'full',sourceLabel:'Hội thoại trong buổi khám',recapText:'',recordingMode:null,currentPatient:{name:'Nguyễn Văn An',id:'BN-0084251'},encounterId:'ENC-20260908-0158',worklist:'action',readOnly:false,pendingNewSession:false,consentAudioCaptured:false,status:null,statusAt:null,summaryStatus:'NONE',summaryVersion:0,firstChunkAt:null,pendingFirstChunk:false,staleNew:false,statusLog:[],exportLog:[]};
+/* ===== MÁY TRẠNG THÁI PHIÊN THU ÂM =====
+   6 status hợp lệ. Mọi thay đổi phải đi qua setStatus() để được kiểm tra transition. */
+const S={NEW:'NEW',RECORDING:'RECORDING',COMPLETED:'COMPLETED',DRAFT_SUMMARY:'DRAFT_SUMMARY',CONFIRM_SUMMARY:'CONFIRM_SUMMARY',REJECT_CONSENT:'REJECT_CONSENT'};
+/* Bảng chuyển trạng thái hợp lệ. '' = chưa tồn tại phiên (màn hình consent). */
+const ALLOWED_TRANSITIONS={
+  '':[S.NEW,S.REJECT_CONSENT],
+  /* NEW/RECORDING -> REJECT_CONSENT vẫn hợp lệ ở tầng dữ liệu (bệnh nhân rút lại đồng ý),
+     nhưng không còn nút nào trên giao diện gọi tới. */
+  [S.NEW]:[S.RECORDING,S.REJECT_CONSENT],
+  [S.RECORDING]:[S.COMPLETED,S.REJECT_CONSENT],
+  [S.COMPLETED]:[S.DRAFT_SUMMARY,S.CONFIRM_SUMMARY],
+  [S.DRAFT_SUMMARY]:[S.DRAFT_SUMMARY,S.CONFIRM_SUMMARY],
+  [S.CONFIRM_SUMMARY]:[],
+  [S.REJECT_CONSENT]:[]
+};
+const STATUS_META={
+  [S.NEW]:{chip:'chip blue',chipText:'NEW · chờ audio đầu tiên',stage:'Đang chờ audio đầu tiên',si:'is-new',worklist:'Chờ audio',listChip:'chip blue',group:'action',action:'Tiếp tục ghi'},
+  [S.RECORDING]:{chip:'chip red',chipText:'RECORDING · đang ghi',stage:'Đang ghi nhận hội thoại',si:'is-recording',worklist:'● Đang ghi',listChip:'chip red',group:'action',action:'Tiếp tục ghi'},
+  [S.COMPLETED]:{chip:'chip amber',chipText:'COMPLETED · chờ review',stage:'Bản ghi buổi khám',si:'is-completed',worklist:'Chờ review',listChip:'chip amber',group:'action',action:'Mở'},
+  [S.DRAFT_SUMMARY]:{chip:'chip',chipText:'DRAFT_SUMMARY · bản nháp',stage:'Bản nháp của bác sĩ',si:'is-draft',worklist:'Bản nháp',listChip:'chip',group:'action',action:'Tiếp tục'},
+  [S.CONFIRM_SUMMARY]:{chip:'chip green',chipText:'CONFIRM_SUMMARY · đã xác nhận',stage:'Bản ghi đã xác nhận',si:'is-confirm',worklist:'Đã xác nhận',listChip:'chip green',group:'completed',action:'Xem'},
+  [S.REJECT_CONSENT]:{chip:'chip red',chipText:'REJECT_CONSENT · không ghi âm',stage:'Không ghi âm phiên khám',si:'is-reject',worklist:'Không ghi âm',listChip:'chip red',group:'completed',action:'Xem'}
+};
+/* Bộ lọc "Đang ghi" gộp NEW + RECORDING vì với bác sĩ đây là cùng một việc: phiên chưa đóng audio. */
+const STATUS_FILTER_GROUPS={ACTIVE:[S.NEW,S.RECORDING]};
+const AI_BANNER_DEFAULT='✦ AI đã tạo bản tóm tắt từ hội thoại. Bác sĩ kiểm tra và chỉnh sửa trước khi xác nhận.';
+/* Nguồn sự thật duy nhất của worklist. Chip, nhóm tab và nhãn nút đều suy ra từ status. */
+const sessions=[
+  {sid:'S-1',encounterId:'ENC-20260922-0071',patient:'Võ Quốc Bảo',patientId:'BN-0102884',when:'Hôm nay, 14:52',reason:'Chóng mặt, ù tai trái',status:S.RECORDING,seconds:412},
+  {sid:'S-2',encounterId:'ENC-20260922-0070',patient:'Đặng Thị Lan',patientId:'BN-0098117',when:'Hôm nay, 14:48',reason:'Viêm xoang tái phát',status:S.NEW,seconds:0},
+  {sid:'S-3',encounterId:'ENC-20260922-0064',patient:'Nguyễn Văn An',patientId:'BN-0084251',when:'Hôm nay, 14:30',reason:'Đau họng, nuốt vướng',status:S.COMPLETED,seconds:516,times:{created:'2026-09-22T14:30:12',closed:'2026-09-22T14:38:47'}},
+  {sid:'S-4',encounterId:'ENC-20260922-0058',patient:'Lê Minh Đức',patientId:'BN-0091254',when:'Hôm nay, 13:10',reason:'Khàn tiếng',status:S.DRAFT_SUMMARY,seconds:384,times:{created:'2026-09-22T13:10:02',closed:'2026-09-22T13:16:26'}},
+  {sid:'S-5',encounterId:'ENC-20260922-0061',patient:'Trần Thị Mai',patientId:'BN-0061732',when:'Hôm nay, 13:45',reason:'Viêm mũi kéo dài',status:S.CONFIRM_SUMMARY,seconds:672,times:{created:'2026-09-22T13:45:05',closed:'2026-09-22T13:56:17',confirmed:'2026-09-22T14:05:40'}},
+  {sid:'S-6',encounterId:'ENC-20260922-0049',patient:'Phạm Thu Hương',patientId:'BN-0077310',when:'Hôm nay, 11:05',reason:'Không đồng ý ghi âm',status:S.REJECT_CONSENT,seconds:0},
+  {sid:'S-7',encounterId:'ENC-20260821-0122',patient:'Nguyễn Văn An',patientId:'BN-0084251',when:'21/08/2026, 09:20',reason:'Tái khám viêm họng',status:S.CONFIRM_SUMMARY,seconds:498,times:{created:'2026-08-21T09:20:11',closed:'2026-08-21T09:28:29',confirmed:'2026-08-21T09:31:02'}}
+];
+function renderSessionList(){
+  const host=$('sessionRows');
+  if(!host)return;
+  host.innerHTML=sessions.map(x=>{
+    const meta=STATUS_META[x.status];
+    const search=`${x.patient} ${x.patientId} ${x.reason}`.toLowerCase();
+    return `<div class="session-row" data-session data-sid="${x.sid}" data-worklist-group="${meta.group}" data-status="${x.status}" data-patient="${x.patient}" data-patient-id="${x.patientId}" data-seconds="${x.seconds}" data-search="${search}"><div><b>${x.patient}</b><div class="sub">${x.patientId} · ${x.when}</div></div><span>${x.reason}</span><span class="${meta.listChip}">${meta.worklist}</span><button class="btn secondary sessionOpenBtn">${meta.action}</button></div>`;
+  }).join('');
+  const actionCount=sessions.filter(x=>STATUS_META[x.status].group==='action').length;
+  if($('actionCount'))$('actionCount').textContent=actionCount;
+}
+/* Demo: 30 phút thật được rút còn 45s. Hết hạn mà vẫn NEW = phiên kẹt.
+   Bộ 6 status hiện KHÔNG có CANCELLED/EXPIRED nên ở đây chỉ cảnh báo, chưa đóng được phiên. */
+const NEW_TIMEOUT_MS=45000;
+const FIRST_CHUNK_DELAY_MS=1500;
+let firstChunkTimer=null,newTimeoutTimer=null;
+function canTransition(from,to){return (ALLOWED_TRANSITIONS[from||'']||[]).includes(to)}
+function isReadOnlyStatus(st){return st===S.CONFIRM_SUMMARY||st===S.REJECT_CONSENT}
+function isReadOnly(){return isReadOnlyStatus(state.status)}
+function setStatus(to,opts){
+  opts=opts||{};
+  const from=state.status||'';
+  if(!canTransition(from,to)){
+    console.warn('[status] transition bị chặn:',from||'(chưa có phiên)','->',to);
+    toast(`Chuyển trạng thái không hợp lệ: ${from||'—'} → ${to}`);
+    return false;
+  }
+  state.status=to;state.statusAt=new Date();
+  state.statusLog.push({from:from||'—',to,reason:opts.reason||'',at:state.statusAt});
+  applyStatusEffects(to,opts);
+  renderStatusUI();
+  return true;
+}
+function setSummaryStatus(v){state.summaryStatus=v;renderStatusUI()}
+function applyStatusEffects(to,opts){
+  if(to===S.NEW){
+    state.summaryStatus='NONE';state.summaryVersion=0;state.staleNew=false;state.firstChunkAt=null;
+    state.encounterId=state.encounterId||`ENC-${Date.now()}`;
+    armFirstChunk();armNewTimeout();
+  }
+  if(to===S.RECORDING){clearNewTimeout();state.firstChunkAt=new Date()}
+  if(to===S.COMPLETED){clearFirstChunkTimer();clearNewTimeout();clearInterval(state.timer);setSummaryStatus('PROCESSING')}
+  if(to===S.DRAFT_SUMMARY){state.summaryVersion++}
+  if(to===S.CONFIRM_SUMMARY){state.confirmed=true}
+  if(to===S.REJECT_CONSENT){
+    clearFirstChunkTimer();clearNewTimeout();clearInterval(state.timer);
+    state.summaryStatus='NONE';state.pendingFirstChunk=false;
+    if(opts.purgeAudio)toast('Đã hủy toàn bộ audio và transcript của phiên');
+  }
+}
+/* NEW -> RECORDING do SERVER quyết định: chỉ xảy ra khi chunk đầu tiên tới server.
+   Mất mạng thì UI vẫn hiển thị "đang ghi" (local) nhưng status server vẫn là NEW. */
+function armFirstChunk(){
+  clearFirstChunkTimer();
+  firstChunkTimer=setTimeout(()=>{
+    if(state.status!==S.NEW)return;
+    if(state.offline){state.pendingFirstChunk=true;renderStatusUI();return}
+    setStatus(S.RECORDING,{reason:'Server nhận chunk audio đầu tiên'});
+  },FIRST_CHUNK_DELAY_MS);
+}
+function clearFirstChunkTimer(){clearTimeout(firstChunkTimer);firstChunkTimer=null}
+function armNewTimeout(){
+  clearNewTimeout();
+  newTimeoutTimer=setTimeout(()=>{
+    if(state.status!==S.NEW)return;
+    state.staleNew=true;renderStatusUI();
+    toast('Phiên ở NEW quá lâu mà không có audio — cần job tự đóng (bộ status chưa có CANCELLED)');
+  },NEW_TIMEOUT_MS);
+}
+function clearNewTimeout(){clearTimeout(newTimeoutTimer);newTimeoutTimer=null}
+function statusChipText(){
+  if(!state.status)return null;
+  const meta=STATUS_META[state.status];
+  if(state.status===S.NEW&&state.pendingFirstChunk)return 'NEW · audio đang chờ đồng bộ';
+  if(state.status===S.COMPLETED&&state.summaryStatus==='PROCESSING')return 'COMPLETED · AI đang xử lý';
+  if(state.status===S.COMPLETED&&state.summaryStatus==='FAILED')return 'COMPLETED · AI xử lý lỗi';
+  return meta.chipText;
+}
+function renderStatusUI(){
+  const chip=$('stageChip');
+  if(chip&&state.status){const meta=STATUS_META[state.status];chip.className=meta.chip;chip.textContent=statusChipText()}
+  const pill=$('siStatus');
+  if(pill){
+    pill.className='si-status '+(state.status?STATUS_META[state.status].si:'');
+    pill.textContent=state.status||'CHƯA TẠO PHIÊN';
+  }
+  if($('siSummary'))$('siSummary').textContent=state.summaryStatus;
+  if($('siVersion'))$('siVersion').textContent=state.summaryVersion;
+  if($('siSession'))$('siSession').textContent=state.status?state.encounterId:'—';
+  const warn=$('siWarn');
+  if(warn){
+    let msg='';
+    if(state.status===S.NEW&&state.pendingFirstChunk)msg='Mất mạng: audio đang ghi cục bộ, server vẫn thấy NEW.';
+    else if(state.staleNew&&state.status===S.NEW)msg='Phiên NEW quá hạn — chưa có status CANCELLED để đóng.';
+    else if(state.status===S.COMPLETED&&state.summaryStatus==='FAILED')msg='Pipeline AI lỗi — cần cho bác sĩ chạy lại.';else if(!state.status&&state.recapOutsideStatus)msg='Recap không audio — bộ 6 status chưa mô tả được ca này.';
+    warn.textContent=msg;warn.classList.toggle('hidden',!msg);
+  }
+  const log=$('siLog');
+  if(log){
+    const ex=(state.exportLog||[]).slice(-2).reverse()
+      .map(e=>`<div><b>Xuất PDF · ${EXPORT_KINDS[e.kind]?EXPORT_KINDS[e.kind].label:e.kind}</b> · ${e.by}</div>`).join('');
+    log.innerHTML=ex+(state.statusLog.slice(-6).reverse().map(e=>`<div><b>${e.from} → ${e.to}</b>${e.reason?' · '+e.reason:''}</div>`).join('')||'<div>Chưa có chuyển trạng thái nào.</div>');
+  }
+}
+/* ===== BẢN TÓM TẮT — đúng schema JSON do backend trả về =====
+   6 trường: tinh_trang_benh, chi_dinh_dieu_tri, thuoc, tai_kham,
+   luu_y_rieng_tu_bac_si, canh_bao_khan_tu_bac_si. */
+const SUMMARY_FIELDS=[
+  {key:'tinh_trang_benh',label:'TÌNH TRẠNG BỆNH',type:'text',origin:'AI tạo'},
+  {key:'chi_dinh_dieu_tri',label:'CHỈ ĐỊNH ĐIỀU TRỊ',type:'list',origin:'AI tạo',add:'Thêm chỉ định'},
+  {key:'thuoc',label:'CÁCH DÙNG THUỐC',type:'drugs',origin:'AI tạo',add:'Thêm thuốc'},
+  {key:'tai_kham',label:'TÁI KHÁM',type:'followup',origin:'AI tạo'},
+  {key:'luu_y_rieng_tu_bac_si',label:'LƯU Ý RIÊNG TỪ BÁC SĨ',type:'list',origin:'Bác sĩ nhập',add:'Thêm lưu ý',cls:'private'},
+  {key:'canh_bao_khan_tu_bac_si',label:'DẶN DÒ TỪ BÁC SĨ',type:'list',origin:'Bác sĩ nhập',add:'Thêm dặn dò',cls:'urgent'}
+];
+const DRUG_FIELDS=[
+  {key:'ten_thuoc',label:'TÊN THUỐC',name:true},
+  {key:'ham_luong_lieu_dung',label:'HÀM LƯỢNG · LIỀU DÙNG'},
+  {key:'ham_luong_duong_dung',label:'HÀM LƯỢNG · ĐƯỜNG DÙNG'},
+  {key:'cach_dung_bo_sung',label:'CÁCH DÙNG BỔ SUNG',wide:true}
+];
+function emptySummary(){return {tinh_trang_benh:null,chi_dinh_dieu_tri:[],thuoc:[],
+  tai_kham:{ngay_gio:null,can_chuan_bi_gi:null},luu_y_rieng_tu_bac_si:[],canh_bao_khan_tu_bac_si:[]}}
+function emptyDrug(){return {ten_thuoc:'',ham_luong_lieu_dung:'',ham_luong_duong_dung:'',cach_dung_bo_sung:null,nguon_trich:{tu_vi_tri_transcript:null}}}
+const clone=o=>JSON.parse(JSON.stringify(o));
+const draft={
+  tinh_trang_benh:'Viêm họng cấp, chưa ghi nhận dấu hiệu biến chứng đường hô hấp dưới.',
+  chi_dinh_dieu_tri:['Súc họng nước muối sinh lý 3 lần mỗi ngày','Uống nhiều nước ấm, hạn chế nói to','Theo dõi thân nhiệt 2 lần mỗi ngày'],
+  thuoc:[
+    {ten_thuoc:'Amoxicillin',ham_luong_lieu_dung:'500mg · 1 viên mỗi lần',ham_luong_duong_dung:'500mg · đường uống',
+     cach_dung_bo_sung:'Uống sau ăn, ngày 3 lần, dùng đủ 5 ngày kể cả khi đã đỡ',
+     nguon_trich:{tu_vi_tri_transcript:'04:12 — bác sĩ kê Amoxicillin 500'}},
+    {ten_thuoc:'Paracetamol',ham_luong_lieu_dung:'500mg · 1 viên mỗi lần',ham_luong_duong_dung:'500mg · đường uống',
+     cach_dung_bo_sung:'Chỉ dùng khi sốt trên 38,5°C, hai lần cách nhau tối thiểu 6 giờ',
+     nguon_trich:{tu_vi_tri_transcript:'05:03 — dặn hạ sốt khi sốt cao'}}
+  ],
+  tai_kham:{ngay_gio:'Sau 5 ngày · sáng 27/09/2026',can_chuan_bi_gi:'Mang theo sổ khám bệnh và vỏ thuốc đang dùng'},
+  luu_y_rieng_tu_bac_si:['Bệnh nhân từng tự ngưng kháng sinh khi thấy đỡ, cần nhắc uống đủ liều'],
+  canh_bao_khan_tu_bac_si:['Đến ngay cơ sở y tế nếu khó thở, nuốt không được hoặc sốt trên 39°C không hạ']
+};
+const patientSummaries={
  'Nguyễn Văn An':draft,
- 'Trần Thị Mai':{reason:'Nghẹt mũi và chảy mũi kéo dài.',history:'Triệu chứng kéo dài khoảng hai tuần, tăng vào buổi sáng.',symptoms:'Nghẹt mũi, hắt hơi, chảy mũi trong.',meds:'Chưa ghi nhận dị ứng thuốc; đang dùng nước muối sinh lý.'},
- 'Lê Minh Đức':{reason:'Khàn tiếng sau khi nói nhiều.',history:'Khàn tiếng xuất hiện ba ngày, chưa ghi nhận khó thở.',symptoms:'Khàn tiếng, khô họng.',meds:'Chưa ghi nhận thuốc đang sử dụng hoặc dị ứng thuốc.'}
+ 'Trần Thị Mai':{tinh_trang_benh:'Viêm mũi dị ứng kéo dài, chưa có bội nhiễm.',
+   chi_dinh_dieu_tri:['Xịt rửa mũi nước muối ngày 2 lần','Tránh khói bụi và phấn hoa'],
+   thuoc:[{ten_thuoc:'Natri clorid 0,9%',ham_luong_lieu_dung:'0,9% · xịt 2 nhát mỗi bên',ham_luong_duong_dung:'0,9% · xịt mũi',
+     cach_dung_bo_sung:'Sáng và tối, dùng liên tục 2 tuần',nguon_trich:{tu_vi_tri_transcript:'02:48 — dặn rửa mũi'}}],
+   tai_kham:{ngay_gio:'Sau 2 tuần nếu nghẹt mũi không giảm',can_chuan_bi_gi:null},
+   luu_y_rieng_tu_bac_si:['Rửa mũi đúng cách quan trọng hơn thuốc, cần hướng dẫn lại thao tác cho bệnh nhân'],
+   canh_bao_khan_tu_bac_si:['Khám lại sớm nếu chảy mũi đổi màu vàng xanh kèm sốt']},
+ 'Phạm Thu Hương':{tinh_trang_benh:'Bệnh nhân không đồng ý ghi âm, nội dung do bác sĩ nhập tay.',
+   chi_dinh_dieu_tri:[],thuoc:[],tai_kham:{ngay_gio:null,can_chuan_bi_gi:null},
+   luu_y_rieng_tu_bac_si:['Bệnh nhân e ngại việc ghi âm, lần sau giải thích kỹ trước khi đề nghị'],canh_bao_khan_tu_bac_si:[]},
+ 'Lê Minh Đức':{tinh_trang_benh:'Khàn tiếng do lạm dụng giọng nói, chưa ghi nhận tổn thương thực thể.',
+   chi_dinh_dieu_tri:['Hạn chế nói nhiều và nói to trong 1 tuần','Uống nước ấm, tránh đồ lạnh'],
+   thuoc:[],tai_kham:{ngay_gio:'Sau 7 ngày nếu còn khàn tiếng',can_chuan_bi_gi:null},
+   luu_y_rieng_tu_bac_si:['Nghề nghiệp phải nói nhiều, cần tư vấn kỹ về nghỉ giọng'],
+   canh_bao_khan_tu_bac_si:[]}
 };
 const priorEncounter={
  department:'Tai Mũi Họng',time:'08:15',doctor:'BS. Nguyễn Minh Anh',
@@ -312,24 +585,131 @@ function openStandaloneDirect(){setView('loginView');$('loginUsername').focus()}
 function loginStandalone(){if(!$('loginUsername').value.trim()||!$('loginPassword').value){toast('Vui lòng nhập tên đăng nhập và mật khẩu');return}setView('standaloneHome');toast('Đã đăng nhập Standalone')}
 function sendRegistrationOtp(){const phone=$('registerPhone').value.trim(),password=$('registerPassword').value;if(!phone||!$('registerName').value.trim()||!$('registerHospital').value||!$('registerDepartment').value){toast('Vui lòng nhập đầy đủ thông tin đăng ký');return}if(password.length<8){toast('Mật khẩu cần ít nhất 8 ký tự');return}if(password!==$('registerPasswordConfirm').value){toast('Mật khẩu xác nhận chưa khớp');return}$('otpPhoneLabel').textContent=phone.replace(/(\d{4})(\d{3})(\d+)/,'$1 $2 $3');setView('otpView');toast('Đã gửi mã OTP tới số điện thoại')}
 function verifyRegistrationOtp(){if($('otpCode').value.trim()!=='123456'){toast('Mã OTP không đúng hoặc đã hết hạn');return}setView('standaloneHome');toast('Tạo tài khoản thành công')}
-function filterSessions(){const term=$('sessionSearch').value.trim().toLowerCase();const status=$('sessionStatusFilter').value;let visible=0;document.querySelectorAll('[data-session]').forEach(row=>{const matchText=!term||row.dataset.search.includes(term);const matchStatus=status==='all'||row.dataset.status===status;const matchList=state.worklist==='all'||row.dataset.worklistGroup===state.worklist;row.classList.toggle('hidden',!(matchText&&matchStatus&&matchList));if(matchText&&matchStatus&&matchList)visible++});$('sessionCount').textContent=`${visible} phiên`;$('sessionEmpty').classList.toggle('hidden',visible>0)}
+function filterSessions(){const term=$('sessionSearch').value.trim().toLowerCase();const status=$('sessionStatusFilter').value;let visible=0;document.querySelectorAll('[data-session]').forEach(row=>{const matchText=!term||row.dataset.search.includes(term);const group=STATUS_FILTER_GROUPS[status];const matchStatus=status==='all'||(group?group.includes(row.dataset.status):row.dataset.status===status);const matchList=state.worklist==='all'||row.dataset.worklistGroup===state.worklist;row.classList.toggle('hidden',!(matchText&&matchStatus&&matchList));if(matchText&&matchStatus&&matchList)visible++});$('sessionCount').textContent=`${visible} phiên`;$('sessionEmpty').classList.toggle('hidden',visible>0)}
 function setWorklist(name){state.worklist=name;document.querySelectorAll('[data-worklist]').forEach(x=>x.classList.toggle('active',x.dataset.worklist===name));$('worklistTitle').textContent=name==='action'?'Cần xử lý':name==='completed'?'Đã hoàn tất':'Tất cả phiên';filterSessions()}
 function updatePatientUI(){$('selectedPatientLabel').textContent=state.currentPatient.name;$('workspacePatientChip').textContent=`${state.currentPatient.name} · ${state.source==='standalone'?state.currentPatient.id:'TMH 02'}`;$('readyPatientName').textContent=`${state.currentPatient.name} · ${state.currentPatient.id}`;$('reviewPatientName').textContent=`${state.currentPatient.name} · ${state.currentPatient.id}`;$('stageMeta').textContent=`${state.currentPatient.id} · BS. Nguyễn Minh Anh`;$('contextPatientLabel').textContent=state.currentPatient.name;$('contextEncounterLabel').textContent=`${state.currentPatient.id} · Phiên hiện tại`;const hasPrior=state.currentPatient.name==='Nguyễn Văn An';if($('crossDeptBadge'))$('crossDeptBadge').classList.toggle('hidden',!hasPrior);renderPriorVisits();renderLinkedVisits()}
-function loadSessionContent(name){const note=patientNotes[name]||draft;Object.entries(note).forEach(([key,value])=>{const target=document.querySelector(`[data-section="${key}"] .section-content`);if(target)target.textContent=value})}
-function resetEncounterState(patient){clearInterval(state.timer);state.confirmed=false;state.synced=false;state.paused=false;state.offline=false;state.seconds=0;state.timer=null;state.recipients=[];state.contextFiles=[];state.linkedVisits=[];state.consentAudioCaptured=false;state.readOnly=false;state.recordingMode=null;state.sourceLabel='Hội thoại trong buổi khám';state.recapText='';state.encounterId=`ENC-${Date.now()}`;if(patient)state.currentPatient=patient;document.querySelectorAll('.section-content').forEach(x=>x.contentEditable='true');$('syncBtn').disabled=true;$('syncBtn').textContent='Đồng bộ HIS'}
+/* ===== RENDER BẢN TÓM TẮT TỪ MODEL =====
+   Một model duy nhất (state.summary) đổ ra cả màn đầy đủ lẫn màn nhúng.
+   Mỗi ô soạn thảo mang data-path để ghi ngược vào đúng nhánh JSON. */
+function getPath(obj,path){return path.split('.').reduce((o,k)=>o==null?o:o[k],obj)}
+function setPath(obj,path,val){const ks=path.split('.');const last=ks.pop();
+  const t=ks.reduce((o,k)=>o[k],obj);t[last]=val}
+function edAttr(ro,path){return `class="val" data-path="${path}" contenteditable="${ro?'false':'true'}" role="textbox"`}
+function renderTextField(f,ro){
+  const v=state.summary[f.key];
+  return v==null&&ro?'<div class="sum-empty">Không có dữ liệu</div>'
+    :`<div class="section-content" data-path="${f.key}" contenteditable="${ro?'false':'true'}" role="textbox">${esc(v==null?'':v)}</div>`;
+}
+function renderListField(f,ro){
+  const arr=state.summary[f.key]||[];
+  const items=arr.map((v,i)=>`<li class="sum-item"><span class="dot">•</span><div ${edAttr(ro,f.key+'.'+i)}>${esc(v)}</div>${ro?'':`<button class="del" data-act="del" data-key="${f.key}" data-idx="${i}" title="Xóa dòng">×</button>`}</li>`).join('');
+  const empty=arr.length?'':'<div class="sum-empty">AI không trích được nội dung cho mục này</div>';
+  return `<ul class="sum-list">${items}</ul>${empty}${ro?'':`<button class="sum-add" data-act="add" data-key="${f.key}">+ ${f.add}</button>`}`;
+}
+function renderDrugs(f,ro){
+  const arr=state.summary.thuoc||[];
+  if(!arr.length&&ro)return '<div class="sum-empty">Không có thuốc được kê trong buổi khám này</div>';
+  const cards=arr.map((d,i)=>{
+    const fields=DRUG_FIELDS.filter(x=>!x.name).map(x=>
+      `<div class="f${x.wide?' wide':''}"><label>${x.label}</label><div ${edAttr(ro,'thuoc.'+i+'.'+x.key)}>${esc(d[x.key]==null?'':d[x.key])}</div></div>`).join('');
+    const src=d.nguon_trich&&d.nguon_trich.tu_vi_tri_transcript;
+    return `<div class="drug-card">${ro?'':`<button class="del" data-act="delDrug" data-idx="${i}" title="Xóa thuốc">×</button>`}
+      <div class="dname" data-path="thuoc.${i}.ten_thuoc" contenteditable="${ro?'false':'true'}" role="textbox">${esc(d.ten_thuoc||'')}</div>
+      <div class="drug-grid">${fields}</div>
+      <div class="drug-src">${src?`<span class="chip blue">Nguồn transcript</span><span>${esc(src)}</span>`:'<span class="chip amber">Không có vị trí transcript</span>'}</div>
+    </div>`;
+  }).join('');
+  return `${cards}${arr.length?'':'<div class="sum-empty">Chưa có thuốc nào</div>'}${ro?'':`<button class="sum-add" data-act="addDrug">+ ${f.add}</button>`}`;
+}
+function renderFollowUp(f,ro){
+  const t=state.summary.tai_kham||{};
+  const cell=(k,label)=>`<div class="f wide"><label>${label}</label><div ${edAttr(ro,'tai_kham.'+k)}>${esc(t[k]==null?'':t[k])}</div></div>`;
+  const none=(t.ngay_gio==null&&t.can_chuan_bi_gi==null&&ro)?'<div class="sum-empty">Không hẹn tái khám</div>':'';
+  return none||`<div class="drug-grid">${cell('ngay_gio','NGÀY GIỜ')}${cell('can_chuan_bi_gi','CẦN CHUẨN BỊ GÌ')}</div>`;
+}
+function renderSummary(){
+  const ro=isReadOnly();
+  const html=SUMMARY_FIELDS.map(f=>{
+    const body=f.type==='text'?renderTextField(f,ro)
+      :f.type==='list'?renderListField(f,ro)
+      :f.type==='drugs'?renderDrugs(f,ro)
+      :renderFollowUp(f,ro);
+    return `<div class="section${f.cls?' '+f.cls:''}" data-section="${f.key}">
+      <div class="section-title"><b>${f.label}</b><span class="chip${f.origin==='AI tạo'?' blue':''} origin">${f.origin}</span></div>
+      ${body}</div>`;
+  }).join('');
+  ['summarySections','compactSummary'].forEach(id=>{const host=$(id);if(host)host.innerHTML=html});
+}
+function bindSummaryHost(id){
+  const host=$(id);if(!host)return;
+  host.addEventListener('input',e=>{
+    const el=e.target.closest('[data-path]');if(!el)return;
+    setPath(state.summary,el.dataset.path,el.textContent.trim()||null);
+  });
+  host.addEventListener('click',e=>{
+    const btn=e.target.closest('[data-act]');if(!btn||isReadOnly())return;
+    const act=btn.dataset.act;
+    if(act==='add')state.summary[btn.dataset.key].push('');
+    if(act==='del')state.summary[btn.dataset.key].splice(+btn.dataset.idx,1);
+    if(act==='addDrug')state.summary.thuoc.push(emptyDrug());
+    if(act==='delDrug')state.summary.thuoc.splice(+btn.dataset.idx,1);
+    renderSummary();
+    const first=$(id).querySelector('[data-path]');
+    if(act==='add'||act==='addDrug'){const eds=$(id).querySelectorAll(`[data-path^="${act==='add'?btn.dataset.key:'thuoc'}"]`);
+      const last=eds[eds.length-1];if(last)last.focus()}
+  });
+}
+function loadSessionContent(name){
+  state.summary=clone(patientSummaries[name]||draft);
+  renderSummary();
+}
+function resetEncounterState(patient){clearInterval(state.timer);clearFirstChunkTimer();clearNewTimeout();state.status=null;state.statusAt=null;state.summaryStatus='NONE';state.summaryVersion=0;state.firstChunkAt=null;state.pendingFirstChunk=false;state.staleNew=false;state.statusLog=[];state.seedTimes=null;state.recapOutsideStatus=false;state.exportLog=[];state.summary=clone((patient&&patientSummaries[patient.name])||draft);state.confirmed=false;state.synced=false;state.paused=false;state.offline=false;state.seconds=0;state.timer=null;state.recipients=[];state.contextFiles=[];state.linkedVisits=[];state.consentAudioCaptured=false;state.readOnly=false;state.recordingMode=null;state.sourceLabel='Hội thoại trong buổi khám';state.recapText='';state.encounterId=`ENC-${Date.now()}`;if(patient)state.currentPatient=patient;document.querySelectorAll('.section-content').forEach(x=>x.contentEditable='true');$('syncBtn').disabled=true;$('syncBtn').textContent='Đồng bộ HIS';hide('consentDeclinedPanel');renderStatusUI()}
 function selectPatient(name,id){const patient={name,id:id||(name==='Trần Thị Mai'?'BN-0061732':'BN-0084251')};if(state.pendingNewSession)resetEncounterState(patient);else state.currentPatient=patient;$('addPatientBtn').classList.add('active');hide('patientPicker');updatePatientUI();if(state.pendingNewSession){state.pendingNewSession=false;openWorkspace('standalone')}toast(`Đã chọn bệnh nhân ${name}`)}
 function openPatientFirst(){state.pendingNewSession=true;show('patientPicker')}
-function openSession(row){state.currentPatient={name:row.dataset.patient,id:row.dataset.patientId};state.readOnly=row.dataset.readonly==='true';state.confirmed=state.readOnly;loadSessionContent(state.currentPatient.name);openWorkspace('standalone',true);updatePatientUI();setReviewReadOnly(state.readOnly)}
+function openSession(row){
+  const st=row.dataset.status;
+  resetEncounterState({name:row.dataset.patient,id:row.dataset.patientId});
+  state.status=st;
+  state.statusLog=[{from:'—',to:st,reason:'Mở từ danh sách phiên',at:new Date()}];
+  if(st===S.NEW||st===S.RECORDING){resumeRecordingSession(row);return}
+  const seed=sessions.find(x=>x.sid===row.dataset.sid);
+  state.seedTimes=seed&&seed.times?seed.times:null;state.seconds=seed?seed.seconds:0;
+  if(seed&&seed.encounterId)state.encounterId=seed.encounterId;
+  state.summaryStatus='READY';state.summaryVersion=st===S.DRAFT_SUMMARY?1:0;
+  state.readOnly=isReadOnly();state.confirmed=st===S.CONFIRM_SUMMARY;loadSessionContent(state.currentPatient.name);openWorkspace('standalone',true);updatePatientUI();setReviewReadOnly(state.readOnly);renderStatusUI()}
+/* Phiên chưa đóng audio thì mở lại đúng màn hình ghi, không đưa vào màn review. */
+function resumeRecordingSession(row){
+  state.source='standalone';state.recordingMode='full';state.seconds=Number(row.dataset.seconds||0);state.paused=false;
+  const seedR=sessions.find(x=>x.sid===row.dataset.sid);if(seedR&&seedR.encounterId)state.encounterId=seedR.encounterId;
+  state.summaryStatus='NONE';state.summaryVersion=0;state.confirmed=false;state.readOnly=false;
+  openWorkspace('standalone');updatePatientUI();
+  allStagesHidden();show('recordingStage');
+  $('stageTitle').textContent='Đang ghi nhận hội thoại';
+  $('fullTimer').textContent=format(state.seconds);
+  $('liveTranscript').innerHTML=transcript.map((x,i)=>`<div><span class="time">${format(30+i*29)}</span> ${x}</div>`).join('');
+  tick('fullTimer');$('flowCapture').classList.add('on');
+  $('fullFloatToggle').classList.remove('hidden');
+  /* Phiên NEW mở lại từ worklist là phiên kẹt: không giả lập chunk tới nữa, chỉ đếm giờ quá hạn. */
+  if(state.status===S.NEW){state.staleNew=true;armNewTimeout()}
+  renderStatusUI();
+  toast(state.status===S.NEW?'Phiên chưa nhận được audio nào':'Tiếp tục phiên đang ghi');
+}
 function openWorkspace(source='full',review=false){state.source=source;closeEmbeddedPanel();closeRecorderPip();setView('workspace');$('standaloneToolbar').classList.toggle('hidden',source!=='standalone');$('changePatientBtn').classList.toggle('hidden',source!=='standalone');$('backHis').textContent=source==='standalone'?'← Phiên của tôi':'← HIS';document.querySelector('.mobile-badge').style.display=source==='qr'?'inline-flex':'';if(source!=='standalone'){state.currentPatient={name:'Nguyễn Văn An',id:'BN-0084251'};state.readOnly=false}updatePatientUI();review?showReview():showReady()}
 function allStagesHidden(){['readyStage','recordingStage','processingStage','reviewStage'].forEach(hide)}
-function showReady(){allStagesHidden();show('readyStage');$('stageTitle').textContent='Ghi nhận buổi khám';$('stageChip').className='chip';$('stageChip').textContent='Sẵn sàng'}
+function showReady(){allStagesHidden();show('readyStage');$('stageTitle').textContent='Ghi nhận buổi khám';$('stageChip').className='chip';$('stageChip').textContent='Chưa tạo phiên · màn hình consent';renderStatusUI()}
 function tick(timerId){clearInterval(state.timer);state.timer=setInterval(()=>{if(!state.paused){state.seconds++;$(timerId).textContent=format(state.seconds);updateMiniPill();syncRecorderPip()}},1000)}
-function startFull(){state.seconds=0;state.paused=false;state.recordingMode='full';allStagesHidden();show('recordingStage');$('stageTitle').textContent='Đang ghi nhận hội thoại';$('stageChip').className='chip red';$('stageChip').textContent='● Đang ghi';$('liveTranscript').innerHTML=transcript.map((x,i)=>`<div><span class="time">${format(30+i*29)}</span> ${x}</div>`).join('');tick('fullTimer');$('flowCapture').classList.add('on');$('fullFloatToggle').classList.toggle('hidden',state.source!=='standalone')}
+function startFull(){if(!setStatus(S.NEW,{reason:'BS bấm Xác nhận và bắt đầu ghi'}))return;state.seconds=0;state.paused=false;state.recordingMode='full';allStagesHidden();show('recordingStage');$('stageTitle').textContent='Đang ghi nhận hội thoại';$('liveTranscript').innerHTML=transcript.map((x,i)=>`<div><span class="time">${format(30+i*29)}</span> ${x}</div>`).join('');tick('fullTimer');$('flowCapture').classList.add('on');$('fullFloatToggle').classList.toggle('hidden',state.source!=='standalone')}
 function togglePause(buttonId){state.paused=!state.paused;$(buttonId).textContent=state.paused?'Tiếp tục':'Tạm dừng';toast(state.paused?'Đã tạm dừng ghi':'Đã tiếp tục ghi');updateMiniPill();syncRecorderPipPause()}
-function toggleOffline(prefix){state.offline=!state.offline;$(prefix+'Offline').classList.toggle('hidden',!state.offline);$(prefix+'Network').textContent=state.offline?'Khôi phục mạng':'Mô phỏng mất mạng';toast(state.offline?'Mất mạng · Audio vẫn đang được ghi cục bộ':'Đã có mạng · Audio đang tự đồng bộ')}
-function processFull(){closeRecorderPip();clearInterval(state.timer);allStagesHidden();show('processingStage');$('stageTitle').textContent='Đang xử lý bản ghi';$('stageChip').className='chip blue';$('stageChip').textContent='Đang xử lý';let step=0;const timer=setInterval(()=>{step++;$('progressBar').style.width=`${18+step*27}%`;if(step===1){$('pTranscript').className='done';$('pTranscript').textContent='✓ Đã tạo transcript';$('pSummary').className='active'}if(step===2){$('pSummary').className='done';$('pSummary').textContent='✓ Đã tạo bản ghi có cấu trúc';$('pChecks').className='active'}if(step===3){clearInterval(timer);showReview()}},520)}
-function showReview(){allStagesHidden();show('reviewStage');$('stageTitle').textContent='Review bản ghi buổi khám';$('stageChip').className=state.confirmed?'chip green':'chip amber';$('stageChip').textContent=state.confirmed?'Đã xác nhận':'Chờ bác sĩ review';setReviewReadOnly(state.readOnly);renderInlineEvidence()}
-function setReviewReadOnly(readOnly){state.readOnly=readOnly;$('readOnlyBanner').classList.toggle('hidden',!readOnly);document.querySelectorAll('.section-content').forEach(x=>x.contentEditable=readOnly?'false':'true');$('saveDraft').disabled=readOnly;$('confirmBtn').disabled=readOnly;$('confirmBtn').textContent=readOnly?'Đã xác nhận':'Xác nhận';$('reviewChip').className=readOnly?'chip green':'chip amber';$('reviewChip').textContent=readOnly?'Đã được bác sĩ xác nhận':'● AI tạo · Chưa được bác sĩ xác nhận'}
+function toggleOffline(prefix){state.offline=!state.offline;$(prefix+'Offline').classList.toggle('hidden',!state.offline);$(prefix+'Network').textContent=state.offline?'Khôi phục mạng':'Mô phỏng mất mạng';toast(state.offline?'Mất mạng · Audio vẫn đang được ghi cục bộ':'Đã có mạng · Audio đang tự đồng bộ');if(!state.offline&&state.pendingFirstChunk&&state.status===S.NEW){state.pendingFirstChunk=false;setStatus(S.RECORDING,{reason:'Chunk đầu tiên tới server sau khi có mạng'})}else renderStatusUI()}
+function processFull(){if(state.status===S.NEW){toast('Chưa nhận được audio nào — không thể kết thúc. Kiểm tra micro, hoặc ghi nhận bệnh nhân không đồng ý.');return}if(!setStatus(S.COMPLETED,{reason:'BS bấm Kết thúc buổi khám'}))return;closeRecorderPip();allStagesHidden();show('processingStage');$('stageTitle').textContent='Đang xử lý bản ghi';let step=0;const timer=setInterval(()=>{step++;$('progressBar').style.width=`${18+step*27}%`;if(step===1){$('pTranscript').className='done';$('pTranscript').textContent='✓ Đã tạo transcript';$('pSummary').className='active'}if(step===2){$('pSummary').className='done';$('pSummary').textContent='✓ Đã tạo bản ghi có cấu trúc';$('pChecks').className='active'}if(step===3){clearInterval(timer);setSummaryStatus('READY');showReview()}},520)}
+function showReview(){allStagesHidden();show('reviewStage');$('stageTitle').textContent=state.status?STATUS_META[state.status].stage:'Review bản ghi buổi khám';setReviewReadOnly(isReadOnly());renderInlineEvidence();
+  const noAudio=state.status===S.REJECT_CONSENT;
+  if($('transcriptEvidenceCard'))$('transcriptEvidenceCard').classList.toggle('hidden',noAudio);
+  const banner=document.querySelector('.ai-banner');
+  if(banner&&noAudio)banner.textContent='Phiên không được ghi âm. Nội dung dưới đây do bác sĩ nhập tay, không có transcript đối chiếu.';
+  else if(banner&&!state.recapOutsideStatus)banner.textContent=AI_BANNER_DEFAULT;
+  renderStatusUI()}
+function setReviewReadOnly(readOnly){readOnly=readOnly===undefined?isReadOnly():readOnly;state.readOnly=readOnly;$('readOnlyBanner').classList.toggle('hidden',!readOnly);renderSummary();$('saveDraft').disabled=readOnly;$('confirmBtn').disabled=readOnly;$('confirmBtn').textContent=state.status===S.CONFIRM_SUMMARY?'Đã xác nhận':'Xác nhận';const confirmed=state.status===S.CONFIRM_SUMMARY,drafted=state.status===S.DRAFT_SUMMARY;$('reviewChip').className=confirmed?'chip green':'chip amber';$('reviewChip').textContent=confirmed?'Đã được bác sĩ xác nhận':(drafted?`● Bản nháp của bác sĩ · v${state.summaryVersion}`:'● AI tạo · Chưa được bác sĩ xác nhận');renderStatusUI()}
 function markEdited(section){const origin=section.querySelector('.origin');origin.className='chip green origin';origin.textContent='Bác sĩ đã sửa';$('autosaveStatus').textContent='Đang lưu…';clearTimeout(markEdited.t);markEdited.t=setTimeout(()=>{$('autosaveStatus').textContent=`✓ Đã lưu lúc ${new Date().toLocaleTimeString('vi-VN',{hour:'2-digit',minute:'2-digit'})}`},650)}
 function renderInlineEvidence(id,filter=''){const term=filter.trim().toLowerCase();$('inlineEvidenceTitle').textContent='Transcript đối chiếu';const rows=transcript.map((line,i)=>[format(30+i*29),line.startsWith('BS:')?'Bác sĩ':'Bệnh nhân',`“${line.slice(4)}”`]);const filtered=rows.filter(q=>!term||`${q[1]} ${q[2]}`.toLowerCase().includes(term));$('inlineEvidenceQuotes').innerHTML=filtered.length?filtered.map(q=>`<div class="linked-row"><div class="time">${q[0]} · ${q[1]}</div>${q[2]}</div>`).join(''):'<div class="empty">Không tìm thấy nội dung phù hợp.</div>'}
 function renderContextFiles(){const list=$('contextFileList');list.innerHTML=state.contextFiles.map((file,i)=>`<div class="context-file-card"><span>📄</span><div class="file-copy"><b>${file.name}</b><small>✓ Sẵn sàng làm dữ liệu tham khảo</small></div><button class="mini" onclick="removeContextFile(${i})">Xóa</button></div>`).join('')}
@@ -367,9 +747,34 @@ function updateContextBtnState(){
 function addContextFiles(files){state.contextFiles.push(...[...files].map(file=>({name:file.name,size:file.size})));renderContextFiles();contextSaved()}
 function renderFullTranscript(filter=''){const term=filter.trim().toLowerCase();const rows=transcript.map((line,i)=>({time:format(30+i*29),speaker:line.slice(0,2),text:line.slice(4)})).filter(row=>!term||`${row.speaker} ${row.text}`.toLowerCase().includes(term));$('fullTranscriptList').innerHTML=rows.length?rows.map(row=>`<div class="transcript-row"><span class="time">${row.time}</span><b>${row.speaker==='BS'?'Bác sĩ':'Bệnh nhân'}</b><span>${row.text}</span></div>`).join(''):'<div class="empty">Không tìm thấy nội dung phù hợp.</div>'}
 function openFullTranscript(){renderFullTranscript();$('transcriptSearch').value='';show('fullTranscriptDrawer')}
-function collect(){return [...document.querySelectorAll('[data-section]')].map(s=>`${s.querySelector('.section-title b').textContent}\n${s.querySelector('.section-content').textContent.trim()}`).join('\n\n')}
+/* Chuyển model thành các khối nhãn + dòng, dùng cho bản chia sẻ và cả hai bản in. */
+function summaryBlocks(){
+  return SUMMARY_FIELDS.map(f=>{
+    const v=state.summary?state.summary[f.key]:null;
+    let lines=[];
+    if(f.type==='text')lines=v?[v]:[];
+    else if(f.type==='list')lines=(v||[]).filter(Boolean);
+    else if(f.type==='drugs')lines=(v||[]).map(d=>{
+      /* Schema để hàm lượng ở CẢ ham_luong_lieu_dung và ham_luong_duong_dung nên phải
+         khử trùng lặp, nếu không tờ giấy đưa bệnh nhân sẽ lặp "500mg" hai lần. */
+      const parts=[];
+      [d.ten_thuoc,d.ham_luong_lieu_dung,d.ham_luong_duong_dung,d.cach_dung_bo_sung]
+        .filter(Boolean).forEach(x=>String(x).split('·').forEach(tok=>{
+          const t=tok.trim();if(!t)return;
+          const low=t.toLowerCase();
+          if(parts.some(pp=>pp.toLowerCase().includes(low)))return;
+          parts.push(t)}));
+      return parts.join(' · ')});
+    else if(f.type==='followup'){
+      if(v&&v.ngay_gio)lines.push('Thời điểm: '+v.ngay_gio);
+      if(v&&v.can_chuan_bi_gi)lines.push('Cần chuẩn bị: '+v.can_chuan_bi_gi);
+    }
+    return {key:f.key,label:f.label,lines,bullet:f.type!=='text',urgent:f.cls==='urgent'};
+  }).filter(b=>b.lines.length);
+}
+function collect(){return summaryBlocks().map(b=>`${b.label}\n${b.lines.map(l=>b.bullet?'- '+l:l).join('\n')}`).join('\n\n')}
 function requestClinicalConfirmation(afterConfirm=null){if(state.confirmed){if(afterConfirm)afterConfirm();return}pendingAfterConfirm=afterConfirm;$('clinicalReviewComplete').checked=false;$('finalizeClinicalConfirm').disabled=true;show('clinicalConfirmModal')}
-function confirm(){if(state.confirmed)return;state.confirmed=true;$('reviewChip').className='chip green';$('reviewChip').textContent='Đã được bác sĩ xác nhận';$('stageChip').className='chip green';$('stageChip').textContent='Đã xác nhận';$('confirmBtn').disabled=true;$('syncBtn').disabled=false;document.querySelectorAll('.section-content').forEach(x=>x.contentEditable='false');$('flowReview').classList.add('on');toast('Đã xác nhận bản ghi')}
+function confirm(){if(state.confirmed)return;if(state.status&&!setStatus(S.CONFIRM_SUMMARY,{reason:'BS bấm Xác nhận'}))return;state.confirmed=true;$('reviewChip').className='chip green';$('reviewChip').textContent='Đã được bác sĩ xác nhận';$('stageChip').className='chip green';$('stageChip').textContent='Đã xác nhận';$('confirmBtn').disabled=true;$('syncBtn').disabled=false;$('flowReview').classList.add('on');setReviewReadOnly(true);renderStatusUI();toast('Đã xác nhận bản ghi')}
 function openShare(){if(!state.confirmed){show('shareConfirm');return}updateShare();show('shareModal')}
 function renderAllRecipientLists(){['recipientList','compactRecipientList'].forEach(id=>{const el=$(id);if(el)el.innerHTML=state.recipients.map(x=>`<span class="chip">${x} ×</span>`).join('')})}
 
@@ -377,14 +782,12 @@ function renderAllRecipientLists(){['recipientList','compactRecipientList'].forE
 function openEmbeddedReviewFlow(){if(embedPipWindow){showCompactReview()}else{openWorkspace('embedded',true)}}
 function showCompactReview(){
   embeddedStages().forEach(hide);show('embeddedCompactReview');
-  const note=(typeof patientNotes!=='undefined'&&patientNotes[state.currentPatient.name])||draft;
-  if(!state.confirmed){$('compactReason').textContent=note.reason;$('compactHistory').textContent=note.history;$('compactSymptoms').textContent=note.symptoms;$('compactMeds').textContent=note.meds}
+  if(!state.summary)state.summary=clone(patientSummaries[state.currentPatient.name]||draft);
+  renderSummary();
   updateCompactConfirmUI();
 }
-function syncCompactToWorkspace(){
-  const map={reason:'compactReason',history:'compactHistory',symptoms:'compactSymptoms',meds:'compactMeds'};
-  Object.entries(map).forEach(([key,id])=>{const target=document.querySelector(`[data-section="${key}"] .section-content`);if(target)target.textContent=$(id).textContent});
-}
+/* Hai màn dùng chung state.summary nên không còn phải đồng bộ thủ công. */
+function syncCompactToWorkspace(){renderSummary()}
 function confirmCompact(){if(state.confirmed)return;syncCompactToWorkspace();confirm();updateCompactConfirmUI();updateMiniPill()}
 function requestCompactConfirmation(){syncCompactToWorkspace();requestClinicalConfirmation(()=>{updateCompactConfirmUI();updateMiniPill()})}
 function updateCompactConfirmUI(){
@@ -475,29 +878,250 @@ function closeRecorderPip(){if(recorderPipWindow){const w=recorderPipWindow;reco
 function updateFloatToggleLabel(){if($('fullFloatToggle'))$('fullFloatToggle').textContent=recorderPipWindow?'🪟 Đóng cửa sổ nổi':'🪟 Cửa sổ nổi'}
 function syncRecorderPip(){if(recorderPipWindow){const t=recorderPipWindow.document.getElementById('rpTimer');if(t)t.textContent=format(state.seconds)}}
 function syncRecorderPipPause(){if(recorderPipWindow){const s=recorderPipWindow.document.getElementById('rpState'),p=recorderPipWindow.document.getElementById('rpPause');if(s)s.textContent=state.paused?'❙❙ TẠM DỪNG':'● ĐANG GHI';if(p)p.textContent=state.paused?'▶':'⏸'}}
-function startEmbedded(){state.seconds=0;state.paused=false;hide('embeddedReady');show('embeddedRecording');tick('embeddedTimer');$('flowCapture').classList.add('on')}
-function finishEmbedded(){clearInterval(state.timer);hide('embeddedRecording');show('embeddedProcessing');setTimeout(()=>{$('epTranscript').className='done';$('epTranscript').textContent='✓ Đã tạo transcript';$('epSummary').className='active'},500);setTimeout(()=>{$('epSummary').className='done';$('epSummary').textContent='✓ Đã tạo bản ghi có cấu trúc';$('epChecks').className='active'},1000);setTimeout(()=>{hide('embeddedProcessing');show('embeddedResult')},1500)}
+function startEmbedded(){if(!setStatus(S.NEW,{reason:'BS bấm Xác nhận và bắt đầu ghi (embedded)'}))return;state.seconds=0;state.paused=false;hide('embeddedReady');show('embeddedRecording');tick('embeddedTimer');$('flowCapture').classList.add('on')}
+function finishEmbedded(){if(state.status===S.NEW){toast('Chưa nhận được audio nào — không thể kết thúc phiên.');return}if(!setStatus(S.COMPLETED,{reason:'BS bấm Kết thúc (embedded)'}))return;hide('embeddedRecording');show('embeddedProcessing');setTimeout(()=>{$('epTranscript').className='done';$('epTranscript').textContent='✓ Đã tạo transcript';$('epSummary').className='active'},500);setTimeout(()=>{$('epSummary').className='done';$('epSummary').textContent='✓ Đã tạo bản ghi có cấu trúc';$('epChecks').className='active'},1000);setTimeout(()=>{setSummaryStatus('READY');hide('embeddedProcessing');show('embeddedResult')},1500)}
 function consentMethodLabel(scope='full'){return {verbal:'Đồng ý bằng lời nói',electronic:'Xác nhận điện tử',audio:'Ghi âm lời xác nhận'}[$(scope==='embedded'?'embeddedConsentMethod':'consentMethod').value]}
 function updateRecordingConsent(scope='full'){const patient=$(scope==='embedded'?'embeddedPatientConsent':'patientConsent').checked;const methodEl=$(scope==='embedded'?'embeddedConsentMethod':'consentMethod');const audioReady=methodEl.value!=='audio'||state.consentAudioCaptured;const startBtn=$(scope==='embedded'?'embeddedStart':'fullStart');startBtn.disabled=!patient||!audioReady;const auditEl=$(scope==='embedded'?'embeddedConsentAudit':'consentAudit');auditEl.classList.toggle('hidden',!patient);if(patient)auditEl.textContent=`✓ ${consentMethodLabel(scope)} · ${$(scope==='embedded'?'embeddedConsentingPerson':'consentingPerson').value} · Ghi nhận bởi BS. Nguyễn Minh Anh · 14:30 · Consent v1.2`}
 function updateConsentingPerson(scope='full'){const personEl=$(scope==='embedded'?'embeddedConsentingPerson':'consentingPerson');const representative=personEl.value==='Người đại diện hợp pháp';const stmtEl=$(scope==='embedded'?'embeddedConsentStatement':'consentStatement');stmtEl.textContent=representative?'Tôi xác nhận đã giải thích và người đại diện hợp pháp đồng ý trước khi ghi âm':'Tôi xác nhận đã giải thích và bệnh nhân đồng ý trước khi ghi âm';updateRecordingConsent(scope)}
 function updateConsentMethod(scope='full'){const methodEl=$(scope==='embedded'?'embeddedConsentMethod':'consentMethod');const audio=methodEl.value==='audio';$(scope==='embedded'?'embeddedAudioConsentPanel':'audioConsentPanel').classList.toggle('hidden',!audio);$(scope==='embedded'?'embeddedPatientConsent':'patientConsent').checked=false;$(scope==='embedded'?'embeddedConsentAudit':'consentAudit').classList.add('hidden');if(scope==='full')$('consentDeclinedPanel').classList.add('hidden');updateRecordingConsent(scope)}
 function recordConsentEvidence(scope='full'){state.consentAudioCaptured=true;$(scope==='embedded'?'embeddedAudioConsentLabel':'audioConsentLabel').textContent='Đã lưu audio xác nhận riêng';$(scope==='embedded'?'embeddedAudioConsentDuration':'audioConsentDuration').textContent='00:08';$(scope==='embedded'?'embeddedRecordConsentAudio':'recordConsentAudio').textContent='↻ Ghi lại';$(scope==='embedded'?'embeddedPlayConsentAudio':'playConsentAudio').disabled=false;$(scope==='embedded'?'embeddedDeleteConsentAudio':'deleteConsentAudio').disabled=false;updateRecordingConsent(scope);toast('Đã lưu audio xác nhận riêng với phiên bản consent v1.2')}
 function deleteConsentEvidence(scope='full'){state.consentAudioCaptured=false;$(scope==='embedded'?'embeddedAudioConsentLabel':'audioConsentLabel').textContent='Chưa có audio xác nhận';$(scope==='embedded'?'embeddedAudioConsentDuration':'audioConsentDuration').textContent='00:00';$(scope==='embedded'?'embeddedRecordConsentAudio':'recordConsentAudio').textContent='● Ghi lời xác nhận';$(scope==='embedded'?'embeddedPlayConsentAudio':'playConsentAudio').disabled=true;$(scope==='embedded'?'embeddedDeleteConsentAudio':'deleteConsentAudio').disabled=true;updateRecordingConsent(scope);toast('Đã xóa audio xác nhận')}
-function declineConsent(){$('patientConsent').checked=false;$('consentAudit').classList.add('hidden');$('fullStart').disabled=true;show('consentDeclinedPanel');toast('Đã ghi nhận bệnh nhân không đồng ý ghi âm')}
+function declineConsent(){if(!setStatus(S.REJECT_CONSENT,{reason:'BS bấm Bệnh nhân không đồng ý'}))return;$('patientConsent').checked=false;$('consentAudit').classList.add('hidden');$('fullStart').disabled=true;show('consentDeclinedPanel');toast('Đã ghi nhận bệnh nhân không đồng ý ghi âm')}
 function continueWithoutRecording(){state.pendingNewSession=false;setView(state.source==='standalone'?'standaloneHome':'hisView');toast('Tiếp tục khám không ghi âm')}
 function recapAfterVisit(){show('recapModal');$('recapSource').focus()}
-function submitRecap(){const source=$('recapSource').value.trim();if(!source){show('recapError');$('recapSource').focus();return}hide('recapError');hide('recapModal');hide('consentDeclinedPanel');hide('readyStage');show('processingStage');state.sourceLabel='Recap của bác sĩ';state.recapText=source;$('stageChip').className='chip blue';$('stageChip').textContent='Xử lý recap của bác sĩ';setTimeout(()=>{showReview();const history=document.querySelector('[data-section="history"] .section-content');if(history)history.textContent=state.recapText;document.querySelector('.ai-banner').textContent='AI đã tạo bản tóm tắt từ recap của bác sĩ, không phải từ hội thoại ghi âm. Bác sĩ kiểm tra và chỉnh sửa trước khi xác nhận.'},900)}
+function submitRecap(){const source=$('recapSource').value.trim();if(!source){show('recapError');$('recapSource').focus();return}hide('recapError');hide('recapModal');hide('consentDeclinedPanel');hide('readyStage');show('processingStage');state.sourceLabel='Recap của bác sĩ';state.recapText=source;/* Recap sau khám = bản ghi KHÔNG có audio. Bộ 6 status hiện không có giá trị nào mô tả được ca này, nên phiên được tách ra khỏi máy trạng thái. */clearFirstChunkTimer();clearNewTimeout();state.statusLog.push({from:state.status||'—',to:'(ngoài bộ status)',reason:'Recap sau khám, không có audio',at:new Date()});state.status=null;state.confirmed=false;state.summaryStatus='READY';state.summaryVersion=0;state.recapOutsideStatus=true;renderStatusUI();$('stageChip').className='chip blue';$('stageChip').textContent='Xử lý recap của bác sĩ';setTimeout(()=>{showReview();if(!state.summary)state.summary=emptySummary();state.summary.tinh_trang_benh=state.recapText;renderSummary();document.querySelector('.ai-banner').textContent='AI đã tạo bản tóm tắt từ recap của bác sĩ, không phải từ hội thoại ghi âm. Bác sĩ kiểm tra và chỉnh sửa trước khi xác nhận.'},900)}
 function requestWorkspaceExit(){const recording=!$('recordingStage').classList.contains('hidden');if(recording){show('leaveRecordingModal');return}performWorkspaceExit()}
 function performWorkspaceExit(){closeRecorderPip();setView(state.source==='standalone'?'standaloneHome':'hisView')}
 function continueRecordingInBackground(){if(!supportsPiP()){toast('Trình duyệt không hỗ trợ cửa sổ nổi. Hãy tạm dừng hoặc ở lại phiên.');return}hide('leaveRecordingModal');openRecorderPip();setView(state.source==='standalone'?'standaloneHome':'hisView');toast('MedVita tiếp tục ghi trong cửa sổ nổi')}
 function openConsentDetails(){$('consentTitle').textContent='Thông báo và đồng ý ghi âm';$('consentAudience').textContent='Dành cho bệnh nhân hoặc người đại diện hợp pháp';$('consentContent').innerHTML='<p>MedVita ghi âm cuộc trao đổi trong buổi khám để tạo transcript và bản tóm tắt hỗ trợ bác sĩ hoàn thiện hồ sơ.</p><p>Dữ liệu được bảo vệ theo chính sách của bệnh viện, không thay thế kết luận chuyên môn của bác sĩ và chỉ được chia sẻ cho người có quyền.</p><p>Bệnh nhân có thể từ chối hoặc yêu cầu dừng ghi âm bất kỳ lúc nào mà không ảnh hưởng đến việc khám chữa bệnh.</p>';show('consentModal')}
 function inviteDoctor(){const doctor=$('doctorInviteSelect').value;if(!doctor){toast('Vui lòng chọn bác sĩ cùng bệnh viện');return}hide('inviteDoctorModal');toast(`Đã mời ${doctor} · Chỉ xem`)}
-function exportSummaryPdf(){if(!state.confirmed){toast('Cần xác nhận bản tóm tắt trước khi xuất PDF');return}document.body.classList.add('printing-summary');window.print();setTimeout(()=>document.body.classList.remove('printing-summary'),300)}
+/* ===== QR code (byte mode, mức sửa lỗi M, phiên bản 1-10) ===== */
+const QR=(()=>{
+  const CAP=[16,28,44,64,86,108,124,154,182,216];          // số codeword dữ liệu, mức M
+  const TOTAL=[26,44,70,100,134,172,196,242,292,346];      // tổng codeword
+  const BLOCKS=[1,1,1,2,2,4,4,4,5,5];                      // số khối
+  const ALIGN=[[],[6,18],[6,22],[6,26],[6,30],[6,34],[6,22,38],[6,24,42],[6,26,46],[6,28,50]];
+  let EXP=new Array(512),LOG=new Array(256);
+  (()=>{let x=1;for(let i=0;i<255;i++){EXP[i]=x;LOG[x]=i;x<<=1;if(x&256)x^=0x11d}for(let i=255;i<512;i++)EXP[i]=EXP[i-255]})();
+  const mul=(a,b)=>(a===0||b===0)?0:EXP[LOG[a]+LOG[b]];
+  function genPoly(n){let g=[1];for(let i=0;i<n;i++){const ng=new Array(g.length+1).fill(0);
+    for(let j=0;j<g.length;j++){ng[j]^=mul(g[j],1);ng[j+1]^=mul(g[j],EXP[i])}g=ng}return g}
+  function ecc(data,n){const g=genPoly(n),res=new Array(n).fill(0);
+    for(const d of data){const f=d^res[0];res.shift();res.push(0);
+      if(f!==0)for(let i=0;i<n;i++)res[i]^=mul(g[i+1],f)}return res}
+  function bch(data,poly,bits){const deg=poly.toString(2).length-1;let v=data<<bits;
+    while(v.toString(2).length-1>=deg)v^=poly<<(v.toString(2).length-1-deg);
+    return (data<<bits)|v}
+  function formatBits(mask){const data=(0b00<<3)|mask;           // 00 = mức M
+    let v=bch(data,0x537,10);return (v^0x5412)&0x7fff}
+  function versionBits(ver){return bch(ver,0x1f25,12)}
+  function encode(text){
+    const bytes=[...new TextEncoder().encode(text)];
+    let ver=0;for(let v=1;v<=10;v++){const cci=v<10?8:16;
+      if(4+cci+bytes.length*8<=CAP[v-1]*8){ver=v;break}}
+    if(!ver)throw new Error('Nội dung quá dài cho QR phiên bản 10');
+    const cap=CAP[ver-1],cci=ver<10?8:16;
+    let bits=[];const put=(val,len)=>{for(let i=len-1;i>=0;i--)bits.push((val>>i)&1)};
+    put(0b0100,4);put(bytes.length,cci);bytes.forEach(b=>put(b,8));
+    const capBits=cap*8;
+    for(let i=0;i<4&&bits.length<capBits;i++)bits.push(0);
+    while(bits.length%8)bits.push(0);
+    const pad=[0xec,0x11];let k=0;
+    while(bits.length<capBits){put(pad[k++%2],8)}
+    const dataCw=[];for(let i=0;i<bits.length;i+=8){let b=0;for(let j=0;j<8;j++)b=(b<<1)|bits[i+j];dataCw.push(b)}
+    // chia khối
+    const nb=BLOCKS[ver-1],ecLen=(TOTAL[ver-1]-cap)/nb;
+    const short=Math.floor(cap/nb),longCount=cap%nb;
+    const blocks=[],eccs=[];let pos=0;
+    for(let i=0;i<nb;i++){const len=short+(i>=nb-longCount?1:0);
+      const blk=dataCw.slice(pos,pos+len);pos+=len;blocks.push(blk);eccs.push(ecc(blk,ecLen))}
+    const out=[];const maxLen=Math.max(...blocks.map(b=>b.length));
+    for(let i=0;i<maxLen;i++)for(const b of blocks)if(i<b.length)out.push(b[i]);
+    for(let i=0;i<ecLen;i++)for(const e of eccs)out.push(e[i]);
+    return {ver,codewords:out};
+  }
+  function build(text){
+    const {ver,codewords}=encode(text);
+    const n=17+ver*4;
+    const m=Array.from({length:n},()=>new Array(n).fill(null));
+    const set=(r,c,v)=>{if(r>=0&&r<n&&c>=0&&c<n)m[r][c]=v};
+    const finder=(r,c)=>{for(let i=-1;i<=7;i++)for(let j=-1;j<=7;j++){
+      const rr=r+i,cc=c+j;if(rr<0||rr>=n||cc<0||cc>=n)continue;
+      const on=(i>=0&&i<=6&&(j===0||j===6))||(j>=0&&j<=6&&(i===0||i===6))||(i>=2&&i<=4&&j>=2&&j<=4);
+      m[rr][cc]=on?1:0}};
+    finder(0,0);finder(0,n-7);finder(n-7,0);
+    for(let i=8;i<n-8;i++){m[6][i]=i%2===0?1:0;m[i][6]=i%2===0?1:0}
+    const ac=ALIGN[ver-1];
+    for(const r of ac)for(const c of ac){
+      if((r<=8&&c<=8)||(r<=8&&c>=n-9)||(r>=n-9&&c<=8))continue;
+      for(let i=-2;i<=2;i++)for(let j=-2;j<=2;j++)
+        m[r+i][c+j]=(Math.abs(i)===2||Math.abs(j)===2||(i===0&&j===0))?1:0}
+    m[n-8][8]=1; // module tối cố định
+    // chừa chỗ format
+    const fmtCells=[];
+    for(let i=0;i<=5;i++)fmtCells.push([8,i]);fmtCells.push([8,7],[8,8],[7,8]);
+    for(let i=5;i>=0;i--)fmtCells.push([i,8]);
+    const fmtCells2=[];
+    for(let i=0;i<7;i++)fmtCells2.push([n-1-i,8]);
+    for(let i=0;i<8;i++)fmtCells2.push([8,n-8+i]);
+    fmtCells.concat(fmtCells2).forEach(([r,c])=>{if(m[r][c]===null)m[r][c]=0});
+    if(ver>=7){for(let i=0;i<18;i++){const r=Math.floor(i/3),c=i%3;
+      if(m[n-11+c][r]===null)m[n-11+c][r]=0;if(m[r][n-11+c]===null)m[r][n-11+c]=0}}
+    const reserved=m.map(row=>row.map(v=>v!==null));
+    // đặt dữ liệu
+    let bitIdx=0;const total=codewords.length*8;
+    const bitAt=i=>i<total?((codewords[i>>3]>>(7-(i&7)))&1):0;
+    let up=true;
+    for(let col=n-1;col>0;col-=2){
+      if(col===6)col--;
+      for(let t=0;t<n;t++){const row=up?n-1-t:t;
+        for(let d=0;d<2;d++){const c=col-d;
+          if(!reserved[row][c]){m[row][c]=bitIdx<total?bitAt(bitIdx):0;bitIdx++}}}
+      up=!up;
+    }
+    const maskFn=[
+      (r,c)=>(r+c)%2===0,(r,c)=>r%2===0,(r,c)=>c%3===0,(r,c)=>(r+c)%3===0,
+      (r,c)=>(Math.floor(r/2)+Math.floor(c/3))%2===0,(r,c)=>((r*c)%2)+((r*c)%3)===0,
+      (r,c)=>(((r*c)%2)+((r*c)%3))%2===0,(r,c)=>(((r+c)%2)+((r*c)%3))%2===0];
+    let best=null,bestScore=Infinity;
+    for(let mk=0;mk<8;mk++){
+      const g=m.map((row,r)=>row.map((v,c)=>reserved[r][c]?v:(maskFn[mk](r,c)?v^1:v)));
+      const f=formatBits(mk);
+      fmtCells.forEach(([r,c],i)=>{g[r][c]=(f>>(14-i))&1});
+      fmtCells2.forEach(([r,c],i)=>{g[r][c]=(f>>(14-i))&1});
+      g[n-8][8]=1;
+      if(ver>=7){const vb=versionBits(ver);
+        for(let i=0;i<18;i++){const bit=(vb>>i)&1,r=Math.floor(i/3),c=i%3;
+          g[n-11+c][r]=bit;g[r][n-11+c]=bit}}
+      const sc=penalty(g,n);
+      if(sc<bestScore){bestScore=sc;best=g}
+    }
+    return best;
+  }
+  function penalty(g,n){
+    let p=0;
+    const runScore=line=>{let s=0,run=1;
+      for(let i=1;i<n;i++){if(line[i]===line[i-1])run++;else{if(run>=5)s+=3+(run-5);run=1}}
+      if(run>=5)s+=3+(run-5);return s};
+    for(let r=0;r<n;r++)p+=runScore(g[r]);
+    for(let c=0;c<n;c++)p+=runScore(g.map(row=>row[c]));
+    for(let r=0;r<n-1;r++)for(let c=0;c<n-1;c++){
+      const v=g[r][c];if(v===g[r][c+1]&&v===g[r+1][c]&&v===g[r+1][c+1])p+=3}
+    const pat=[1,0,1,1,1,0,1,0,0,0,0],pat2=[0,0,0,0,1,0,1,1,1,0,1];
+    const findPat=line=>{let s=0;
+      for(let i=0;i+11<=n;i++){let a=true,b=true;
+        for(let j=0;j<11;j++){if(line[i+j]!==pat[j])a=false;if(line[i+j]!==pat2[j])b=false}
+        if(a)s+=40;if(b)s+=40}return s};
+    for(let r=0;r<n;r++)p+=findPat(g[r]);
+    for(let c=0;c<n;c++)p+=findPat(g.map(row=>row[c]));
+    let dark=0;g.forEach(row=>row.forEach(v=>dark+=v));
+    const pct=dark*100/(n*n);p+=Math.floor(Math.abs(pct-50)/5)*10;
+    return p;
+  }
+  function svg(text,px){
+    const g=build(text),n=g.length,q=2,size=n+q*2;
+    let path='';
+    for(let r=0;r<n;r++)for(let c=0;c<n;c++)if(g[r][c])path+=`M${c+q} ${r+q}h1v1h-1z`;
+    return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${size} ${size}" width="${px}" height="${px}" shape-rendering="crispEdges"><rect width="${size}" height="${size}" fill="#fff"/><path d="${path}" fill="#000"/></svg>`;
+  }
+  return {build,svg};
+})();
+
+/* ===== XUẤT PDF =====
+   Hai lựa chọn trong MV-291 dùng CHUNG một định dạng: bản dành cho bệnh nhân (A5).
+   Khác nhau chỉ ở loại bản được ghi vào log xuất file theo BR-04. */
+const ORG={name:'Bệnh viện Trung ương Thái Nguyên',code:'01015',tier:'Tuyến trung ương · Hạng I',address:'479 Lương Ngọc Quyến, P. Quang Trung, TP. Thái Nguyên',contact:'0208 3855 125 · cskh@bvtwtn.vn'};
+const DOCTOR={name:'BS.CKI Nguyễn Minh Anh',staff:'NV-10482',license:'004821/TN-CCHN',dept:'Khám bệnh ngoại trú · Phòng 214',deptCode:'KHOA-NGT'};
+const AI_MODEL='MedVita-Summarizer v3.2 · vi-VN';
+function stamp(d){if(!d)return '—';const p=n=>String(n).padStart(2,'0');return `${p(d.getDate())}/${p(d.getMonth()+1)}/${d.getFullYear()} ${p(d.getHours())}:${p(d.getMinutes())}:${p(d.getSeconds())}`}
+function statusTime(to){const e=state.statusLog.filter(x=>x.to===to).pop();if(e&&e.reason!=='Mở từ danh sách phiên')return e.at;const t=state.seedTimes,k={[S.NEW]:'created',[S.COMPLETED]:'closed',[S.CONFIRM_SUMMARY]:'confirmed'}[to];if(t&&k&&t[k])return new Date(t[k]);return e?e.at:null}
+function esc(t){return String(t==null?'':t).replace(/[&<>]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[m]))}
+/* Bản dán vào sổ khám bệnh: người đọc là BỆNH NHÂN, khổ A5, một trang.
+   Cố ý bỏ mã nhân viên, số CCHN, tên model AI, enum trạng thái và nhật ký audit —
+   những thứ đó thuộc bản lưu nội bộ, in ra cho bệnh nhân chỉ gây nhiễu. */
+function buildBookletDocument(){
+  const closed=statusTime(S.COMPLETED)||statusTime(S.NEW)||new Date();
+  const patient=state.currentPatient||{name:'—',id:'—'};
+  const blocks=summaryBlocks();
+  const lookupUrl=`https://medvita.vn/tra-cuu/${state.encounterId||''}`;
+  let lookupQr='';try{lookupQr=QR.svg(lookupUrl,84)}catch(e){console.warn('QR lỗi',e)}
+  $('printDocument').innerHTML=`
+    <div class="bk-head">
+      <div class="org">${esc(ORG.name)}<div class="dept">${esc(DOCTOR.dept)}</div></div>
+      <div class="when">Ngày khám<br><b>${esc(stamp(closed).slice(0,16))}</b></div>
+    </div>
+    <div class="bk-title">TÓM TẮT BUỔI KHÁM</div>
+    <div class="bk-pt">Tên bệnh nhân: <b>${esc(patient.name)}</b> · Mã: ${esc(patient.id)}</div>
+    ${blocks.map(b=>`<div class="bk-block"><div class="lbl">${esc(b.label)}</div>${b.lines.map(l=>`<div class="txt">${b.bullet?'– ':''}${esc(l)}</div>`).join('')}</div>`).join('')}
+    <div class="bk-sign">
+      <div class="lookup">${lookupQr}<div class="qtxt">Quét mã để xem bản tóm tắt đầy đủ.<br>Mã phiên: <b>${esc(state.encounterId||'—')}</b><br>${esc(lookupUrl)}</div></div>
+      <div class="box"><div class="role">BÁC SĨ KHÁM BỆNH</div><div class="gap"></div><div>${esc(DOCTOR.name)}</div></div>
+    </div>
+    <div class="bk-foot"><span>${esc(ORG.name)}</span><span>In lúc ${esc(stamp(new Date()))}</span></div>`;
+}
+const BASE_TITLE=document.title;
+/* Tiêu đề rỗng thì Chrome lấy tên file thay vào, nên đặt một khoảng trắng để mép phải trống.
+   Ngày giờ bên trái thì không có cách nào tắt bằng code: phải bỏ tick "Headers and footers"
+   trong hộp thoại in, hoặc sinh PDF ở server theo đúng AC2 của MV-291. */
+function runPrint(mode){
+  document.title='\u00A0';
+  $('printPageStyle').textContent='@page{size:A5 portrait;margin:10mm 10mm 8mm}';
+  buildBookletDocument();
+  document.body.classList.add('printing-summary','print-booklet');
+  window.print();
+  setTimeout(()=>{document.body.classList.remove('printing-summary','print-booklet');document.title=BASE_TITLE;},300);
+}
+/* ===== MV-291 — Xuất bản tóm tắt thành PDF =====
+   AC1 bác sĩ chọn một trong hai bản; bản chưa xác nhận không chọn được.
+   AC4 chưa có bản nào được xác nhận thì báo lỗi, không tạo file.
+   BR-03 file không kèm transcript và audio. BR-04 ghi log người xuất, loại bản, thời điểm.
+   Lưu ý: bộ 6 status chỉ có MỘT giá trị CONFIRM_SUMMARY, nên ở đây hai bản dùng chung
+   một lần xác nhận. Nếu sản phẩm muốn xác nhận riêng từng bản thì schema trạng thái phải đổi. */
+const EXPORT_KINDS={
+  booklet:{label:'Tóm tắt dành cho bệnh nhân'},
+  internal:{label:'Bản tóm tắt buổi khám'}
+};
+let exportChoice=null;
+function summaryConfirmed(){return state.status===S.CONFIRM_SUMMARY}
+function openExportPdfModal(){
+  const st=state.status;
+  if(st===S.NEW||st===S.RECORDING){toast('Phiên chưa kết thúc ghi âm, chưa có bản tóm tắt để xuất');return}
+  if(st===S.REJECT_CONSENT){toast('Phiên không ghi âm — không có bản tóm tắt để xuất');return}
+  if(!summaryConfirmed()){toast('Cần xác nhận bản tóm tắt trước khi xuất PDF');return}   // AC4
+  exportChoice=null;
+  renderExportOptions();
+  show('exportPdfModal');
+}
+function renderExportOptions(){
+  const ok=summaryConfirmed();
+  [['exportPatientSummary','patientSummaryChip','booklet'],['exportClinicalSummary','clinicalSummaryChip','internal']]
+    .forEach(([btnId,chipId,kind])=>{
+      const btn=$(btnId),chip=$(chipId);
+      btn.disabled=!ok;
+      btn.classList.toggle('on',exportChoice===kind);
+      chip.className=ok?'chip green':'chip amber';
+      chip.textContent=ok?'Đã xác nhận':'Chưa xác nhận';
+    });
+  $('downloadExportPdf').disabled=!exportChoice;
+}
+function chooseExport(kind){if(!summaryConfirmed())return;exportChoice=kind;renderExportOptions()}
+function downloadExportPdf(){
+  if(!exportChoice)return;
+  try{
+    runPrint(exportChoice);                                   // AC2
+    state.exportLog.push({kind:exportChoice,by:DOCTOR.name,at:new Date()});   // BR-04
+    hide('exportPdfModal');
+    renderStatusUI();
+  }catch(e){                                                  // AC5
+    console.error('Xuất PDF lỗi',e);
+    toast('Xuất PDF không thành công. Vui lòng thử lại.');
+  }
+}
 function showContextTab(tab){const map={context:'contextEditorPanel'};Object.values(map).forEach(hide);show(map[tab]);$('contextContextTab').classList.toggle('active',tab==='context')}
 function reset(){closeEmbeddedPanel();closeRecorderPip();location.reload()}
 document.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',()=>{b.dataset.close==='embeddedDrawer'?closeEmbeddedPanel():hide(b.dataset.close)}));
 $('openStandalone').onclick=openStandaloneDirect;$('cancelLogin').onclick=()=>setView('hisView');$('loginBtn').onclick=loginStandalone;$('loginPassword').onkeydown=e=>{if(e.key==='Enter')loginStandalone()};$('openRegistration').onclick=()=>setView('registrationView');$('backToLogin').onclick=()=>setView('loginView');$('sendOtpBtn').onclick=sendRegistrationOtp;$('backToRegistration').onclick=()=>setView('registrationView');$('verifyOtpBtn').onclick=verifyRegistrationOtp;$('resendOtpBtn').onclick=()=>toast('Đã gửi lại mã OTP');$('logoutBtn').onclick=()=>setView('loginView');$('createStandaloneSession').onclick=openPatientFirst;
-$('sessionSearch').oninput=filterSessions;$('sessionStatusFilter').onchange=filterSessions;document.querySelectorAll('[data-worklist]').forEach(x=>x.onclick=()=>setWorklist(x.dataset.worklist));document.querySelectorAll('.sessionOpenBtn').forEach(x=>x.onclick=()=>openSession(x.closest('[data-session]')));
+$('sessionSearch').oninput=filterSessions;$('sessionStatusFilter').onchange=filterSessions;document.querySelectorAll('[data-worklist]').forEach(x=>x.onclick=()=>setWorklist(x.dataset.worklist));state.summary=clone(draft);bindSummaryHost('summarySections');bindSummaryHost('compactSummary');renderSummary();renderSessionList();$('sessionRows').addEventListener('click',e=>{const btn=e.target.closest('.sessionOpenBtn');if(btn)openSession(btn.closest('[data-session]'))});setWorklist(state.worklist);
 $('crossDeptBadge').onclick=()=>{$('priorNoteModalTitle').textContent='Nội dung đã tham chiếu từ khoa '+priorEncounter.department;$('priorNoteModalMeta').textContent=priorEncounter.time+' · '+priorEncounter.doctor;$('priorNoteModalBody').textContent='Câu được AI tham chiếu khi tạo "LÝ DO KHÁM" cho khoa hiện tại:\n\n"'+priorEncounter.usedSentence+'"\n\n— Trích từ ghi chú khoa '+priorEncounter.department+' —';show('priorNoteModal')};
 $('embeddedRecContextToggle').onclick=()=>{const open=!$('embeddedRecContextBody').classList.contains('hidden');$('embeddedRecContextBody').classList.toggle('hidden',open);$('embeddedRecContextChevron').textContent=open?'▾':'▴'};
 $('addPatientBtn').onclick=()=>show('patientPicker');$('changePatientBtn').onclick=()=>show('patientPicker');$('contextBtn').onclick=()=>{if(state.source==='standalone'){showContextTab('context');show('standaloneContextWorkspace')}};$('quickNoteBtn').onclick=()=>show('quickNoteModal');document.querySelectorAll('.patientSelect').forEach(x=>x.onclick=()=>selectPatient(x.dataset.name,x.dataset.name==='Trần Thị Mai'?'BN-0061732':'BN-0084251'));$('createNewPatient').onclick=()=>{hide('patientPicker');show('newPatientModal')};$('saveNewPatient').onclick=()=>{const name=$('newPatientName').value.trim();const phone=$('newPatientPhone').value.trim();const birthYear=$('newPatientBirthYear').value.trim();const address=$('newPatientAddress').value.trim();if(!name){toast('Vui lòng nhập họ tên bệnh nhân');return}if(!phone){toast('Vui lòng nhập số điện thoại');return}if(!/^\d{4}$/.test(birthYear)){toast('Vui lòng nhập năm sinh hợp lệ (VD: 1990)');return}if(!address){toast('Vui lòng nhập địa chỉ');return}hide('newPatientModal');selectPatient(name,'BN-MỚI')};$('saveQuickNote').onclick=()=>{hide('quickNoteModal');$('quickNoteBtn').classList.add('active');toast('Đã lưu ghi chú vào phiên hiện tại')};
@@ -509,9 +1133,9 @@ $('compactGoFullWorkspace').onclick=()=>{closeEmbeddedPanel();openWorkspace('emb
 $('patientConsent').onchange=()=>updateRecordingConsent('full');$('consentingPerson').onchange=updateConsentingPerson;$('consentMethod').onchange=updateConsentMethod;$('recordConsentAudio').onclick=recordConsentEvidence;$('playConsentAudio').onclick=()=>toast('Đang phát audio xác nhận 00:08');$('deleteConsentAudio').onclick=deleteConsentEvidence;$('declineConsentBtn').onclick=declineConsent;$('continueWithoutRecording').onclick=continueWithoutRecording;$('recapAfterVisit').onclick=recapAfterVisit;$('fullStart').onclick=startFull;$('fullPause').onclick=()=>togglePause('fullPause');$('fullNetwork').onclick=()=>toggleOffline('full');$('fullFinish').onclick=processFull;$('backgroundBtn').onclick=()=>{setView(state.source==='standalone'?'standaloneHome':'hisView');toast('MedVita tiếp tục xử lý trong nền')};$('toggleTranscript').onclick=()=>{$('liveTranscript').classList.toggle('hidden');$('toggleTranscript').textContent=$('liveTranscript').classList.contains('hidden')?'Xem transcript đang ghi ▾':'Ẩn transcript đang ghi ▴'};
 document.querySelectorAll('.section-content').forEach(x=>x.addEventListener('input',()=>markEdited(x.closest('.section'))));
 $('openFullTranscript').onclick=openFullTranscript;$('transcriptSearch').oninput=e=>renderFullTranscript(e.target.value);$('inlineTranscriptSearch').oninput=e=>renderInlineEvidence(null,e.target.value);$('playInlineEvidence').onclick=()=>toast('Đang phát đoạn audio đang đối chiếu');$('playFullTranscript').onclick=()=>toast('Đang phát toàn bộ audio từ đầu');
-$('saveDraft').onclick=()=>toast('Đã lưu bản nháp');$('confirmBtn').onclick=()=>requestClinicalConfirmation();
+$('saveDraft').onclick=()=>{if(isReadOnly()){toast('Phiên đã chốt, không sửa được');return}if(!setStatus(S.DRAFT_SUMMARY,{reason:'BS bấm Lưu bản nháp'}))return;setReviewReadOnly(false);toast(`Đã lưu bản nháp · v${state.summaryVersion}`)};$('confirmBtn').onclick=()=>requestClinicalConfirmation();$('siToggle').onclick=()=>{const el=$('statusInspector');const c=el.classList.toggle('collapsed');$('siToggle').textContent=c?'+':'–'};renderStatusUI();
 $('focusContextText').onclick=()=>$('contextText').focus();$('attachContextFile').onclick=()=>$('contextFileInput').click();$('contextFileInput').onchange=e=>{addContextFiles(e.target.files);e.target.value=''};$('contextText').oninput=contextSaved;$('contextContextTab').onclick=()=>showContextTab('context');document.querySelectorAll('.consent-details').forEach(x=>x.onclick=()=>openConsentDetails(x.dataset.consentType));
- $('shareBtn').onclick=openShare;$('inviteDoctorBtn').onclick=()=>show('inviteDoctorModal');$('sendDoctorInvite').onclick=inviteDoctor;$('exportPdfBtn').onclick=exportSummaryPdf;$('confirmAndShare').onclick=()=>{hide('shareConfirm');requestClinicalConfirmation(()=>{updateShare();show('shareModal')})};$('syncBtn').onclick=syncHis;$('retrySyncBtn').onclick=retryHisSync;document.querySelectorAll('input[name="output"]').forEach(x=>x.onchange=restoreShareContent);$('shareChannel').onchange=updateShareChannel;$('restoreShareAI').onclick=restoreShareContent;$('addRecipient').onclick=()=>{const v=$('recipientInput').value.trim(),channel=$('shareChannel').value;if(!validateRecipient(v,channel)){toast(`Nhập ${channel==='email'?'email':'số điện thoại'} hợp lệ`);return}if(!state.recipients.includes(v))state.recipients.push(v);renderAllRecipientLists();$('recipientInput').value=''};$('sendShare').onclick=()=>sendShareResult('full');$('clinicalReviewComplete').onchange=e=>$('finalizeClinicalConfirm').disabled=!e.target.checked;$('finalizeClinicalConfirm').onclick=()=>{if(!$('clinicalReviewComplete').checked)return;const after=pendingAfterConfirm;pendingAfterConfirm=null;confirm();hide('clinicalConfirmModal');if(after)after()};$('submitRecapBtn').onclick=submitRecap;$('pauseAndExit').onclick=()=>{state.paused=true;clearInterval(state.timer);hide('leaveRecordingModal');performWorkspaceExit();toast('Đã tạm dừng ghi')};$('floatAndExit').onclick=continueRecordingInBackground;document.querySelectorAll('.field label').forEach(label=>{const control=label.parentElement.querySelector('input,select,textarea');if(control)label.htmlFor=control.id});document.querySelectorAll('.section-content[contenteditable]').forEach(element=>{element.setAttribute('role','textbox');element.setAttribute('aria-multiline','true');const title=element.closest('.section')?.querySelector('.section-title b')?.textContent.trim();if(title)element.setAttribute('aria-label',title)});setWorklist('action');
+ $('shareBtn').onclick=openShare;$('inviteDoctorBtn').onclick=()=>show('inviteDoctorModal');$('sendDoctorInvite').onclick=inviteDoctor;$('exportPdfBtn').onclick=openExportPdfModal;$('exportPatientSummary').onclick=()=>chooseExport('booklet');$('exportClinicalSummary').onclick=()=>chooseExport('internal');$('downloadExportPdf').onclick=downloadExportPdf;$('confirmAndShare').onclick=()=>{hide('shareConfirm');requestClinicalConfirmation(()=>{updateShare();show('shareModal')})};$('syncBtn').onclick=syncHis;$('retrySyncBtn').onclick=retryHisSync;document.querySelectorAll('input[name="output"]').forEach(x=>x.onchange=restoreShareContent);$('shareChannel').onchange=updateShareChannel;$('restoreShareAI').onclick=restoreShareContent;$('addRecipient').onclick=()=>{const v=$('recipientInput').value.trim(),channel=$('shareChannel').value;if(!validateRecipient(v,channel)){toast(`Nhập ${channel==='email'?'email':'số điện thoại'} hợp lệ`);return}if(!state.recipients.includes(v))state.recipients.push(v);renderAllRecipientLists();$('recipientInput').value=''};$('sendShare').onclick=()=>sendShareResult('full');$('clinicalReviewComplete').onchange=e=>$('finalizeClinicalConfirm').disabled=!e.target.checked;$('finalizeClinicalConfirm').onclick=()=>{if(!$('clinicalReviewComplete').checked)return;const after=pendingAfterConfirm;pendingAfterConfirm=null;confirm();hide('clinicalConfirmModal');if(after)after()};$('submitRecapBtn').onclick=submitRecap;$('pauseAndExit').onclick=()=>{state.paused=true;clearInterval(state.timer);hide('leaveRecordingModal');performWorkspaceExit();toast('Đã tạm dừng ghi')};$('floatAndExit').onclick=continueRecordingInBackground;document.querySelectorAll('.field label').forEach(label=>{const control=label.parentElement.querySelector('input,select,textarea');if(control)label.htmlFor=control.id});document.querySelectorAll('.section-content[contenteditable]').forEach(element=>{element.setAttribute('role','textbox');element.setAttribute('aria-multiline','true');const title=element.closest('.section')?.querySelector('.section-title b')?.textContent.trim();if(title)element.setAttribute('aria-label',title)});setWorklist('action');
  
 </script>
 </body>
