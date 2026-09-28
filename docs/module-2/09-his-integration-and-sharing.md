@@ -29,6 +29,9 @@ The outgoing copy can be edited without changing the confirmed record. Supported
 channels in the prototype are Zalo and email. Recipient format is validated, and
 multiple recipients can be added.
 
+Sharing is the explicit scope of MV-261. The share action creates an outgoing copy;
+it does not change confirmation status, mutate the clinical record, or imply HIS sync.
+
 ## Internal collaboration
 
 The doctor may invite another doctor from the same hospital with read-only access.
@@ -37,3 +40,8 @@ This collaboration action is independent of patient sharing and HIS sync.
 ## PDF
 
 The confirmed summary may be printed/exported as PDF. Draft export is blocked.
+
+## Outcome separation
+
+Each destination needs its own status, timestamp, actor, and failure/retry evidence.
+A success or failure for one destination must not silently update another destination.

@@ -20,6 +20,24 @@ Launch from HIS or Standalone
 → independently sync HIS, share, invite doctor, or export PDF
 ```
 
+The capture-to-confirmation segment is owned by MV-195. HIS/EMR entry is owned by
+MV-260, standalone entry by MV-258, cross-department context by MV-259, and result
+sharing by MV-261.
+
+## Cross-department workflow
+
+```text
+Resolve current patient and encounter
+→ list permitted prior department encounters
+→ clinician selects relevant context
+→ record selected sources and review status
+→ generate the current encounter draft
+→ clinician reviews and confirms the current record independently
+```
+
+Separate department encounters must not be merged into one clinical record merely
+because they belong to the same patient journey.
+
 ## Consent-refusal workflow
 
 ```text

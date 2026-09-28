@@ -20,6 +20,10 @@
   patient/session.
 - **FR-09:** The UI shall distinguish reference context from recorded conversation and
   from content sent to HIS.
+- **FR-09a:** Cross-department context shall identify its source encounter,
+  department, document type, and review/confirmation status.
+- **FR-09b:** The system shall record which prior context items were used to create
+  the current draft.
 
 ## Capture
 
@@ -51,3 +55,6 @@
 - **FR-25:** Doctor invitations shall be limited to doctors in the same hospital and
   shall grant read-only access.
 - **FR-26:** PDF export shall be available only after confirmation.
+- **FR-27:** Standalone sharing shall not imply that a record was synchronised to HIS.
+- **FR-28:** HIS sync, patient sharing, doctor collaboration, and PDF export shall
+  expose independent outcomes and retry states.

@@ -8,6 +8,8 @@
   a patient before opening capture.
 - **AC-03:** Prior visits and added reference material remain attached to the selected
   patient/session and are visibly labelled as reference context.
+- **AC-03a:** Cross-department context identifies its source encounter, department,
+  and confirmation status, and generation identifies which items were used.
 
 ## Consent
 
@@ -44,9 +46,12 @@
 - **AC-22:** Editing a patient-sharing copy does not alter the confirmed record or HIS content.
 - **AC-23:** Zalo recipients require a valid phone number; email recipients require a valid email.
 - **AC-24:** Invited doctors are restricted to the same hospital and receive read-only access.
+- **AC-25:** Sharing, HIS sync, collaboration, and PDF export display independent
+  outcomes; completing one does not mark another as completed.
+- **AC-26:** Standalone completion does not imply HIS synchronisation.
 
 ## Traceability
 
-Each criterion above is grounded in a visible state, control, validation, or transition in
-`module2.html`. Criteria intentionally avoid backend behaviour, timing guarantees, or policies
-that the prototype does not demonstrate.
+Criteria combine Jira scope with visible states, controls, validations, and transitions
+in `module2.html`. They do not prove implementation status, backend behaviour, timing
+guarantees, or policies that neither source demonstrates.

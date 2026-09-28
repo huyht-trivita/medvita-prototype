@@ -5,6 +5,7 @@ triển độc lập và vẫn được truy cập từ một mục lục chung.
 
 ## Modules
 
+- [Module 1 — Tiếp nhận bệnh nhân](module-1/README.md)
 - [Module 2 — Đồng hành buổi khám](module-2/README.md)
 
 ## Quy ước cấu trúc

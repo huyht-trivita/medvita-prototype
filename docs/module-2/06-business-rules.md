@@ -27,3 +27,9 @@
   automatically conversation evidence or HIS data.
 - **BR-15 — Failure preservation:** HIS failure must not invalidate or remove a confirmed
   record.
+- **BR-16 — Encounter separation:** Visits to different departments remain separate
+  encounters unless an approved hospital workflow defines another grouping.
+- **BR-17 — Prior-summary provenance:** Prior AI summaries are reference context and
+  retain source, status, and provenance; they are not automatically verified facts.
+- **BR-18 — Mode parity:** Standalone and HIS-linked modes use the same consent,
+  draft, and confirmation gates even when their context sources differ.

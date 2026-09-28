@@ -1,9 +1,14 @@
 # MedVita Module 2 — Product Documentation
 
-This documentation describes the final business behaviour represented by
-[`module2.html`](../../module2.html). The prototype is the sole source of truth for
-this version. External planning systems, implementation assumptions, and future
-roadmap items are intentionally excluded.
+This documentation combines the business scope recorded in Jira epics
+[MV-195](https://trivitaai.atlassian.net/browse/MV-195),
+[MV-258](https://trivitaai.atlassian.net/browse/MV-258),
+[MV-259](https://trivitaai.atlassian.net/browse/MV-259),
+[MV-260](https://trivitaai.atlassian.net/browse/MV-260), and
+[MV-261](https://trivitaai.atlassian.net/browse/MV-261) with the visible behaviour
+represented by [`module2.html`](../../module2.html). Jira defines product scope;
+the prototype provides interaction evidence. Prototype-only behaviour is not proof
+of production implementation.
 
 ## Product statement
 
@@ -35,3 +40,11 @@ sharing, collaboration, or PDF export.
 - **Draft:** AI-generated or doctor-edited content not yet clinically confirmed.
 - **Confirmed record:** immutable clinical content after explicit doctor confirmation.
 - **Patient summary:** editable communication derived from the confirmed record.
+
+## Jira scope map
+
+- **MV-195:** capture, process, review and complete an examination session.
+- **MV-258:** use MedVita independently from HIS/EHR.
+- **MV-259:** manage cross-department examination context.
+- **MV-260:** use MedVita from an HIS/EMR context.
+- **MV-261:** share examination results after clinical confirmation.

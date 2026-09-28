@@ -2,6 +2,8 @@
 
 ## Included
 
+- The five Jira scope areas: examination completion, standalone use,
+  cross-department context, HIS/EMR use, and result sharing.
 - HIS-linked and standalone doctor entry points.
 - Doctor authentication and prototype standalone registration with OTP.
 - Patient selection and minimal patient creation in standalone mode.
@@ -34,3 +36,9 @@
 Static identities, medical content, timers, delays, authentication values, and success
 responses are demonstrations. They define intended states and transitions, not a
 production implementation or performance commitment.
+
+## Source boundary
+
+Jira epics define intended business areas. The prototype demonstrates a coherent
+target workflow but does not prove every child item, integration or production
+control has been implemented. Delivery evidence remains in Jira.

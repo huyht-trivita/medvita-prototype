@@ -40,6 +40,18 @@ The doctor authenticates independently, sees a personal worklist, chooses or cre
 a patient, and creates a session. Standalone mode adds reference context and session
 management because HIS does not provide these automatically.
 
+Standalone and HIS-linked use are separate Jira scope areas (MV-258 and MV-260).
+They share consent, draft and confirmation gates but differ in how patient,
+encounter, hospital and reference context are established.
+
+## Cross-department operation
+
+MV-259 defines cross-department information management as a separate concern. Each
+department interaction remains a distinct encounter unless an approved hospital
+workflow defines otherwise. Prior summaries are reference context: their source and
+review status remain visible, and an earlier AI summary is not silently treated as
+verified clinical fact.
+
 ## Session worklist states
 
 - **Needs action:** review-required and draft sessions.
