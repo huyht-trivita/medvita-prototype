@@ -193,11 +193,8 @@ textarea.note-input:focus{border-color:var(--primary);}
 .intake-card{background:#fff;border:1.5px solid var(--line);border-radius:var(--radius);padding:24px;box-shadow:0 8px 24px rgba(15,39,64,.05);}
 .intake-step{display:none;}.intake-step.active{display:block;}
 .intake-title{font-size:18px;font-weight:800;margin-bottom:5px;}.intake-desc{font-size:12.5px;color:var(--muted);line-height:1.55;margin-bottom:20px;}
-.patient-tabs{display:grid;grid-template-columns:1fr 1fr;background:var(--bg);padding:4px;border-radius:11px;margin-bottom:22px;}
-.patient-tab{min-height:46px;border:0;border-radius:8px;background:transparent;color:var(--muted);font-size:13px;font-weight:700;cursor:pointer;}
-.patient-tab.active{background:#fff;color:var(--primary);box-shadow:0 2px 8px rgba(15,39,64,.08);}
-.patient-form{display:none;}.patient-form.active{display:block;}
 .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}.form-grid .field{margin-bottom:0;}
+.identity-lookup{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:start;margin-bottom:16px;}.identity-lookup .field{margin-bottom:0;}.identity-check{min-height:44px;margin-top:24px;border:1.5px solid var(--primary);border-radius:10px;padding:0 18px;background:#fff;color:var(--primary);font-size:13px;font-weight:800;cursor:pointer;}.identity-check:disabled{opacity:.5;cursor:not-allowed;}.optional-field[hidden]{display:none;}
 .field select{width:100%;height:44px;border:1.5px solid var(--line);border-radius:10px;padding:0 14px;background:#fff;font-size:14px;color:var(--ink);outline:none;}
 .field input[aria-invalid="true"],.field select[aria-invalid="true"]{border-color:var(--accent-red);box-shadow:0 0 0 3px rgba(230,53,53,.08);}
 .field-error{min-height:18px;color:var(--accent-red);font-size:11.5px;font-weight:600;margin-top:5px;}
@@ -249,6 +246,7 @@ textarea.note-input:focus{border-color:var(--primary);}
 .kiosk-home{text-align:center;padding:62px 24px;background:#fff;border:1.5px solid var(--line);border-radius:22px;box-shadow:0 18px 48px rgba(15,39,64,.09);}
 .kiosk-home-icon{width:76px;height:76px;border-radius:22px;background:#e8f0ff;color:var(--primary);display:flex;align-items:center;justify-content:center;margin:0 auto 22px;}.kiosk-home-icon svg{width:38px;height:38px;fill:currentColor;}
 .kiosk-home h1{font-size:28px;color:var(--navy);margin-bottom:10px;}.kiosk-home>p{max-width:610px;margin:0 auto 28px;color:var(--muted);font-size:15px;line-height:1.65;}
+.mobile-recommendation{max-width:760px;margin:0 auto 18px;padding:20px 22px;border:1.5px solid #c8dcff;border-radius:14px;background:#f3f7ff;text-align:left;color:#314865;display:grid;grid-template-columns:minmax(0,1fr) 208px;align-items:center;gap:24px;}.mobile-recommendation h2{font-size:17px;color:var(--navy);margin-bottom:7px;}.mobile-recommendation p{font-size:15px;line-height:1.65;}.mobile-recommendation-copy>p{text-align:justify;text-justify:inter-word;}.mobile-recommendation strong{color:var(--primary);}.mobile-download-qr{display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--navy);font-size:13px;font-weight:800;text-align:center;text-decoration:none;}.qr-code{display:block;width:184px;height:184px;max-width:100%;background:#fff;border:8px solid #fff;border-radius:8px;box-shadow:0 4px 14px rgba(15,39,64,.12);}.mobile-download-qr:focus-visible{border-radius:10px;outline:3px solid rgba(0,87,196,.28);outline-offset:4px;}.kiosk-fallback{max-width:620px;margin:0 auto 20px;color:#4b5f7a;font-size:15px;line-height:1.6;text-align:center;}
 .kiosk-start{min-width:260px;min-height:56px;border:0;border-radius:13px;background:var(--primary);color:#fff;font-size:16px;font-weight:800;cursor:pointer;box-shadow:0 9px 22px rgba(0,87,196,.2);}
 .staff-link{display:block;margin:26px auto 0;border:0;background:transparent;color:var(--muted);font-size:14px;text-decoration:underline;cursor:pointer;min-height:48px;padding:0 14px;}
 .staff-panel{display:none;max-width:390px;margin:24px auto 0;padding:18px;background:var(--bg);border-radius:12px;text-align:left;}.staff-panel.active{display:block;}.staff-panel .field{margin-bottom:10px;}.staff-actions{display:flex;gap:8px}.staff-actions button{flex:1;min-height:44px;border:0;border-radius:9px;font-weight:700;cursor:pointer}.staff-cancel{background:#fff;color:var(--ink)}.staff-unlock{background:var(--navy);color:#fff}.staff-error{min-height:18px;color:var(--accent-red);font-size:11.5px;font-weight:600;margin-top:5px;}
@@ -257,7 +255,7 @@ textarea.note-input:focus{border-color:var(--primary);}
 #view-kiosk .intake-card{padding:32px;border-radius:18px;}
 #view-kiosk .intake-title{font-size:25px;margin-bottom:8px;}
 #view-kiosk .intake-desc{font-size:16px;line-height:1.6;margin-bottom:24px;}
-#view-kiosk .patient-tab{min-height:56px;font-size:16px;}
+#view-kiosk .identity-check{min-height:56px;margin-top:27px;font-size:16px;border-radius:12px;}
 #view-kiosk .field label{font-size:15px;margin-bottom:8px;}
 #view-kiosk .field input,#view-kiosk .field select{height:56px;font-size:16px;border-radius:12px;}
 #view-kiosk .field-error{font-size:14px;min-height:22px;}
@@ -282,7 +280,7 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
     .kiosk-main{width:min(920px,calc(100% - 64px));padding:32px 0 calc(48px + env(safe-area-inset-bottom))}.chat-window{height:clamp(280px,40dvh,430px)}
 }
 @media(max-width:760px){
-    #view-dashboard.active{display:block}.sidebar{width:100%;height:auto;position:static;padding:14px}.hospital-chip,.sidebar-footer{display:none}.sidebar-brand{margin-bottom:12px}.nav-item{display:inline-flex;margin-right:4px;padding:10px}.main{padding:20px 14px;max-width:none}.main-header{align-items:flex-start}.epic-tag{display:none}.kiosk-topbar{height:auto;padding:calc(14px + env(safe-area-inset-top)) 18px 14px}.kiosk-hospital{display:none}.kiosk-main{width:calc(100% - 24px);padding:22px 0 calc(28px + env(safe-area-inset-bottom))}.kiosk-home{padding:38px 18px}.kiosk-home h1{font-size:23px}.form-grid{grid-template-columns:1fr}.intake-card,#view-kiosk .intake-card{padding:18px}.patient-tabs{grid-template-columns:1fr}.field input,.field select,.chat-compose textarea{font-size:16px}.chat-window{height:clamp(260px,42dvh,360px)}.chat-compose{display:grid;grid-template-columns:56px 1fr auto}.chat-compose textarea{min-width:0}.chat-message{max-width:90%}.intake-actions{flex-direction:column-reverse}.intake-actions button{width:100%}
+    #view-dashboard.active{display:block}.sidebar{width:100%;height:auto;position:static;padding:14px}.hospital-chip,.sidebar-footer{display:none}.sidebar-brand{margin-bottom:12px}.nav-item{display:inline-flex;margin-right:4px;padding:10px}.main{padding:20px 14px;max-width:none}.main-header{align-items:flex-start}.epic-tag{display:none}.kiosk-topbar{height:auto;padding:calc(14px + env(safe-area-inset-top)) 18px 14px}.kiosk-hospital{display:none}.kiosk-main{width:calc(100% - 24px);padding:22px 0 calc(28px + env(safe-area-inset-bottom))}.kiosk-home{padding:38px 18px}.kiosk-home h1{font-size:23px}.mobile-recommendation{grid-template-columns:1fr;text-align:center;padding:20px 18px;gap:18px}.form-grid,.identity-lookup{grid-template-columns:1fr}.identity-check,#view-kiosk .identity-check{width:100%;margin-top:0}.intake-card,#view-kiosk .intake-card{padding:18px}.field input,.field select,.chat-compose textarea{font-size:16px}.chat-window{height:clamp(260px,42dvh,360px)}.chat-compose{display:grid;grid-template-columns:56px 1fr auto}.chat-compose textarea{min-width:0}.chat-message{max-width:90%}.intake-actions{flex-direction:column-reverse}.intake-actions button{width:100%}
 }
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;}}
 </style>
@@ -415,26 +413,19 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
                 <div class="intake-card">
                     <section class="intake-step active" id="intake-step-info" data-step-key="info">
                         <h2 class="intake-title">Thông tin bệnh nhân</h2>
-                        <p class="intake-desc">Chọn loại bệnh nhân để MedVita đối chiếu với HIS hoặc tạo hồ sơ mới.</p>
-                        <div class="patient-tabs" role="tablist" aria-label="Loại bệnh nhân">
-                            <button class="patient-tab active" id="patient-type-returning" role="tab" aria-selected="true" aria-controls="returning-patient-form" onclick="selectPatientType('returning')">Bệnh nhân quay lại khám</button>
-                            <button class="patient-tab" id="patient-type-new" role="tab" aria-selected="false" aria-controls="new-patient-form" onclick="selectPatientType('new')">Bệnh nhân mới</button>
-                        </div>
-                        <div class="patient-form active" id="returning-patient-form" role="tabpanel" aria-labelledby="patient-type-returning">
-                            <div class="form-grid">
-                                <div class="field"><label for="existing-patient-id">Mã bệnh nhân</label><input id="existing-patient-id" aria-describedby="existing-patient-id-error" autocomplete="off" placeholder="VD: BN-TN-1024"><div class="field-error" id="existing-patient-id-error" role="alert"></div></div>
-                                <div class="field"><label for="existing-cccd">Số CCCD</label><input id="existing-cccd" aria-describedby="existing-cccd-error" inputmode="numeric" maxlength="12" autocomplete="off" placeholder="12 chữ số"><div class="field-error" id="existing-cccd-error" role="alert"></div></div>
+                        <p class="intake-desc">Vui lòng nhập thông tin bên dưới. Nếu đã từng khám tại bệnh viện, hãy nhập mã bệnh nhân để tìm hồ sơ nhanh hơn.</p>
+                        <div id="patient-identity-form">
+                            <div class="identity-lookup">
+                                <div class="field"><label for="patient-id">Mã bệnh nhân <span style="font-weight:500;color:var(--muted)">(không bắt buộc)</span></label><input id="patient-id" aria-describedby="patient-id-hint patient-id-error" autocomplete="off" placeholder="VD: BN-TN-1024" oninput="handlePatientIdInput()"><div class="field-error" id="patient-id-error" role="alert"></div><div class="form-note" id="patient-id-hint" style="margin-top:4px;padding:8px 10px">Có mã bệnh nhân? Nhập mã để đối chiếu thông tin với HIS.</div></div>
+                                <button class="identity-check" id="btn-check-patient" type="button" onclick="checkPatientOnServer()" disabled>Kiểm tra</button>
                             </div>
-                            <div class="form-note"><b>Dữ liệu demo:</b> dùng mã <code>BN-TN-1024</code> và CCCD <code>012345678901</code> để mô phỏng tìm thấy bệnh nhân trên HIS.</div>
-                        </div>
-                        <div class="patient-form" id="new-patient-form" role="tabpanel" aria-labelledby="patient-type-new" hidden>
                             <div class="form-grid">
-                                <div class="field"><label for="new-full-name">Họ và tên</label><input id="new-full-name" aria-describedby="new-full-name-error" autocomplete="name" placeholder="Nhập họ tên đầy đủ"><div class="field-error" id="new-full-name-error" role="alert"></div></div>
-                                <div class="field"><label for="new-cccd">Số CCCD</label><input id="new-cccd" aria-describedby="new-cccd-error" inputmode="numeric" maxlength="12" autocomplete="off" placeholder="12 chữ số"><div class="field-error" id="new-cccd-error" role="alert"></div></div>
-                                <div class="field"><label for="new-dob">Ngày sinh</label><input id="new-dob" aria-describedby="new-dob-error" type="date"><div class="field-error" id="new-dob-error" role="alert"></div></div>
-                                <div class="field"><label for="new-gender">Giới tính</label><select id="new-gender" aria-describedby="new-gender-error"><option value="">Chọn giới tính</option><option>Nam</option><option>Nữ</option><option>Khác</option></select><div class="field-error" id="new-gender-error" role="alert"></div></div>
+                                <div class="field"><label for="patient-cccd">Số CCCD</label><input id="patient-cccd" aria-describedby="patient-cccd-error" inputmode="numeric" maxlength="12" autocomplete="off" placeholder="12 chữ số" oninput="markIdentityUnverified()"><div class="field-error" id="patient-cccd-error" role="alert"></div></div>
+                                <div class="field"><label for="patient-birth-year">Năm sinh</label><input id="patient-birth-year" aria-describedby="patient-birth-year-error" inputmode="numeric" maxlength="4" autocomplete="bday-year" placeholder="VD: 1989" oninput="markIdentityUnverified()"><div class="field-error" id="patient-birth-year-error" role="alert"></div></div>
+                                <div class="field"><label for="patient-gender">Giới tính</label><select id="patient-gender" aria-describedby="patient-gender-error" onchange="markIdentityUnverified()"><option value="">Chọn giới tính</option><option>Nam</option><option>Nữ</option><option>Khác</option></select><div class="field-error" id="patient-gender-error" role="alert"></div></div>
+                                <div class="field optional-field" id="optional-name-field"><label for="patient-full-name">Họ và tên <span style="font-weight:500;color:var(--muted)">(không bắt buộc)</span></label><input id="patient-full-name" aria-describedby="patient-full-name-error" autocomplete="name" placeholder="Nhập họ tên nếu muốn" oninput="markIdentityUnverified()"><div class="field-error" id="patient-full-name-error" role="alert"></div></div>
                             </div>
-                            <div class="form-note">Bệnh nhân mới sẽ cần <b>nhận diện khuôn mặt</b> ở bước tiếp theo trước khi MedVita tạo Account/Health Profile.</div>
+                            <div class="form-note"><b>Dữ liệu demo:</b> mã <code>BN-TN-1024</code>, CCCD <code>012345678901</code>, năm sinh <code>1989</code>, giới tính <code>Nữ</code>.</div>
                         </div>
                         <div class="intake-status" id="intake-status" role="status" aria-live="polite"></div>
                         <div class="intake-actions"><button class="action-next" id="btn-process-patient" onclick="processPatientIdentity()">Khai báo triệu chứng</button></div>
@@ -533,7 +524,17 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
         <section class="kiosk-home" id="kiosk-home">
             <div class="kiosk-home-icon"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M19 8H5c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-8c0-1.1-.9-2-2-2zm-7 9c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zM8 4h8v2H8V4z"/></svg></div>
             <h1>Khai báo thông tin trước khám</h1>
-            <p>Vui lòng chuẩn bị CCCD và mã bệnh nhân nếu bạn đã từng khám tại Bệnh viện Thái Nguyên. Thông tin của mỗi phiên sẽ được xoá khỏi màn hình sau khi hoàn tất.</p>
+            <div class="mobile-recommendation">
+                <div class="mobile-recommendation-copy">
+                    <h2>Khai báo thuận tiện hơn với ứng dụng MedVita</h2>
+                    <p>Bạn nên khai báo thông tin trước khám trên <strong>Ứng Dụng MedVita</strong>. Sau khi hoàn tất, số thứ tự sẽ được gửi về điện thoại, giúp bạn chủ động thời gian và hạn chế chờ.</p>
+                </div>
+                <a class="mobile-download-qr" href="https://medvita.vn/download" aria-label="Mở trang tải ứng dụng MedVita Mobile" target="_blank" rel="noopener">
+                    <svg class="qr-code" viewBox="0 0 37 37" shape-rendering="crispEdges" aria-hidden="true"><rect width="37" height="37" fill="#fff"/><path fill="#0f2740" d="M4 4h7v1h-7z M13 4h2v1h-2z M19 4h6v1h-6z M26 4h7v1h-7z M4 5h1v1h-1z M10 5h1v1h-1z M13 5h2v1h-2z M16 5h1v1h-1z M21 5h1v1h-1z M24 5h1v1h-1z M26 5h1v1h-1z M32 5h1v1h-1z M4 6h1v1h-1z M6 6h3v1h-3z M10 6h1v1h-1z M12 6h2v1h-2z M15 6h1v1h-1z M18 6h1v1h-1z M20 6h1v1h-1z M22 6h3v1h-3z M26 6h1v1h-1z M28 6h3v1h-3z M32 6h1v1h-1z M4 7h1v1h-1z M6 7h3v1h-3z M10 7h1v1h-1z M12 7h3v1h-3z M16 7h1v1h-1z M20 7h2v1h-2z M24 7h1v1h-1z M26 7h1v1h-1z M28 7h3v1h-3z M32 7h1v1h-1z M4 8h1v1h-1z M6 8h3v1h-3z M10 8h1v1h-1z M12 8h2v1h-2z M16 8h4v1h-4z M21 8h4v1h-4z M26 8h1v1h-1z M28 8h3v1h-3z M32 8h1v1h-1z M4 9h1v1h-1z M10 9h1v1h-1z M12 9h9v1h-9z M24 9h1v1h-1z M26 9h1v1h-1z M32 9h1v1h-1z M4 10h7v1h-7z M12 10h1v1h-1z M14 10h1v1h-1z M16 10h1v1h-1z M18 10h1v1h-1z M20 10h1v1h-1z M22 10h1v1h-1z M24 10h1v1h-1z M26 10h7v1h-7z M12 11h1v1h-1z M14 11h4v1h-4z M19 11h1v1h-1z M22 11h3v1h-3z M4 12h1v1h-1z M6 12h5v1h-5z M13 12h2v1h-2z M16 12h1v1h-1z M18 12h2v1h-2z M21 12h1v1h-1z M23 12h1v1h-1z M26 12h5v1h-5z M6 13h1v1h-1z M8 13h1v1h-1z M11 13h1v1h-1z M15 13h1v1h-1z M19 13h10v1h-10z M32 13h1v1h-1z M6 14h2v1h-2z M9 14h3v1h-3z M14 14h1v1h-1z M21 14h1v1h-1z M25 14h2v1h-2z M5 15h2v1h-2z M8 15h1v1h-1z M11 15h1v1h-1z M16 15h1v1h-1z M18 15h1v1h-1z M20 15h1v1h-1z M24 15h1v1h-1z M27 15h3v1h-3z M31 15h1v1h-1z M5 16h1v1h-1z M7 16h2v1h-2z M10 16h2v1h-2z M14 16h1v1h-1z M20 16h2v1h-2z M27 16h1v1h-1z M29 16h2v1h-2z M4 17h1v1h-1z M6 17h1v1h-1z M8 17h2v1h-2z M11 17h2v1h-2z M14 17h6v1h-6z M22 17h3v1h-3z M26 17h3v1h-3z M32 17h1v1h-1z M5 18h3v1h-3z M9 18h2v1h-2z M12 18h1v1h-1z M14 18h1v1h-1z M17 18h4v1h-4z M22 18h1v1h-1z M24 18h1v1h-1z M28 18h3v1h-3z M5 19h1v1h-1z M8 19h2v1h-2z M11 19h1v1h-1z M15 19h1v1h-1z M17 19h1v1h-1z M19 19h1v1h-1z M23 19h3v1h-3z M27 19h2v1h-2z M31 19h1v1h-1z M6 20h2v1h-2z M10 20h1v1h-1z M13 20h2v1h-2z M16 20h1v1h-1z M18 20h2v1h-2z M21 20h1v1h-1z M23 20h1v1h-1z M29 20h2v1h-2z M4 21h3v1h-3z M8 21h2v1h-2z M13 21h4v1h-4z M19 21h2v1h-2z M22 21h2v1h-2z M25 21h4v1h-4z M30 21h1v1h-1z M32 21h1v1h-1z M4 22h1v1h-1z M7 22h4v1h-4z M12 22h1v1h-1z M14 22h1v1h-1z M25 22h1v1h-1z M27 22h2v1h-2z M30 22h1v1h-1z M4 23h1v1h-1z M8 23h1v1h-1z M11 23h2v1h-2z M16 23h1v1h-1z M18 23h1v1h-1z M20 23h1v1h-1z M22 23h3v1h-3z M27 23h2v1h-2z M31 23h1v1h-1z M4 24h1v1h-1z M6 24h1v1h-1z M9 24h2v1h-2z M12 24h4v1h-4z M20 24h1v1h-1z M22 24h7v1h-7z M30 24h3v1h-3z M12 25h1v1h-1z M14 25h1v1h-1z M16 25h4v1h-4z M21 25h2v1h-2z M24 25h1v1h-1z M28 25h5v1h-5z M4 26h7v1h-7z M13 26h9v1h-9z M23 26h2v1h-2z M26 26h1v1h-1z M28 26h3v1h-3z M4 27h1v1h-1z M10 27h1v1h-1z M12 27h1v1h-1z M14 27h2v1h-2z M17 27h1v1h-1z M19 27h1v1h-1z M21 27h4v1h-4z M28 27h1v1h-1z M32 27h1v1h-1z M4 28h1v1h-1z M6 28h3v1h-3z M10 28h1v1h-1z M12 28h1v1h-1z M14 28h3v1h-3z M18 28h2v1h-2z M24 28h5v1h-5z M30 28h3v1h-3z M4 29h1v1h-1z M6 29h3v1h-3z M10 29h1v1h-1z M12 29h1v1h-1z M14 29h1v1h-1z M16 29h2v1h-2z M19 29h2v1h-2z M22 29h1v1h-1z M24 29h2v1h-2z M29 29h2v1h-2z M4 30h1v1h-1z M6 30h3v1h-3z M10 30h1v1h-1z M12 30h1v1h-1z M14 30h4v1h-4z M22 30h2v1h-2z M25 30h7v1h-7z M4 31h1v1h-1z M10 31h1v1h-1z M14 31h1v1h-1z M17 31h2v1h-2z M20 31h1v1h-1z M23 31h2v1h-2z M26 31h4v1h-4z M31 31h1v1h-1z M4 32h7v1h-7z M12 32h1v1h-1z M14 32h1v1h-1z M17 32h2v1h-2z M20 32h1v1h-1z M22 32h2v1h-2z M25 32h3v1h-3z M30 32h1v1h-1z"/></svg>
+                    <span>Quét mã để tải ứng dụng</span>
+                </a>
+            </div>
+            <p class="kiosk-fallback">Nếu chưa sử dụng Mobile, bạn vẫn có thể tiếp tục khai báo tại kiosk này.</p>
             <button class="kiosk-start" onclick="startPatientSession()">Bắt đầu khai báo</button>
             <div class="kiosk-privacy"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 1a5 5 0 00-5 5v3H5v14h14V9h-2V6a5 5 0 00-5-5zm-3 8V6a3 3 0 016 0v3H9z"/></svg>Phiên riêng tư · Không hiển thị dữ liệu bệnh nhân khác</div>
             <button class="staff-link" onclick="exitKioskToLogin()">Dành cho nhân viên · Đăng nhập lại</button>
@@ -624,10 +625,10 @@ const NURSE_ACCOUNTS = {
 let currentNurse = null;
 
 const HIS_PATIENTS = {
-    'BN-TN-1024|012345678901': { patientId: 'BN-TN-1024', name: 'NGUYỄN THỊ AN', dob: '1989-06-12', gender: 'Nữ', cccd: '012345678901' }
+    'BN-TN-1024': { patientId: 'BN-TN-1024', name: 'NGUYỄN THỊ AN', dob: '1989-06-12', gender: 'Nữ', cccd: '012345678901' }
 };
 
-const intakeState = { patientType: 'returning', patient: null, pendingNewPatientData: null, answers: [], questionIndex: 0 };
+const intakeState = { patientType: 'new', patient: null, pendingNewPatientData: null, identityVerified: false, matchedPatient: null, answers: [], questionIndex: 0 };
 let voiceRecognition = null;
 let voiceRecording = false;
 const symptomQuestions = [
@@ -833,27 +834,12 @@ function exitKioskToLogin() {
 function buildStepFlow(patientType) {
     return patientType === 'new' ? ['info', 'face', 'consent', 'chat', 'summary'] : ['info', 'consent', 'chat', 'summary'];
 }
-let currentStepFlow = buildStepFlow('returning');
+let currentStepFlow = buildStepFlow('new');
 let currentStepKey = 'info';
 
 function goToIntakeStep(key) {
     currentStepKey = key;
     document.querySelectorAll('.intake-step').forEach(el => el.classList.toggle('active', el.dataset.stepKey === key));
-}
-
-function selectPatientType(type) {
-    intakeState.patientType = type;
-    const returning = type === 'returning';
-    document.getElementById('patient-type-returning').classList.toggle('active', returning);
-    document.getElementById('patient-type-new').classList.toggle('active', !returning);
-    document.getElementById('patient-type-returning').setAttribute('aria-selected', String(returning));
-    document.getElementById('patient-type-new').setAttribute('aria-selected', String(!returning));
-    document.getElementById('returning-patient-form').classList.toggle('active', returning);
-    document.getElementById('new-patient-form').classList.toggle('active', !returning);
-    document.getElementById('returning-patient-form').hidden = !returning;
-    document.getElementById('new-patient-form').hidden = returning;
-    clearIntakeErrors();
-    if (currentStepKey === 'info') currentStepFlow = buildStepFlow(type);
 }
 
 function clearIntakeErrors() {
@@ -870,10 +856,14 @@ function setFieldError(id, message) {
 
 function validateCccd(value) { return /^\d{12}$/.test(value); }
 function validatePatientName(value) { return /^[\p{L}\s'.-]{2,100}$/u.test(value); }
+function validateBirthYear(value) {
+    const year = Number(value);
+    return /^\d{4}$/.test(value) && year >= 1900 && year <= new Date().getFullYear();
+}
 function escapeHtml(value) { return String(value).replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char])); }
 
-function lookupReturningPatient(patientId, cccd) {
-    return HIS_PATIENTS[`${patientId.toUpperCase()}|${cccd}`] || null;
+function lookupPatientById(patientId) {
+    return HIS_PATIENTS[patientId.toUpperCase()] || null;
 }
 
 function createPatientProfile(data) {
@@ -888,49 +878,98 @@ function calculateAge(dob) {
     return age;
 }
 
+function getIdentityFormData() {
+    return {
+        patientId: document.getElementById('patient-id').value.trim().toUpperCase(),
+        name: document.getElementById('patient-full-name').value.trim().toUpperCase(),
+        cccd: document.getElementById('patient-cccd').value.trim(),
+        birthYear: document.getElementById('patient-birth-year').value.trim(),
+        gender: document.getElementById('patient-gender').value
+    };
+}
+
+function markIdentityUnverified() {
+    intakeState.identityVerified = false;
+    intakeState.matchedPatient = null;
+    const status = document.getElementById('intake-status');
+    if (document.getElementById('patient-id').value.trim()) status.innerText = 'Thông tin đã thay đổi. Vui lòng kiểm tra lại.';
+}
+
+function handlePatientIdInput() {
+    const hasPatientId = Boolean(document.getElementById('patient-id').value.trim());
+    document.getElementById('btn-check-patient').disabled = !hasPatientId;
+    markIdentityUnverified();
+    if (!hasPatientId) document.getElementById('intake-status').innerText = 'Không có mã bệnh nhân: MedVita sẽ tạo hồ sơ mới sau khi xác minh khuôn mặt.';
+}
+
+function validateIdentityData(data, requirePatientId = false) {
+    let valid = true;
+    if (requirePatientId && !data.patientId) { setFieldError('patient-id', 'Vui lòng nhập mã bệnh nhân.'); valid = false; }
+    if (!validateCccd(data.cccd)) { setFieldError('patient-cccd', 'CCCD phải gồm đúng 12 chữ số.'); valid = false; }
+    if (!validateBirthYear(data.birthYear)) { setFieldError('patient-birth-year', 'Vui lòng nhập năm sinh hợp lệ gồm 4 chữ số.'); valid = false; }
+    if (!data.gender) { setFieldError('patient-gender', 'Vui lòng chọn giới tính.'); valid = false; }
+    if (data.name && !validatePatientName(data.name)) { setFieldError('patient-full-name', 'Họ tên chỉ gồm chữ cái và dấu câu thông dụng.'); valid = false; }
+    return valid;
+}
+
+function checkPatientOnServer() {
+    clearIntakeErrors();
+    const data = getIdentityFormData();
+    if (!data.patientId) {
+        setFieldError('patient-id', 'Vui lòng nhập mã bệnh nhân.');
+        return;
+    }
+    const button = document.getElementById('btn-check-patient');
+    const continueButton = document.getElementById('btn-process-patient');
+    button.disabled = true;
+    continueButton.disabled = true;
+    document.getElementById('intake-status').innerText = 'Đang kiểm tra thông tin…';
+    setTimeout(() => {
+        button.disabled = false;
+        continueButton.disabled = false;
+        const patient = lookupPatientById(data.patientId);
+        if (!patient) {
+            setFieldError('patient-id', 'Không tìm thấy mã bệnh nhân. Vui lòng kiểm tra và thử lại.');
+            document.getElementById('intake-status').innerText = '';
+            return;
+        }
+        document.getElementById('patient-full-name').value = patient.name;
+        document.getElementById('patient-cccd').value = patient.cccd;
+        document.getElementById('patient-birth-year').value = patient.dob.slice(0, 4);
+        document.getElementById('patient-gender').value = patient.gender;
+        intakeState.identityVerified = true;
+        intakeState.matchedPatient = patient;
+        document.getElementById('intake-status').innerText = 'Đã tìm thấy và điền thông tin của bạn.';
+    }, 650);
+}
+
+function continueWithReturningPatient(patient) {
+    intakeState.patientType = 'returning';
+    intakeState.patient = patient;
+    currentStepFlow = buildStepFlow('returning');
+    prepareConsent();
+    goToIntakeStep('consent');
+}
+
 function processPatientIdentity() {
     clearIntakeErrors();
-    let valid = true;
+    const data = {
+        ...getIdentityFormData()
+    };
+    if (!validateIdentityData(data, false)) return;
 
-    if (intakeState.patientType === 'returning') {
-        const patientId = document.getElementById('existing-patient-id').value.trim();
-        const cccd = document.getElementById('existing-cccd').value.trim();
-        if (!patientId) { setFieldError('existing-patient-id', 'Vui lòng nhập mã bệnh nhân.'); valid = false; }
-        if (!validateCccd(cccd)) { setFieldError('existing-cccd', 'CCCD phải gồm đúng 12 chữ số.'); valid = false; }
-        if (!valid) return;
-
-        const button = document.getElementById('btn-process-patient');
-        button.disabled = true;
-        document.getElementById('intake-status').innerText = 'Đang đối chiếu thông tin với HIS…';
-        setTimeout(() => {
-            button.disabled = false;
-            const patient = lookupReturningPatient(patientId, cccd);
-            if (!patient) {
-                setFieldError('existing-patient-id', 'Không tìm thấy bệnh nhân hoặc CCCD không khớp trên HIS.');
-                document.getElementById('intake-status').innerText = '';
-                return;
-            }
-            intakeState.patient = patient;
-            document.getElementById('intake-status').innerText = 'Đã xác minh bệnh nhân trên HIS.';
-            currentStepFlow = buildStepFlow('returning');
-            prepareConsent();
-            goToIntakeStep('consent');
-        }, 650);
+    if (data.patientId) {
+        if (intakeState.identityVerified && intakeState.matchedPatient) {
+            continueWithReturningPatient(intakeState.matchedPatient);
+        } else {
+            setFieldError('patient-id', 'Vui lòng nhấn “Kiểm tra” trước khi tiếp tục.');
+        }
         return;
     }
 
-    const data = {
-        name: document.getElementById('new-full-name').value.trim().toUpperCase(),
-        cccd: document.getElementById('new-cccd').value.trim(),
-        dob: document.getElementById('new-dob').value,
-        gender: document.getElementById('new-gender').value
-    };
-    if (!validatePatientName(data.name)) { setFieldError('new-full-name', 'Họ tên chỉ gồm chữ cái và dấu câu thông dụng.'); valid = false; }
-    if (!validateCccd(data.cccd)) { setFieldError('new-cccd', 'CCCD phải gồm đúng 12 chữ số.'); valid = false; }
-    if (!data.dob || new Date(data.dob + 'T00:00:00') > new Date()) { setFieldError('new-dob', 'Vui lòng chọn ngày sinh hợp lệ.'); valid = false; }
-    if (!data.gender) { setFieldError('new-gender', 'Vui lòng chọn giới tính.'); valid = false; }
-    if (!valid) return;
-
+    data.name = data.name || 'BỆNH NHÂN MỚI';
+    data.dob = `${data.birthYear}-01-01`;
+    intakeState.patientType = 'new';
     intakeState.pendingNewPatientData = data;
     currentStepFlow = buildStepFlow('new');
     prepareFaceRecognition(data);
@@ -1138,9 +1177,11 @@ function confirmPatientSummary() {
 
 function resetPatientIntake() {
     resetVoiceInput();
-    intakeState.patient = null; intakeState.answers = []; intakeState.questionIndex = 0; intakeState.pendingNewPatientData = null;
+    intakeState.patientType = 'new'; intakeState.patient = null; intakeState.answers = []; intakeState.questionIndex = 0; intakeState.pendingNewPatientData = null; intakeState.identityVerified = false; intakeState.matchedPatient = null;
     document.querySelectorAll('#pane-intake input').forEach(el => el.value = '');
-    document.getElementById('new-gender').value = '';
+    document.getElementById('patient-gender').value = '';
+    document.getElementById('optional-name-field').hidden = false;
+    document.getElementById('btn-check-patient').disabled = true;
     document.getElementById('symptom-answer').value = '';
     document.getElementById('symptom-chat').innerHTML = '';
     document.getElementById('patient-summary').innerText = '';
@@ -1148,12 +1189,12 @@ function resetPatientIntake() {
     document.getElementById('summary-patient-context').innerHTML = '';
     document.getElementById('face-patient-context').innerHTML = '';
     document.getElementById('consent-patient-context').innerHTML = '';
-    selectPatientType('returning');
+    clearIntakeErrors();
     document.getElementById('summary-confirmation').style.display = 'block';
     document.getElementById('intake-success').classList.remove('active');
     document.getElementById('consent-question').style.display = '';
     document.getElementById('consent-declined').classList.remove('active');
-    currentStepFlow = buildStepFlow('returning');
+    currentStepFlow = buildStepFlow('new');
     goToIntakeStep('info');
 }
 

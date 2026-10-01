@@ -29,18 +29,59 @@ const checks = [
     assert.match(html, /function exitKioskToLogin\(/);
     assert.doesNotMatch(html, /id="staff-pin"/);
   }],
-  ['patient intake distinguishes returning and new patients', () => {
-    assert.match(html, /id="patient-type-returning"/);
-    assert.match(html, /id="patient-type-new"/);
-    assert.match(html, /id="returning-patient-form"/);
-    assert.match(html, /id="new-patient-form"/);
+  ['patient intake uses one identity form without patient-type tabs', () => {
+    assert.doesNotMatch(html, /id="patient-type-returning"/);
+    assert.doesNotMatch(html, /id="patient-type-new"/);
+    assert.match(html, /id="patient-identity-form"/);
+    assert.match(html, /id="optional-name-field"/);
+    assert.match(html, /Vui lòng nhập thông tin bên dưới\. Nếu đã từng khám tại bệnh viện, hãy nhập mã bệnh nhân để tìm hồ sơ nhanh hơn\./);
   }],
   ['all patient identity inputs have explicit labels', () => {
-    for (const id of ['existing-patient-id', 'existing-cccd', 'new-full-name', 'new-cccd', 'new-dob', 'new-gender']) {
+    for (const id of ['patient-id', 'patient-full-name', 'patient-cccd', 'patient-birth-year', 'patient-gender']) {
       assert.match(html, new RegExp(`<label[^>]*for="${id}"`));
-      assert.match(html, new RegExp(`id="${id}"[^>]*aria-describedby="${id}-error"`));
+      assert.match(html, new RegExp(`id="${id}"[^>]*aria-describedby="[^"]*${id}-error[^"]*"`));
       assert.match(html, new RegExp(`id="${id}-error"[^>]*role="alert"`));
     }
+  }],
+  ['patient ID lookup only validates the ID and fills HIS identity fields', () => {
+    assert.match(html, /id="btn-check-patient"[^>]*>Kiểm tra<\/button>/);
+    assert.match(html, /function checkPatientOnServer\(/);
+    assert.match(html, /function lookupPatientById\(/);
+    assert.match(html, /identityVerified/);
+    const lookup = html.match(/function checkPatientOnServer\([\s\S]*?\n}\n\nfunction continueWithReturningPatient/);
+    assert.ok(lookup, 'lookup function must be present');
+    assert.doesNotMatch(lookup[0], /validateIdentityData/);
+    assert.match(lookup[0], /if \(!data\.patientId\)/);
+    assert.match(lookup[0], /getElementById\('patient-full-name'\)\.value = patient\.name/);
+    assert.match(lookup[0], /getElementById\('patient-cccd'\)\.value = patient\.cccd/);
+    assert.match(lookup[0], /getElementById\('patient-birth-year'\)\.value = patient\.dob\.slice\(0, 4\)/);
+    assert.match(lookup[0], /getElementById\('patient-gender'\)\.value = patient\.gender/);
+  }],
+  ['patient name stays visible and optional with or without a patient ID', () => {
+    assert.match(html, /function handlePatientIdInput\(/);
+    assert.match(html, /optional-name-field/);
+    const patientIdHandler = html.match(/function handlePatientIdInput\([\s\S]*?\n}/);
+    assert.ok(patientIdHandler, 'patient ID input handler must be present');
+    assert.doesNotMatch(patientIdHandler[0], /optional-name-field'\)\.hidden/);
+    assert.doesNotMatch(patientIdHandler[0], /patient-full-name'\)\.value = ''/);
+    assert.match(html, /data\.name && !validatePatientName\(data\.name\)/);
+    assert.match(html, /data\.name \|\| 'BỆNH NHÂN MỚI'/);
+  }],
+  ['kiosk home recommends Mobile while keeping kiosk available', () => {
+    assert.match(html, /class="mobile-recommendation"/);
+    assert.match(html, /<h2>Khai báo thuận tiện hơn với ứng dụng MedVita<\/h2>/);
+    assert.match(html, /Bạn nên khai báo thông tin trước khám trên <strong>Ứng Dụng MedVita<\/strong>\./);
+    assert.match(html, /số thứ tự/);
+    assert.match(html, /chủ động thời gian và hạn chế chờ\./);
+    assert.match(html, /\.mobile-recommendation-copy>p\{text-align:justify;/);
+    assert.match(html, /<\/a>\s*<\/div>\s*<p class="kiosk-fallback">Nếu chưa sử dụng Mobile, bạn vẫn có thể tiếp tục khai báo tại kiosk này\.<\/p>\s*<button class="kiosk-start"/);
+  }],
+  ['Mobile recommendation includes an accessible demo download QR', () => {
+    assert.match(html, /class="mobile-download-qr"[^>]*href="https:\/\/medvita\.vn\/download"[^>]*aria-label="[^"]+"/);
+    assert.match(html, /class="qr-code"[^>]*viewBox="0 0 37 37"[^>]*shape-rendering="crispEdges"/);
+    assert.match(html, /Quét mã để tải ứng dụng/);
+    assert.match(html, /@media\s*\(max-width:\s*760px\)[\s\S]*\.mobile-recommendation/);
+    assert.match(html, /\.qr-code\{[^}]*width:184px;[^}]*height:184px;/);
   }],
   ['intake provides conditional face recognition and consent steps', () => {
     assert.doesNotMatch(html, /id="intake-stepper"/);
@@ -55,7 +96,7 @@ const checks = [
   }],
   ['backend simulation handles returning lookup and new profile creation', () => {
     assert.match(html, /function processPatientIdentity\(/);
-    assert.match(html, /function lookupReturningPatient\(/);
+    assert.match(html, /function lookupPatientById\(/);
     assert.match(html, /function createPatientProfile\(/);
   }],
   ['AI symptom conversation builds an editable summary', () => {
