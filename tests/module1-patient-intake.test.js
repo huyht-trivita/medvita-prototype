@@ -35,6 +35,7 @@ const checks = [
     assert.match(html, /id="patient-identity-form"/);
     assert.match(html, /id="optional-name-field"/);
     assert.match(html, /Vui lòng nhập thông tin bên dưới\. Nếu đã từng khám tại bệnh viện, hãy nhập mã bệnh nhân để tìm hồ sơ nhanh hơn\./);
+    assert.match(html, /id="patient-id-hint"[^>]*>Nếu đã từng khám tại bệnh viện, hãy nhập mã bệnh nhân để tìm thông tin nhanh hơn\.<\/div>/);
   }],
   ['all patient identity inputs have explicit labels', () => {
     for (const id of ['patient-id', 'patient-full-name', 'patient-cccd', 'patient-birth-year', 'patient-gender']) {

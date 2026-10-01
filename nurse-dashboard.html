@@ -416,7 +416,7 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
                         <p class="intake-desc">Vui lòng nhập thông tin bên dưới. Nếu đã từng khám tại bệnh viện, hãy nhập mã bệnh nhân để tìm hồ sơ nhanh hơn.</p>
                         <div id="patient-identity-form">
                             <div class="identity-lookup">
-                                <div class="field"><label for="patient-id">Mã bệnh nhân <span style="font-weight:500;color:var(--muted)">(không bắt buộc)</span></label><input id="patient-id" aria-describedby="patient-id-hint patient-id-error" autocomplete="off" placeholder="VD: BN-TN-1024" oninput="handlePatientIdInput()"><div class="field-error" id="patient-id-error" role="alert"></div><div class="form-note" id="patient-id-hint" style="margin-top:4px;padding:8px 10px">Có mã bệnh nhân? Nhập mã để đối chiếu thông tin với HIS.</div></div>
+                                <div class="field"><label for="patient-id">Mã bệnh nhân <span style="font-weight:500;color:var(--muted)">(không bắt buộc)</span></label><input id="patient-id" aria-describedby="patient-id-hint patient-id-error" autocomplete="off" placeholder="VD: BN-TN-1024" oninput="handlePatientIdInput()"><div class="field-error" id="patient-id-error" role="alert"></div><div class="form-note" id="patient-id-hint" style="margin-top:4px;padding:8px 10px">Nếu đã từng khám tại bệnh viện, hãy nhập mã bệnh nhân để tìm thông tin nhanh hơn.</div></div>
                                 <button class="identity-check" id="btn-check-patient" type="button" onclick="checkPatientOnServer()" disabled>Kiểm tra</button>
                             </div>
                             <div class="form-grid">
