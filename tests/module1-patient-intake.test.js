@@ -119,6 +119,15 @@ const checks = [
     assert.match(html, /reviewItems\.unshift\(/);
     assert.match(html, /status:\s*'Pending Nurse Review'/);
   }],
+  ['completed intake shows a printable queue number without changing the intake flow', () => {
+    assert.match(html, /Số thứ tự chờ khám của bạn/);
+    assert.match(html, /id="patient-queue-number"/);
+    assert.match(html, /onclick="printQueueTicket\(\)"/);
+    assert.match(html, /function printQueueTicket\(/);
+    assert.match(html, /window\.print\(\)/);
+    assert.match(html, /@media\s+print/);
+    assert.match(html, /document\.getElementById\('patient-queue-number'\)\.innerText/);
+  }],
   ['completed or declined sessions reset to kiosk home', () => {
     assert.match(html, /function finishKioskSession\(/);
     assert.match(html, /finishKioskSession\(\)/);
