@@ -1,0 +1,141 @@
+{
+    "openapi": "3.1.0",
+    "info": {
+        "title": "MedVita Platform",
+        "summary": "MedVita API for Partner",
+        "description": "This is the OpenAPI specification for the MedVita Platform API. It provides endpoints for health checks, summary data retrieval",
+        "version": "0.1.0"
+    },
+    "paths": {
+        "/api/v1/health": {
+            "get": {
+                "tags": [
+                    "health"
+                ],
+                "summary": "Health Check",
+                "description": "Simple liveness probe.",
+                "operationId": "health_check_api_v1_health_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "additionalProperties": true,
+                                    "type": "object",
+                                    "title": "Response Health Check Api V1 Health Get"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/partner-integration/summary": {
+            "post": {
+                "tags": [
+                    "Partner Integration"
+                ],
+                "summary": "Get Partner Summary",
+                "description": "Get the medical summary for a finished chat session, for eMed.\n\nReturns 404 if session_id is malformed, does not exist, or is not finished yet\n— the response never distinguishes these cases to avoid leaking session existence.",
+                "operationId": "get_partner_summary_api_v1_partner_integration_summary_post",
+                "parameters": [
+                    {
+                        "name": "x-hospital-id",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "X-Hospital-Id"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "additionalProperties": true,
+                                "title": "Raw Body"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PartnerSummaryResponse"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "PartnerSummaryResponse": {
+                "properties": {
+                    "red_flag": {
+                        "type": "boolean",
+                        "title": "Red Flag"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "title": "Created At"
+                    }
+                },
+                "additionalProperties": true,
+                "type": "object",
+                "required": [
+                    "red_flag",
+                    "created_at"
+                ],
+                "title": "PartnerSummaryResponse",
+                "description": "Response for /partner-integration/summary.\n\nextra=\"allow\" passes through whatever clinical keys live in chat_sessions.summary\n(free-form AI JSON: ly_do_vao_vien, khoa, tien_su_benh, ...) unmodified — the eMed\ncontract for exact field names is still Pending (MV-106)."
+            }
+        },
+        "securitySchemes": {
+            "APIKeyHeader": {
+                "type": "apiKey",
+                "in": "header",
+                "name": "X-API-Key"
+            },
+            "HTTPBearer": {
+                "type": "http",
+                "scheme": "bearer"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "health",
+            "description": "Health check endpoints"
+        },
+        {
+            "name": "Partner Integration",
+            "description": "Partner Integration"
+        }
+    ],
+    "servers": [
+        {
+            "url": "/app-uat/platform"
+        }
+    ]
+}

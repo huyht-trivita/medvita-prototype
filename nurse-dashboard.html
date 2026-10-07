@@ -218,17 +218,6 @@ textarea.note-input:focus{border-color:var(--primary);}
 .success-panel{display:none;text-align:center;padding:28px 18px;}.success-panel.active{display:block;}.success-icon{width:56px;height:56px;border-radius:50%;margin:0 auto 14px;background:#dcf7e3;color:#166534;display:flex;align-items:center;justify-content:center;}.success-icon.danger{background:#ffe1e1;color:var(--accent-red);}.success-icon svg{width:28px;height:28px;fill:currentColor}.success-panel h3{font-size:18px;margin-bottom:6px}.success-panel p{font-size:13px;color:var(--muted);line-height:1.55;max-width:520px;margin:0 auto;}
 .queue-ticket{max-width:420px;margin:20px auto 0;padding:22px;border:2px solid var(--navy);border-radius:14px;background:#fff;text-align:center;}.queue-ticket-label{font-size:14px;font-weight:700;color:var(--ink);}.queue-ticket-number{margin:8px 0;font-family:var(--mono);font-size:46px;font-weight:800;letter-spacing:2px;color:var(--primary);}.queue-ticket-note{font-size:12px;color:var(--muted);line-height:1.5;}.queue-ticket-actions{justify-content:center;flex-wrap:wrap;}
 
-.face-scan{display:flex;flex-direction:column;align-items:center;gap:14px;padding:26px 20px;}
-.scan-frame{width:160px;height:160px;border-radius:50%;border:3px dashed var(--line);display:flex;align-items:center;justify-content:center;background:#f7faff;transition:0.2s;}
-.scan-frame svg{width:64px;height:64px;fill:#c7d0e0;transition:0.2s;}
-.scan-frame.scanning{border-color:var(--primary);border-style:solid;animation:pulseScan 1.1s ease-in-out infinite;}
-.scan-frame.verified{border-color:var(--accent-green);border-style:solid;background:#f0fbf4;}
-.scan-frame.verified svg{fill:var(--accent-green);}
-.scan-frame.failed{border-color:var(--accent-red);border-style:solid;background:#fff5f5;}
-.scan-frame.failed svg{fill:var(--accent-red);}
-@keyframes pulseScan{0%,100%{box-shadow:0 0 0 0 rgba(0,87,196,.25);}50%{box-shadow:0 0 0 14px rgba(0,87,196,0);}}
-.scan-status{font-size:13.5px;font-weight:700;color:var(--ink);text-align:center;}
-.scan-hint{font-size:12px;color:var(--muted);text-align:center;max-width:380px;line-height:1.5;}
 
 .consent-card{background:#f7faff;border:1.5px solid #dce8fb;border-radius:12px;padding:18px 20px;font-size:13px;line-height:1.7;color:var(--ink);margin-bottom:18px;}
 .consent-card h4{font-size:13.5px;margin-bottom:8px;}
@@ -267,8 +256,7 @@ textarea.note-input:focus{border-color:var(--primary);}
 #view-kiosk .patient-context strong{font-size:16px;}#view-kiosk .patient-context span{font-size:14px;}
 #view-kiosk .chat-message{font-size:16px;padding:12px 15px;}
 #view-kiosk .summary-editor{font-size:16px;min-height:260px;}
-#view-kiosk .summary-help,#view-kiosk .scan-hint{font-size:14px;}
-#view-kiosk .scan-status{font-size:16px;}
+#view-kiosk .summary-help{font-size:14px;}
 #view-kiosk .consent-card{font-size:16px;padding:22px 24px;}
 #view-kiosk .consent-card h4{font-size:17px;}
 #view-kiosk .consent-actions button{height:56px;font-size:16px;}
@@ -431,20 +419,6 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
                         </div>
                         <div class="intake-status" id="intake-status" role="status" aria-live="polite"></div>
                         <div class="intake-actions"><button class="action-next" id="btn-process-patient" onclick="processPatientIdentity()">Khai báo triệu chứng</button></div>
-                    </section>
-
-                    <section class="intake-step" id="intake-step-face" data-step-key="face">
-                        <h2 class="intake-title">Nhận diện khuôn mặt</h2>
-                        <p class="intake-desc">Bệnh nhân mới cần xác minh khuôn mặt khớp với CCCD trước khi MedVita tạo Account/Health Profile.</p>
-                        <div class="patient-context" id="face-patient-context"></div>
-                        <div class="face-scan">
-                            <div class="scan-frame" id="scan-frame">
-                                <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 12c2.7 0 8 1.34 8 4v2H4v-2c0-2.66 5.3-4 8-4zm0-2a4 4 0 110-8 4 4 0 010 8z"/></svg>
-                            </div>
-                            <div class="scan-status" id="scan-status" role="status" aria-live="polite">Sẵn sàng quét khuôn mặt</div>
-                            <div class="scan-hint">Yêu cầu bệnh nhân nhìn thẳng vào camera, đủ sáng, không đeo khẩu trang/kính râm.</div>
-                        </div>
-                        <div class="intake-actions"><button class="action-back" onclick="goToIntakeStep('info')">Quay lại</button><button class="action-next" id="btn-start-scan" onclick="startFaceRecognition()">Bắt đầu nhận diện</button></div>
                     </section>
 
                     <section class="intake-step" id="intake-step-consent" data-step-key="consent">
@@ -839,7 +813,7 @@ function exitKioskToLogin() {
 
 // ================= PATIENT INTAKE — MODULE 1 =================
 function buildStepFlow(patientType) {
-    return patientType === 'new' ? ['info', 'face', 'consent', 'chat', 'summary'] : ['info', 'consent', 'chat', 'summary'];
+    return ['info', 'consent', 'chat', 'summary'];
 }
 let currentStepFlow = buildStepFlow('new');
 let currentStepKey = 'info';
@@ -906,7 +880,7 @@ function handlePatientIdInput() {
     const hasPatientId = Boolean(document.getElementById('patient-id').value.trim());
     document.getElementById('btn-check-patient').disabled = !hasPatientId;
     markIdentityUnverified();
-    if (!hasPatientId) document.getElementById('intake-status').innerText = 'Không có mã bệnh nhân: MedVita sẽ tạo hồ sơ mới sau khi xác minh khuôn mặt.';
+    if (!hasPatientId) document.getElementById('intake-status').innerText = 'Không có mã bệnh nhân: MedVita sẽ tạo hồ sơ mới từ thông tin bạn cung cấp.';
 }
 
 function validateIdentityData(data, requirePatientId = false) {
@@ -979,61 +953,9 @@ function processPatientIdentity() {
     intakeState.patientType = 'new';
     intakeState.pendingNewPatientData = data;
     currentStepFlow = buildStepFlow('new');
-    prepareFaceRecognition(data);
-    goToIntakeStep('face');
-}
-
-function prepareFaceRecognition(data) {
-    faceScanAttempts = 0;
-    document.getElementById('face-patient-context').innerHTML =
-        `<div class="avatar">${escapeHtml(data.name.charAt(0))}</div><div><strong>${escapeHtml(data.name)}</strong><span>CCCD ${escapeHtml(data.cccd)} · ${calculateAge(data.dob)} tuổi · ${escapeHtml(data.gender)}</span></div>`;
-    const frame = document.getElementById('scan-frame');
-    frame.className = 'scan-frame';
-    document.getElementById('scan-status').innerText = 'Sẵn sàng quét khuôn mặt';
-    const btn = document.getElementById('btn-start-scan');
-    btn.disabled = false;
-    btn.innerText = 'Bắt đầu nhận diện';
-    btn.onclick = startFaceRecognition;
-}
-
-let faceScanAttempts = 0;
-function startFaceRecognition() {
-    const frame = document.getElementById('scan-frame');
-    const status = document.getElementById('scan-status');
-    const btn = document.getElementById('btn-start-scan');
-    frame.className = 'scan-frame scanning';
-    status.innerText = 'Đang quét khuôn mặt…';
-    btn.disabled = true;
-    faceScanAttempts++;
-    setTimeout(() => {
-        // Demo: mô phỏng xác minh thất bại ở lần quét đầu tiên để minh hoạ luồng thử lại.
-        const success = faceScanAttempts > 1;
-        if (!success) {
-            frame.className = 'scan-frame failed';
-            status.innerText = 'Không xác minh được khuôn mặt khớp với CCCD. Vui lòng thử lại.';
-            btn.disabled = false;
-            btn.innerText = 'Thử lại';
-            btn.onclick = startFaceRecognition;
-            return;
-        }
-        frame.className = 'scan-frame verified';
-        status.innerText = 'Đã xác minh khuôn mặt khớp với CCCD.';
-        btn.disabled = false;
-        btn.innerText = 'Tiếp tục';
-        btn.onclick = confirmFaceRecognition;
-    }, 1200);
-}
-
-function confirmFaceRecognition() {
-    const data = intakeState.pendingNewPatientData;
-    const btn = document.getElementById('btn-start-scan');
-    btn.disabled = true;
-    document.getElementById('scan-status').innerText = 'Đang tạo Account và Health Profile…';
-    setTimeout(() => {
-        intakeState.patient = createPatientProfile(data);
-        prepareConsent();
-        goToIntakeStep('consent');
-    }, 650);
+    intakeState.patient = createPatientProfile(data);
+    prepareConsent();
+    goToIntakeStep('consent');
 }
 
 function prepareConsent() {
@@ -1202,7 +1124,6 @@ function resetPatientIntake() {
     document.getElementById('patient-queue-number').innerText = '—';
     document.getElementById('chat-patient-context').innerHTML = '';
     document.getElementById('summary-patient-context').innerHTML = '';
-    document.getElementById('face-patient-context').innerHTML = '';
     document.getElementById('consent-patient-context').innerHTML = '';
     clearIntakeErrors();
     document.getElementById('summary-confirmation').style.display = 'block';

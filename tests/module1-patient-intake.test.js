@@ -84,15 +84,19 @@ const checks = [
     assert.match(html, /@media\s*\(max-width:\s*760px\)[\s\S]*\.mobile-recommendation/);
     assert.match(html, /\.qr-code\{[^}]*width:184px;[^}]*height:184px;/);
   }],
-  ['intake provides conditional face recognition and consent steps', () => {
+  ['patient information continues directly to written AI consent without face recognition', () => {
     assert.doesNotMatch(html, /id="intake-stepper"/);
     assert.doesNotMatch(html, /function renderStepper\(/);
-    assert.match(html, /id="intake-step-face"/);
-    assert.match(html, /function startFaceRecognition\(/);
+    assert.doesNotMatch(html, /id="intake-step-face"/);
+    assert.doesNotMatch(html, /function startFaceRecognition\(/);
+    assert.doesNotMatch(html, /prepareFaceRecognition|confirmFaceRecognition|faceScanAttempts/);
     assert.match(html, /id="intake-step-consent"/);
     assert.match(html, /function handleConsentDecision\(/);
-    assert.match(html, /\['info', 'face', 'consent', 'chat', 'summary'\]/);
     assert.match(html, /\['info', 'consent', 'chat', 'summary'\]/);
+    const newPatientFlow = html.match(/function processPatientIdentity\(\)[\s\S]*?\n}\n\nfunction prepareConsent/);
+    assert.ok(newPatientFlow, 'new patient flow must continue to consent');
+    assert.match(newPatientFlow[0], /intakeState\.patient = createPatientProfile\(data\)/);
+    assert.match(newPatientFlow[0], /prepareConsent\(\);\s*goToIntakeStep\('consent'\)/);
     assert.match(html, /id="intake-status"[^>]*role="status"[^>]*aria-live="polite"/);
   }],
   ['backend simulation handles returning lookup and new profile creation', () => {
