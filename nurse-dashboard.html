@@ -273,6 +273,55 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
 }
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;}}
 @media print{body.printing-queue *{visibility:hidden!important;}body.printing-queue .queue-ticket,body.printing-queue .queue-ticket *{visibility:visible!important;}body.printing-queue .queue-ticket{position:absolute;left:50%;top:24px;width:420px;margin:0;transform:translateX(-50%);box-shadow:none;}body.printing-queue .queue-ticket-actions{display:none!important;}}
+
+/* ================= KIOSK — Epic MV-373 ================= */
+.kiosk-topbar-right{display:flex;align-items:center;gap:18px;}
+.kiosk-cancel{min-height:48px;padding:0 18px;border:1.5px solid #ffc9c9;border-radius:12px;background:#fff;color:#b42318;font-size:15px;font-weight:800;cursor:pointer;}
+.kiosk-cancel:hover{background:#fff5f5;}
+.kiosk-cancel[hidden]{display:none;}
+.identity-panel{margin-top:18px;padding:18px 20px;border:1.5px solid #c8dcff;border-radius:14px;background:#f7faff;}
+.identity-panel[hidden]{display:none;}
+.identity-panel h3{font-size:17px;color:var(--navy);margin-bottom:6px;}
+.identity-panel p{font-size:14px;color:var(--muted);margin-bottom:12px;line-height:1.5;}
+.field input[readonly],.field select:disabled{background:#f1f5f9;color:var(--ink);opacity:1;cursor:not-allowed;}
+.identity-panel .intake-actions{margin-top:16px;}
+.profile-options{display:grid;gap:10px;}
+.profile-option{display:flex;flex-direction:column;align-items:flex-start;gap:3px;width:100%;min-height:60px;padding:12px 16px;border:1.5px solid var(--line);border-radius:12px;background:#fff;text-align:left;cursor:pointer;color:var(--ink);}
+.profile-option:hover{border-color:var(--primary);}
+.profile-option strong{font-size:16px;}
+.profile-option span{font-size:14px;color:var(--muted);font-family:var(--mono);}
+.profile-option.not-me{align-items:center;justify-content:center;background:var(--bg);font-weight:800;font-size:15px;border-style:dashed;}
+.finish-early{margin-left:auto;min-height:44px;padding:0 18px;border:1.5px solid var(--navy);border-radius:10px;background:#fff;color:var(--navy);font-size:14px;font-weight:800;cursor:pointer;flex-shrink:0;}
+.finish-early:disabled{opacity:.45;cursor:not-allowed;}
+.summary-view{background:#fbfcfe;}
+.action-danger{background:var(--accent-red);color:#fff;}
+.queue-ticket-meta{display:grid;gap:6px;margin:12px 0;text-align:left;border-top:1px dashed var(--line);padding-top:12px;}
+.queue-ticket-meta div{display:flex;justify-content:space-between;gap:12px;font-size:13px;}
+.queue-ticket-meta div[hidden]{display:none;}
+.queue-ticket-meta dt{color:var(--muted);}
+.queue-ticket-meta dd{font-weight:700;color:var(--ink);text-align:right;}
+.kiosk-modal{position:fixed;inset:0;z-index:3000;display:none;align-items:center;justify-content:center;padding:24px;background:rgba(15,39,64,.55);}
+.kiosk-modal.active{display:flex;}
+.kiosk-idle{z-index:3100;}
+.kiosk-modal-card{width:min(560px,100%);background:#fff;border-radius:20px;padding:30px 28px 24px;text-align:center;box-shadow:0 24px 60px rgba(0,0,0,.25);}
+.kiosk-modal-icon{width:60px;height:60px;border-radius:50%;margin:0 auto 14px;display:flex;align-items:center;justify-content:center;background:#e8f0ff;color:var(--primary);}
+.kiosk-modal-icon svg{width:30px;height:30px;fill:currentColor;}
+.kiosk-modal[data-tone="danger"] .kiosk-modal-icon{background:#ffe1e1;color:var(--accent-red);}
+.kiosk-modal[data-tone="warning"] .kiosk-modal-icon{background:#fff3d6;color:#b45309;}
+.kiosk-modal-card h2{font-size:22px;color:var(--navy);margin-bottom:8px;}
+.kiosk-modal-card p{font-size:17px;line-height:1.6;color:#314865;}
+.kiosk-modal-actions{display:flex;gap:12px;justify-content:center;margin-top:22px;flex-wrap:wrap;}
+.kiosk-modal-actions button{flex:1;min-width:160px;min-height:56px;border:0;border-radius:12px;font-size:16px;font-weight:800;cursor:pointer;}
+.pill.kiosk{background:#e6f4ff;color:#0b5cad;}
+.kiosk-number-badge{display:inline-block;font-family:var(--mono);font-weight:800;font-size:15px;color:var(--primary);background:#e8f0ff;border-radius:8px;padding:2px 10px;margin-right:6px;}
+.kiosk-number-section[hidden]{display:none;}
+.announce-row{display:flex;gap:10px;align-items:flex-start;padding:12px 14px;margin-bottom:10px;border:1.5px solid #c8dcff;border-radius:10px;background:#f7faff;font-size:13px;font-weight:700;cursor:pointer;}
+.announce-row input{width:18px;height:18px;margin-top:1px;flex-shrink:0;}
+.announce-row small{display:block;font-weight:500;color:var(--muted);margin-top:3px;line-height:1.45;}
+.replay-call{margin-top:10px;height:44px;border:1.5px solid #c8dcff;background:#f7faff;color:var(--primary);font-weight:700;}
+.app-toast{position:fixed;left:50%;bottom:24px;z-index:4000;max-width:min(640px,calc(100% - 32px));transform:translate(-50%,20px);opacity:0;pointer-events:none;background:var(--navy);color:#fff;padding:14px 18px;border-radius:12px;font-size:13.5px;line-height:1.5;white-space:pre-line;box-shadow:0 14px 34px rgba(0,0,0,.25);transition:opacity .2s,transform .2s;}
+.app-toast.active{opacity:1;transform:translate(-50%,0);}
+@media(max-width:760px){.kiosk-topbar-right{gap:10px}.voice-tools{flex-wrap:wrap}.finish-early{margin-left:0;width:100%}.kiosk-modal-actions button{min-width:0}}
 </style>
 </head>
 <body>
@@ -413,9 +462,10 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
                                 <div class="field"><label for="patient-cccd">Số CCCD</label><input id="patient-cccd" aria-describedby="patient-cccd-error" inputmode="numeric" maxlength="12" autocomplete="off" placeholder="12 chữ số" oninput="markIdentityUnverified()"><div class="field-error" id="patient-cccd-error" role="alert"></div></div>
                                 <div class="field"><label for="patient-birth-year">Năm sinh</label><input id="patient-birth-year" aria-describedby="patient-birth-year-error" inputmode="numeric" maxlength="4" autocomplete="bday-year" placeholder="VD: 1989" oninput="markIdentityUnverified()"><div class="field-error" id="patient-birth-year-error" role="alert"></div></div>
                                 <div class="field"><label for="patient-gender">Giới tính</label><select id="patient-gender" aria-describedby="patient-gender-error" onchange="markIdentityUnverified()"><option value="">Chọn giới tính</option><option>Nam</option><option>Nữ</option><option>Khác</option></select><div class="field-error" id="patient-gender-error" role="alert"></div></div>
-                                <div class="field optional-field" id="optional-name-field"><label for="patient-full-name">Họ và tên <span style="font-weight:500;color:var(--muted)">(không bắt buộc)</span></label><input id="patient-full-name" aria-describedby="patient-full-name-error" autocomplete="name" placeholder="Nhập họ tên nếu muốn" oninput="markIdentityUnverified()"><div class="field-error" id="patient-full-name-error" role="alert"></div></div>
+                                <div class="field optional-field" id="optional-name-field"><label for="patient-full-name">Họ và tên <span id="patient-name-requirement" style="font-weight:500;color:var(--muted)">(không bắt buộc)</span></label><input id="patient-full-name" aria-describedby="patient-full-name-error" autocomplete="name" placeholder="Nhập họ tên nếu muốn" oninput="markIdentityUnverified()"><div class="field-error" id="patient-full-name-error" role="alert"></div></div>
                             </div>
-                            <div class="form-note"><b>Dữ liệu demo:</b> mã <code>BN-TN-1024</code>, CCCD <code>012345678901</code>, năm sinh <code>1989</code>, giới tính <code>Nữ</code>.</div>
+                            <div class="identity-panel" id="profile-chooser" hidden></div>
+                            <div class="form-note"><b>Dữ liệu demo:</b> mã <code>BN-TN-1024</code> (tìm thấy trên HIS), <code>BN-TN-ERR</code> (HIS lỗi), mã khác (không tìm thấy). Không nhập mã: CCCD <code>079123456789</code> · <code>1990</code> · <code>Nam</code> (trùng 2 hồ sơ khác tên); CCCD <code>001234567890</code> · <code>1975</code> · <code>Nữ</code> (1 hồ sơ); thông tin khác sẽ tạo hồ sơ mới.</div>
                         </div>
                         <div class="intake-status" id="intake-status" role="status" aria-live="polite"></div>
                         <div class="intake-actions"><button class="action-next" id="btn-process-patient" onclick="processPatientIdentity()">Khai báo triệu chứng</button></div>
@@ -441,12 +491,6 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
                                 <button class="consent-accept" onclick="handleConsentDecision(true)">Đồng ý</button>
                             </div>
                         </div>
-                        <div class="success-panel" id="consent-declined" role="status" aria-live="polite">
-                            <div class="success-icon danger"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 13.59L15.59 17 12 13.41 8.41 17 7 15.59 10.59 12 7 8.41 8.41 7 12 10.59 15.59 7 17 8.41 13.41 12 17 15.59z"/></svg></div>
-                            <h3>Bệnh nhân đã từ chối Consent AI</h3>
-                            <p>Không thể tiếp tục khai báo triệu chứng bằng AI (BR-04). Chuyển bệnh nhân sang quy trình khai báo thủ công hiện tại của bệnh viện.</p>
-                            <div class="intake-actions" style="justify-content:center"><button class="action-next" onclick="finishKioskSession()">Kết thúc phiên</button></div>
-                        </div>
                     </section>
 
                     <section class="intake-step" id="intake-step-chat" data-step-key="chat">
@@ -463,6 +507,7 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
                             <div class="voice-tools">
                                 <div class="voice-wave" id="voice-wave" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
                                 <div class="voice-status" id="voice-status" role="status" aria-live="polite"><strong>Nhập bằng giọng nói</strong>Bấm microphone, nói tiếng Việt rồi kiểm tra nội dung trước khi gửi.</div>
+                                <button class="finish-early" id="btn-finish-early" type="button" onclick="finishConversation()" disabled>Xong sớm</button>
                             </div>
                         </div>
                     </section>
@@ -470,22 +515,28 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
                     <section class="intake-step" id="intake-step-summary" data-step-key="summary">
                         <div id="summary-confirmation">
                             <h2 class="intake-title">Kiểm tra và xác nhận tóm tắt</h2>
-                            <p class="intake-desc">Bệnh nhân đọc lại, chỉnh sửa nếu cần rồi xác nhận gửi cho điều dưỡng.</p>
+                            <p class="intake-desc">Bệnh nhân đọc lại bản tóm tắt. Muốn bổ sung hoặc thay đổi thông tin, chọn “Chỉnh sửa thông tin” để quay lại hội thoại.</p>
                             <div class="patient-context" id="summary-patient-context"></div>
-                            <div class="summary-editor" id="patient-summary" contenteditable="true" role="textbox" aria-multiline="true" aria-label="Bản tóm tắt triệu chứng có thể chỉnh sửa"></div>
+                            <div class="summary-editor summary-view" id="patient-summary" role="document" aria-label="Bản tóm tắt triệu chứng (chỉ xem)"></div>
                             <p class="summary-help">Nội dung này là bản tóm tắt hỗ trợ, chưa phải chẩn đoán hoặc hồ sơ lâm sàng đã được điều dưỡng duyệt.</p>
-                            <div class="intake-actions"><button class="action-back" onclick="goToIntakeStep('chat')">Quay lại chỉnh sửa khai báo</button><button class="action-confirm" onclick="confirmPatientSummary()">Đồng ý và xác nhận</button></div>
+                            <div class="intake-status" id="summary-status" role="status" aria-live="polite"></div>
+                            <div class="intake-actions"><button class="action-back" type="button" onclick="editSummaryViaChat()">Chỉnh sửa thông tin</button><button class="action-confirm" id="btn-confirm-summary" type="button" onclick="confirmPatientSummary()">Xác nhận thông tin</button></div>
                         </div>
                         <div class="success-panel" id="intake-success" role="status" aria-live="polite">
                             <div class="success-icon"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>
-                            <h3>Đã gửi bản tóm tắt</h3>
-                            <p>Bản khai báo đã được chuyển vào hàng chờ duyệt của điều dưỡng với trạng thái <b>Pending Nurse Review</b>.</p>
+                            <h3>Đã gửi bản tóm tắt cho điều dưỡng</h3>
+                            <p>Vui lòng giữ số thứ tự và theo dõi màn hình chờ. Điều dưỡng sẽ gọi số của bạn.</p>
                             <div class="queue-ticket" aria-label="Phiếu số thứ tự chờ khám">
                                 <div class="queue-ticket-label">Số thứ tự chờ khám của bạn</div>
                                 <div class="queue-ticket-number" id="patient-queue-number">—</div>
-                                <div class="queue-ticket-note">Vui lòng theo dõi màn hình gọi số tại bệnh viện.</div>
+                                <dl class="queue-ticket-meta">
+                                    <div id="ticket-name-row"><dt>Họ và tên</dt><dd id="ticket-name"></dd></div>
+                                    <div><dt>Bệnh viện</dt><dd id="ticket-hospital"></dd></div>
+                                    <div><dt>Ngày giờ cấp số</dt><dd id="ticket-issued-at"></dd></div>
+                                </dl>
+                                <div class="queue-ticket-note">Theo dõi số trên màn hình chờ tại khu tiếp nhận.</div>
                             </div>
-                            <div class="intake-actions queue-ticket-actions"><button class="action-back" type="button" onclick="printQueueTicket()">In số thứ tự</button><button class="action-next" type="button" onclick="finishKioskSession()">Hoàn tất</button></div>
+                            <div class="intake-actions queue-ticket-actions"><button class="action-back" type="button" onclick="printQueueTicket()">In số thứ tự</button><button class="action-next" id="btn-finish-session" type="button" onclick="finishKioskSession()">Hoàn tất</button></div>
                         </div>
                     </section>
                 </div>
@@ -499,7 +550,10 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
 <div id="view-kiosk" class="kiosk-view">
     <header class="kiosk-topbar">
         <div class="kiosk-brand"><span class="kiosk-brand-mark"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg></span>MedVita</div>
-        <div class="kiosk-hospital"><strong id="kiosk-hospital-name">Bệnh viện Thái Nguyên</strong>Kiosk khai báo trước khám</div>
+        <div class="kiosk-topbar-right">
+            <button class="kiosk-cancel" id="btn-cancel-intake" type="button" onclick="requestCancelIntake()" hidden>Hủy khai báo</button>
+            <div class="kiosk-hospital"><strong id="kiosk-hospital-name">Bệnh viện Thái Nguyên</strong>Kiosk khai báo trước khám</div>
+        </div>
     </header>
     <main class="kiosk-main">
         <section class="kiosk-home" id="kiosk-home">
@@ -522,6 +576,22 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
         </section>
         <section id="kiosk-flow" aria-label="Phiên khai báo của bệnh nhân"></section>
     </main>
+    <div class="kiosk-modal" id="kiosk-modal" data-tone="info" role="dialog" aria-modal="true" aria-labelledby="kiosk-modal-title" aria-describedby="kiosk-modal-message">
+        <div class="kiosk-modal-card">
+            <div class="kiosk-modal-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg></div>
+            <h2 id="kiosk-modal-title"></h2>
+            <p id="kiosk-modal-message"></p>
+            <div class="kiosk-modal-actions" id="kiosk-modal-actions"></div>
+        </div>
+    </div>
+    <div class="kiosk-modal kiosk-idle" id="kiosk-idle" data-tone="warning" role="alertdialog" aria-modal="true" aria-labelledby="kiosk-idle-title" aria-describedby="kiosk-idle-message">
+        <div class="kiosk-modal-card">
+            <div class="kiosk-modal-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg></div>
+            <h2 id="kiosk-idle-title">Bạn còn đang khai báo không?</h2>
+            <p id="kiosk-idle-message">Phiên sẽ tự kết thúc sau <strong id="kiosk-idle-count">30</strong> giây để bảo vệ thông tin của bạn. Chạm vào màn hình để tiếp tục.</p>
+            <div class="kiosk-modal-actions"><button class="action-next" id="btn-idle-continue" type="button" onclick="resetIdleTimer()">Tiếp tục</button></div>
+        </div>
+    </div>
 </div>
 
 <!-- ============ DETAIL DRAWER: REVIEW ============ -->
@@ -540,6 +610,7 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
                 <div><b>Mâu thuẫn dữ liệu:</b> HIS ghi nhận bệnh nền nhưng bệnh nhân khai không dùng thuốc tương ứng. Cần xác minh trực tiếp.</div>
             </div>
 
+            <div class="d-section kiosk-number-section" id="rv-kiosk" hidden><div class="d-label">Số kiosk (MV-378)</div><div class="d-content"><span class="kiosk-number-badge" id="rv-kiosk-number"></span> Bệnh nhân khai báo tại kiosk, đang chờ điều dưỡng gọi.</div></div>
             <div class="d-section"><div class="d-label">Lý do đến khám</div><div class="d-content" id="rv-chief">—</div></div>
             <div class="d-section"><div class="d-label">Tiền sử &amp; dị ứng</div><div class="d-content" id="rv-history">—</div></div>
             <div class="d-section"><div class="d-label">Summary AI</div><div class="d-content" id="rv-summary">—</div></div>
@@ -592,6 +663,7 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
     </div>
 </div>
 
+<script src="shared/kiosk-store.js"></script>
 <script>
 // ================= DATA (demo) =================
 const NURSE_ACCOUNTS = {
@@ -605,11 +677,28 @@ const NURSE_ACCOUNTS = {
 
 let currentNurse = null;
 
+// Dữ liệu dùng chung với lcd.html (shared/kiosk-store.js). Mở nhiều tab để thấy cập nhật trực tiếp.
+const store = MedVitaKioskStore.createStore();
+
 const HIS_PATIENTS = {
     'BN-TN-1024': { patientId: 'BN-TN-1024', name: 'NGUYỄN THỊ AN', dob: '1989-06-12', gender: 'Nữ', cccd: '012345678901' }
 };
+const HIS_ERROR_CODE = 'BN-TN-ERR';
+const REDFLAG_KEYWORDS = ['đau ngực', 'khó thở', 'ngất', 'méo miệng', 'co giật'];
 
-const intakeState = { patientType: 'new', patient: null, pendingNewPatientData: null, identityVerified: false, matchedPatient: null, answers: [], questionIndex: 0 };
+// MV-377: thời gian chờ mặc định (ms). Thêm ?timeout=fast vào URL để demo nhanh.
+const KIOSK_TIMEOUTS = new URLSearchParams(location.search).get('timeout') === 'fast'
+    ? { intake: 15000, ticket: 10000, warning: 10000, processing: 60000 }
+    : { intake: 120000, ticket: 60000, warning: 30000, processing: 60000 };
+
+function freshIntakeState() {
+    return {
+        sessionActive: false, stage: 'info', patient: null, identityVerified: false, matchedPatient: null,
+        profileChoices: [], requireName: false, consent: null, answers: [], additions: [], questionIndex: 0,
+        editMode: false, conversationEnded: false, redflagKeywords: [], summaryText: '', summaryId: null, processing: false
+    };
+}
+const intakeState = freshIntakeState();
 let voiceRecognition = null;
 let voiceRecording = false;
 const symptomQuestions = [
@@ -622,91 +711,32 @@ function hasPermission(permission, account = currentNurse) {
     return Boolean(account && account.permissions && account.permissions.includes(permission));
 }
 
-let reviewItems = [
-    {
-        id: 'r1', name: 'NGUYỄN VĂN TÙNG', age: 32, gender: 'Nam',
-        chief: 'Đau bụng âm ỉ vùng quanh rốn, xuất hiện từ đêm qua.',
-        allergy: 'Dị ứng Penicillin', meds: 'Không dùng thuốc', chronic: 'Tiểu đường',
-        aiDept: 'Khoa Tiêu Hóa', status: 'Pending Nurse Review',
-        time: new Date(Date.now() - 12*60000), conflict: true
-    },
-    {
-        id: 'r2', name: 'TRẦN THỊ MAI', age: 38, gender: 'Nữ',
-        chief: 'Ho khan kéo dài 3 ngày, kèm sốt nhẹ.',
-        allergy: 'Không ghi nhận', meds: 'Paracetamol', chronic: 'Không ghi nhận',
-        aiDept: 'Khoa Hô Hấp', status: 'Approved',
-        time: new Date(Date.now() - 40*60000), conflict: false, approvedDept: 'Khoa Hô Hấp'
-    },
-    { id: 'r3', name: 'PHẠM VĂN ĐỨC', age: 45, gender: 'Nam', chief: 'Đau thắt ngực khi gắng sức.', allergy: 'Không ghi nhận', meds: 'Aspirin', chronic: 'Tăng huyết áp', aiDept: 'Khoa Tim Mạch', status: 'Pending Nurse Review', time: new Date(Date.now() - 55*60000), conflict: false },
-    { id: 'r4', name: 'HOÀNG THỊ LAN', age: 27, gender: 'Nữ', chief: 'Buồn nôn, chóng mặt 2 ngày nay.', allergy: 'Dị ứng hải sản', meds: 'Không dùng thuốc', chronic: 'Không ghi nhận', aiDept: 'Khoa Nội Tổng Quát', status: 'Pending Nurse Review', time: new Date(Date.now() - 70*60000), conflict: false },
-    { id: 'r5', name: 'VŨ MINH TUẤN', age: 60, gender: 'Nam', chief: 'Ho đờm, khó thở khi nằm.', allergy: 'Không ghi nhận', meds: 'Thuốc hen', chronic: 'Hen suyễn', aiDept: 'Khoa Hô Hấp', status: 'Approved', time: new Date(Date.now() - 90*60000), conflict: false, approvedDept: 'Khoa Hô Hấp' },
-    { id: 'r6', name: 'ĐỖ THỊ HƯƠNG', age: 33, gender: 'Nữ', chief: 'Đau vùng thượng vị sau ăn.', allergy: 'Không ghi nhận', meds: 'Omeprazole', chronic: 'Không ghi nhận', aiDept: 'Khoa Tiêu Hóa', status: 'Pending Nurse Review', time: new Date(Date.now() - 110*60000), conflict: false },
-    { id: 'r7', name: 'NGÔ VĂN SƠN', age: 50, gender: 'Nam', chief: 'Đau lưng, tê chân trái.', allergy: 'Không ghi nhận', meds: 'Không dùng thuốc', chronic: 'Không ghi nhận', aiDept: 'Khoa Nội Tổng Quát', status: 'Pending Nurse Review', time: new Date(Date.now() - 130*60000), conflict: false },
-    { id: 'r8', name: 'BÙI THỊ NGA', age: 41, gender: 'Nữ', chief: 'Sốt cao 39 độ kèm ớn lạnh.', allergy: 'Không ghi nhận', meds: 'Paracetamol', chronic: 'Không ghi nhận', aiDept: 'Khoa Nội Tổng Quát', status: 'Approved', time: new Date(Date.now() - 150*60000), conflict: false, approvedDept: 'Khoa Nội Tổng Quát' },
-    { id: 'r9', name: 'LÝ VĂN PHÚC', age: 29, gender: 'Nam', chief: 'Khó thở, thở khò khè.', allergy: 'Dị ứng phấn hoa', meds: 'Không dùng thuốc', chronic: 'Hen suyễn', aiDept: 'Khoa Hô Hấp', status: 'Pending Nurse Review', time: new Date(Date.now() - 170*60000), conflict: false },
-    { id: 'r10', name: 'DƯƠNG THỊ THU', age: 36, gender: 'Nữ', chief: 'Đau đầu kéo dài kèm buồn nôn.', allergy: 'Không ghi nhận', meds: 'Không dùng thuốc', chronic: 'Không ghi nhận', aiDept: 'Khoa Nội Tổng Quát', status: 'Pending Nurse Review', time: new Date(Date.now() - 190*60000), conflict: false },
-    { id: 'r11', name: 'TRỊNH VĂN LONG', age: 58, gender: 'Nam', chief: 'Đau ngực âm ỉ, mệt mỏi.', allergy: 'Không ghi nhận', meds: 'Metformin', chronic: 'Tiểu đường', aiDept: 'Khoa Tim Mạch', status: 'Pending Nurse Review', time: new Date(Date.now() - 210*60000), conflict: false },
-    { id: 'r12', name: 'PHAN THỊ YẾN', age: 24, gender: 'Nữ', chief: 'Đau bụng dưới, kinh nguyệt bất thường.', allergy: 'Không ghi nhận', meds: 'Không dùng thuốc', chronic: 'Không ghi nhận', aiDept: 'Khoa Nội Tổng Quát', status: 'Approved', time: new Date(Date.now() - 230*60000), conflict: false, approvedDept: 'Khoa Nội Tổng Quát' }
-];
+function currentHospital() {
+    return (currentNurse && currentNurse.hospital) || MedVitaKioskStore.DEFAULT_HOSPITAL;
+}
+function displayName(name) { return name || 'Chưa có họ tên'; }
+function toDate(value) { return value ? new Date(value) : null; }
+function inCurrentHospital(item) { return !currentNurse || !currentNurse.hospital || item.hospital === currentNurse.hospital; }
+function getReviewItems() {
+    return store.listSummaries().filter(inCurrentHospital).map(item => ({ ...item, time: toDate(item.time), approvedAt: toDate(item.approvedAt) }));
+}
+function getRedflagItems() {
+    return store.listRedflags().filter(inCurrentHospital).map(item => ({ ...item, time: toDate(item.time) }));
+}
 
-let redflagItems = [
-    {
-        id: 'a1', name: 'LÊ VĂN HÙNG', age: 55, gender: 'Nam',
-        reason: 'Câu trả lời chứa từ khóa "đau ngực, khó thở" — nghi ngờ hội chứng vành cấp.',
-        content: '"Tôi thấy đau ngực trái và khó thở khi leo cầu thang."',
-        contact: 'SĐT: 09xx xxx 456 (Health Profile, hiển thị đầy đủ trong hệ thống thật)',
-        protocol: 'Ưu tiên gọi điện xác minh trong 5 phút. Nếu không liên lạc được, thông báo lễ tân kiểm tra tại chỗ.',
-        status: 'New', time: new Date(Date.now() - 3*60000), note: ''
-    },
-    {
-        id: 'a2', name: 'NGUYỄN THỊ HẠNH', age: 68, gender: 'Nữ',
-        reason: 'Câu trả lời chứa từ khóa "liệt, méo miệng" — nghi ngờ đột quỵ.',
-        content: '"Tay trái của mẹ tôi tự nhiên yếu, không cầm được đũa, miệng hơi méo."',
-        contact: 'SĐT: 09xx xxx 112 (con gái khai hộ)',
-        protocol: 'Gọi ngay 115 theo quy trình FAST-stroke. Không chờ xác minh qua điện thoại.',
-        status: 'New', time: new Date(Date.now() - 8*60000), note: ''
-    },
-    {
-        id: 'a3', name: 'TRẦN VĂN BÌNH', age: 42, gender: 'Nam',
-        reason: 'Câu trả lời chứa từ khóa "ngất, mất ý thức".',
-        content: '"Tôi bị ngất khoảng 30 giây lúc đang đứng xếp hàng, sau đó tỉnh lại bình thường."',
-        contact: 'SĐT: 09xx xxx 778',
-        protocol: 'Liên hệ xác minh trong 10 phút, kiểm tra tiền sử tim mạch/huyết áp trước khi quyết định.',
-        status: 'Đang xử lý', time: new Date(Date.now() - 25*60000), note: 'Đã gọi lần 1, chưa liên lạc được, đang gọi lại.'
-    },
-    {
-        id: 'a4', name: 'PHẠM THỊ THẢO', age: 30, gender: 'Nữ',
-        reason: 'Câu trả lời chứa từ khóa "khó thở" khi đang mang thai.',
-        content: '"Tôi đang mang thai tuần 32, hôm nay thấy khó thở hơn bình thường khi đi lại."',
-        contact: 'SĐT: 09xx xxx 334',
-        protocol: 'Ưu tiên chuyển khoa Sản cấp cứu, xác minh thêm dấu hiệu phù/huyết áp.',
-        status: 'Đang xử lý', time: new Date(Date.now() - 48*60000), note: 'Đã liên hệ, đang hướng dẫn đến khoa Sản.'
-    },
-    {
-        id: 'a5', name: 'ĐINH VĂN KHOA', age: 61, gender: 'Nam',
-        reason: 'Câu trả lời chứa từ khóa "đau ngực" — nghi ngờ hội chứng vành cấp.',
-        content: '"Tôi có đau nhẹ vùng ngực sau khi leo cầu thang, đỡ khi nghỉ."',
-        contact: 'SĐT: 09xx xxx 990',
-        protocol: 'Đã gọi xác minh, bệnh nhân xác nhận đau đã hết, không cần can thiệp cấp cứu tức thời — vẫn hẹn tái khám khoa Tim mạch.',
-        status: 'Đã xử lý', time: new Date(Date.now() - 65*60000), note: 'Đã gọi điện xác minh lúc 14:20 — bệnh nhân ổn định, hẹn tái khám khoa Tim mạch trong tuần.'
-    },
-    {
-        id: 'a6', name: 'VÕ THỊ KIM', age: 19, gender: 'Nữ',
-        reason: 'Câu trả lời chứa từ khóa "khó thở" nhưng ngữ cảnh là hen suyễn nhẹ đã biết trước.',
-        content: '"Tôi hơi khó thở do thời tiết, tôi có tiền sử hen suyễn nhẹ, đã dùng thuốc xịt như bình thường."',
-        contact: 'SĐT: 09xx xxx 221',
-        protocol: 'Không cần can thiệp — dấu hiệu khớp với hen suyễn mãn tính đã kiểm soát tốt theo hồ sơ.',
-        status: 'Bỏ qua', time: new Date(Date.now() - 95*60000), note: 'Đã xác minh — thuộc bệnh nền hen suyễn đã kiểm soát, không phải dấu hiệu cấp tính mới.'
-    },
-    {
-        id: 'a7', name: 'LƯƠNG VĂN ĐẠT', age: 47, gender: 'Nam',
-        reason: 'Câu trả lời chứa từ khóa "cấp cứu" do người dùng tự mô tả mức độ nghiêm trọng.',
-        content: '"Cần cấp cứu gấp, tôi bị đau bụng dữ dội không chịu nổi."',
-        contact: 'SĐT: 09xx xxx 556',
-        protocol: 'Xác minh mức độ đau, kiểm tra dấu hiệu ruột thừa/viêm tụy cấp, chuyển cấp cứu nếu cần.',
-        status: 'New', time: new Date(Date.now() - 120*60000), note: ''
-    }
-];
+let toastTimer = null;
+function showToast(message, duration = 5000) {
+    const toast = document.getElementById('app-toast');
+    toast.innerText = message;
+    toast.classList.add('active');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toast.classList.remove('active'), duration);
+}
+
+store.subscribe(() => {
+    renderReviewList();
+    renderRedflagList();
+});
 
 // ================= LOGIN (MV-28) =================
 document.getElementById('btn-nurse-login').addEventListener('click', () => {
@@ -787,20 +817,34 @@ function startKioskMode() {
 function showKioskHome() {
     document.getElementById('kiosk-home').style.display = '';
     document.getElementById('kiosk-flow').classList.remove('active');
+    updateKioskChrome();
 }
 
 function startPatientSession() {
     resetPatientIntake();
+    intakeState.sessionActive = true;
     document.getElementById('kiosk-home').style.display = 'none';
     document.getElementById('kiosk-flow').classList.add('active');
+    updateKioskChrome();
+    resetIdleTimer();
+}
+
+// MV-377: mọi cách kết thúc phiên (Hoàn tất, Kết thúc sau khi từ chối Consent, Hủy khai báo, hết thời gian chờ) đi qua đây.
+function endKioskSession(reason) {
+    stopIdleTimers();
+    closeKioskModal();
+    resetPatientIntake();
+    showKioskHome();
+    if (reason === 'timeout') showToast('Phiên khai báo đã tự kết thúc do không có thao tác. Thông tin trên màn hình đã được xóa.');
 }
 
 function finishKioskSession() {
-    resetPatientIntake();
-    showKioskHome();
+    endKioskSession('complete');
 }
 
 function exitKioskToLogin() {
+    stopIdleTimers();
+    closeKioskModal();
     resetPatientIntake();
     currentNurse = null;
     document.getElementById('view-kiosk').classList.remove('active');
@@ -811,6 +855,125 @@ function exitKioskToLogin() {
     document.getElementById('li-user').focus();
 }
 
+function updateKioskChrome() {
+    document.getElementById('btn-cancel-intake').hidden = !(intakeState.sessionActive && intakeState.stage !== 'ticket');
+}
+
+function requestCancelIntake() {
+    if (!intakeState.sessionActive) return;
+    openKioskModal({
+        kind: 'cancel', tone: 'warning',
+        title: 'Hủy khai báo?',
+        message: 'Thông tin chưa xác nhận sẽ không được gửi cho điều dưỡng.',
+        actions: [
+            { label: 'Tiếp tục', className: 'action-back', onClick: closeKioskModal, autofocus: true },
+            { label: 'Hủy khai báo', className: 'action-danger', onClick: () => endKioskSession('cancel') }
+        ]
+    });
+}
+
+// ================= KIOSK DIALOG =================
+let kioskModalState = null;
+function openKioskModal({ kind = '', tone = 'info', title, message, actions = [] }) {
+    const modal = document.getElementById('kiosk-modal');
+    modal.dataset.tone = tone;
+    document.getElementById('kiosk-modal-title').innerText = title;
+    document.getElementById('kiosk-modal-message').innerText = message;
+    const actionsEl = document.getElementById('kiosk-modal-actions');
+    actionsEl.innerHTML = '';
+    let focusTarget = null;
+    actions.forEach(action => {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = action.className || 'action-back';
+        button.innerText = action.label;
+        button.addEventListener('click', action.onClick);
+        actionsEl.appendChild(button);
+        if (action.autofocus || !focusTarget) focusTarget = action.autofocus ? button : (focusTarget || button);
+    });
+    kioskModalState = { kind, previousFocus: document.activeElement };
+    modal.classList.add('active');
+    if (focusTarget) focusTarget.focus();
+}
+
+function closeKioskModal() {
+    const modal = document.getElementById('kiosk-modal');
+    if (!modal.classList.contains('active')) return;
+    modal.classList.remove('active');
+    const previous = kioskModalState && kioskModalState.previousFocus;
+    kioskModalState = null;
+    if (previous && previous.focus && document.body.contains(previous)) previous.focus();
+}
+
+// ================= IDLE TIMEOUT (MV-377) =================
+const idle = { timer: null, countdown: null, processingGuard: null };
+
+function stopIdleTimers() {
+    clearTimeout(idle.timer);
+    clearTimeout(idle.processingGuard);
+    idle.timer = null;
+    idle.processingGuard = null;
+    hideIdleWarning();
+}
+
+function idleLimit() {
+    return intakeState.stage === 'ticket' ? KIOSK_TIMEOUTS.ticket : KIOSK_TIMEOUTS.intake;
+}
+
+function resetIdleTimer() {
+    clearTimeout(idle.timer);
+    idle.timer = null;
+    hideIdleWarning();
+    // Không tính thời gian chờ khi hệ thống đang xử lý hoặc bệnh nhân đang ghi âm.
+    if (!intakeState.sessionActive || intakeState.processing || voiceRecording) return;
+    idle.timer = setTimeout(showIdleWarning, idleLimit());
+}
+
+function showIdleWarning() {
+    if (!intakeState.sessionActive) return;
+    let remaining = Math.round(KIOSK_TIMEOUTS.warning / 1000);
+    const count = document.getElementById('kiosk-idle-count');
+    count.innerText = remaining;
+    document.getElementById('kiosk-idle').classList.add('active');
+    document.getElementById('btn-idle-continue').focus();
+    idle.countdown = setInterval(() => {
+        remaining -= 1;
+        count.innerText = Math.max(remaining, 0);
+        if (remaining <= 0) endKioskSession('timeout');
+    }, 1000);
+}
+
+function hideIdleWarning() {
+    clearInterval(idle.countdown);
+    idle.countdown = null;
+    document.getElementById('kiosk-idle').classList.remove('active');
+}
+
+function setProcessing(on) {
+    intakeState.processing = on;
+    clearTimeout(idle.processingGuard);
+    idle.processingGuard = null;
+    if (on) {
+        clearTimeout(idle.timer);
+        idle.timer = null;
+        hideIdleWarning();
+        idle.processingGuard = setTimeout(() => {
+            if (!intakeState.processing) return;
+            intakeState.processing = false;
+            showToast('Hệ thống đang phản hồi chậm. Vui lòng thử lại.');
+            resetIdleTimer();
+        }, KIOSK_TIMEOUTS.processing);
+    } else {
+        resetIdleTimer();
+    }
+}
+
+['pointerdown', 'keydown', 'input'].forEach(type => {
+    document.getElementById('view-kiosk').addEventListener(type, () => {
+        if (intakeState.sessionActive) resetIdleTimer();
+    }, true);
+});
+
 // ================= PATIENT INTAKE — MODULE 1 =================
 function buildStepFlow(patientType) {
     return ['info', 'consent', 'chat', 'summary'];
@@ -820,7 +983,9 @@ let currentStepKey = 'info';
 
 function goToIntakeStep(key) {
     currentStepKey = key;
+    intakeState.stage = key;
     document.querySelectorAll('.intake-step').forEach(el => el.classList.toggle('active', el.dataset.stepKey === key));
+    updateKioskChrome();
 }
 
 function clearIntakeErrors() {
@@ -848,15 +1013,21 @@ function lookupPatientById(patientId) {
 }
 
 function createPatientProfile(data) {
-    return { ...data, patientId: `MV-${String(Date.now()).slice(-7)}`, createdBy: currentNurse ? currentNurse.username : 'demo-nurse' };
+    return store.createProfile({
+        hospital: currentHospital(), name: data.name, cccd: data.cccd, birthYear: data.birthYear, gender: data.gender,
+        createdBy: currentNurse ? currentNurse.username : 'demo-kiosk'
+    });
 }
 
-function calculateAge(dob) {
-    const birth = new Date(dob + 'T00:00:00');
-    const now = new Date();
-    let age = now.getFullYear() - birth.getFullYear();
-    if (now < new Date(now.getFullYear(), birth.getMonth(), birth.getDate())) age--;
-    return age;
+function ageFromBirthYear(birthYear) {
+    return new Date().getFullYear() - Number(birthYear);
+}
+
+function sessionPatientFromProfile(profile) {
+    return {
+        profileId: profile.id, patientId: profile.hisPatientId || profile.id, name: profile.name || '',
+        birthYear: String(profile.birthYear), gender: profile.gender, cccd: profile.cccd
+    };
 }
 
 function getIdentityFormData() {
@@ -869,9 +1040,41 @@ function getIdentityFormData() {
     };
 }
 
+function hideIdentityPanels() {
+    const panel = document.getElementById('profile-chooser');
+    panel.hidden = true;
+    panel.innerHTML = '';
+}
+
+const HIS_PREFILL_FIELDS = ['patient-full-name', 'patient-cccd', 'patient-birth-year', 'patient-gender'];
+
+// Thông tin lấy từ HIS được điền sẵn và khóa lại; muốn đổi thì sửa hoặc xóa Mã bệnh nhân.
+function setHisPrefill(patient) {
+    document.getElementById('patient-full-name').value = patient.name;
+    document.getElementById('patient-cccd').value = patient.cccd;
+    document.getElementById('patient-birth-year').value = patient.dob.slice(0, 4);
+    document.getElementById('patient-gender').value = patient.gender;
+    setHisFieldsLocked(true);
+}
+
+function clearHisPrefill() {
+    if (!document.getElementById('patient-cccd').readOnly) return;
+    HIS_PREFILL_FIELDS.forEach(id => { document.getElementById(id).value = ''; });
+    setHisFieldsLocked(false);
+}
+
+function setHisFieldsLocked(locked) {
+    HIS_PREFILL_FIELDS.forEach(id => {
+        const field = document.getElementById(id);
+        if (field.tagName === 'SELECT') field.disabled = locked;
+        else field.readOnly = locked;
+    });
+}
+
 function markIdentityUnverified() {
     intakeState.identityVerified = false;
     intakeState.matchedPatient = null;
+    hideIdentityPanels();
     const status = document.getElementById('intake-status');
     if (document.getElementById('patient-id').value.trim()) status.innerText = 'Thông tin đã thay đổi. Vui lòng kiểm tra lại.';
 }
@@ -879,8 +1082,9 @@ function markIdentityUnverified() {
 function handlePatientIdInput() {
     const hasPatientId = Boolean(document.getElementById('patient-id').value.trim());
     document.getElementById('btn-check-patient').disabled = !hasPatientId;
+    clearHisPrefill();
     markIdentityUnverified();
-    if (!hasPatientId) document.getElementById('intake-status').innerText = 'Không có mã bệnh nhân: MedVita sẽ tạo hồ sơ mới từ thông tin bạn cung cấp.';
+    if (!hasPatientId) document.getElementById('intake-status').innerText = 'Không có mã bệnh nhân: MedVita sẽ tìm hồ sơ theo thông tin bạn nhập hoặc tạo hồ sơ mới.';
 }
 
 function validateIdentityData(data, requirePatientId = false) {
@@ -889,12 +1093,15 @@ function validateIdentityData(data, requirePatientId = false) {
     if (!validateCccd(data.cccd)) { setFieldError('patient-cccd', 'CCCD phải gồm đúng 12 chữ số.'); valid = false; }
     if (!validateBirthYear(data.birthYear)) { setFieldError('patient-birth-year', 'Vui lòng nhập năm sinh hợp lệ gồm 4 chữ số.'); valid = false; }
     if (!data.gender) { setFieldError('patient-gender', 'Vui lòng chọn giới tính.'); valid = false; }
+    if (intakeState.requireName && !data.name) { setFieldError('patient-full-name', 'Vui lòng bổ sung họ tên để MedVita đối chiếu lại hồ sơ.'); valid = false; }
     if (data.name && !validatePatientName(data.name)) { setFieldError('patient-full-name', 'Họ tên chỉ gồm chữ cái và dấu câu thông dụng.'); valid = false; }
     return valid;
 }
 
+// MV-375 / MV-447: tra cứu HIS bằng Mã bệnh nhân.
 function checkPatientOnServer() {
     clearIntakeErrors();
+    hideIdentityPanels();
     const data = getIdentityFormData();
     if (!data.patientId) {
         setFieldError('patient-id', 'Vui lòng nhập mã bệnh nhân.');
@@ -904,39 +1111,38 @@ function checkPatientOnServer() {
     const continueButton = document.getElementById('btn-process-patient');
     button.disabled = true;
     continueButton.disabled = true;
-    document.getElementById('intake-status').innerText = 'Đang kiểm tra thông tin…';
+    setProcessing(true);
+    document.getElementById('intake-status').innerText = 'Đang kiểm tra thông tin với bệnh viện…';
     setTimeout(() => {
+        setProcessing(false);
         button.disabled = false;
         continueButton.disabled = false;
+        if (data.patientId === HIS_ERROR_CODE) {
+            document.getElementById('intake-status').innerText = '';
+            setFieldError('patient-id', 'Chưa thể kiểm tra thông tin với bệnh viện. Vui lòng thử lại sau hoặc xóa mã để tự nhập thông tin.');
+            return;
+        }
         const patient = lookupPatientById(data.patientId);
         if (!patient) {
-            setFieldError('patient-id', 'Không tìm thấy mã bệnh nhân. Vui lòng kiểm tra và thử lại.');
+            setFieldError('patient-id', 'Không tìm thấy mã bệnh nhân. Vui lòng nhập lại mã hoặc xóa mã để tự nhập thông tin.');
             document.getElementById('intake-status').innerText = '';
             return;
         }
-        document.getElementById('patient-full-name').value = patient.name;
-        document.getElementById('patient-cccd').value = patient.cccd;
-        document.getElementById('patient-birth-year').value = patient.dob.slice(0, 4);
-        document.getElementById('patient-gender').value = patient.gender;
+        setHisPrefill(patient);
         intakeState.identityVerified = true;
         intakeState.matchedPatient = patient;
-        document.getElementById('intake-status').innerText = 'Đã tìm thấy và điền thông tin của bạn.';
+        document.getElementById('intake-status').innerText = 'Đã điền sẵn thông tin từ bệnh viện. Nếu không đúng, hãy sửa hoặc xóa mã bệnh nhân.';
     }, 650);
 }
 
 function continueWithReturningPatient(patient) {
-    intakeState.patientType = 'returning';
-    intakeState.patient = patient;
-    currentStepFlow = buildStepFlow('returning');
-    prepareConsent();
-    goToIntakeStep('consent');
+    const profile = store.findOrCreateHisProfile(patient, currentHospital(), currentNurse ? currentNurse.username : 'demo-kiosk');
+    beginConsent(profile);
 }
 
 function processPatientIdentity() {
     clearIntakeErrors();
-    const data = {
-        ...getIdentityFormData()
-    };
+    const data = getIdentityFormData();
     if (!validateIdentityData(data, false)) return;
 
     if (data.patientId) {
@@ -948,38 +1154,81 @@ function processPatientIdentity() {
         return;
     }
 
-    data.name = data.name || 'BỆNH NHÂN MỚI';
-    data.dob = `${data.birthYear}-01-01`;
-    intakeState.patientType = 'new';
-    intakeState.pendingNewPatientData = data;
-    currentStepFlow = buildStepFlow('new');
-    intakeState.patient = createPatientProfile(data);
+    // MV-375 AC4: đối chiếu CCCD + năm sinh + giới tính (+ họ tên nếu có) trong cùng bệnh viện.
+    const matches = store.findProfiles({ hospital: currentHospital(), cccd: data.cccd, birthYear: data.birthYear, gender: data.gender, name: data.name });
+    if (matches.length === 1) { beginConsent(matches[0]); return; }
+    if (matches.length > 1) { showProfileChooser(matches); return; }
+    beginConsent(createPatientProfile(data));
+}
+
+function beginConsent(profile) {
+    hideIdentityPanels();
+    intakeState.patient = sessionPatientFromProfile(profile);
     prepareConsent();
     goToIntakeStep('consent');
 }
 
+function showProfileChooser(matches) {
+    intakeState.profileChoices = matches;
+    const panel = document.getElementById('profile-chooser');
+    panel.innerHTML = `
+        <h3>Chọn hồ sơ của bạn</h3>
+        <p>Có nhiều hồ sơ khớp với thông tin bạn nhập. Vui lòng chọn đúng hồ sơ của mình.</p>
+        <div class="profile-options">
+            ${matches.map(profile => `
+                <button type="button" class="profile-option" onclick="selectMatchedProfile('${escapeHtml(profile.id)}')">
+                    <strong>${escapeHtml(displayName(profile.name))}</strong>
+                    <span>${escapeHtml(profile.birthYear)} · ${escapeHtml(profile.gender)} · CCCD ${escapeHtml(MedVitaKioskStore.maskCccd(profile.cccd))}</span>
+                </button>`).join('')}
+            <button type="button" class="profile-option not-me" onclick="rejectProfileChoices()">Không phải thông tin của tôi</button>
+        </div>`;
+    panel.hidden = false;
+    document.getElementById('intake-status').innerText = '';
+    panel.querySelector('button').focus();
+}
+
+function selectMatchedProfile(id) {
+    const profile = intakeState.profileChoices.find(item => item.id === id);
+    if (profile) beginConsent(profile);
+}
+
+function rejectProfileChoices() {
+    hideIdentityPanels();
+    intakeState.requireName = true;
+    document.getElementById('patient-name-requirement').innerText = '(bắt buộc để đối chiếu lại)';
+    setFieldError('patient-full-name', 'Vui lòng bổ sung họ tên rồi bấm “Khai báo triệu chứng” để MedVita đối chiếu lại.');
+    document.getElementById('patient-full-name').focus();
+}
+
+// ================= CONSENT (MV-376 / MV-449) =================
 function prepareConsent() {
     document.getElementById('consent-patient-context').innerHTML = patientContextMarkup();
-    document.getElementById('consent-question').style.display = '';
-    document.getElementById('consent-declined').classList.remove('active');
 }
 
 function handleConsentDecision(accepted) {
     if (!accepted) {
-        document.getElementById('consent-question').style.display = 'none';
-        document.getElementById('consent-declined').classList.add('active');
+        openKioskModal({
+            kind: 'consent-decline', tone: 'danger',
+            title: 'Không thể khai báo bằng AI',
+            message: 'Bạn chưa đồng ý sử dụng AI nên không thể tiếp tục khai báo triệu chứng.',
+            actions: [
+                { label: 'Cancel', className: 'action-back', onClick: closeKioskModal, autofocus: true },
+                { label: 'Kết thúc', className: 'action-danger', onClick: () => { intakeState.consent = 'DECLINED'; endKioskSession('consent-declined'); } }
+            ]
+        });
         return;
     }
+    intakeState.consent = 'ACCEPTED';
     startSymptomChat();
     goToIntakeStep('chat');
 }
 
 function patientContextMarkup() {
     const p = intakeState.patient;
-    const age = calculateAge(p.dob);
-    return `<div class="avatar">${escapeHtml(p.name.charAt(0))}</div><div><strong>${escapeHtml(p.name)}</strong><span>${escapeHtml(p.patientId)} · ${age} tuổi · ${escapeHtml(p.gender)}</span></div>`;
+    return `<div class="avatar">${escapeHtml(p.name ? p.name.charAt(0) : '?')}</div><div><strong>${escapeHtml(displayName(p.name))}</strong><span>${escapeHtml(p.patientId)} · ${ageFromBirthYear(p.birthYear)} tuổi · ${escapeHtml(p.gender)}</span></div>`;
 }
 
+// ================= SYMPTOM CHAT (MV-421 / MV-452) =================
 function appendChatMessage(kind, text) {
     const message = document.createElement('div');
     message.className = `chat-message ${kind}`;
@@ -989,16 +1238,110 @@ function appendChatMessage(kind, text) {
     chat.scrollTop = chat.scrollHeight;
 }
 
+function setComposerEnabled(enabled) {
+    document.getElementById('symptom-answer').disabled = !enabled;
+    document.getElementById('btn-send-symptom').disabled = !enabled;
+    document.getElementById('btn-voice-input').disabled = !enabled;
+    updateFinishButton(enabled);
+}
+
+function updateFinishButton(enabled = !document.getElementById('symptom-answer').disabled) {
+    const button = document.getElementById('btn-finish-early');
+    button.innerText = intakeState.editMode ? 'Xong' : 'Xong sớm';
+    button.disabled = !enabled || (!intakeState.editMode && intakeState.answers.length === 0);
+}
+
 function startSymptomChat() {
     intakeState.answers = [];
+    intakeState.additions = [];
     intakeState.questionIndex = 0;
+    intakeState.editMode = false;
+    intakeState.conversationEnded = false;
     document.getElementById('chat-patient-context').innerHTML = patientContextMarkup();
     document.getElementById('symptom-chat').innerHTML = '';
     document.getElementById('symptom-answer').value = '';
-    document.getElementById('symptom-answer').disabled = false;
-    document.getElementById('btn-send-symptom').disabled = false;
     resetVoiceInput();
+    setComposerEnabled(true);
     appendChatMessage('ai', symptomQuestions[0]);
+}
+
+function detectRedflag(text) {
+    const normalized = text.toLowerCase();
+    return REDFLAG_KEYWORDS.find(keyword => normalized.includes(keyword) && !intakeState.redflagKeywords.includes(keyword)) || null;
+}
+
+function submitSymptomAnswer() {
+    const input = document.getElementById('symptom-answer');
+    const answer = input.value.trim();
+    if (!answer || intakeState.processing || input.disabled) { input.focus(); return; }
+    if (voiceRecording) resetVoiceInput();
+    appendChatMessage('patient', answer);
+    input.value = '';
+    if (intakeState.editMode) intakeState.additions.push(answer);
+    else intakeState.answers.push(answer);
+    setComposerEnabled(false);
+    setProcessing(true);
+    setTimeout(() => {
+        setProcessing(false);
+        if (!intakeState.sessionActive) return;
+        const keyword = detectRedflag(answer);
+        if (keyword) { raiseRedflag(keyword, answer); return; }
+        askNextQuestion();
+    }, 700);
+}
+
+function askNextQuestion() {
+    if (intakeState.editMode) {
+        setComposerEnabled(true);
+        appendChatMessage('ai', 'Đã ghi nhận. Bạn có thể bổ sung thêm hoặc bấm “Xong” để MedVita tạo lại bản tóm tắt.');
+        document.getElementById('symptom-answer').focus();
+        return;
+    }
+    intakeState.questionIndex++;
+    if (intakeState.questionIndex < symptomQuestions.length) {
+        setComposerEnabled(true);
+        appendChatMessage('ai', symptomQuestions[intakeState.questionIndex]);
+        document.getElementById('symptom-answer').focus();
+        return;
+    }
+    finishConversation();
+}
+
+// MV-10 qua MV-421: cảnh báo trên kiosk và gửi alert đến Dashboard điều dưỡng của bệnh viện thuộc phiên.
+function raiseRedflag(keyword, answer) {
+    intakeState.redflagKeywords.push(keyword);
+    const p = intakeState.patient;
+    store.addRedflag({
+        hospital: currentHospital(), source: 'kiosk', name: displayName(p.name), age: ageFromBirthYear(p.birthYear), gender: p.gender,
+        reason: `Kiosk: câu trả lời chứa từ khóa "${keyword}".`,
+        content: `"${answer}"`,
+        contact: 'Bệnh nhân đang ở khu vực kiosk — kiểm tra trực tiếp tại chỗ.',
+        protocol: 'Nhân viên y tế đến kiosk kiểm tra bệnh nhân ngay theo quy trình red-flag của bệnh viện.'
+    });
+    appendChatMessage('ai', 'MedVita phát hiện dấu hiệu cần nhân viên y tế kiểm tra ngay.');
+    openKioskModal({
+        kind: 'redflag', tone: 'danger',
+        title: 'Vui lòng báo ngay cho nhân viên y tế',
+        message: 'Thông tin bạn vừa cung cấp có dấu hiệu cần được nhân viên y tế kiểm tra ngay. Hãy báo cho nhân viên bệnh viện gần nhất. Điều dưỡng đã nhận được cảnh báo.',
+        actions: [
+            { label: 'Tiếp tục khai báo', className: 'action-back', onClick: () => { closeKioskModal(); askNextQuestion(); } },
+            { label: 'Kết thúc khai báo', className: 'action-next', onClick: () => { closeKioskModal(); finishConversation(); } }
+        ]
+    });
+}
+
+function finishConversation() {
+    if (intakeState.conversationEnded) return;
+    intakeState.conversationEnded = true;
+    if (voiceRecording) resetVoiceInput();
+    setComposerEnabled(false);
+    appendChatMessage('ai', intakeState.editMode ? 'Cảm ơn bạn. MedVita đang tạo lại bản tóm tắt.' : 'Cảm ơn bạn. MedVita đang tạo bản tóm tắt để bạn kiểm tra.');
+    setProcessing(true);
+    setTimeout(() => {
+        setProcessing(false);
+        if (!intakeState.sessionActive) return;
+        showPatientSummary();
+    }, 800);
 }
 
 function setVoiceRecordingState(recording, message) {
@@ -1011,6 +1354,7 @@ function setVoiceRecordingState(recording, message) {
     document.getElementById('voice-status').innerHTML = recording
         ? `<strong>Đang nghe…</strong>${escapeHtml(message || 'Nói rõ ràng bằng tiếng Việt.')}`
         : `<strong>Nhập bằng giọng nói</strong>${escapeHtml(message || 'Bấm microphone, nói tiếng Việt rồi kiểm tra nội dung trước khi gửi.')}`;
+    if (intakeState.sessionActive) resetIdleTimer();
 }
 
 function resetVoiceInput() {
@@ -1055,54 +1399,81 @@ function toggleVoiceRecording() {
     };
     recognition.onend = () => {
         voiceRecognition = null;
-        if (!voiceError) setVoiceRecordingState(false, 'Đã chuyển giọng nói thành văn bản. Hãy kiểm tra rồi bấm Gửi trả lời.');
+        if (!voiceError) setVoiceRecordingState(false, 'Đã chuyển giọng nói thành văn bản. Hãy kiểm tra, sửa nếu cần rồi bấm Gửi.');
     };
     try { recognition.start(); }
     catch (error) { setVoiceRecordingState(false, 'Không thể khởi động microphone. Vui lòng thử lại.'); }
 }
 
-function submitSymptomAnswer() {
-    const input = document.getElementById('symptom-answer');
-    const answer = input.value.trim();
-    if (!answer) { input.focus(); return; }
-    intakeState.answers.push(answer);
-    appendChatMessage('patient', answer);
-    input.value = '';
-    intakeState.questionIndex++;
-    if (intakeState.questionIndex < symptomQuestions.length) {
-        appendChatMessage('ai', symptomQuestions[intakeState.questionIndex]);
-        input.focus();
-        return;
-    }
-    appendChatMessage('ai', 'Cảm ơn bạn. MedVita đang tạo bản tóm tắt để bạn kiểm tra.');
-    input.disabled = true;
-    document.getElementById('btn-send-symptom').disabled = true;
-    setTimeout(showPatientSummary, 500);
+// ================= SUMMARY & QUEUE TICKET (MV-450 / MV-378) =================
+function buildSummaryText() {
+    const p = intakeState.patient;
+    const [chief, onset, context] = intakeState.answers;
+    const lines = [
+        `Lý do đến khám: ${chief || 'Chưa cung cấp'}`,
+        `Khởi phát và diễn biến: ${onset || 'Chưa cung cấp'}`,
+        `Triệu chứng kèm theo, bệnh nền, dị ứng và thuốc đang dùng: ${context || 'Chưa cung cấp'}`
+    ];
+    if (intakeState.additions.length) lines.push(`Thông tin bổ sung: ${intakeState.additions.join('; ')}`);
+    if (intakeState.redflagKeywords.length) lines.push(`Dấu hiệu cần lưu ý: ${intakeState.redflagKeywords.join(', ')} (đã gửi cảnh báo cho điều dưỡng).`);
+    lines.push(`Thông tin bệnh nhân: ${displayName(p.name)}, ${ageFromBirthYear(p.birthYear)} tuổi, ${p.gender}.`);
+    return lines.join('\n\n');
 }
 
 function showPatientSummary() {
-    const p = intakeState.patient;
-    const [chief, onset, context] = intakeState.answers;
+    intakeState.summaryText = buildSummaryText();
     document.getElementById('summary-patient-context').innerHTML = patientContextMarkup();
-    document.getElementById('patient-summary').innerText = `Lý do đến khám: ${chief}\n\nKhởi phát và diễn biến: ${onset}\n\nTriệu chứng kèm theo, bệnh nền, dị ứng và thuốc đang dùng: ${context}\n\nThông tin bệnh nhân: ${p.name}, ${calculateAge(p.dob)} tuổi, ${p.gender}.`;
+    document.getElementById('patient-summary').innerText = intakeState.summaryText;
     document.getElementById('summary-confirmation').style.display = 'block';
     document.getElementById('intake-success').classList.remove('active');
+    document.getElementById('summary-status').innerText = '';
+    document.getElementById('btn-confirm-summary').disabled = false;
     goToIntakeStep('summary');
+    resetIdleTimer();
+}
+
+// MV-450: chỉnh sửa bằng cách quay lại hội thoại, không sửa trực tiếp bản tóm tắt.
+function editSummaryViaChat() {
+    intakeState.editMode = true;
+    intakeState.conversationEnded = false;
+    goToIntakeStep('chat');
+    appendChatMessage('ai', 'Bạn muốn bổ sung hoặc thay đổi thông tin gì? Hãy nhập hoặc nói nội dung, sau đó bấm “Xong” để MedVita tạo lại bản tóm tắt.');
+    setComposerEnabled(true);
+    document.getElementById('symptom-answer').focus();
 }
 
 function confirmPatientSummary() {
-    const summary = document.getElementById('patient-summary').innerText.trim();
-    if (!summary) { document.getElementById('patient-summary').focus(); return; }
+    if (intakeState.processing) return;
     const p = intakeState.patient;
-    reviewItems.unshift({
-        id: `r${Date.now()}`, name: p.name, age: calculateAge(p.dob), gender: p.gender,
-        chief: intakeState.answers[0], allergy: 'Theo nội dung bệnh nhân khai báo', meds: 'Theo nội dung bệnh nhân khai báo', chronic: 'Theo nội dung bệnh nhân khai báo',
-        aiDept: 'Khoa Nội Tổng Quát', status: 'Pending Nurse Review', time: new Date(), conflict: false, summary
-    });
+    document.getElementById('btn-confirm-summary').disabled = true;
+    document.getElementById('summary-status').innerText = 'Đang gửi bản tóm tắt cho điều dưỡng và cấp số thứ tự…';
+    setProcessing(true);
+    setTimeout(() => {
+        setProcessing(false);
+        if (!intakeState.sessionActive) return;
+        const summary = store.addSummary({
+            source: 'kiosk', hospital: currentHospital(), profileId: p.profileId, name: p.name, age: ageFromBirthYear(p.birthYear), gender: p.gender,
+            chief: intakeState.answers[0] || 'Chưa cung cấp', allergy: 'Theo nội dung bệnh nhân khai báo', meds: 'Theo nội dung bệnh nhân khai báo', chronic: 'Theo nội dung bệnh nhân khai báo',
+            aiDept: 'Khoa Nội Tổng Quát', status: 'Pending Nurse Review', summary: intakeState.summaryText
+        });
+        intakeState.summaryId = summary.id;
+        showQueueTicket(store.issueKioskNumber(summary.id));
+    }, 700);
+}
+
+function showQueueTicket(ticket) {
+    const p = intakeState.patient;
     document.getElementById('summary-confirmation').style.display = 'none';
     document.getElementById('intake-success').classList.add('active');
-    document.getElementById('patient-queue-number').innerText = `A-${String(reviewItems.length).padStart(3, '0')}`;
-    renderReviewList();
+    document.getElementById('patient-queue-number').innerText = ticket.number;
+    document.getElementById('ticket-name-row').hidden = !p.name;
+    document.getElementById('ticket-name').innerText = p.name || '';
+    document.getElementById('ticket-hospital').innerText = currentHospital();
+    document.getElementById('ticket-issued-at').innerText = new Date(ticket.issuedAt).toLocaleString('vi-VN', { hour: '2-digit', minute: '2-digit', day: '2-digit', month: '2-digit', year: 'numeric' });
+    intakeState.stage = 'ticket';
+    updateKioskChrome();
+    resetIdleTimer();
+    document.getElementById('btn-finish-session').focus();
 }
 
 function printQueueTicket() {
@@ -1112,24 +1483,32 @@ function printQueueTicket() {
 }
 
 function resetPatientIntake() {
+    intakeState.sessionActive = false;
+    stopIdleTimers();
     resetVoiceInput();
-    intakeState.patientType = 'new'; intakeState.patient = null; intakeState.answers = []; intakeState.questionIndex = 0; intakeState.pendingNewPatientData = null; intakeState.identityVerified = false; intakeState.matchedPatient = null;
+    Object.assign(intakeState, freshIntakeState());
     document.querySelectorAll('#pane-intake input').forEach(el => el.value = '');
     document.getElementById('patient-gender').value = '';
+    setHisFieldsLocked(false);
     document.getElementById('optional-name-field').hidden = false;
+    document.getElementById('patient-name-requirement').innerText = '(không bắt buộc)';
     document.getElementById('btn-check-patient').disabled = true;
+    document.getElementById('btn-process-patient').disabled = false;
+    hideIdentityPanels();
     document.getElementById('symptom-answer').value = '';
     document.getElementById('symptom-chat').innerHTML = '';
     document.getElementById('patient-summary').innerText = '';
     document.getElementById('patient-queue-number').innerText = '—';
+    document.getElementById('ticket-name').innerText = '';
+    document.getElementById('ticket-hospital').innerText = '';
+    document.getElementById('ticket-issued-at').innerText = '';
     document.getElementById('chat-patient-context').innerHTML = '';
     document.getElementById('summary-patient-context').innerHTML = '';
     document.getElementById('consent-patient-context').innerHTML = '';
     clearIntakeErrors();
     document.getElementById('summary-confirmation').style.display = 'block';
     document.getElementById('intake-success').classList.remove('active');
-    document.getElementById('consent-question').style.display = '';
-    document.getElementById('consent-declined').classList.remove('active');
+    document.getElementById('summary-status').innerText = '';
     currentStepFlow = buildStepFlow('new');
     goToIntakeStep('info');
 }
@@ -1138,7 +1517,7 @@ document.getElementById('symptom-answer').addEventListener('keydown', event => {
     if (event.key === 'Enter' && !event.shiftKey) { event.preventDefault(); submitSymptomAnswer(); }
 });
 
-// ================= REVIEW & APPROVE (MV-24) =================
+// ================= REVIEW & APPROVE (MV-24, MV-460) =================
 function statusPillClass(status) {
     return { 'Pending Nurse Review': 'pending', 'Approved': 'approved' }[status] || 'pending';
 }
@@ -1150,6 +1529,7 @@ function renderReviewList() {
     const dateFrom = document.getElementById('flt-date-from').value;
     const dateTo = document.getElementById('flt-date-to').value;
     const list = document.getElementById('review-list');
+    const reviewItems = getReviewItems();
 
     let filtered = reviewItems.filter(r => !statusFilter || r.status === statusFilter);
     if (dateFrom) filtered = filtered.filter(r => r.time >= new Date(dateFrom + 'T00:00:00'));
@@ -1168,15 +1548,17 @@ function renderReviewList() {
         return;
     }
     list.innerHTML = pageItems.map(r => `
-        <div class="data-card" onclick="openReviewDrawer('${r.id}')">
+        <div class="data-card" onclick="openReviewDrawer('${escapeHtml(r.id)}')">
             <div class="dc-top">
-                <div><div class="dc-patient">${r.name}</div><div class="dc-meta">${r.age} tuổi · ${r.gender}</div></div>
+                <div><div class="dc-patient">${escapeHtml(displayName(r.name))}</div><div class="dc-meta">${r.age} tuổi · ${escapeHtml(r.gender)}</div></div>
                 <span class="pill ${statusPillClass(r.status)}">${r.status}</span>
             </div>
             <div class="dc-body">
-                <div class="dc-chief">${r.chief}</div>
+                <div class="dc-chief">${escapeHtml(r.chief)}</div>
                 <div class="dc-tags">
-                    <span class="pill pending" style="background:#eef1f6;color:var(--muted);">AI đề xuất: ${r.aiDept}</span>
+                    ${r.kioskNumber ? `<span class="pill kiosk">Số kiosk ${escapeHtml(r.kioskNumber)}</span>` : ''}
+                    <span class="pill pending" style="background:#eef1f6;color:var(--muted);">AI đề xuất: ${escapeHtml(r.aiDept)}</span>
+                    ${r.examNumber ? `<span class="pill sent">Số khám ${escapeHtml(r.examNumber)}</span>` : ''}
                     ${r.conflict ? '<span class="pill failed">⚠ Mâu thuẫn dữ liệu</span>' : ''}
                 </div>
             </div>
@@ -1200,13 +1582,16 @@ document.getElementById('btn-review-search').addEventListener('click', () => {
 
 let activeReviewId = null;
 function openReviewDrawer(id) {
-    const r = reviewItems.find(x => x.id === id);
+    const r = getReviewItems().find(x => x.id === id);
+    if (!r) return;
     activeReviewId = id;
-    document.getElementById('rv-patient-name').innerText = r.name;
+    document.getElementById('rv-patient-name').innerText = displayName(r.name);
     document.getElementById('rv-patient-meta').innerText = `${r.age} tuổi · ${r.gender}`;
     document.getElementById('rv-conflict').style.display = r.conflict ? 'flex' : 'none';
+    document.getElementById('rv-kiosk').hidden = !r.kioskNumber;
+    document.getElementById('rv-kiosk-number').innerText = r.kioskNumber || '';
     document.getElementById('rv-chief').innerText = r.chief;
-    document.getElementById('rv-history').innerHTML = `Bệnh nền: ${r.chronic}<br>Dị ứng: <span class="allergy-flag">${r.allergy}</span><br>Thuốc đang dùng: ${r.meds}`;
+    document.getElementById('rv-history').innerHTML = `Bệnh nền: ${escapeHtml(r.chronic)}<br>Dị ứng: <span class="allergy-flag">${escapeHtml(r.allergy)}</span><br>Thuốc đang dùng: ${escapeHtml(r.meds)}`;
     document.getElementById('rv-summary').innerText = r.summary || (r.chief + ' AI tổng hợp: cần theo dõi thêm dấu hiệu tiêu hóa.');
     document.getElementById('rv-time').innerText = r.time.toLocaleString('vi-VN');
     document.getElementById('rv-dept-select').value = r.approvedDept || r.aiDept;
@@ -1216,24 +1601,72 @@ function openReviewDrawer(id) {
     const actionsEl = document.getElementById('rv-actions');
     const timeline = document.getElementById('rv-timeline');
     if (r.status === 'Pending Nurse Review') {
-        actionsEl.innerHTML = '<button class="btn-primary" id="btn-rv-approve" onclick="approveReview()">Approve</button>';
+        actionsEl.innerHTML = `${r.kioskNumber ? `
+            <label class="announce-row">
+                <input type="checkbox" id="rv-announce" checked>
+                <span>Phát thông báo gọi bệnh nhân<small>Mặc định bật. Sau khi duyệt thành công, loa máy điều dưỡng đọc mẫu câu của bệnh viện với số kiosk ${escapeHtml(r.kioskNumber)} (MV-460).</small></span>
+            </label>` : ''}
+            <button class="btn-primary" id="btn-rv-approve" onclick="approveReview()">Approve</button>`;
         timeline.innerText = 'Chưa approve — bệnh nhân vẫn tiếp tục khám bình thường theo vận hành bệnh viện (MV24-BR-05).';
     } else if (r.status === 'Approved') {
-        actionsEl.innerHTML = `<div class="status-timeline" style="margin-top:0;">Đã approve — phân khoa chính thức: <b>${r.approvedDept}</b></div>`;
+        actionsEl.innerHTML = `<div class="status-timeline" style="margin-top:0;">Đã approve — phân khoa chính thức: <b>${escapeHtml(r.approvedDept)}</b>${r.examNumber ? ` · Số khám <b>${escapeHtml(r.examNumber)}</b>` : ''}</div>${r.kioskNumber ? `
+            <button class="btn-secondary replay-call" id="btn-rv-replay" type="button" onclick="replayKioskCall()">Phát lại thông báo</button>` : ''}`;
         timeline.innerText = `Đã approve lúc ${r.approvedAt ? r.approvedAt.toLocaleString('vi-VN') : ''}. Việc gửi sang HIS do hệ thống MedVita tự xử lý, không hiển thị ở đây.`;
     }
     document.getElementById('drawer-review').classList.add('active');
 }
+
 function approveReview() {
-    const r = reviewItems.find(x => x.id === activeReviewId);
-    r.approvedDept = document.getElementById('rv-dept-select').value;
-    r.status = 'Approved';
-    r.approvedAt = new Date();
+    const announce = document.getElementById('rv-announce');
+    const shouldAnnounce = Boolean(announce && announce.checked);
+    const dept = document.getElementById('rv-dept-select').value;
+    let approved;
+    try {
+        approved = store.approveSummary(activeReviewId, dept);
+    } catch (error) {
+        showToast('Duyệt không thành công. Không phát thông báo. Vui lòng thử lại.');
+        return;
+    }
     // Việc gửi sang HIS (thành công/thất bại/retry) là trạng thái nội bộ hệ thống MedVita,
     // không thuộc phạm vi hiển thị cho điều dưỡng — không track/hiện ở Dashboard này.
-    renderReviewList();
     openReviewDrawer(activeReviewId);
-    alert(`Đã Approve. Phân khoa chính thức: ${r.approvedDept}. Audit log: nurse_id, old/new dept, approved_at (MV24-AC4).`);
+    showToast(`Đã Approve. Phân khoa chính thức: ${approved.approvedDept} · Số khám ${approved.examNumber}. Audit log: nurse_id, old/new dept, approved_at (MV24-AC4).`);
+    if (shouldAnnounce && approved.kioskNumber) announceKioskCall(approved.kioskNumber, approved.hospital);
+}
+
+// MV-460: điều dưỡng phát lại thông báo của bản tóm tắt đã duyệt.
+function replayKioskCall() {
+    const r = store.getSummary(activeReviewId);
+    if (r && r.status === 'Approved' && r.kioskNumber) announceKioskCall(r.kioskNumber, r.hospital);
+}
+
+// MV-460: đọc câu gọi bệnh nhân trên loa máy điều dưỡng, theo mẫu câu của bệnh viện.
+function kioskCallText(number, hospital) {
+    return store.callTemplate(hospital).replace('{số kiosk}', number);
+}
+function spokenKioskNumber(number) {
+    const [prefix, digits] = String(number).split('-');
+    return digits ? `${prefix} ${Number(digits)}` : number;
+}
+function vietnameseVoice() {
+    if (!('speechSynthesis' in window)) return null;
+    return window.speechSynthesis.getVoices().find(voice => /^vi([-_]|$)/i.test(voice.lang)) || null;
+}
+if ('speechSynthesis' in window) window.speechSynthesis.getVoices();
+
+function announceKioskCall(number, hospital) {
+    const voice = vietnameseVoice();
+    if (!voice) {
+        showToast(`Thông báo: ${kioskCallText(number, hospital)}\n(Máy này không có giọng đọc tiếng Việt nên thông báo hiển thị dạng chữ.)`, 9000);
+        return;
+    }
+    const utterance = new SpeechSynthesisUtterance(kioskCallText(spokenKioskNumber(number), hospital));
+    utterance.lang = 'vi-VN';
+    utterance.voice = voice;
+    utterance.rate = 0.95;
+    window.speechSynthesis.cancel();
+    window.speechSynthesis.speak(utterance);
+    showToast(`Đang phát: ${kioskCallText(number, hospital)}`, 9000);
 }
 
 // ================= RED-FLAG (MV-25) =================
@@ -1246,6 +1679,7 @@ const REDFLAG_PAGE_SIZE = 5;
 function renderRedflagList() {
     const statusFilter = document.getElementById('flt-rf-status').value;
     const list = document.getElementById('redflag-list');
+    const redflagItems = getRedflagItems();
     const filtered = redflagItems.filter(a => !statusFilter || a.status === statusFilter);
     document.getElementById('badge-redflag').innerText = redflagItems.filter(a => a.status === 'New' || a.status === 'Đang xử lý').length;
 
@@ -1260,12 +1694,12 @@ function renderRedflagList() {
         return;
     }
     list.innerHTML = pageItems.map(a => `
-        <div class="data-card alert-card" onclick="openRedflagDrawer('${a.id}')">
+        <div class="data-card alert-card" onclick="openRedflagDrawer('${escapeHtml(a.id)}')">
             <div class="dc-top">
-                <div><div class="dc-patient">${a.name}</div><div class="dc-meta">${a.age} tuổi · ${a.gender} · ${a.time.toLocaleTimeString('vi-VN',{hour:'2-digit',minute:'2-digit'})}</div></div>
+                <div><div class="dc-patient">${escapeHtml(a.name)}</div><div class="dc-meta">${a.age} tuổi · ${escapeHtml(a.gender)} · ${a.time.toLocaleTimeString('vi-VN',{hour:'2-digit',minute:'2-digit'})}</div></div>
                 <span class="pill ${rfPillClass(a.status)}">${a.status}</span>
             </div>
-            <div class="dc-body"><div class="dc-chief">${a.reason}</div></div>
+            <div class="dc-body"><div class="dc-chief">${escapeHtml(a.reason)}</div>${a.source === 'kiosk' ? '<div class="dc-tags"><span class="pill kiosk">Từ kiosk</span></div>' : ''}</div>
         </div>
     `).join('');
 
@@ -1283,7 +1717,8 @@ document.getElementById('flt-rf-status').addEventListener('change', () => { redf
 
 let activeAlertId = null;
 function openRedflagDrawer(id) {
-    const a = redflagItems.find(x => x.id === id);
+    const a = getRedflagItems().find(x => x.id === id);
+    if (!a) return;
     activeAlertId = id;
     document.getElementById('rf-patient-name').innerText = a.name;
     document.getElementById('rf-patient-meta').innerText = `${a.age} tuổi · ${a.gender}`;
@@ -1306,24 +1741,23 @@ function openRedflagDrawer(id) {
     document.getElementById('drawer-redflag').classList.add('active');
 }
 function setAlertStatus(newStatus) {
-    const a = redflagItems.find(x => x.id === activeAlertId);
     const note = document.getElementById('rf-note').value.trim();
     const noteRequired = (newStatus === 'Đã xử lý' || newStatus === 'Bỏ qua');
     if (noteRequired && !note) {
         alert('Cần nhập ghi chú/lý do trước khi đánh dấu ' + newStatus + ' (MV25-AC4).');
         return;
     }
-    a.status = newStatus;
-    a.note = note;
-    renderRedflagList();
+    store.updateRedflag(activeAlertId, { status: newStatus, note });
     openRedflagDrawer(activeAlertId);
-    alert(`Đã cập nhật trạng thái: ${newStatus}. Audit log: alert_id, nurse_id, trạng thái trước/sau, ghi chú, thời điểm (MV25-AC5).`);
+    showToast(`Đã cập nhật trạng thái: ${newStatus}. Audit log: alert_id, nurse_id, trạng thái trước/sau, ghi chú, thời điểm (MV25-AC5).`);
 }
 
 function closeDrawer(which) {
     document.getElementById(`drawer-${which}`).classList.remove('active');
 }
 </script>
+
+<div class="app-toast" id="app-toast" role="status" aria-live="polite"></div>
 
 </body>
 </html>

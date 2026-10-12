@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MedVita — User flow kiosk (MV-373)</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+    --navy:#0f2740; --primary:#0057c4; --ink:#1c2b42; --muted:#5e6f89; --line:#e3e8f0; --bg:#eef2f8; --card:#fff;
+    --lane-op:#eef2ff; --lane-pt:#e8f0ff; --lane-mv:#f1f5f9; --lane-nu:#ecfdf3; --lane-lcd:#fff7e6;
+}
+*{box-sizing:border-box;margin:0;padding:0;font-family:'Inter',sans-serif;}
+body{background:var(--bg);color:var(--ink);}
+.page{width:min(1200px,calc(100% - 32px));margin:0 auto;padding:36px 0 64px;}
+header{margin-bottom:24px;}
+.eyebrow{font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--primary);margin-bottom:6px;}
+h1{font-size:clamp(24px,3vw,32px);font-weight:800;color:var(--navy);letter-spacing:-.01em;}
+.lead{margin-top:8px;max-width:760px;font-size:15px;line-height:1.6;color:var(--muted);}
+.links{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px;}
+.links a{display:inline-flex;align-items:center;min-height:40px;padding:0 14px;border-radius:10px;background:var(--card);border:1.5px solid var(--line);color:var(--navy);font-size:13px;font-weight:700;text-decoration:none;}
+.links a:hover{border-color:var(--primary);color:var(--primary);}
+section{background:var(--card);border:1.5px solid var(--line);border-radius:16px;padding:22px;margin-top:18px;}
+section h2{font-size:18px;font-weight:800;color:var(--navy);}
+section > p{margin-top:6px;font-size:13.5px;line-height:1.6;color:var(--muted);max-width:820px;}
+.legend{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+.legend span{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;color:var(--ink);padding:5px 10px;border-radius:999px;border:1px solid var(--line);}
+.legend i{width:12px;height:12px;border-radius:3px;display:inline-block;}
+.diagram{margin-top:16px;overflow-x:auto;padding:8px 0;}
+.diagram .mermaid{min-width:720px;display:flex;justify-content:center;}
+.diagram .mermaid svg{max-width:100%;height:auto;}
+.diagram .mermaid:not([data-processed]){font-family:monospace;font-size:12px;color:var(--muted);white-space:pre;}
+table{width:100%;border-collapse:collapse;margin-top:14px;font-size:13.5px;}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.5;}
+th{font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);}
+td code{font-size:12px;background:var(--bg);padding:1px 6px;border-radius:5px;}
+.key{font-weight:800;color:var(--primary);white-space:nowrap;}
+.note{margin-top:14px;font-size:12px;color:var(--muted);line-height:1.6;}
+@media(max-width:760px){section{padding:16px;}th:nth-child(3),td:nth-child(3){display:none;}}
+</style>
+</head>
+<body>
+<div class="page">
+    <header>
+        <div class="eyebrow">Module 1 · Epic MV-373</div>
+        <h1>User flow kiosk khai báo trước khám</h1>
+        <p class="lead">Luồng high level từ lúc nhân viên mở kiosk đến khi bệnh nhân được gọi khám. Nguồn: các story trong Epic MV-373 trên Jira, cập nhật ngày 12/10/2026. Khi sơ đồ và Jira khác nhau, Jira là nguồn đúng.</p>
+        <div class="links">
+            <a href="nurse-dashboard.html">Mở prototype kiosk &amp; Dashboard</a>
+            <a href="lcd.html">Mở màn hình chờ LCD</a>
+            <a href="index.html">Về danh sách prototype</a>
+        </div>
+    </header>
+
+    <section>
+        <h2>1. Tổng quan theo người tham gia</h2>
+        <p>Mỗi làn là một người hoặc hệ thống tham gia. Mũi tên nét đứt là luồng phụ (red-flag).</p>
+        <div class="legend">
+            <span><i style="background:var(--lane-op)"></i>Nhân viên (Kiosk Operator)</span>
+            <span><i style="background:var(--lane-pt)"></i>Bệnh nhân tại kiosk</span>
+            <span><i style="background:var(--lane-mv)"></i>MedVita (BE/AI)</span>
+            <span><i style="background:var(--lane-nu)"></i>Điều dưỡng</span>
+            <span><i style="background:var(--lane-lcd)"></i>Màn hình chờ LCD</span>
+        </div>
+        <div class="diagram"><pre class="mermaid">
+flowchart TB
+    subgraph OP["Nhân viên · Kiosk Operator"]
+        op1["Đăng nhập tablet<br/>MV-374"]
+    end
+    subgraph PT["Bệnh nhân tại kiosk"]
+        pt1["Xác định hồ sơ<br/>MV-375"] --> pt2["Đồng ý Consent AI<br/>MV-376"] --> pt3["Khai báo triệu chứng<br/>MV-421"] --> pt4["Xem lại và xác nhận<br/>MV-450"] --> pt5["Nhận và in số kiosk<br/>MV-378"] --> pt6["Kết thúc phiên<br/>MV-377"]
+    end
+    subgraph MV["MedVita · BE/AI"]
+        mv1["Tóm tắt Pending Nurse Review<br/>cấp số kiosk K-xxx"]
+        mv2["Red-flag alert"]
+    end
+    subgraph NU["Điều dưỡng · Dashboard"]
+        nu1["Duyệt tóm tắt, chọn khoa<br/>MV-24 · cấp số khám MV-176"] --> nu2["Phát thông báo gọi số<br/>MV-460"]
+        nu3["Xử lý cảnh báo<br/>MV-25"]
+    end
+    subgraph LCD["Màn hình chờ LCD"]
+        lcd1["Phần dọc: số kiosk chờ duyệt<br/>MV-459"]
+        lcd2["Phần ngang: số khám · họ tên · khoa<br/>MV-459"]
+    end
+    op1 --> pt1
+    pt4 --> mv1 --> pt5
+    mv1 --> lcd1
+    mv1 --> nu1
+    nu1 --> lcd2
+    pt3 -.-> mv2 -.-> nu3
+    style OP fill:#eef2ff,stroke:#c7d2fe
+    style PT fill:#e8f0ff,stroke:#bfd3ff
+    style MV fill:#f1f5f9,stroke:#cbd5e1
+    style NU fill:#ecfdf3,stroke:#b7ebc9
+    style LCD fill:#fff7e6,stroke:#fcd9a0
+        </pre></div>
+    </section>
+
+    <section>
+        <h2>2. Chi tiết phiên của bệnh nhân trên kiosk</h2>
+        <p>Các nhánh chính và nhánh lỗi đã chốt trong MV-375, MV-376, MV-421, MV-450, MV-378 và MV-377. Ở mọi bước trước phiếu số, bệnh nhân có thể bấm Hủy khai báo; không thao tác 2 phút thì kiosk cảnh báo 30 giây rồi tự đóng phiên. Nhân viên thoát kiosk giữa phiên cũng đóng phiên như Hủy khai báo.</p>
+        <div class="diagram"><pre class="mermaid">
+flowchart TB
+    s0(["Màn bắt đầu<br/>QR tải app · Bắt đầu khai báo"]) --> id0{"Có Mã bệnh nhân?"}
+    id0 -- "Có · bấm Kiểm tra" --> his[["Tra cứu HIS"]]
+    his -- "Tìm thấy" --> hisFill["Điền sẵn họ tên · CCCD · năm sinh · giới tính<br/>khóa các trường"]
+    his -- "Không tìm thấy" --> notFound["Báo không tìm thấy mã<br/>không tự tạo profile"]
+    his -- "HIS lỗi" --> hisErr["Báo chưa thể kiểm tra, thử lại sau<br/>chưa cho tiếp tục bằng mã này"]
+    hisFill -- "Sai · sửa hoặc xóa mã" --> cleared["Xóa và mở lại các trường"]
+    notFound --> pickId{"Nhập lại mã<br/>hay xóa mã?"}
+    hisErr --> pickId
+    cleared --> pickId
+    pickId -- "Nhập lại mã" --> id0
+    pickId -- "Xóa mã" --> self
+    hisFill -- "Đúng · Tiếp tục" --> prof["Gắn Health Profile vào phiên"]
+    id0 -- "Không" --> self["Nhập CCCD 12 số · năm sinh · giới tính<br/>họ tên không bắt buộc"] --> match{"Đối chiếu hồ sơ"}
+    match -- "1 hồ sơ" --> prof
+    match -- "Không có" --> create["Tạo hồ sơ mới<br/>gắn Kiosk Operator"] --> prof
+    match -- "Nhiều hồ sơ khác tên" --> choose{"Chọn hồ sơ<br/>CCCD chỉ hiện 4 số cuối"}
+    choose -- "Chọn" --> prof
+    choose -- "Không phải tôi" --> addName["Bổ sung họ tên"] --> match
+    prof --> consent{"Consent AI"}
+    consent -- "Từ chối" --> decline{"Hộp thoại<br/>Kết thúc / Cancel"}
+    decline -- "Cancel" --> consent
+    decline -- "Kết thúc" --> check
+    consent -- "Đồng ý" --> check{"MedVita kiểm tra<br/>phiên bản · phiên · lưu"}
+    check -- "Phiên bản đổi hoặc lưu lỗi" --> consent
+    check -- "Lưu DECLINED" --> fin
+    check -- "Lưu ACCEPTED" --> chat["Hội thoại AI<br/>văn bản hoặc giọng nói"]
+    chat --> rf{"Red-flag?"}
+    rf -- "Có · cảnh báo bệnh nhân và gửi alert điều dưỡng" --> rfDlg{"Tiếp tục / Kết thúc khai báo"}
+    rfDlg -- "Tiếp tục" --> chat
+    rfDlg -- "Kết thúc khai báo" --> sum
+    rf -- "Không" --> enough{"AI đủ thông tin<br/>hoặc Xong sớm?"}
+    enough -- "Chưa" --> chat
+    enough -- "Rồi" --> sum["Tạo bản tóm tắt"]
+    sum --> review{"Xem lại tóm tắt<br/>chỉ xem"}
+    review -- "Chỉnh sửa thông tin" --> chat
+    review -- "Xác nhận thông tin" --> ticket["Pending Nurse Review<br/>cấp số kiosk ngay · K-001"]
+    ticket --> print["Xem / in phiếu, in lại được<br/>số · họ tên · bệnh viện · giờ cấp"] --> done["Hoàn tất"] --> fin(["Làm sạch phiên<br/>về màn bắt đầu"])
+</pre></div>
+    </section>
+
+    <section>
+        <h2>3. Sau phiên kiosk: điều dưỡng và màn hình chờ</h2>
+        <p>Bệnh nhân kiosk có hai số: số kiosk để chờ điều dưỡng tiếp nhận, và số khám theo khoa do MV-176 cấp sau khi duyệt.</p>
+        <div class="diagram"><pre class="mermaid">
+flowchart LR
+    q["Tóm tắt Pending Nurse Review<br/>có số kiosk"] --> v["LCD phần dọc<br/>số kiosk + họ tên trong ngày<br/>lật trang mỗi 8 giây"]
+    q --> n1["Điều dưỡng mở tóm tắt<br/>thấy số kiosk"]
+    n1 --> ap{"Chọn khoa<br/>và duyệt"}
+    ap -- "Thành công" --> ex["Cấp số khám theo khoa<br/>MV-176"]
+    ex --> sp{"Phát thông báo<br/>mặc định bật"}
+    sp -- "Bật" --> say["Loa máy điều dưỡng đọc<br/>mẫu câu của bệnh viện<br/>có thể phát lại"]
+    sp -- "Tắt" --> mute["Không phát"]
+    ex --> out["Số kiosk rời phần dọc"]
+    ex --> h["LCD phần ngang<br/>số khám · họ tên · khoa<br/>20 người mới nhất"]
+    ap -- "Thất bại" --> fail["Không cấp số<br/>không phát âm thanh"]
+</pre></div>
+    </section>
+
+    <section>
+        <h2>4. Bước, story và màn hình trong prototype</h2>
+        <table>
+            <thead><tr><th>Bước</th><th>Story</th><th>Màn hình prototype</th></tr></thead>
+            <tbody>
+                <tr><td>Nhân viên đăng nhập tablet, kiosk chỉ mở flow khai báo</td><td class="key">MV-374</td><td><code>nurse-dashboard.html</code> · tài khoản <code>kiosk.tn01</code></td></tr>
+                <tr><td>Xác định hồ sơ: tra cứu HIS hoặc đối chiếu CCCD, chọn hồ sơ khi trùng</td><td class="key">MV-375</td><td>Bước “Thông tin bệnh nhân”</td></tr>
+                <tr><td>Consent AI theo Health Profile và phiên, hộp thoại Kết thúc / Cancel</td><td class="key">MV-376</td><td>Bước “Consent AI”</td></tr>
+                <tr><td>Khai báo triệu chứng, Xong sớm, cảnh báo red-flag</td><td class="key">MV-421</td><td>Bước “Khai báo triệu chứng với AI”</td></tr>
+                <tr><td>Xem lại tóm tắt, chỉnh sửa qua hội thoại, xác nhận</td><td class="key">MV-450</td><td>Bước “Kiểm tra và xác nhận tóm tắt”</td></tr>
+                <tr><td>Cấp số kiosk ngay, hiển thị và in phiếu</td><td class="key">MV-378</td><td>Màn phiếu số thứ tự</td></tr>
+                <tr><td>Kết thúc phiên: Hoàn tất, Hủy khai báo, hết thời gian chờ, làm sạch dữ liệu</td><td class="key">MV-377</td><td>Nút “Hủy khai báo” trên thanh trên cùng, cảnh báo đếm ngược</td></tr>
+                <tr><td>Màn hình chờ LCD hai phần</td><td class="key">MV-459</td><td><code>lcd.html</code></td></tr>
+                <tr><td>Hiển thị số kiosk; phát thông báo gọi bệnh nhân khi duyệt (mặc định bật, phát lại được)</td><td class="key">MV-460</td><td>Dashboard điều dưỡng · tài khoản <code>dieuduong.tn01</code></td></tr>
+            </tbody>
+        </table>
+        <p class="note">Demo 3 tab: tab 1 đăng nhập <code>kiosk.tn01</code>, tab 2 đăng nhập <code>dieuduong.tn01</code>, tab 3 mở <code>lcd.html</code>. Thêm <code>?timeout=fast</code> vào URL kiosk để thời gian chờ còn 15 giây và cảnh báo 10 giây.</p>
+    </section>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+<script>
+mermaid.initialize({
+    startOnLoad: true,
+    theme: 'base',
+    securityLevel: 'strict',
+    flowchart: { htmlLabels: true, curve: 'basis', useMaxWidth: false },
+    themeVariables: {
+        fontFamily: 'Inter, sans-serif',
+        fontSize: '14px',
+        primaryColor: '#ffffff',
+        primaryBorderColor: '#0057c4',
+        primaryTextColor: '#1c2b42',
+        lineColor: '#5e6f89',
+        clusterBkg: '#f7faff',
+        clusterBorder: '#c8dcff'
+    }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MedVita — Màn hình chờ LCD (MV-459)</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=JetBrains+Mono:wght@700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+    --navy:#0f2740; --navy-2:#16324f; --primary:#0057c4; --sky:#7dd3fc;
+    --ink:#0f2740; --muted:#5e6f89; --line:#d9e3f0; --bg:#eef3fa; --card:#fff;
+    --mono:'JetBrains Mono', monospace;
+    --ticker-height:clamp(56px, 9vh, 104px);
+}
+*{box-sizing:border-box;margin:0;padding:0;font-family:'Inter',sans-serif;}
+html,body{height:100%;}
+body{background:var(--bg);color:var(--ink);overflow:hidden;}
+
+.lcd{height:100vh;height:100dvh;display:grid;grid-template-rows:auto minmax(0,1fr) var(--ticker-height);}
+.lcd[hidden]{display:none;}
+
+.lcd-header{display:flex;align-items:center;justify-content:space-between;gap:3vw;padding:2vh 3vw;background:var(--navy);color:#fff;}
+.brand{display:flex;align-items:center;gap:1vw;font-weight:800;font-size:clamp(18px,2.2vw,36px);}
+.brand-mark{width:clamp(34px,3.2vw,56px);height:clamp(34px,3.2vw,56px);border-radius:12px;background:rgba(255,255,255,.14);display:flex;align-items:center;justify-content:center;}
+.brand-mark svg{width:55%;height:55%;fill:#fff;}
+.hospital{flex:1;text-align:center;font-size:clamp(16px,1.8vw,30px);font-weight:700;opacity:.92;}
+.clock{font-family:var(--mono);font-size:clamp(22px,2.8vw,48px);font-weight:800;letter-spacing:.04em;}
+
+.lcd-main{display:flex;flex-direction:column;min-height:0;padding:3vh 3vw 2vh;}
+.section-title{display:flex;align-items:baseline;justify-content:space-between;gap:2vw;margin-bottom:2.2vh;}
+.section-title h1{font-size:clamp(24px,3vw,52px);font-weight:800;color:var(--navy);letter-spacing:-.01em;}
+.section-title p{font-size:clamp(14px,1.4vw,24px);color:var(--muted);font-weight:600;}
+.queue-list{flex:1;min-height:0;display:flex;flex-direction:column;gap:clamp(8px,1.2vh,16px);overflow:hidden;}
+.queue-row{flex-shrink:0;background:var(--card);border:2px solid var(--line);border-radius:18px;padding:clamp(10px,1.4vh,18px) clamp(16px,2vw,36px);display:flex;align-items:center;gap:clamp(16px,3vw,56px);box-shadow:0 6px 18px rgba(15,39,64,.05);}
+.queue-row.latest{border-color:var(--primary);box-shadow:0 0 0 5px rgba(0,87,196,.14);}
+.queue-number{flex-shrink:0;min-width:5.4ch;font-family:var(--mono);font-size:clamp(30px,3.2vw,64px);font-weight:800;color:var(--primary);letter-spacing:.03em;white-space:nowrap;line-height:1.1;}
+.queue-name{flex:1;min-width:0;font-size:clamp(20px,2.4vw,46px);font-weight:700;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.queue-row[hidden]{display:none;}
+.queue-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1vh;min-height:30vh;border:2px dashed var(--line);border-radius:22px;color:var(--muted);text-align:center;}
+.queue-empty strong{font-size:clamp(20px,2.2vw,38px);color:var(--navy);}
+.queue-empty span{font-size:clamp(14px,1.4vw,24px);}
+.queue-list.page-in .queue-row:not([hidden]){animation:page-in .35s ease-out;}
+@keyframes page-in{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
+
+.ticker{display:flex;align-items:stretch;background:var(--navy-2);color:#fff;overflow:hidden;}
+.ticker-label{flex-shrink:0;display:flex;align-items:center;padding:0 2vw;background:var(--primary);font-weight:800;font-size:clamp(14px,1.5vw,26px);text-transform:uppercase;letter-spacing:.06em;}
+.ticker-viewport{flex:1;overflow:hidden;display:flex;align-items:center;}
+.ticker-track{display:flex;gap:4vw;white-space:nowrap;padding-left:2vw;animation:ticker var(--duration,40s) linear infinite;}
+.ticker-item{font-size:clamp(16px,1.7vw,30px);font-weight:600;}
+.ticker-item b{font-family:var(--mono);color:var(--sky);margin-right:.5em;}
+.ticker-item .dept{color:#cbd5e1;margin-left:.4em;}
+.ticker-empty{padding-left:2vw;font-size:clamp(14px,1.5vw,26px);color:#cbd5e1;}
+@keyframes ticker{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+.offline{position:fixed;inset:0;z-index:5;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2vh;background:var(--bg);text-align:center;padding:4vw;}
+.offline[hidden]{display:none;}
+.offline strong{font-size:clamp(26px,3.4vw,60px);color:var(--navy);}
+.offline span{font-size:clamp(16px,1.8vw,30px);color:var(--muted);font-weight:600;}
+.demo-note{position:fixed;left:12px;bottom:calc(var(--ticker-height) + 10px);max-width:46vw;font-size:11px;line-height:1.4;color:var(--muted);background:rgba(255,255,255,.88);padding:5px 9px;border-radius:7px;}
+
+@media(prefers-reduced-motion:reduce){.ticker-track,.queue-list.page-in .queue-row:not([hidden]){animation:none;}}
+@media(max-width:760px){.hospital{display:none;}.section-title{flex-direction:column;gap:4px;}}
+</style>
+</head>
+<body>
+<div class="lcd">
+    <header class="lcd-header">
+        <div class="brand"><span class="brand-mark"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg></span>MedVita</div>
+        <div class="hospital" id="lcd-hospital"></div>
+        <div class="clock" id="lcd-clock" aria-label="Giờ hiện tại"></div>
+    </header>
+
+    <main class="lcd-main">
+        <div class="section-title">
+            <h1>Đang chờ điều dưỡng tiếp nhận</h1>
+            <p id="lcd-pending-count"></p>
+        </div>
+        <div class="queue-list" id="lcd-pending" aria-live="polite"></div>
+    </main>
+
+    <section class="ticker" aria-label="Bệnh nhân đã được xếp khám">
+        <div class="ticker-label">Đã xếp khám</div>
+        <div class="ticker-viewport"><div class="ticker-track" id="lcd-ticker"></div></div>
+    </section>
+</div>
+<div class="offline" id="lcd-offline" role="status" aria-live="assertive" hidden>
+    <strong>Mất kết nối</strong>
+    <span>Danh sách số thứ tự sẽ hiển thị lại khi màn hình kết nối được với hệ thống.</span>
+</div>
+<div class="demo-note">Prototype MV-459 · dữ liệu demo dùng chung với nurse-dashboard.html. Bản thật cần xác thực màn hình LCD để danh sách bệnh nhân không truy cập công khai.</div>
+
+<script src="shared/kiosk-store.js"></script>
+<script>
+const HOSPITAL = new URLSearchParams(location.search).get('hospital') || MedVitaKioskStore.DEFAULT_HOSPITAL;
+const store = MedVitaKioskStore.createStore();
+const PAGE_INTERVAL_MS = 8000;
+let pageIndex = 0;
+let pageTimer = null;
+
+function escapeHtml(value) { return String(value).replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char])); }
+
+// Phần dọc: số kiosk đang chờ điều dưỡng duyệt, mỗi bệnh nhân một dòng theo thứ tự cấp số. Dòng không có họ tên chỉ hiện số.
+function renderPending() {
+    const pending = store.pendingKioskQueue(HOSPITAL);
+    const list = document.getElementById('lcd-pending');
+    if (!pending.length) {
+        clearTimeout(pageTimer);
+        pageIndex = 0;
+        document.getElementById('lcd-pending-count').innerText = '';
+        list.innerHTML = '<div class="queue-empty"><strong>Hiện chưa có số đang chờ</strong><span>Số thứ tự sẽ hiển thị tại đây sau khi bạn khai báo tại kiosk.</span></div>';
+        return;
+    }
+    list.innerHTML = pending.map((item, index) => `
+        <div class="queue-row${index === pending.length - 1 ? ' latest' : ''}">
+            <div class="queue-number">${escapeHtml(item.kioskNumber)}</div>
+            ${item.name ? `<div class="queue-name">${escapeHtml(item.name)}</div>` : ''}
+        </div>`).join('');
+    paginatePending(false);
+}
+
+// Danh sách dài hơn màn hình thì chia trang theo số dòng vừa khung và tự lật trang.
+function paginatePending(animate) {
+    const list = document.getElementById('lcd-pending');
+    const rows = [...list.querySelectorAll('.queue-row')];
+    if (!rows.length) return;
+    rows.forEach(row => { row.hidden = false; });
+    const limit = list.getBoundingClientRect().bottom + 1;
+    const perPage = Math.max(1, rows.filter(row => row.getBoundingClientRect().bottom <= limit).length);
+    const pageCount = Math.ceil(rows.length / perPage);
+    if (pageIndex >= pageCount) pageIndex = 0;
+    rows.forEach((row, index) => { row.hidden = Math.floor(index / perPage) !== pageIndex; });
+    list.classList.remove('page-in');
+    if (animate) { void list.offsetWidth; list.classList.add('page-in'); }
+    document.getElementById('lcd-pending-count').innerText = `${rows.length} số đang chờ` + (pageCount > 1 ? ` · Trang ${pageIndex + 1}/${pageCount}` : '');
+    clearTimeout(pageTimer);
+    if (pageCount > 1) pageTimer = setTimeout(() => { pageIndex = (pageIndex + 1) % pageCount; paginatePending(true); }, PAGE_INTERVAL_MS);
+}
+
+// Phần ngang: 20 bệnh nhân mới được duyệt gần nhất (gồm cả bệnh nhân app), số khám · họ tên · khoa.
+function renderTicker() {
+    const approved = store.recentApproved(HOSPITAL, 20);
+    const track = document.getElementById('lcd-ticker');
+    if (!approved.length) {
+        track.style.animation = 'none';
+        track.innerHTML = '<span class="ticker-empty">Chưa có bệnh nhân được xếp khám hôm nay.</span>';
+        return;
+    }
+    const items = approved.map(item => `<span class="ticker-item"><b>${escapeHtml(item.examNumber)}</b>${escapeHtml(item.name || '')}<span class="dept">· ${escapeHtml(item.approvedDept)}</span></span>`).join('');
+    track.style.animation = '';
+    track.style.setProperty('--duration', `${Math.max(24, approved.length * 6)}s`);
+    track.innerHTML = items + items;
+}
+
+function render() {
+    renderPending();
+    renderTicker();
+}
+
+function tick() {
+    document.getElementById('lcd-clock').innerText = new Date().toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' });
+}
+
+document.getElementById('lcd-hospital').innerText = HOSPITAL;
+// MV-459: mất kết nối thì báo mất kết nối, không hiển thị dữ liệu cũ.
+function setOffline(offline) {
+    document.getElementById('lcd-offline').hidden = !offline;
+    document.querySelector('.lcd').hidden = offline;
+    if (!offline) render();
+}
+window.addEventListener('offline', () => setOffline(true));
+window.addEventListener('online', () => setOffline(false));
+
+store.subscribe(render);
+window.addEventListener('resize', () => paginatePending(false));
+setOffline(navigator.onLine === false);
+render();
+tick();
+setInterval(tick, 1000);
+</script>
+</body>
+</html>

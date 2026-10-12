@@ -53,10 +53,13 @@ const checks = [
     assert.ok(lookup, 'lookup function must be present');
     assert.doesNotMatch(lookup[0], /validateIdentityData/);
     assert.match(lookup[0], /if \(!data\.patientId\)/);
-    assert.match(lookup[0], /getElementById\('patient-full-name'\)\.value = patient\.name/);
-    assert.match(lookup[0], /getElementById\('patient-cccd'\)\.value = patient\.cccd/);
-    assert.match(lookup[0], /getElementById\('patient-birth-year'\)\.value = patient\.dob\.slice\(0, 4\)/);
-    assert.match(lookup[0], /getElementById\('patient-gender'\)\.value = patient\.gender/);
+    assert.match(lookup[0], /setHisPrefill\(patient\)/);
+    const prefill = html.match(/function setHisPrefill\([\s\S]*?\n}/);
+    assert.ok(prefill, 'prefill function must be present');
+    assert.match(prefill[0], /getElementById\('patient-full-name'\)\.value = patient\.name/);
+    assert.match(prefill[0], /getElementById\('patient-cccd'\)\.value = patient\.cccd/);
+    assert.match(prefill[0], /getElementById\('patient-birth-year'\)\.value = patient\.dob\.slice\(0, 4\)/);
+    assert.match(prefill[0], /getElementById\('patient-gender'\)\.value = patient\.gender/);
   }],
   ['patient name stays visible and optional with or without a patient ID', () => {
     assert.match(html, /function handlePatientIdInput\(/);
@@ -66,7 +69,8 @@ const checks = [
     assert.doesNotMatch(patientIdHandler[0], /optional-name-field'\)\.hidden/);
     assert.doesNotMatch(patientIdHandler[0], /patient-full-name'\)\.value = ''/);
     assert.match(html, /data\.name && !validatePatientName\(data\.name\)/);
-    assert.match(html, /data\.name \|\| 'BỆNH NHÂN MỚI'/);
+    assert.match(html, /intakeState\.requireName && !data\.name/);
+    assert.doesNotMatch(html, /'BỆNH NHÂN MỚI'/);
   }],
   ['kiosk home recommends Mobile while keeping kiosk available', () => {
     assert.match(html, /class="mobile-recommendation"/);
@@ -93,9 +97,10 @@ const checks = [
     assert.match(html, /id="intake-step-consent"/);
     assert.match(html, /function handleConsentDecision\(/);
     assert.match(html, /\['info', 'consent', 'chat', 'summary'\]/);
-    const newPatientFlow = html.match(/function processPatientIdentity\(\)[\s\S]*?\n}\n\nfunction prepareConsent/);
+    const newPatientFlow = html.match(/function processPatientIdentity\(\)[\s\S]*?\n}\n\nfunction beginConsent[\s\S]*?\n}/);
     assert.ok(newPatientFlow, 'new patient flow must continue to consent');
-    assert.match(newPatientFlow[0], /intakeState\.patient = createPatientProfile\(data\)/);
+    assert.match(newPatientFlow[0], /store\.findProfiles\(/);
+    assert.match(newPatientFlow[0], /beginConsent\(createPatientProfile\(data\)\)/);
     assert.match(newPatientFlow[0], /prepareConsent\(\);\s*goToIntakeStep\('consent'\)/);
     assert.match(html, /id="intake-status"[^>]*role="status"[^>]*aria-live="polite"/);
   }],
@@ -104,11 +109,14 @@ const checks = [
     assert.match(html, /function lookupPatientById\(/);
     assert.match(html, /function createPatientProfile\(/);
   }],
-  ['AI symptom conversation builds an editable summary', () => {
+  ['AI symptom conversation builds a read-only summary that is edited through chat', () => {
     assert.match(html, /id="symptom-chat"/);
     assert.match(html, /function submitSymptomAnswer\(/);
-    assert.match(html, /id="patient-summary"/);
-    assert.match(html, /contenteditable="true"/);
+    assert.match(html, /id="patient-summary"[^>]*role="document"/);
+    assert.doesNotMatch(html, /id="patient-summary"[^>]*contenteditable/);
+    assert.match(html, /onclick="editSummaryViaChat\(\)">Chỉnh sửa thông tin<\/button>/);
+    assert.match(html, /onclick="confirmPatientSummary\(\)">Xác nhận thông tin<\/button>/);
+    assert.match(html, /function editSummaryViaChat\(/);
   }],
   ['AI chat supports reviewed Vietnamese voice transcription', () => {
     assert.match(html, /id="btn-voice-input"/);
@@ -118,10 +126,78 @@ const checks = [
     assert.match(html, /function toggleVoiceRecording\(/);
     assert.match(html, /symptom-answer/);
   }],
-  ['patient confirmation adds a pending nurse review item', () => {
+  ['patient confirmation adds a pending nurse review item and issues a kiosk number', () => {
     assert.match(html, /function confirmPatientSummary\(/);
-    assert.match(html, /reviewItems\.unshift\(/);
+    assert.match(html, /store\.addSummary\(/);
     assert.match(html, /status:\s*'Pending Nurse Review'/);
+    assert.match(html, /store\.issueKioskNumber\(/);
+  }],
+  ['identity step prefills HIS data, reports HIS errors and lets patients choose a profile (MV-375)', () => {
+    assert.doesNotMatch(html, /id="his-confirm"/);
+    assert.match(html, /function setHisPrefill\(patient\)/);
+    assert.match(html, /setHisFieldsLocked\(true\)/);
+    assert.match(html, /function handlePatientIdInput\(\) \{[\s\S]*?clearHisPrefill\(\)/);
+    assert.match(html, /const HIS_ERROR_CODE = 'BN-TN-ERR'/);
+    assert.match(html, /Chưa thể kiểm tra thông tin với bệnh viện/);
+    assert.match(html, /id="profile-chooser"/);
+    assert.match(html, /Không phải thông tin của tôi/);
+    assert.match(html, /MedVitaKioskStore\.maskCccd\(/);
+  }],
+  ['declining consent asks to end or cancel before closing the session (MV-376)', () => {
+    assert.doesNotMatch(html, /id="consent-declined"/);
+    assert.match(html, /Bạn chưa đồng ý sử dụng AI nên không thể tiếp tục khai báo triệu chứng\./);
+    assert.match(html, /label: 'Cancel'/);
+    assert.match(html, /label: 'Kết thúc'/);
+    assert.match(html, /endKioskSession\('consent-declined'\)/);
+  }],
+  ['chat offers finish early and red-flag warnings (MV-421)', () => {
+    assert.match(html, /id="btn-finish-early"[^>]*>Xong sớm<\/button>/);
+    assert.match(html, /const REDFLAG_KEYWORDS = \['đau ngực'/);
+    assert.match(html, /store\.addRedflag\(/);
+    assert.match(html, /label: 'Tiếp tục khai báo'/);
+    assert.match(html, /label: 'Kết thúc khai báo'/);
+  }],
+  ['queue ticket shows kiosk number, name, hospital and issue time (MV-378)', () => {
+    assert.match(html, /id="ticket-name-row"/);
+    assert.match(html, /id="ticket-hospital"/);
+    assert.match(html, /id="ticket-issued-at"/);
+  }],
+  ['kiosk cancel button and idle timeout close the session (MV-377)', () => {
+    assert.match(html, /id="btn-cancel-intake"[^>]*>Hủy khai báo<\/button>/);
+    assert.match(html, /title: 'Hủy khai báo\?'/);
+    assert.match(html, /Thông tin chưa xác nhận sẽ không được gửi cho điều dưỡng\./);
+    assert.match(html, /intake: 120000, ticket: 60000, warning: 30000, processing: 60000/);
+    assert.match(html, /get\('timeout'\) === 'fast'/);
+    assert.match(html, /id="kiosk-idle"/);
+    assert.match(html, /function endKioskSession\(/);
+  }],
+  ['nurse dashboard shows the kiosk number and can announce the call (MV-460)', () => {
+    assert.match(html, /pill kiosk/);
+    assert.match(html, /id="rv-announce" checked/);
+    assert.match(html, /Phát thông báo gọi bệnh nhân/);
+    assert.match(html, /store\.callTemplate\(hospital\)\.replace\('\{số kiosk\}', number\)/);
+    assert.match(html, /utterance\.lang = 'vi-VN'/);
+    assert.match(html, /id="btn-rv-replay"[^>]*>Phát lại thông báo<\/button>/);
+  }],
+  ['LCD hides stale data when the connection drops (MV-459)', () => {
+    const lcd = fs.readFileSync('lcd.html', 'utf8');
+    assert.match(lcd, /id="lcd-offline"/);
+    assert.match(lcd, /addEventListener\('offline'/);
+    assert.match(lcd, /addEventListener\('online'/);
+  }],
+  ['dashboard, LCD and user flow use the shared kiosk store and story map', () => {
+    assert.match(html, /<script src="shared\/kiosk-store\.js"><\/script>/);
+    const lcd = fs.readFileSync('lcd.html', 'utf8');
+    assert.match(lcd, /<script src="shared\/kiosk-store\.js"><\/script>/);
+    assert.match(lcd, /pendingKioskQueue\(/);
+    assert.match(lcd, /recentApproved\(HOSPITAL, 20\)/);
+    assert.match(lcd, /class="queue-row/);
+    assert.match(lcd, /const PAGE_INTERVAL_MS = 8000/);
+    assert.match(lcd, /function paginatePending\(/);
+    assert.doesNotMatch(lcd, /số khác đang chờ/);
+    const flow = fs.readFileSync('kiosk-flow.html', 'utf8');
+    assert.match(flow, /class="mermaid"/);
+    for (const key of ['MV-374', 'MV-375', 'MV-376', 'MV-421', 'MV-450', 'MV-378', 'MV-377', 'MV-459', 'MV-460']) assert.match(flow, new RegExp(key));
   }],
   ['completed intake shows a printable queue number without changing the intake flow', () => {
     assert.match(html, /Số thứ tự chờ khám của bạn/);
